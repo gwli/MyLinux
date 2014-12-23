@@ -4,47 +4,6 @@
 :status: C
 :name: LinuxKernel
 
-内存结构
---------
-
-*内存模型*
-由最初的点线面关系问题，自己理解了内存是如何转化的过程。也就是知道一个矩阵如何在内存的问题。至于类与结构体，都是我们人对被处理对象进行的建模，其实就是向量。但是向量的里面的每个成员是不一样。例如哪些是变量，哪些函数。然后哪里数据区存放的地方，以及代码存放的地方。在Ｃ与Ｃ＋＋中结构体与类都是从前往后按照先后顺序的。只要知道首地址，以及数据的长度，其实也就是ＴＬＶ格式。数据的类型就是代表数据长度。起始地址是可以推算出来的。
-
-内存地址的长度是根据ＣＰＵ的地址线来决定的。
-不同CPU的构架，内存框架结构也不一样的，一种ＵＭＡ模式所有内存地址都一样，另一种那就是分类内存，其实本质两者都是一样的，如果把他们看成内存地址的话。[[http://wenku.baidu.com/view/0364850b763231126edb11a8.html][内存的分类笔记]]   并且现在明白内核映像只有５１２ＫＢ的原因，并且压缩格式的原因，是始于硬件本身初以状态下能够读入程序块有多大。不同的硬件，限制不一样。最小是５１２kb.例如硬盘的０磁道０磁头０扇区。只有５１２KB.
-
-以前看龙书，有点看不动，现在再回头看龙书是那么一目了然。把内存管理那一张给看了之后，就全明白了，段页式管理是要解决两个问题。page swapping是为了解决内存不足的问题。而segment是为了解决了灵活性的问题。例如把代码改了，然后大小变了，所有地址都要重定向了。有了段之后，就把把影响变到最小，只用改段基址就可以了。就不用所有段重排了。进程结构是与CPU的物理结构相对应的。
-并且现在CPU大部分都已经支持段了吧。这个就要看CPU的性能了。首先要了解需求。在解决什么问题。那个在面试的问的问题，就已经解决了，是因为它们没有段的结构，所以不能解决灵活性的问题，它们只是简单的页式吧。page是基于硬件的，segment是基于逻辑需求的。理解这些如何快速来得到使用这些就可以根据新需求与以及硬件功能来实现新的算法了。其实就是各个层面的排序与查找了。数组的高效以及链表的灵活。现在也明白了malloc的实现原理了，其实就是在改进程的data的首尾了。
-page 的base为重定向，而limit是为了防止越界。
-
-.. graphviz::
-
-   digraph memoryStucture {
-       rankdir = LR;
-       node [shape = box ];
-       ZONE_DMA [  shape = record  label = "<f0> 0-16MB  | <f1> INIT address 0XFFFF0  BIOS  |<IDT> Interrupt Table  |<GDT>  Global Descriptor Table |<LDT> Local Descriptor Table "];
-       ZONE_NORMAL [label = "16MB-896MB"];
-       ZONE_HIGHMEM [label = "896- END of Physical memory"];
-       MainLayout [ shape = "record" label = "<f0> ZONE_DMA |<f1> ZONE_NORML | <f2> ZONE_HIGHMEM "];
-       MainLayout:f0 -> ZONE_DMA:f0;
-      MainLayout:f1 -> ZONE_NORMAL;
-      MainLayout:f2 -> ZONE_HIGHMEM;
-       
-   　//IDT
-       IDT [shape =record  label ="<f0> 256 Items 8bytes/item |{selector | keyword | offset }" ];
-       ZONE_DMA:IDT -> IDT:f0;
-       //GDT
-      GDT [shape = record  label = "<des> 256 items |<f0> NULL | <f1> CODE Segment  Descriptor| <f2> DATA Segment Descriptor |<f3> SYS Segment Descriptor | <f4> 252 for LDT and TSS　for each TSS"];
-      ZONE_DMA:GDT -> GDT:f0;
-      //LDT
-      LDT [shape = record  label ="<fes> 5 items | <f0> CODE segment | <f1> Data segment |<f2> BSS | <f3> Heap | <f4> stack"];
-        ZONE_DMA:LDT -> LDT:f0;
-   
-   }
-
-#. [[http://guaniuzhijia.blog.163.com/blog/static/16547206920109914658702/][linux下进程的堆栈大小设置  ]] %IF{" 'ulimit -a 可以查看所有' = '' " then="" else="- "}%ulimit -a 可以查看所有
-进程可以修改栈的大小，如果没有指定那么编译就是用默认的大小限制，linux 默认８Ｍ。
-
 *IO*
 每一种外设备都是通过读写设备上的寄存器来进行的，寄存器又分为：控制寄存器，状态寄存器，数据寄存器。
 
@@ -131,42 +90,6 @@ essentially, the Signal is relevent logic/soft interrupt with CPU and Hardware.
     1. state register, this can control CPU behavoier. 
     2. CPU event
     3. interrupt.
-
-
-device Management
------------------
-
-when you plug in a new device such as USB. which label "sdb..." will be used for it. here you can use udev. 
-   1. db store the user device information
-   1. *rule* how to recognize the device.  当你发现你的OS在新的硬件上，不识别，例如网卡不能用了，第一步那就是先把这个rule给删除了。* rm -fr /etc/udev/rules.d/*
-   * [[http://blog.csdn.net/absurd/article/details/1587938][ udev的实现原理 ]]
-   * [[http://blog.csdn.net/fjb2080/article/details/4876314][ 使用udevadm修改usb优盘在/dev下的名字]]
-   * [[http://www.mike.org.cn/articles/linux-xiangjie-udev/][Linux┊详解udev]]
-
-driver 之间的依赖关系是由LKM来管理，`如何自动加载与实现逻辑设备与物理设备的mapping <http://blog.csdn.net/ruixj/article/details/3772798>`_ 主要是对应的pci数据结构，每一个硬件都会用vender,device ID,以及相对应的subID，是通过udev来实现的与管理的，这个就像windows，pnpUtils是一样的。
-
-每一个设备成功后都会占用一个端口号或者内存地址段。应该是每一个硬件都会ID之类的东东，内核来做了这个mapping,例如eth0 对应哪 一个网口。 就像我们在NEAT所做的，逻辑设备与物理设备之间的mapping. 并这个关系更规范与通用化一些。
-  
-kernel module  driver install and debug
----------------------------------------
-
-kernel module usually end with *xxx.ko*.  from linux kernel 2.6, the kernel use dynamic mechanism. you dynamically insmod,rmmod .  use the depmod to generate /lib/modules/2.6.xx/modules.dep and then modprob would automatically insert the module according the modules.dep.  the driver is one of module.  the module could have alias name. 
-
-.. csv-table::
-   :heder: Item,Content,Remark 
-
-   module location , */lib/modules/kernel version /kernel/drivers* ,  ethernet card driver  /lib/modules/2.6.4-gentoo-r4/kernel/drivers/net/r8168.ko ,
-   configuration file , etc/modules.autoload.d/XX , you just need to add the module name here. etc/modules.autoload.d/kernel-2.6 ,
-   modprobe ,  modprobe  r8168.ko  , the module could have alias name.  etc/modprobe.d/XXXX ,
-   depmod  , depmod -a r8168 ,
-   dmesg  , kernel会将开机信息存储在ring buffer中。您若是开机时来不及查看信息，可利用dmesg来查看。开机信息亦保存在/var/log目录中，名称为dmesg的文件里。 , dmesg用来显示内核环缓冲区（kernel-ring buffer）内容，内核将各种消息存放在这里。在系统引导时，内核将与硬件和模块初始化相关的信息填到这个缓冲区中。内核环缓冲区中的消息对于诊断系统问题 通常非常有用。在运行dmesg时，它显示大量信息。通常通过less或grep使用管道查看dmesg的输出，这样可以更容易找到待查信息。例如，如果发现硬盘性能低下，可以使用dmesg来检查它们是否运行在DMA模式：,
-   
-.. seealso::
-#. `解析 Linux 内核可装载模块的版本检查机制 <http://www.ibm.com/developerworks/cn/linux/l-cn-kernelmodules/>`_ 以及 `如何突破其CRC验证 <http://blog.aliyun.com/1123>`_ 简单直接把crc值，直接在elf里改成符合规定的值，说白了就是凑答案 .
-#. `module common command <http://wiki.linuxdeepin.com/index.php?title=Linux%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97>`_ 以及其`实现机制 <http://read.pudn.com/downloads37/sourcecode/unix_linux/124135/Linux%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6.PDF>`_ . 
-.. code-block::
-   
-   $dmesg | grep DMA 
 
 SystemLog 机制 
 --------------
