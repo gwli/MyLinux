@@ -11,8 +11,9 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   
+   Target   
    content/ModuleAndDriver
+   content/Stage_1
 
 Indices and tables
 ==================
