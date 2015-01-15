@@ -47,8 +47,10 @@ kernel module usually end with *xxx.ko*.  from linux kernel 2.6, the kernel use 
    dmesg  , kernel会将开机信息存储在ring buffer中。您若是开机时来不及查看信息，可利用dmesg来查看。开机信息亦保存在/var/log目录中，名称为dmesg的文件里。 , dmesg用来显示内核环缓冲区（kernel-ring buffer）内容，内核将各种消息存放在这里。在系统引导时，内核将与硬件和模块初始化相关的信息填到这个缓冲区中。内核环缓冲区中的消息对于诊断系统问题 通常非常有用。在运行dmesg时，它显示大量信息。通常通过less或grep使用管道查看dmesg的输出，这样可以更容易找到待查信息。例如，如果发现硬盘性能低下，可以使用dmesg来检查它们是否运行在DMA模式：,
    
 .. seealso::
+
 #. `解析 Linux 内核可装载模块的版本检查机制 <http://www.ibm.com/developerworks/cn/linux/l-cn-kernelmodules/>`_ 以及 `如何突破其CRC验证 <http://blog.aliyun.com/1123>`_ 简单直接把crc值，直接在elf里改成符合规定的值，说白了就是凑答案 .
 #. `module common command <http://wiki.linuxdeepin.com/index.php?title=Linux%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97>`_ 以及其`实现机制 <http://read.pudn.com/downloads37/sourcecode/unix_linux/124135/Linux%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6.PDF>`_ . 
+
 .. code-block::
    
    $dmesg | grep DMA 
@@ -56,7 +58,34 @@ kernel module usually end with *xxx.ko*.  from linux kernel 2.6, the kernel use 
 
 
 内核检测到硬件，然后去加载mapping的driver,在加载的过程中要经过modeprobe.conf这样的过虑，并且解决其依赖关系。没有对应关系就要手工加载了。 
-一般是要把module放在 :fifle:`/lib/modules/<kernel version>/kernel/driver/net` 以及去修改 :file:`/etc/modules.d/<kernel version`
+一般是要把module放在 :file:`/lib/modules/<kernel version>/kernel/driver/net` 以及去修改 :file:`/etc/modules.d/<kernel version`
 2.4 的版本 用的是module.conf,而2.6的版本用是modeprobe.conf
 所以多个硬件可以共用一个driver,只需要用alias 把硬件本身映射到一个别名。
+
+
+内核的调试
+
+`Linux 系统内核的调试 <http://www.ibm.com/developerworks/cn/linux/l-kdb/>`_  主要有三种kgdb,SkyEye,UML三种技术。
+
+
+intel  ethernet 153a 网卡不稳定
+-------------------------------
+
+查看问题的，第一个要收集信息，不要轻易破坏了环境。尽可能多的收集信息
+#.  保存error 信息
+#.  save /var/log/dmesg  与 /var/log/syslog
+#.  查看 是否内核加载了 cat /proc/modules |view -
+#.  根据error message进行初步的推理并验证
+#.  提炼你的问题，一句话，几个词
+#.  ehtools 查看并且修改硬件。
+#.  insmod -m 查看插入时信息
+#.  看看没有新版本可以用，看看CL.   http://sourceforge.net/projects/e1000/
+#.  去官网查看相关的FAQ 以及bugs.  http://sourceforge.net/p/e1000/bugs/430/
+#.  还有那是 READE
+#.  最后看一个 开发framework,去找一个init, close函数，只需要看看其做了什么，就知道了。
+
+driver 的开发
+=============
+一般都是register, init, shutdown, close等等几个函数接口。
+
 
