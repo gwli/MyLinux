@@ -33,10 +33,11 @@ du and df
 ---------
 检查是否有分区使用率(Use%)过高(比如超过90%)
 
-:command:`df -h` 
+:command:`df -h |grep -vE "tmpfs|udev"` 
 
 如发现某个分区空间接近用尽,用以下命令找出占用空间最多的文件或目录：
 
+:command:`du -csh /var/lib/state/*` 或者排序 
 :command:`du -cks * |sort -rn| head -n 10` 
 
 
