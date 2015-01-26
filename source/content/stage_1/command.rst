@@ -41,5 +41,8 @@ du and df
 :command:`du -cks * |sort -rn| head -n 10` 
 
 
+文件批量重命名
+--------------
 
- 
+linux专门一条:command:`rename` 指令。例如 我要把  *.txt* 变成 *.rst*
+:command:`rename 's/.txt/.rst/ *.txt` .
