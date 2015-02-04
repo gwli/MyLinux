@@ -1,0 +1,266 @@
+
+X.Org X Server 1.6.5
+Release Date: 2009-10-11
+X Protocol Version 11, Revision 0
+Build Operating System: openSUSE SUSE LINUX
+Current Operating System: Linux DEVTOOLS-QA70 2.6.32.12-0.7-default #1 SMP 2010-05-20 11:14:20 +0200 x86_64
+Build Date: 09 May 2010  12:50:35PM
+ 
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.0.log", Time: Wed Feb  4 06:42:13 2015
+(==) Using config file: "/etc/X11/xorg.conf"
+(==) ServerLayout "Layout[all]"
+(**) |-->Screen "Screen[0]" (0)
+(**) |   |-->Monitor "Monitor[0]"
+(**) |   |-->Device "Device[0]"
+(**) |-->Input Device "Keyboard[0]"
+(**) |-->Input Device "Mouse[1]"
+(**) Option "ZapWarning" "on"
+(**) Option "AllowMouseOpenFail" "on"
+(**) Option "Xinerama" "off"
+(==) Not automatically adding devices
+(==) Automatically enabling devices
+(WW) The directory "/usr/share/fonts/local" does not exist.
+	Entry deleted from font path.
+(WW) The directory "/usr/share/fonts/PEX" does not exist.
+	Entry deleted from font path.
+(WW) The directory "/usr/share/fonts/latin2/misc" does not exist.
+	Entry deleted from font path.
+(WW) The directory "/usr/share/fonts/latin2/75dpi" does not exist.
+	Entry deleted from font path.
+(WW) The directory "/usr/share/fonts/latin2/100dpi" does not exist.
+	Entry deleted from font path.
+(WW) The directory "/usr/share/fonts/latin2/Type1" does not exist.
+	Entry deleted from font path.
+(WW) The directory "/usr/share/fonts/latin7/75dpi" does not exist.
+	Entry deleted from font path.
+(WW) The directory "/usr/share/fonts/baekmuk" does not exist.
+	Entry deleted from font path.
+(WW) The directory "/usr/share/fonts/japanese" does not exist.
+	Entry deleted from font path.
+(WW) The directory "/usr/share/fonts/kwintv" does not exist.
+	Entry deleted from font path.
+(WW) The directory "/usr/share/fonts/uni" does not exist.
+	Entry deleted from font path.
+(WW) The directory "/usr/share/fonts/CID" does not exist.
+	Entry deleted from font path.
+(WW) The directory "/usr/share/fonts/ucs/misc" does not exist.
+	Entry deleted from font path.
+(WW) The directory "/usr/share/fonts/ucs/75dpi" does not exist.
+	Entry deleted from font path.
+(WW) The directory "/usr/share/fonts/ucs/100dpi" does not exist.
+	Entry deleted from font path.
+(WW) The directory "/usr/share/fonts/hellas/misc" does not exist.
+	Entry deleted from font path.
+(WW) The directory "/usr/share/fonts/hellas/75dpi" does not exist.
+	Entry deleted from font path.
+(WW) The directory "/usr/share/fonts/hellas/100dpi" does not exist.
+	Entry deleted from font path.
+(WW) The directory "/usr/share/fonts/hellas/Type1" does not exist.
+	Entry deleted from font path.
+(WW) The directory "/usr/share/fonts/misc/sgi" does not exist.
+	Entry deleted from font path.
+(WW) The directory "/usr/share/fonts/xtest" does not exist.
+	Entry deleted from font path.
+(WW) The directory "/opt/kde3/share/fonts" does not exist.
+	Entry deleted from font path.
+(WW) The directory "/usr/share/fonts/TTF/" does not exist.
+	Entry deleted from font path.
+(WW) The directory "/usr/share/fonts/OTF" does not exist.
+	Entry deleted from font path.
+(**) FontPath set to:
+	/usr/share/fonts/misc:unscaled,
+	/usr/share/fonts/75dpi:unscaled,
+	/usr/share/fonts/100dpi:unscaled,
+	/usr/share/fonts/Type1,
+	/usr/share/fonts/URW,
+	/usr/share/fonts/Speedo,
+	/usr/share/fonts/cyrillic,
+	/usr/share/fonts/truetype,
+	/usr/share/fonts/misc:unscaled,
+	/usr/share/fonts/truetype/,
+	/usr/share/fonts/Type1/,
+	/usr/share/fonts/100dpi:unscaled,
+	/usr/share/fonts/75dpi:unscaled
+(**) Input device list set to "/dev/gpmdata,/dev/input/mice"
+(==) ModulePath set to "/usr/lib64/xorg/modules/updates,/usr/lib64/xorg/modules"
+(II) Loader magic: 0xcc0
+(II) Module ABI versions:
+	X.Org ANSI C Emulation: 0.4
+	X.Org Video Driver: 5.0
+	X.Org XInput driver : 4.0
+	X.Org Server Extension : 2.0
+(II) Loader running on linux
+(++) using VT number 7
+
+(--) PCI:*(0:1:0:0) 10de:17f0:10de:1129 nVidia Corporation rev 161, Mem @ 0xf6000000/16777216, 0xd0000000/268435456, 0xe0000000/33554432, I/O @ 0x0000e000/128, BIOS @ 0x????????/524288
+(--) PCI: (0:4:0:0) 10de:1094:10de:0888 nVidia Corporation rev 161, Mem @ 0xf4000000/16777216, 0xe8000000/134217728, 0xf0000000/33554432, I/O @ 0x0000c000/128, BIOS @ 0x????????/524288
+(II) Open ACPI successful (/var/run/acpid.socket)
+(II) System resource ranges:
+	[0] -1	0	0xffffffff - 0xffffffff (0x1) MX[B]
+	[1] -1	0	0x000f0000 - 0x000fffff (0x10000) MX[B]
+	[2] -1	0	0x000c0000 - 0x000effff (0x30000) MX[B]
+	[3] -1	0	0x00000000 - 0x0009ffff (0xa0000) MX[B]
+	[4] -1	0	0x0000ffff - 0x0000ffff (0x1) IX[B]
+	[5] -1	0	0x00000000 - 0x00000000 (0x1) IX[B]
+(II) "extmod" will be loaded. This was enabled by default and also specified in the config file.
+(II) "dbe" will be loaded. This was enabled by default and also specified in the config file.
+(II) "glx" will be loaded. This was enabled by default and also specified in the config file.
+(II) "record" will be loaded by default.
+(II) "dri" will be loaded by default.
+(II) "dri2" will be loaded by default.
+(II) LoadModule: "dbe"
+(II) Loading /usr/lib64/xorg/modules//extensions/libdbe.so
+(II) Module dbe: vendor="X.Org Foundation"
+	compiled for 1.6.5, module version = 1.0.0
+	Module class: X.Org Server Extension
+	ABI class: X.Org Server Extension, version 2.0
+(II) Loading extension DOUBLE-BUFFER
+(II) LoadModule: "freetype"
+(WW) Warning, couldn't open module freetype
+(II) UnloadModule: "freetype"
+(EE) Failed to load module "freetype" (module does not exist, 0)
+(II) LoadModule: "extmod"
+(II) Loading /usr/lib64/xorg/modules//extensions/libextmod.so
+(II) Module extmod: vendor="X.Org Foundation"
+	compiled for 1.6.5, module version = 1.0.0
+	Module class: X.Org Server Extension
+	ABI class: X.Org Server Extension, version 2.0
+(II) Loading extension MIT-SCREEN-SAVER
+(II) Loading extension XFree86-VidModeExtension
+(II) Loading extension XFree86-DGA
+(II) Loading extension DPMS
+(II) Loading extension XVideo
+(II) Loading extension XVideo-MotionCompensation
+(II) Loading extension X-Resource
+(II) LoadModule: "glx"
+(II) Loading /usr/lib64/xorg/modules//extensions/libglx.so
+(II) Module glx: vendor="NVIDIA Corporation"
+	compiled for 4.0.2, module version = 1.0.0
+	Module class: X.Org Server Extension
+(II) NVIDIA GLX Module  dev_gpu_drv_cuda_a-20150129_19276027  Release Build  (cuda_a)  (19276027)  (buildmeister@swio-display-x86-rhel47-07)  Thu Jan 29 13:48:57 PST 2015
+(II) Loading extension GLX
+(II) LoadModule: "record"
+(II) Loading /usr/lib64/xorg/modules//extensions/librecord.so
+(II) Module record: vendor="X.Org Foundation"
+	compiled for 1.6.5, module version = 1.13.0
+	Module class: X.Org Server Extension
+	ABI class: X.Org Server Extension, version 2.0
+(II) Loading extension RECORD
+(II) LoadModule: "dri"
+(II) Loading /usr/lib64/xorg/modules//extensions/libdri.so
+(II) Module dri: vendor="X.Org Foundation"
+	compiled for 1.6.5, module version = 1.0.0
+	ABI class: X.Org Server Extension, version 2.0
+(II) Loading extension XFree86-DRI
+(II) LoadModule: "dri2"
+(II) Loading /usr/lib64/xorg/modules//extensions/libdri2.so
+(II) Module dri2: vendor="X.Org Foundation"
+	compiled for 1.6.5, module version = 1.1.0
+	ABI class: X.Org Server Extension, version 2.0
+(II) Loading extension DRI2
+(II) LoadModule: "nvidia"
+(II) Loading /usr/lib64/xorg/modules//drivers/nvidia_drv.so
+(II) Module nvidia: vendor="NVIDIA Corporation"
+	compiled for 4.0.2, module version = 1.0.0
+	Module class: X.Org Video Driver
+(II) LoadModule: "kbd"
+(II) Loading /usr/lib64/xorg/modules//input/kbd_drv.so
+(II) Module kbd: vendor="X.Org Foundation"
+	compiled for 1.6.5, module version = 1.3.2
+	Module class: X.Org XInput Driver
+	ABI class: X.Org XInput driver, version 4.0
+(II) LoadModule: "mouse"
+(II) Loading /usr/lib64/xorg/modules//input/mouse_drv.so
+(II) Module mouse: vendor="X.Org Foundation"
+	compiled for 1.6.5, module version = 1.4.0
+	Module class: X.Org XInput Driver
+	ABI class: X.Org XInput driver, version 4.0
+(II) NVIDIA dlloader X Driver  dev_gpu_drv_cuda_a-20150129_19276027  Release Build  (cuda_a)  (19276027)  (buildmeister@swio-display-x86-rhel47-07)  Thu Jan 29 13:25:31 PST 2015
+(II) NVIDIA Unified Driver for all Supported NVIDIA GPUs
+(II) Primary Device is: PCI 01@00:00:0
+(II) Loading sub module "fb"
+(II) LoadModule: "fb"
+(II) Loading /usr/lib64/xorg/modules//libfb.so
+(II) Module fb: vendor="X.Org Foundation"
+	compiled for 1.6.5, module version = 1.0.0
+	ABI class: X.Org ANSI C Emulation, version 0.4
+(II) Loading sub module "wfb"
+(II) LoadModule: "wfb"
+(II) Loading /usr/lib64/xorg/modules//libwfb.so
+(II) Module wfb: vendor="X.Org Foundation"
+	compiled for 1.6.5, module version = 1.0.0
+	ABI class: X.Org ANSI C Emulation, version 0.4
+(II) Loading sub module "ramdac"
+(II) LoadModule: "ramdac"
+(II) Module "ramdac" already built-in
+(II) resource ranges after probing:
+	[0] -1	0	0xffffffff - 0xffffffff (0x1) MX[B]
+	[1] -1	0	0x000f0000 - 0x000fffff (0x10000) MX[B]
+	[2] -1	0	0x000c0000 - 0x000effff (0x30000) MX[B]
+	[3] -1	0	0x00000000 - 0x0009ffff (0xa0000) MX[B]
+	[4] -1	0	0x0000ffff - 0x0000ffff (0x1) IX[B]
+	[5] -1	0	0x00000000 - 0x00000000 (0x1) IX[B]
+(**) NVIDIA(0): Depth 24, (--) framebuffer bpp 32
+(==) NVIDIA(0): RGB weight 888
+(==) NVIDIA(0): Default visual is TrueColor
+(==) NVIDIA(0): Using gamma correction (1.0, 1.0, 1.0)
+(**) Feb 04 06:42:13 NVIDIA(0): Enabling 2D acceleration
+(II) Feb 04 06:42:14 NVIDIA(0): NVIDIA GPU Quadro M6000 (GM200GL-A) at PCI:1:0:0 (GPU-0)
+(--) Feb 04 06:42:14 NVIDIA(0): Memory: 12582912 kBytes
+(--) Feb 04 06:42:14 NVIDIA(0): VideoBIOS: 84.00.1b.00.01
+(II) Feb 04 06:42:14 NVIDIA(0): Detected PCI Express Link width: 16X
+(--) Feb 04 06:42:14 NVIDIA(0): Valid display device(s) on Quadro M6000 at PCI:1:0:0
+(--) Feb 04 06:42:14 NVIDIA(0):     CRT-0
+(--) Feb 04 06:42:14 NVIDIA(0):     DFP-0 (boot)
+(--) Feb 04 06:42:14 NVIDIA(0):     DFP-1
+(--) Feb 04 06:42:14 NVIDIA(0):     DFP-2
+(--) Feb 04 06:42:14 NVIDIA(0):     DFP-3
+(--) Feb 04 06:42:14 NVIDIA(0):     DFP-4
+(--) Feb 04 06:42:14 NVIDIA(0):     DFP-5
+(--) Feb 04 06:42:14 NVIDIA(0):     DFP-6
+(--) Feb 04 06:42:14 NVIDIA(0):     DFP-7
+(--) Feb 04 06:42:14 NVIDIA(0):     DFP-8
+(--) Feb 04 06:42:14 NVIDIA(0):     DFP-9
+(--) Feb 04 06:42:14 NVIDIA(GPU-0): CRT-0: 400.0 MHz maximum pixel clock
+(--) Feb 04 06:42:14 NVIDIA(0): DFP-0: Internal TMDS
+(--) Feb 04 06:42:14 NVIDIA(GPU-0): DFP-0: 330.0 MHz maximum pixel clock
+(--) Feb 04 06:42:14 NVIDIA(0): DFP-1: Internal DisplayPort
+(--) Feb 04 06:42:14 NVIDIA(GPU-0): DFP-1: 960.0 MHz maximum pixel clock
+(--) Feb 04 06:42:14 NVIDIA(0): DFP-2: Internal TMDS
+(--) Feb 04 06:42:14 NVIDIA(GPU-0): DFP-2: 330.0 MHz maximum pixel clock
+(--) Feb 04 06:42:14 NVIDIA(0): DFP-3: Internal DisplayPort
+(--) Feb 04 06:42:14 NVIDIA(GPU-0): DFP-3: 960.0 MHz maximum pixel clock
+(--) Feb 04 06:42:14 NVIDIA(0): DFP-4: Internal TMDS
+(--) Feb 04 06:42:14 NVIDIA(GPU-0): DFP-4: 330.0 MHz maximum pixel clock
+(--) Feb 04 06:42:14 NVIDIA(0): DFP-5: Internal DisplayPort
+(--) Feb 04 06:42:14 NVIDIA(GPU-0): DFP-5: 960.0 MHz maximum pixel clock
+(--) Feb 04 06:42:14 NVIDIA(0): DFP-6: Internal TMDS
+(--) Feb 04 06:42:14 NVIDIA(GPU-0): DFP-6: 330.0 MHz maximum pixel clock
+(--) Feb 04 06:42:14 NVIDIA(0): DFP-7: Internal DisplayPort
+(--) Feb 04 06:42:14 NVIDIA(GPU-0): DFP-7: 960.0 MHz maximum pixel clock
+(--) Feb 04 06:42:14 NVIDIA(0): DFP-8: Internal TMDS
+(--) Feb 04 06:42:14 NVIDIA(GPU-0): DFP-8: 330.0 MHz maximum pixel clock
+(--) Feb 04 06:42:14 NVIDIA(0): DFP-9: External LVDS
+(--) Feb 04 06:42:14 NVIDIA(GPU-0): DFP-9: 165.0 MHz maximum pixel clock
+(EE) Feb 04 06:42:14 NVIDIA(0): Failed to assign any connected display devices to X screen 0. 
+(EE) Feb 04 06:42:14 NVIDIA(0):     Set AllowEmptyInitialConfiguration if you want the server
+(EE) Feb 04 06:42:14 NVIDIA(0):     to start anyway
+(EE) Feb 04 06:42:14 NVIDIA(0): Failing initialization of X screen 0
+(II) UnloadModule: "nvidia"
+(II) UnloadModule: "wfb"
+(II) UnloadModule: "fb"
+(EE) Screen(s) found, but none have a usable configuration.
+
+Fatal server error:
+no screens found
+
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+Please also check the log file at "/var/log/Xorg.0.log" for additional information.
+
