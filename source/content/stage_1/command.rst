@@ -10,8 +10,12 @@ Common command
    tar.gz , tar -xzvf  abc.tar.gz
    tar.bz2, tar -xjvf  abc.tar.bz2
    .zip  ,   unzip abc.zip
+   .rar,   unrar x abc.rar, apt-get install unrar   
 
+tar 到批定的目录
+----------------
 
+:command:`tar -xzvf abc.tgz -C Dest`
 
 grep 
 ----
