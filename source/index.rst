@@ -14,6 +14,8 @@ Contents:
    Target   
    content/ModuleAndDriver
    content/Stage_1
+   content/Stage_2
+   content/Stage_3
 
 Indices and tables
 ==================
