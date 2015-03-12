@@ -44,6 +44,28 @@ du and df
 :command:`du -csh /var/lib/state/*` 或者排序 
 :command:`du -cks * |sort -rn| head -n 10` 
 
+如何查看linux的版本
+-------------------
+
+.. code-block:: bash
+
+   /etc/issue 
+   /etc/debian_version
+   /etc/readhat-release
+   /etc/os-release
+   /etc/lsb-release
+
+利用特征文件 :file:`/etc/issue` 或者 :file:`/etc/redhat-release` 或者 :file:`/etc/debian_version`
+
+或者直接 :command:`cat /etc/*-release` 就可以看到了。
+
+
+如何判断linux是否运行在虚拟机上
+-------------------------------
+
+http://www.vpsee.com/2011/01/how-to-detect-if-a-linux-system-running-on-a-virtual-machine/
+
+主要是通过 :file:`/proc/vz  /proc/xen/` 等文件来做的，一般这些地址会体现系统环境的。
 
 文件批量重命名
 --------------

@@ -28,6 +28,12 @@ when you plug in a new device such as USB. which label "sdb..." will be used for
 1. `使用udevadm修改usb优盘在/dev下的名字 <http://blog.csdn.net/fjb2080/article/details/4876314>`_ 
 1. `Linux┊详解udev <http://www.mike.org.cn/articles/linux-xiangjie-udev/>`_ 
 
+
+如果你想定义硬件的命名等都是可以用 udev.rules 来解决的。
+`writing udev rules <http://www.reactivated.net/writing_udev_rules.html>`_ . 
+
+如何写查询属性可以用  :command:`udevinfo` 或者 :command:`udevadm info -qury=property -path=/sys/block/sda`
+
 driver 之间的依赖关系是由LKM来管理，`如何自动加载与实现逻辑设备与物理设备的mapping <http://blog.csdn.net/ruixj/article/details/3772798>`_ 主要是对应的pci数据结构，每一个硬件都会用vender,device ID,以及相对应的subID，是通过udev来实现的与管理的，这个就像windows，pnpUtils是一样的。
 
 每一个设备成功后都会占用一个端口号或者内存地址段。应该是每一个硬件都会ID之类的东东，内核来做了这个mapping,例如eth0 对应哪 一个网口。 就像我们在NEAT所做的，逻辑设备与物理设备之间的mapping. 并这个关系更规范与通用化一些。

@@ -87,6 +87,7 @@ sourcelist support three source
  
        Creat bootable usb 
    ===========================
+
 #. Download syslinux on windows
       http://www.kernel.org/pub/linux/utils/boot/syslinux/syslinux-4.04.zip
    2. Format USB stick in fat32
