@@ -72,3 +72,12 @@ http://www.vpsee.com/2011/01/how-to-detect-if-a-linux-system-running-on-a-virtua
 
 linux专门一条:command:`rename` 指令。例如 我要把  *.txt* 变成 *.rst*
 :command:`rename 's/.txt/.rst/ *.txt` .
+
+取文件的部分内容
+----------------
+
+.. csv-table::
+   
+   行, sed,grep,head,tail
+   例,awk,column
+

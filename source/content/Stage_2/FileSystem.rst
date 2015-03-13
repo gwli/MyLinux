@@ -1,5 +1,5 @@
 介绍
-======
+====
 
 `文件系统 <http://wenku.baidu.com/view/aef3dbc69ec3d5bbfd0a74f3.html>`_ ，任何时候不明白的都先回来看看最原始的教材。文件系统基本的功能，就是文件管理与目录管理。以及磁盘空间分配使用。
 为什么要有这么多种文件系统。原因在于一定是不同的硬件实现。底层的实现是不样的。例如磁片硬件，与flash,以及固态硬盘，以及 人们对数据操作要求的不同。这种逻辑的需求与硬件结合的接口就是文件系统。对于不同的存储读写需求以及硬件实现，就会不同的实现实现算法机制。而这些就是文件系统。
@@ -77,7 +77,7 @@
 分区是对硬盘的一个抽象，对于ＯＳ来说，分区基本硬盘是一样的，并且分区上面还可以逻辑分区。block是对 扇区的一种抽象。文件相当于heads, 而目录相当于cylinders.
 
 如何制作文件系统
-========================
+================
 
 mount 各种各样的文件系统，loop 表示把本地文件当做文件系统来进行挂载。同时也还可以重新mount --bind 挂载点。对于物理分区有的时候会用完，添加就需要重起机器。所以也就产生了LVM. 逻辑分区。随着云计算到来，一切的虚拟化。原来的系统都是建立物理设备上的，现在都直接在逻辑设备上了。这样就具有更大的移值性，就像我们的CAS就是把逻辑拓扑与物理拓扑的隔离。LVM就在物理分区与文件系统之间又加了一层。文件系统直接建在LVM。
 
@@ -87,8 +87,9 @@ mount 各种各样的文件系统，loop 表示把本地文件当做文件系统
 #. `如何制作文件系统  <http://mcuol.com/download/upfile/armLinuxEMB10.pdf>`_  
 #. `mkfs manual  <http://study.chyangwa.com/IT/AIX/aixcmds3/mkfs.htm>`_  
 通过对gentoo对于各种概念有了更深的认识。
- 分区与格式化挂载
-=========================
+
+分区与格式化挂载
+================
 
 `sfdisk <http://jarson.blog.51cto.com/1422982/573541>`_   是分区为了逻辑设备，就像人们有了多个硬盘一样。这个是由硬盘前面的分区表来决定的。而分区表的大小决定了，你可以有多少个分区，并且在分区表建立文件系统，在linux 下有各种各样的mkfs工具来供你使用。然后加载在OS上，这里就要mount了。
 对于mount 由于这个概念泛化了。你可以mount 本地硬盘，也可以远程（NFS，autofs,samba) 还以把本地文件本身当做文件系统进行访问。同时也可以用bind 来把一个目录绑到另一个目录里，来避免ln的不足.`mount --bind挂载功能，避免ln -s链接的不足 <http://blog.csdn.net/islandstar/article/details/7774121>`_ ,`mount --bind 的妙用  <http://www.cnitblog.com/gouzhuang/archive/2012/07/15/65503.html>`_ 
@@ -112,10 +113,29 @@ mount 各种各样的文件系统，loop 表示把本地文件当做文件系统
 #. `mkfs IBM manual <http://pic.dhe.ibm.com/infocenter/aix/v7r1/index.jsp?topic=%2Fcom.ibm.aix.cmds%2Fdoc%2Faixcmds3%2Fmkfs.htm>`_ 
 #. `高级文件系统实现者指南 日志和 ReiserFS <http://www.ibm.com/developerworks/cn/linux/filesystem/l-fs/>`_ 
 
+硬盘检查与修复
+==============
 
+.. csv-table::
 
--HardLink and softlink
-======================
+   extfs, e2fsck -y /dev/sda1
+   HFSP, fsck.htfsplus  -f -y /dev/sda1 
+   NTFS, ntfsfix -d /dev/sda1
+   Reiserfs,reiserfsck -a -y /dev/sda1
+
+#. e2fsck 还有一个配置文件 :file:`etc/e2fsck.conf`
+
+修复的原理，那就是各种文件系统的，格式 
+
+`Ext3日志原理 <http://m.blog.chinaunix.net/uid-20196318-id-152429.html>`_ 
+`whats-the-difference-between-e2fsck-and-fsck-and-which-one-i-should-use <http://unix.stackexchange.com/questions/87415/whats-the-difference-between-e2fsck-and-fsck-and-which-one-i-should-use>`_ 
+man
+===
+
+:command:`H` 可以打开man的命令帮助文档。
+
+HardLink and softlink
+=====================
 
 `what-is-the-difference-between-a-hard-link-and-a-symbolic-link <http://askubuntu.com/questions/108771/what-is-the-difference-between-a-hard-link-and-a-symbolic-link>`_ 
 
@@ -125,8 +145,6 @@ http://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/  hardlink 一
 
 See also
 ========
-
-
 
 #. `TFS <http://code.taobao.org/p/tfs/src/>`_  taobao 分布式文件系统，`TFS集群文件系统 <http://baike.baidu.com.cn/view/4253974.htm>`_ 把原数据放在文件名与路径上，采用对象存储，
 #. `存储领域面临六大趋势  <http://www.pcworld.com.cn/Article/ShowArticle.asp?ArticleID&#61;15927>`_  
