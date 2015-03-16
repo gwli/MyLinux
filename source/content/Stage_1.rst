@@ -2,7 +2,11 @@
 基础篇
 ######
 
-include stage_1/network.rst
-include stage_1/troubleshot.rst
-
-
+.. include:: Stage_1command.rst
+.. include:: Stage_1DirectoryLayout.rst
+.. include:: Stage_1gnome.rst
+.. include:: Stage_1LinuxInstall.rst
+.. include:: Stage_1network.rst
+.. include:: Stage_1SUSE.rst
+.. include:: Stage_1TimeDateManagement.rst
+.. include:: Stage_1troubleshot.rst

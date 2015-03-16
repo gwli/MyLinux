@@ -1,5 +1,5 @@
 ######
-�ں�ƪ
+内核篇
 ######
 
 .. include:: Stage_2/LinuxKernel.rst
