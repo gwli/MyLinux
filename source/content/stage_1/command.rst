@@ -81,3 +81,5 @@ linux专门一条:command:`rename` 指令。例如 我要把  *.txt* 变成 *.rst*
    行, sed,grep,head,tail
    例,awk,column
 
+在文件添加一行，一个方法那就是用vim就可以了。
+如果只是简单的行尾，那就是>>就搞定了。

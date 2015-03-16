@@ -49,22 +49,33 @@ sourcelist support three source
    如何快速的制作一个linux系统
    ---------------------------
    #. 在一个现在系统上直接把系统文件打包
-   .. code-block::
-      $tar cvzf suse11_sp3.tgz bin boot etc lib lib64 opt root sbin selinux srv usr var 
+
+      .. code-block::
+
+         $tar cvzf suse11_sp3.tgz bin boot etc lib lib64 opt root sbin selinux srv usr var 
+
    
    #. 在目标机上直接硬盘分区格式化，然后解压
-   .. code-block::
-      $ tar xvf suse11_sp3.tgz
+
+      .. code-block::
+         $ tar xvf suse11_sp3.tgz
    
    #. 并创建那些动态的目录 
    
-   .. code-block::
-      @mkdir dev media mnt proc tmp
+      .. code-block::
+         @mkdir dev media mnt proc tmp
    
    4. 然后启动盘来修复起动项
    
-   .. code-block::
-      $restore grub,
+      .. code-block::
+         $restore grub,
+         mount /dev/sda1 /mnt/sda1
+         grub-install --boot-directory=/mnt/sda1/boot /dev/sda1 --force
+         grub-mkconfig -o /mnt/sda1/boot/grub.cfg
+
+
+
+ 
    .. seealso::
    
    #. `使用官方Ubuntu软件库构建DVD镜像 <http://linux.chinaunix.net/docs/2007-04-03/4110.shtml>`_  
