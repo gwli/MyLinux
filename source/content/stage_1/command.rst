@@ -17,6 +17,8 @@ tar 到批定的目录
 
 :command:`tar -xzvf abc.tgz -C Dest`
 
+``python tarfile`` 以及 ``python zipfile``
+
 grep 
 ----
 
