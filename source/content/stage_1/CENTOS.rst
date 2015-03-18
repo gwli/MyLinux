@@ -54,7 +54,7 @@ Centos
          :command:`chkconfig vncserver on`
 
 
-
+this new method is working `vnc-server-installation-on-centos-7 <https://www.howtoforge.com/vnc-server-installation-on-centos-7>`_
 #. autologin
 
    .. code-block:: bash
@@ -63,9 +63,13 @@ Centos
        [daemon]
        AutomaticEnable=true
        AutomaticLogic=root
-
+      
+.. note::
+   this just work VM.
 .. [ref] http://blog.csdn.net/kpshare/article/details/7523546
 
+
+https://www.centos.org/forums/viewtopic.php?f=47&t=48288
 
 #. usb install
 
@@ -74,6 +78,12 @@ http://wiki.centos.org/zh/HowTos/InstallFromUSBkey
    ## method 2
    cat XX.iso >/dev/sdb
    sync
+
+
+install nvidia driver
+=====================
+
+http://www.dedoimedo.com/computers/centos-7-nvidia.html
 
 yum and rpm
 ===========
@@ -114,3 +124,7 @@ enter text interface
 :command:`ctrl+alt+F1~F6`
 
 
+no lock screen
+==============
+
+change power management.
