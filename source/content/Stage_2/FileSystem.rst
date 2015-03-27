@@ -88,6 +88,14 @@ mount 各种各样的文件系统，loop 表示把本地文件当做文件系统
 #. `mkfs manual  <http://study.chyangwa.com/IT/AIX/aixcmds3/mkfs.htm>`_  
 通过对gentoo对于各种概念有了更深的认识。
 
+
+
+不同的文件系统就是硬件磁盘与逻辑存储之间的映射关系。 所谓的超级块就是与文件系统有关的。
+并且存储的效率以及备份与压缩的机制。
+
+还有在备份的时候，先碎片整理最小化，然后再copy数据，这样会加块的速度。
+:command:`e4defrag` ，可以用碎片的整理，同时利用 gparted可以还直接对硬盘进行拉大与拉小，关键是存放的文件不要被覆盖。
+
 分区与格式化挂载
 ================
 
@@ -129,6 +137,7 @@ mount 各种各样的文件系统，loop 表示把本地文件当做文件系统
 
 `Ext3日志原理 <http://m.blog.chinaunix.net/uid-20196318-id-152429.html>`_ 
 `whats-the-difference-between-e2fsck-and-fsck-and-which-one-i-should-use <http://unix.stackexchange.com/questions/87415/whats-the-difference-between-e2fsck-and-fsck-and-which-one-i-should-use>`_ 
+
 man
 ===
 

@@ -1,6 +1,14 @@
 Centos
 ******
 
+
+#. sshd run on startup
+   :command:`chkconfig sshd on`
+
+#. install python 2.7 on centos 6.5
+  
+   http://bicofino.io/blog/2014/01/16/installing-python-2-dot-7-6-on-centos-6-dot-5/
+
 #. hostname
 
    .. code-block:: bash
@@ -128,3 +136,44 @@ no lock screen
 ==============
 
 change power management.
+
+
+config boot
+===========
+
+#. config /etc/fstab
+
+   .. code-block:: bash
+
+      #. /etc/fstab
+      #
+      # /etc/fstab
+      # Created by anaconda on Tue Mar 17 01:42:54 2015
+      #
+      # Accessible filesystems, by reference, are maintained under '/dev/disk'
+      # See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+      #
+      /dev/sda1 /                       ext4    defaults        1 1
+
+
+#. change /boot/grub2/grub.cfg
+
+   .. code-block:: bash
+
+      if [ x$feature_platform_search_hint = xy ]; then
+          search --no-floppy --fs-uuid --set=root --hint-bios=hd0,msdos1 --hint-efi=hd0,msdos1 --hint-baremetal=ahci0,msdos1 --hint='hd0,msdos1'  35bf2afd-b8f4-4a7e-ab82-12adba3e8cbc
+      else
+          search --no-floppy --fs-uuid --set=root 35bf2afd-b8f4-4a7e-ab82-12adba3e8cbc
+      fi
+
+      ####### change from above to the below  
+      if [ x$feature_platform_search_hint = xy ]; then
+                search --no-floppy --file --set=root --hint-bios=hd0,msdos1 --hint-efi=hd0,msdos1 --hint-baremetal=ahci0,msdos1 --hint='hd0,msdos1'  /boot/vmlinuz-3.10.0-123.20.1.el7.x86_64
+      else
+          search --no-floppy --file --set=root /boot/vmlinuz-3.10.0-123.20.1.el7.x86_64
+      fi
+
+
+      
+
+
