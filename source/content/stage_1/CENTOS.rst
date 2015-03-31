@@ -60,6 +60,7 @@ Centos
 
       #. bootup
          :command:`chkconfig vncserver on`
+         :command:`chkconfig iptables off`
 
 
 this new method is working `vnc-server-installation-on-centos-7 <https://www.howtoforge.com/vnc-server-installation-on-centos-7>`_

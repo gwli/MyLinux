@@ -19,6 +19,8 @@ tar 到批定的目录
 
 ``python tarfile`` 以及 ``python zipfile``
 
+`xz <http://en.wikipedia.org/wiki/Xz>`_
+
 grep 
 ----
 
@@ -85,3 +87,32 @@ linux专门一条:command:`rename` 指令。例如 我要把  *.txt* 变成 *.rst*
 
 在文件添加一行，一个方法那就是用vim就可以了。
 如果只是简单的行尾，那就是>>就搞定了。
+
+
+minicom
+=======
+
+:command:`minicom -D /dev/ttyUSB0` 
+:command:`minicom -C log.txt -D /dev/ttypUSB0` 保存log
+
+:command:`ctrl+A` 来进入控制台
+
+
+
+Development Tools
+=================
+
+不同平台下，会有不同的名字，
+在ubuntu 下那就是  build-essential
+在centos 下 那就是 Development Tools
+
+
+centos 的development tools
+--------------------------
+
+indent, C语言的格式美化工具。 
+
+https://www.kernel.org/doc/Documentation/CodingStyle
+
+
+kernel-devel 包

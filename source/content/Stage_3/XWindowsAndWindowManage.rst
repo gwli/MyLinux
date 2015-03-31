@@ -103,6 +103,11 @@ window,menu and button has style/menustyle/buttonstyle to control outline. for t
    http://www.fvwm.org/screenshots/desktops/Lee_Willis-desk-1024x768/screenshot.gif ,
 
 
+VNC
+===
+
+:command:`gnome-session` 用来开始窗口管理器的。 一般需要在 .xstartup中启动它，不然的话，就会出现只有一个灰色的窗口。
+
 Remote Display
 ==============
 
