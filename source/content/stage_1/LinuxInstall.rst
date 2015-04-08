@@ -44,6 +44,14 @@ sourcelist support three source
    #. `apt-get  代理设置 <http://hi.baidu.com/penglaiguoguo/item/385acb1553da648c88a9569e>`_  
    #. `源列表格式说明 <http://windorain.net/sources-list-format/>`_ , `说明名2 <http://blog.csdn.net/xizaizhuanyong_/article/details/8170093>`_ 
    #. `source list 制作方法 <http://www.debian.org/doc/manuals/apt-howto/ch-basico.zh-cn.html>`_ 
+
+
+dpkg
+====
+
+查询包 :command:`dpkg -l |grep vnc`
+
+删除   :command:`dpkg -r vnc`
    
    
    如何快速的制作一个linux系统
