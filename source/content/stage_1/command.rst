@@ -116,3 +116,9 @@ https://www.kernel.org/doc/Documentation/CodingStyle
 
 
 kernel-devel 包
+
+
+resize2fs 分区 
+==============
+
+:command:`resize2fs -F -f -p /dev/sda1 -M` 最小化。
