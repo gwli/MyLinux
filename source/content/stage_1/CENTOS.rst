@@ -176,5 +176,13 @@ config boot
 
 
       
+redhat
+======
 
+just select software devleopment workstation. anything is ready except python 2.7.
 
+you can use vino-preference to config.
+
+unlock keyring
+--------------
+rm -fr ~/.gnomme2/default/default.keyring
