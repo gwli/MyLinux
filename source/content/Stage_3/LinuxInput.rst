@@ -1,3 +1,13 @@
+
+最终真实硬件，都会变成文件对象，其实大部分的硬件都是基于寄存器的，无非提供了硬件复用机制，就像CPU一样，同样的道理适用于其他硬件，首先每一个硬件抽象化，然后映射到真实硬件的部分。而每一个抽象硬件，都有其独立寄存器，就像所谓的context,正所谓的open,close其实本质就是实现一个小的context,并且实现环境切换以得到复用，这也是 with context manager的实现的原理。
+
+`ioctl <http://baike.baidu.com/link?url=xSR7hRAezhCFEgGa2o1n8ncvsY1LgnI1Qx6xahZpBQjuJ9pLzyIPJK1bakVVQqvKL5k1x-zdbDX-E2tk8ZM3Aa>`_ 大部分硬件都是基于寄存器，而一段时间内得到具体控制可以用ioctl来对I/O 通道进行管理。
+
+对于xterm 更是如此，同一套硬件，还要多欠mapping,输入的多次，输出的多次。
+
+所谓的无非就是查看共同一块数据而己，同时具有读写功能。本质那就是对同一个文件进行同时打开两次，并且都具有读写功能。这个也就是os.openpty,的功能，先得到pty,然后再打开一次，相当于一个主，一个slave.
+可以用 os.open打开同一个文件即可。并且不用缓冲区即可。
+
 .. seealso::
    * `linux input子系统详截 <http://wenku.baidu.com/view/a6c4b6bfc77da26925c5b001.html>`_  %IF{" '' = '' " then="" else="- "}%
    * `Android 【真机】与【模拟器】触摸屏事件的模拟差异分析 <http://www.linuxidc.com/Linux/2011-06/37906.htm>`_  %IF{" '' = '' " then="" else="- "}%
