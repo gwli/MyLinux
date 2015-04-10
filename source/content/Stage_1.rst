@@ -6,9 +6,9 @@
 .. include:: Stage_11/DirectoryLayout.rst
 .. include:: Stage_11/gnome.rst
 .. include:: Stage_11/LinuxInstall.rst
-.. include:: Stage_1/network.rst
-.. include:: Stage_1/SUSE.rst
-.. include:: Stage_1/CENTOS.rst
-.. include:: Stage_1/TimeDateManagement.rst
-.. include:: Stage_1/troubleshot.rst
+.. include:: Stage_11/network.rst
+.. include:: Stage_11/SUSE.rst
+.. include:: Stage_11/CENTOS.rst
+.. include:: Stage_11/TimeDateManagement.rst
+.. include:: Stage_11/troubleshot.rst
 
