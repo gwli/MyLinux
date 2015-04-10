@@ -1,7 +1,7 @@
 Common command
 ==============
 
-½âÑ¹ 
+è§£å‹ 
 ----
 
 .. csv-table:: 
@@ -12,25 +12,25 @@ Common command
    .zip  ,   unzip abc.zip
    .rar,   unrar x abc.rar, apt-get install unrar   
 
-tar µ½Åú¶¨µÄÄ¿Â¼
+tar åˆ°æ‰¹å®šçš„ç›®å½•
 ----------------
 
 :command:`tar -xzvf abc.tgz -C Dest`
 
-``python tarfile`` ÒÔ¼° ``python zipfile``
+``python tarfile`` ä»¥åŠ ``python zipfile``
 
 `xz <http://en.wikipedia.org/wiki/Xz>`_
 
 grep 
 ----
 
-ÕıÔò±í´ïÊ½£¬ÊÇ²»ĞèÒª×ªÒåµÄ£¬ :command:` grep -E` »òÕß :command:`egrep`.
+æ­£åˆ™è¡¨è¾¾å¼ï¼Œæ˜¯ä¸éœ€è¦è½¬ä¹‰çš„ï¼Œ :command:` grep -E` æˆ–è€… :command:`egrep`.
 
-¶ÔÓÚÊä³öµÄ¿ØÖÆºÜÁé»î£¬¿ÉÒÔ¼ÆÊı£¬¿ÉÒÔ¸ßÁÁ£¬ÒÔ¼°Ö»ÏÔÎÄ¼şÃû£¬ÒÔ¼°Ö§³ÖÓë»ò·Ç¡£
+å¯¹äºè¾“å‡ºçš„æ§åˆ¶å¾ˆçµæ´»ï¼Œå¯ä»¥è®¡æ•°ï¼Œå¯ä»¥é«˜äº®ï¼Œä»¥åŠåªæ˜¾æ–‡ä»¶åï¼Œä»¥åŠæ”¯æŒä¸æˆ–éã€‚
 
-¶ÔÓÚ»òµÄÖ§³Ö ¿ÉÒÔÓÃ  :command:`grep -F` »òÕß :command:`fgrep` ºó½ÓÒ»¸öÎÄ¼şÁĞ±í
-Ö»ÒªÖ±½ÓpatternÁĞ±í£¬Ã¿Ò»ĞĞÒ»¸ö£¬ÕâĞ©patternµÄ¹ØÏµÊÇ any(patterns)µÄ¹ØÏµ¡£
-Í¬Ê±ÕıÔò±í´ïÊ½Ò²ÊÇÖ§³ÖµÄ 
+å¯¹äºæˆ–çš„æ”¯æŒ å¯ä»¥ç”¨  :command:`grep -F` æˆ–è€… :command:`fgrep` åæ¥ä¸€ä¸ªæ–‡ä»¶åˆ—è¡¨
+åªè¦ç›´æ¥patternåˆ—è¡¨ï¼Œæ¯ä¸€è¡Œä¸€ä¸ªï¼Œè¿™äº›patternçš„å…³ç³»æ˜¯ any(patterns)çš„å…³ç³»ã€‚
+åŒæ—¶æ­£åˆ™è¡¨è¾¾å¼ä¹Ÿæ˜¯æ”¯æŒçš„ 
 
 
 
@@ -39,16 +39,16 @@ grep
 
 du and df
 ---------
-¼ì²éÊÇ·ñÓĞ·ÖÇøÊ¹ÓÃÂÊ(Use%)¹ı¸ß(±ÈÈç³¬¹ı90%)
+æ£€æŸ¥æ˜¯å¦æœ‰åˆ†åŒºä½¿ç”¨ç‡(Use%)è¿‡é«˜(æ¯”å¦‚è¶…è¿‡90%)
 
 :command:`df -h |grep -vE "tmpfs|udev"` 
 
-Èç·¢ÏÖÄ³¸ö·ÖÇø¿Õ¼ä½Ó½üÓÃ¾¡,ÓÃÒÔÏÂÃüÁîÕÒ³öÕ¼ÓÃ¿Õ¼ä×î¶àµÄÎÄ¼ş»òÄ¿Â¼£º
+å¦‚å‘ç°æŸä¸ªåˆ†åŒºç©ºé—´æ¥è¿‘ç”¨å°½,ç”¨ä»¥ä¸‹å‘½ä»¤æ‰¾å‡ºå ç”¨ç©ºé—´æœ€å¤šçš„æ–‡ä»¶æˆ–ç›®å½•ï¼š
 
-:command:`du -csh /var/lib/state/*` »òÕßÅÅĞò 
+:command:`du -csh /var/lib/state/*` æˆ–è€…æ’åº 
 :command:`du -cks * |sort -rn| head -n 10` 
 
-ÈçºÎ²é¿´linuxµÄ°æ±¾
+å¦‚ä½•æŸ¥çœ‹linuxçš„ç‰ˆæœ¬
 -------------------
 
 .. code-block:: bash
@@ -59,66 +59,67 @@ du and df
    /etc/os-release
    /etc/lsb-release
 
-ÀûÓÃÌØÕ÷ÎÄ¼ş :file:`/etc/issue` »òÕß :file:`/etc/redhat-release` »òÕß :file:`/etc/debian_version`
+åˆ©ç”¨ç‰¹å¾æ–‡ä»¶ :file:`/etc/issue` æˆ–è€… :file:`/etc/redhat-release` æˆ–è€… :file:`/etc/debian_version`
 
-»òÕßÖ±½Ó :command:`cat /etc/*-release` ¾Í¿ÉÒÔ¿´µ½ÁË¡£
+æˆ–è€…ç›´æ¥ :command:`cat /etc/*-release` å°±å¯ä»¥çœ‹åˆ°äº†ã€‚
 
 
-ÈçºÎÅĞ¶ÏlinuxÊÇ·ñÔËĞĞÔÚĞéÄâ»úÉÏ
+å¦‚ä½•åˆ¤æ–­linuxæ˜¯å¦è¿è¡Œåœ¨è™šæ‹Ÿæœºä¸Š
 -------------------------------
 
 http://www.vpsee.com/2011/01/how-to-detect-if-a-linux-system-running-on-a-virtual-machine/
 
-Ö÷ÒªÊÇÍ¨¹ı :file:`/proc/vz  /proc/xen/` µÈÎÄ¼şÀ´×öµÄ£¬Ò»°ãÕâĞ©µØÖ·»áÌåÏÖÏµÍ³»·¾³µÄ¡£
+ä¸»è¦æ˜¯é€šè¿‡ :file:`/proc/vz  /proc/xen/` ç­‰æ–‡ä»¶æ¥åšçš„ï¼Œä¸€èˆ¬è¿™äº›åœ°å€ä¼šä½“ç°ç³»ç»Ÿç¯å¢ƒçš„ã€‚
 
-ÎÄ¼şÅúÁ¿ÖØÃüÃû
+æ–‡ä»¶æ‰¹é‡é‡å‘½å
 --------------
 
-linux×¨ÃÅÒ»Ìõ:command:`rename` Ö¸Áî¡£ÀıÈç ÎÒÒª°Ñ  *.txt* ±ä³É *.rst*
+linuxä¸“é—¨ä¸€æ¡:command:`rename` æŒ‡ä»¤ã€‚ä¾‹å¦‚ æˆ‘è¦æŠŠ  *.txt* å˜æˆ *.rst*
 :command:`rename 's/.txt/.rst/ *.txt` .
 
-È¡ÎÄ¼şµÄ²¿·ÖÄÚÈİ
+å–æ–‡ä»¶çš„éƒ¨åˆ†å†…å®¹
 ----------------
 
 .. csv-table::
    
-   ĞĞ, sed,grep,head,tail
-   Àı,awk,column
+   è¡Œ, sed,grep,head,tail
+   ä¾‹,awk,column
 
-ÔÚÎÄ¼şÌí¼ÓÒ»ĞĞ£¬Ò»¸ö·½·¨ÄÇ¾ÍÊÇÓÃvim¾Í¿ÉÒÔÁË¡£
-Èç¹ûÖ»ÊÇ¼òµ¥µÄĞĞÎ²£¬ÄÇ¾ÍÊÇ>>¾Í¸ã¶¨ÁË¡£
+åœ¨æ–‡ä»¶æ·»åŠ ä¸€è¡Œï¼Œä¸€ä¸ªæ–¹æ³•é‚£å°±æ˜¯ç”¨vimå°±å¯ä»¥äº†ã€‚
+å¦‚æœåªæ˜¯ç®€å•çš„è¡Œå°¾ï¼Œé‚£å°±æ˜¯>>å°±æå®šäº†ã€‚
 
 
 minicom
 =======
 
 :command:`minicom -D /dev/ttyUSB0` 
-:command:`minicom -C log.txt -D /dev/ttypUSB0` ±£´ælog
+:command:`minicom -C log.txt -D /dev/ttypUSB0` ä¿å­˜log
 
-:command:`ctrl+A` À´½øÈë¿ØÖÆÌ¨
+:command:`ctrl+A` æ¥è¿›å…¥æ§åˆ¶å°
 
 
 
 Development Tools
 =================
 
-²»Í¬Æ½Ì¨ÏÂ£¬»áÓĞ²»Í¬µÄÃû×Ö£¬
-ÔÚubuntu ÏÂÄÇ¾ÍÊÇ  build-essential
-ÔÚcentos ÏÂ ÄÇ¾ÍÊÇ Development Tools
+ä¸åŒå¹³å°ä¸‹ï¼Œä¼šæœ‰ä¸åŒçš„åå­—ï¼Œ
+åœ¨ubuntu ä¸‹é‚£å°±æ˜¯  build-essential
+åœ¨centos ä¸‹ é‚£å°±æ˜¯ Development Tools
 
 
-centos µÄdevelopment tools
+centos çš„development tools
 --------------------------
 
-indent, CÓïÑÔµÄ¸ñÊ½ÃÀ»¯¹¤¾ß¡£ 
+indent, Cè¯­è¨€çš„æ ¼å¼ç¾åŒ–å·¥å…·ã€‚ 
 
 https://www.kernel.org/doc/Documentation/CodingStyle
 
 
-kernel-devel °ü
+kernel-devel åŒ…
 
 
-resize2fs ·ÖÇø 
+resize2fs åˆ†åŒº 
 ==============
 
-:command:`resize2fs -F -f -p /dev/sda1 -M` ×îĞ¡»¯¡£
+:command:`resize2fs -F -f -p /dev/sda1 -M` æœ€å°åŒ–ã€‚
+
