@@ -1,9 +1,3 @@
-:author: GangweiLi
-:comment: No
-:CreateDate: 14-07-10
-:status: C
-:name: LinuxInstall
-
 software install apt-get 
 ------------------------
 

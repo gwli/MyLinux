@@ -12,7 +12,7 @@ Common command
    .zip  ,   unzip abc.zip
    .rar,   unrar x abc.rar, apt-get install unrar   
 
-tar 到批定的目录
+tar 到指定的目录
 ----------------
 
 :command:`tar -xzvf abc.tgz -C Dest`
@@ -117,9 +117,10 @@ https://www.kernel.org/doc/Documentation/CodingStyle
 
 kernel-devel 包
 
-
+/
 resize2fs 分区 
 ==============
 
 :command:`resize2fs -F -f -p /dev/sda1 -M` 最小化。
+
 
