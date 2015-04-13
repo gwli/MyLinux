@@ -39,6 +39,25 @@
  |    ^ | DIR |
  |  real data | DATA |
 
+每一个分区的超级块放在这个分区的头，如果有就在第二个逻辑块里，一般情况下，第一块是引导块，第二块为super block并且大小固定。并且格式，大小固定。
+
+
+每一个分区四大块:
+
+.. graphviz::
+   digraph filesystem {
+      partition  [ shape=Record, label="boot block|super block | inode index block |data block"]
+   }
+
+`各种挂载问题 <http://man.chinaunix.net/linux/mandrake/cmuo/admin/camount3.html>`_ 
+
+
+并且这个根文件系统是在内存里。 可以通过chroot 来修系统 的根在哪里。这在很多地方都能用到，例如安装机制，例如 apache中，当然不能一般用户得以/etc/目录了，所以要把 apache中根目录要改掉才行。并且还可以其他目录拼接成一个新的目录。 
+
+例一个用法，那就是修复系统时可以用到，例如 https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Base 把proc 从加载一下，
+
+每一个进程的都会记录自己的根目录在哪里，这样才能解析绝对目录与相对路径。
+
 #. `硬盘知识,硬盘逻辑结构,硬盘MBR详解 <http://wenku.baidu.com/view/b131844d2e3f5727a5e9620d.html>`_ 64 字节的分区表
 #. ` Partition Tables <http://thestarman.pcministry.com/asm/mbr/PartTables.htm>`_  
 #. `INIX文件系统中，第一个块为引导块，第二个块为超块，之后的N个块是inode位图块(表示哪几个inode被使用了，总的inode个数由超块给出)，紧接着是数据块位图，表示哪些数据块被使用了，紧接着就是inode块和数据块 <http://hi.baidu.com/bicener/item/b628c909039b7b1ceafe38bd>`_ 
@@ -74,7 +93,14 @@
 
 
 
+
 分区是对硬盘的一个抽象，对于ＯＳ来说，分区基本硬盘是一样的，并且分区上面还可以逻辑分区。block是对 扇区的一种抽象。文件相当于heads, 而目录相当于cylinders.
+
+
+
+
+
+可以用 :command:`dumpe2fs` 来查看文件系统，并且可以用 :command:`tune2fs` 来调整参数。
 
 如何制作文件系统
 ================

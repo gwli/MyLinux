@@ -4,6 +4,7 @@ Linux 的目录结构
 
 最基本目录
 ==========
+
 :file:`/bin,/dev,/etc,/lib,/proc,/sbin,/usr`
 
 
