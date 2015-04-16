@@ -31,16 +31,15 @@ Linux 基本命令
 #. 在文件间建立连接: ln -s（软连接）
 #. 查找文件: find 
 
-grep不太理解
 
 其它：
 -----
 
 #. 查看网络设备: ifconfig
-#. 进程状态查看: ps  aux
 #. 安装程序包: sudo apt-get 
 #. 查看任务管理器进程: ps 
 #. 查看命令历史: history
+#. 产看帮助： man，help
 
 解压 
 ----
@@ -74,13 +73,13 @@ grep
 同时正则表达式也是支持的 
 
 
-
 :command:`grep -lincrE "localhost|127.0.0.1" ./* |grep -vE "tutorial|machine"`
 
 
 du and df
 ---------
-检查是否有分区使用率(Use%)过高(比如超过90%)
+
+检查是否有文件分区使用率(Use%)过高(比如超过90%)
 
 :command:`df -h |grep -vE "tmpfs|udev"` 
 
