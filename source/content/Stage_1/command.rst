@@ -1,36 +1,9 @@
 Linux 基本命令
-=========================
+==============
 
-Linux 操作系统
-================
-.. figure:: images/LinuxFileTree.png
-    :width: 400px
-    :align: center
-    :height: 200px
-    :alt: alternate text
-    :figclass: align-center
-
-    Linux 树状目录结构表
-
-#. /bin： 用来存储用户命令和可执行程序
-#. /sbin: 包含一些主要供超级用户用的可执行程序；
-#. /usr: 安装主要的系统文件和软件
-#. /home: 存放各用户的主目录。
-#. /etc: 系统设置文件
-#. /dev: 设备文件，主要是各种驱动；
-#. /proc: Linux 内核的接口，可以通过它在运行时获取、改变系统内核的许多参数；
-#. /mnt: 外挂设备的挂接点；
-#. /root: 超级用户的目录；
-#. /boot 和 /initrd: 系统启动用的文件；
-#. /lib: 库文件；
-#. /tmp: 用于创建临时文件或目录；
-#. /usr/include/: 头文件的位置；
-#. /src: 内核和软件的源代码的位置；
-#. /local: 安装外来软件的地方；
-#. /sudo: 使得普通用户可以得到超级用户权利。
 
 开机关机操作
-----------------
+------------
 
 #. 开机:  /sbin/halt
 #. 关机:  /sbin/poweroff
@@ -39,7 +12,7 @@ Linux 操作系统
 修改密码：password
 
 目录操作
--------------
+--------
 
 #. 查看当前目录：pwd
 #. 返回目录：cd 
@@ -47,7 +20,7 @@ Linux 操作系统
 #. 当前目录：cd .
 
 文件操作
----------
+--------
 
 #. 创建目录: mkdir
 #. 删除目录: rmdir
@@ -181,11 +154,8 @@ centos 的development tools
 indent, C语言的格式美化工具。 
 
 https://www.kernel.org/doc/Documentation/CodingStyle
-
-
 kernel-devel 包
 
-/
 resize2fs 分区 
 ==============
 
