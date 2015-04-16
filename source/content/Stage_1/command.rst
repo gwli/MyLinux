@@ -1,5 +1,73 @@
-Common command
-==============
+Linux 基本命令
+=========================
+
+Linux 操作系统
+================
+.. figure:: images/LinuxFileTree.png
+    :width: 400px
+    :align: center
+    :height: 200px
+    :alt: alternate text
+    :figclass: align-center
+
+    Linux 树状目录结构表
+
+#. /bin： 用来存储用户命令和可执行程序
+#. /sbin: 包含一些主要供超级用户用的可执行程序；
+#. /usr: 安装主要的系统文件和软件
+#. /home: 存放各用户的主目录。
+#. /etc: 系统设置文件
+#. /dev: 设备文件，主要是各种驱动；
+#. /proc: Linux 内核的接口，可以通过它在运行时获取、改变系统内核的许多参数；
+#. /mnt: 外挂设备的挂接点；
+#. /root: 超级用户的目录；
+#. /boot 和 /initrd: 系统启动用的文件；
+#. /lib: 库文件；
+#. /tmp: 用于创建临时文件或目录；
+#. /lib: 头文件的位置；
+#. /src: 内核和软件的源代码的位置；
+#. /local: 安装外来软件的地方；
+#. /sudo: 使得普通用户可以得到超级用户权利。
+
+开机关机操作
+----------------
+
+#. 开机:  /sbin/halt
+#. 关机:  /sbin/poweroff
+#. 重启： /sbin/reboot 
+
+修改密码：password
+
+目录操作
+-------------
+
+#. 查看当前目录：pwd
+#. 返回目录：cd 
+#. 返回上一层目录： cd ..
+#. 当前目录：cd .
+
+文件操作
+---------
+
+#. 创建目录: mkdir
+#. 删除目录: rmdir
+#. 打开文件(读写文件): vim 
+#. 关闭文件:wq 
+#. 移动文件: mv 
+#. 删除文件: rm
+#. 复制文件或目录: cp
+#. 在文件间建立连接: ln -s（软连接）
+#. 查找文件: find 
+
+
+其它：
+-----
+
+#. 查看网络设备: ifconfig
+#. 安装程序包: sudo apt-get 
+#. 查看任务管理器进程: ps 
+#. 查看命令历史: history
+#. 产看帮助： man，help
 
 解压 
 ----
@@ -33,13 +101,13 @@ grep
 同时正则表达式也是支持的 
 
 
-
 :command:`grep -lincrE "localhost|127.0.0.1" ./* |grep -vE "tutorial|machine"`
 
 
 du and df
 ---------
-检查是否有分区使用率(Use%)过高(比如超过90%)
+
+检查是否有文件分区使用率(Use%)过高(比如超过90%)
 
 :command:`df -h |grep -vE "tmpfs|udev"` 
 
