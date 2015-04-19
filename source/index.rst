@@ -12,7 +12,7 @@ Contents:
    :maxdepth: 2
 
    Target   
-   content/ModuleAndDriver
+   content/Stage_1
    content/Stage_2
    content/Stage_3
 

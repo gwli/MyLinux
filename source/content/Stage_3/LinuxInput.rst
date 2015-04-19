@@ -36,3 +36,25 @@ linux内核是支持事件，与输入设备的操作，你可以加入伪信号
 linux实现了对物理设备与逻辑设备的映射关系。当然了映射关系，再加上context机制的分时，就可以分时复用了。同时我们还可以做一些伪设备来发送数据。来达到虚拟化的效果，并且这个mapping规范化就是虚拟机了。
 原来进程模型，stdin指就是键盘，而stdout就是文本显示器。同时出错也是显示器。
 进程再输入与输出以出错信息。在linux都是以文件方式来进行。
+
+最原来的字符终端设备已经没有了，所以理解起来比较困难。本身就是一个显示与输出，有类似于键盘+屏幕一样的。 但是伪终端，从设备这一端与进程相联系的，而主役备是由窗口管理系统控制，与真正的终端的mapping是内核与窗口管理系统控制。 就是缓冲区，采用类似于进程一样的结构，来达到复用的效果。
+
+
+linux 分三大块，CPU,内存，I/O. 最复杂的也就是IO设备，也就需要各种各样的驱动了。
+对于终端的各种key的翻译可以用 stty 来进行设备，例如backspace是删除等等都保存在termio中。
+
+pty 是采用的动态分配的机制，每一次需要的时候去 打开 ptmx 会自动得到主设备，然后去打开一个从设备，然后主从之间就可以通信了。就像pipe 是一样的。
+
+操作模型
+--------
+
+#. open /dev/ptmx 得到 master fd_master
+#. grantpt(fd_master)
+#. unlockpt(fdm)
+#. slavename = ptsname(fd_master)
+#. fd_slave=open(slavename)
+
+http://wenku.baidu.com/view/53d0daf8aef8941ea76e05d2.html
+
+
+其实也简单，只要共享同一个文件就行了，并且实时更新，相当于共享了session. 也就是我们要共享shession. 例如ssh 共享session. 在python 中有直接pty模块，也可以spawn pty.
