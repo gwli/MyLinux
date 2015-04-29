@@ -49,6 +49,12 @@ https://devtalk.nvidia.com/default/topic/567784/nvidia-325-08-optimus-no-screens
 X windows 采用的 properites and components模式，相当于screen一组，对应实体的inputs,mouse, monitor.
 
 
+V3L 14.04 下的启动
+------------------
+
+
+
+
 X windows 消息机制 
 =======================
 
@@ -167,4 +173,29 @@ Thinking
 
 -- Main.GangweiLi - 12 Dec 2013
 
+DRI Direct Rendering Infrastructure. 
+RM & DRI
+ DRI 全称 Direct Rendering Infrastructure。X11 是采用 C/S 架构的，客户端的任何操作都需要和服务器进行通讯，在实时的 3D 渲染上性能无法接受。DRI 在 X11 上能够允许直接访问硬件渲染器（显卡），从而直接将 3D 图形渲染到屏幕上，绕过 X11 ，提升性能，这种叫作直接渲染（direct render）。DRI 为上层 3D 库提供访问底层硬件的接口。DRM 全称 Direct Rendering Manager，直接渲染管理器，是真正操作硬件的层次。各个硬件厂商负责提供各自硬件的 drm 模块（开源的提供源码、不开源的提供二进制文件）。DRI 通过调用 DRM 的接口来实现上层 3D 图形库的接口。DRI 的源码则在 Mesa 中。
 
+ `x window配置 <http://blog.csdn.net/wangjasonlinux/article/details/9194547>`_
+
+
+ InputClass 会改把 /dev/input/event中映射过来。
+
+
+XWindows 设置屏保
+-----------------
+
+.. code-block:: bash
+   
+   Section "ServerFlags"
+       # Set the basic blanking screen saver timeout in minutes. 0 to disable.
+       Option "blank time" "0"
+           
+       # Set the DPMS timeouts. 0 to disable.
+       Option "standby time" "0"
+       Option "suspend time" "0"
+       Option "off time" "0"
+   EndSection
+
+ 
