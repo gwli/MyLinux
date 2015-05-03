@@ -138,6 +138,8 @@ minicom
 
 :command:`ctrl+A` 来进入控制台
 
+`Text-Terminal-HOWTO-11.html <http://www.tldp.org/HOWTO/Text-Terminal-HOWTO-11.html>`_  为什么需要flow control,就是为解决速度不匹配的原因，并且解释了原理。
+
 
 
 Development Tools
