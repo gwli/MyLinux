@@ -97,9 +97,6 @@
 分区是对硬盘的一个抽象，对于ＯＳ来说，分区基本硬盘是一样的，并且分区上面还可以逻辑分区。block是对 扇区的一种抽象。文件相当于heads, 而目录相当于cylinders.
 
 
-
-
-
 可以用 :command:`dumpe2fs` 来查看文件系统，并且可以用 :command:`tune2fs` 来调整参数。
 
 如何制作文件系统
@@ -171,6 +168,16 @@ man
 
 HardLink and softlink
 =====================
+
+我们知道文件包括文件名和数据，在Linux上被分为两个部分：用户数据（user data）和元数据（metadata），用户数据主要记录文件真实内容的地方，元数据是记录文件的附加信息，比如文件大小、创建信息、所有者等信息。在Linux中的innode才是文件的唯一标示而非文件名。文件名是方便人们的记忆。
+
+为了解决文件共享的问题，Linux 引入两种链接：硬链接和软连接。 
+
+#. 若一个innode号对应于多个文件名，则成为硬链接
+#. 若文件用户数据块中存放的内容是另一个的路径名的指向，则该文件就是软链接。
+
+
+`http://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/`_
 
 `what-is-the-difference-between-a-hard-link-and-a-symbolic-link <http://askubuntu.com/questions/108771/what-is-the-difference-between-a-hard-link-and-a-symbolic-link>`_ 
 
