@@ -114,6 +114,18 @@ VNC
 
 :command:`gnome-session` 用来开始窗口管理器的。 一般需要在 .xstartup中启动它，不然的话，就会出现只有一个灰色的窗口。
 
+ubuntu 14.04 发现有版本不匹配时可以用。:command:`gsettings set org.gnome.Vino require-encryption false`  
+https://bugs.launchpad.net/ubuntu/+source/vino/+bug/1290666
+
+
+XWindows 恢复
+=============
+
+`dconf <http://en.wikipedia.org/wiki/Dconf>`_ 可以用来调整配置
+
+例如XWindow墨屏没有显示可以用. :command:`sudo dconf -f /org/compiz` 进行恢复。 
+对于 Gnome 定制可以参考 http://askubuntu.com/questions/22313/what-is-dconf-what-is-its-function-and-how-do-i-use-it
+
 Remote Display
 ==============
 

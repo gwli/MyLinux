@@ -1,3 +1,10 @@
+linux 和选择
+============
+
+其实只要看到每一个事情起源就自然明白其源由了，例如这么多linux，到底各有什么区别，只要再一下其各个发展史，以及先后顺序就知道了。例如 apt-get dpkg这种方式是debian首创的。 后面系统都会吸取前面系统的优点。 gentoo是出现最迟的，当然也就是优点更多一些了。
+
+`linux服务器系统CentOS、uBuntu、Gentoo、FreeBSD、Debian的比较 <http://www.jb51.net/article/32657.htm>`_ 
+redhat由于追求稳定性，而发展太慢。而ubuntu 则是通过快速的迭代用的新的技术也保证稳定性。那也就是敏捷也追求吧。这也是 `为什么ubuntu server在逐步蚕食CentOS的市场份额？ <http://www.zhihu.com/question/24180649>`_  由于技术本质就是求新求快。例如redhat 中自带的python现在还是2.6。 这些采用自己安装。当然他有一些自己特定的优势。但是长期是谬论， python 2.7 肯定比2.6要更强，更稳定。不管的你的内核更稳定，你的用python不行，还是不行的。当然还得瓶颈是在哪里。
 software install apt-get 
 ------------------------
 
