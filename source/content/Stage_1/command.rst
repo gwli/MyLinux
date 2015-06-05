@@ -76,6 +76,8 @@ grep
 
 :command:`grep -lincrE "localhost|127.0.0.1" ./* |grep -vE "tutorial|machine"`
 
+screenshot
+----------
 
 du and df
 ---------

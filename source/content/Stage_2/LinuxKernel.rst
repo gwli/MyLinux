@@ -96,7 +96,18 @@ system call
   
 
    brk,sbrk,getrlimit,setrlimit,prlimit查看系统资源的systemcall.
+libc的库有一个gensyscalls.py 生成 syscall 例表。 /ndk/toolchains/X/prebuild/<platofrm>/share/lib/syscalls 可以看到各个系统的system call 个数，现在linux 325个API。
 
+这些systemcall与大部分 shell 命令是对应的，例如mkdir等，其实本质就让shell 过程 
+
+   while(1) {
+     switch {syscall} {
+       case ...:  {do something};
+     }
+   }
+
+
+其实内核就是一个数据结构，我们只是在不断的改其设备，就像 game Engine是一样的。
 
 Signal
 ------
@@ -154,3 +165,17 @@ sysctl modifies kernel parameter at runtime
 
 -- Main.GangweiLi - 17 Apr 2014
 
+内核的启动与一般函数调用
+========================
+
+是一样的，或者一个复杂的命令行而己，就像gcc一样，哪些自身的参数，哪些是传给你init,哪些是传给module中。
+都可以在这里查到的。
+http://man7.org/linux/man-pages/man7/bootparam.7.html
+https://www.kernel.org/doc/Documentation/kernel-parameters.txt
+
+例如要不要使用 initrd,可以直接使用 noinitrd,就可以了。具体其他的起动参数都是可以从上面的文档中查到。
+
+对于启动的时候，initramfs 都是initrd的压缩版，只是把当前文件系统的一些东东直接cpio,gzip打包成.img而己。
+http://www.stlinux.com/howto/initramfs
+http://www.ibm.com/developerworks/cn/linux/l-k26initrd/index.html
+https://wiki.ubuntu.com/Initramfs
