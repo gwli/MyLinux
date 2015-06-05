@@ -3,9 +3,20 @@
 ****
 
 
+如何检查网速
+============
+
+自己直接ifconfig ; sleep 1;ifconfig 查看结果相减就可以了。当然也有一些其他的命令
+nload,iftop,iptraf,nethogs,bmon http://os.51cto.com/art/201404/435279.htm
+
+dns lookup
+==========
+
+nslookup 可以查询IP,或者域名。
 
 IP 冲突
 =======
+
 在windows下会有直接提示IP冲突。 在linux下则没有。
 
 如何检则
