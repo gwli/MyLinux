@@ -131,6 +131,19 @@ linux专门一条:command:`rename` 指令。例如 我要把  *.txt* 变成 *.rs
 在文件添加一行，一个方法那就是用vim就可以了。
 如果只是简单的行尾，那就是>>就搞定了。
 
+date
+----
+
+格式化字符串   +% 例如 :command:`date +%Y/%m/%d` ， 另外相得到 
+上周一是几号  :command:`date -d 'last monday` . 
+
+cronjob
+-------
+
+:command:`crontab -l` 列出当前所有的。
+:command:`crontab -e` 编辑当前cronjob。
+
+http://stackoverflow.com/questions/18919151/crontab-day-of-the-week-syntax
 
 minicom
 =======
