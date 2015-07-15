@@ -5,6 +5,17 @@ linux 和选择
 
 `linux服务器系统CentOS、uBuntu、Gentoo、FreeBSD、Debian的比较 <http://www.jb51.net/article/32657.htm>`_ 
 redhat由于追求稳定性，而发展太慢。而ubuntu 则是通过快速的迭代用的新的技术也保证稳定性。那也就是敏捷也追求吧。这也是 `为什么ubuntu server在逐步蚕食CentOS的市场份额？ <http://www.zhihu.com/question/24180649>`_  由于技术本质就是求新求快。例如redhat 中自带的python现在还是2.6。 这些采用自己安装。当然他有一些自己特定的优势。但是长期是谬论， python 2.7 肯定比2.6要更强，更稳定。不管的你的内核更稳定，你的用python不行，还是不行的。当然还得瓶颈是在哪里。
+
+
+usb 启动盘制作
+==============
+
+要想让其可启动，就要让BIOS能够认出来，也就是BIOS本身具有相应的驱动，或者中间的转接，然后是在其引导有引导代码类似于grub的代码能执行，并加载相应的kernel.
+
+` 用AT&T 汇编实现 第一个bootloader <http://www.imsiren.com/archives/917>`_   BIOS 通电-将磁盘第一个扇区512字节copy到内存的0x0000:0x7c0处，并将CS寄存器设置为0x0000,IP设置为0x07c0, 因为现在CPU处于实模式下，所以CPU下一条将要执行的指令就是CS:IP 将是 0x:0000:0x7c0, 这样就能挂靠 到我们写的bootloader了。
+
+所以只要把USB变成可引导盘，并且分区格式化并不会影响MBR，因为这个是分区之外的事情。 然后就可以像里面copy kernel了。这也就是为什么，今天直接往U盘copy 光盘内容就可以用了的原因。
+
 software install apt-get 
 ------------------------
 
