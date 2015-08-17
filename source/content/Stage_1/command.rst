@@ -164,6 +164,8 @@ Development Tools
 在ubuntu 下那就是  build-essential
 在centos 下 那就是 Development Tools
 
+:command:`pkg-config` 用来查看这个系统所安装库的，编译选项，以及所在的位置。而不需要人为去记住每一个库的编译选项。 在make 文件中常见的那就是
+
 
 centos 的development tools
 --------------------------
