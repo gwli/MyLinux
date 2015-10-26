@@ -57,6 +57,7 @@ sourcelist support three source
    #. `源列表格式说明 <http://windorain.net/sources-list-format/>`_ , `说明名2 <http://blog.csdn.net/xizaizhuanyong_/article/details/8170093>`_ 
    #. `source list 制作方法 <http://www.debian.org/doc/manuals/apt-howto/ch-basico.zh-cn.html>`_ 
 
+apt-get upgrade 只是升级到当前的软件到最新版本， apt-get dist-upgrade,升级到大版本。
 
 dpkg
 ====
@@ -113,7 +114,23 @@ dpkg
    USB install 
    -----------
    
-      
+
+ubuntu 发行光盘的制作 
+=====================
+
+#. https://help.ubuntu.com/community/LiveCDCustomization
+   http://lifehacker.com/5085405/make-any-linux-directory-into-an-iso-file
+
+而casper,ubuntu 等这些用户都是动态创建的。主要过程那就是/casper/filesystem.squashfs 的制作与修改。
+而起动时需要initrd.lz 以及其修改。当然也可以利用ubuntu Customization Kit. 
+https://help.ubuntu.com/community/LiveCD/Persistence 原来创建一个Casper-rw 文件来进行存储，这个大小
+还是可以重定义的。
+
+preseed 目录是用来存放预配置文件。
+
+实现也是采用grub来起动的。
+
+
 .. ::
  
        Creat bootable usb 
@@ -154,14 +171,18 @@ network install
 .. ::
  
     A as linux server, B as Solaris server.  We want to mount /home/A/ directory on Ubuntu into Solaris. <br/>
-##### Install NFS on Ubuntu
-sudo apt-get install nfs-kernel-server
-3. Edit /etc/exports, add line at the end of file:
-/home/tss3st  *(rw,sync,no_root_squash)
-4. Restart NFS service
+
+Install NFS on Ubuntu
+======================
+
+#. sudo apt-get install nfs-kernel-server
+#. Edit /etc/exports, add line at the end of file:
+      /home/tss3st  *(rw,sync,no_root_squash)
+#. Restart NFS service
 sudo service portmap restart
 sudo service nfs-kernel-server restart
 showmount -e
+
 ######Mount A:/home/A/ on Solaris
 1. Login to B as user "root"
 2. Create directory:

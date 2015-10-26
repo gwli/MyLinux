@@ -104,6 +104,8 @@
 
 mount 各种各样的文件系统，loop 表示把本地文件当做文件系统来进行挂载。同时也还可以重新mount --bind 挂载点。对于物理分区有的时候会用完，添加就需要重起机器。所以也就产生了LVM. 逻辑分区。随着云计算到来，一切的虚拟化。原来的系统都是建立物理设备上的，现在都直接在逻辑设备上了。这样就具有更大的移值性，就像我们的CAS就是把逻辑拓扑与物理拓扑的隔离。LVM就在物理分区与文件系统之间又加了一层。文件系统直接建在LVM。
 
+loop device 就是伪设备当做块设备。http://unix.stackexchange.com/questions/4535/what-is-a-loop-device-when-mounting
+
 数据的存储系统是任何一个现代系统必不可少的一部分。它关系着系统是否高效与稳定。使用数据库要求太多，而文件系统而是最灵活的，但是效率可能没有数据高。为了结合自己的数据存储需求，产生定制的文件系统，而非通过的OS文件系统。例如版本控制的文件存储系统，以及现在云计算系统都有自己存储系统。例如Google的GFS。`fuse <http://fuse.sourceforge.net/>`_ 文件系统是在用户空间的文件系统。`如何使用 <http://www.ibm.com/developerworks/cn/linux/l-fuse/>`_ 。并且通过它可以把一些服务当做文件系统来使用。例如google的mail空间。以及ftp等等。
 
 #. `SquashFS HOWTO (一) ---简介 <http://blog.csdn.net/karmy/article/details/1427315>`_  
@@ -239,3 +241,15 @@ Thinking
 *文件属性*
 在查找的，排序的时候，利用文件属性会具有很大的优势，另外一个文件的属性是存储在哪里的。例如我想基于文件属性的查找排序是会很有用，在win7上是可以随时调整的，但是linux上却没有发现，如何大规模对象存储。对于图象。更是如此。例如利用find可以查找有限的文件属性。
 `IBM filesystem 系列 <http://www.ibm.com/developerworks/cn/linux/filesystem/>`_ 现在才对文件系统的认识有了更深的认识。需要文件系统具有什么样的能力。
+
+
+文件系统中节点的类型
+====================
+
+#. directory 
+#. file
+#. symlink
+#. block device
+#. charactor device
+#. FIFO
+#. unix domain socket
