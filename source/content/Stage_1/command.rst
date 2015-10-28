@@ -62,6 +62,9 @@ tar 到指定的目录
 
 `xz <http://en.wikipedia.org/wiki/Xz>`_
 
+当然也可以用tar 来代替 cp,在大量小文件的时候，可以加快速度。相当于先打包再传输。
+:command:`tar -cvf - /etc |tar -xvf -` 就是这样的目的。 
+
 grep 
 ----
 
