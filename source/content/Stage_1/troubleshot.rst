@@ -13,4 +13,13 @@ https://code.google.com/p/android/issues/detail?id=23894
 Test:
 看其本地的测试。
 
+run 32-bit run on ubuntu 14.04 64 bit
+=====================================
 
+.. code-block::
+
+   dpkg --print-foreign-architectures
+   sudo dpkg --add-architecture i386
+   sudo apt-get update
+   sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386
+   sudo apt-get install lib32z1 lib32ncurses5 lib32bz2-1.0
