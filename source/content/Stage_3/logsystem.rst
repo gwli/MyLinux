@@ -24,3 +24,4 @@ log system
 :command:`logrotate`  并且再 :file:`/etc/logrotate.conf` 这里配制每一份log的大小，多少次，并且压缩格式等等。 每一个 app 都可以添加一个自己的log conf 放在 :file:`/etc/logrotate.d/` 下面。
 
 
+系统log记录了，所有用户登陆的信息，wtmp,utmp,等等，同时也记录login 失
