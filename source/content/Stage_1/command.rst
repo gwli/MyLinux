@@ -94,6 +94,13 @@ du and df
 :command:`du -csh /var/lib/state/*` 或者排序 
 :command:`du -cks * |sort -rn| head -n 10` 
 
+
+下载工具
+--------
+
+主要有两个wget与curl, 类似curl功能更强，支持功能更多，wget 强的主要一点，那就是 recursively download. 并且都支持管道，但是curl支持更多一些。
+例如 下载下来直接执行 :command:`wget -O - |sh` 。 如何编程使用的话，用curl可能更加方便一些，毕竟后面一个跨平台的库在那里支持着。
+
 如何查看linux的版本
 -------------------
 
@@ -119,7 +126,6 @@ http://www.vpsee.com/2011/01/how-to-detect-if-a-linux-system-running-on-a-virtua
 
 文件批量重命名
 --------------
-
 linux专门一条:command:`rename` 指令。例如 我要把  *.txt* 变成 *.rst*
 :command:`rename 's/.txt/.rst/ *.txt` .
 
@@ -183,4 +189,7 @@ resize2fs 分区
 
 :command:`resize2fs -F -f -p /dev/sda1 -M` 最小化。
 
+sync
+====
 
+有各种同步， sync是直接把cache中内容写回到硬盘，isync,dsync则是mail box同步，而zsync 则提供的是部分下载，文件下载到了一半，只需要同步一部分，相当于patch的功能，而rsync则是文件的同步。
