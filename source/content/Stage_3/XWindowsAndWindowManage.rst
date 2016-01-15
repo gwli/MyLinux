@@ -34,6 +34,14 @@ SUSE下的启动
 
 没有显示连接的话，*x server* 会起不来。如果还想起就要用 `XVFB(virtual framebuffer X server) <http://www.x.org/archive/X11R7.7/doc/man/man1/Xvfb.1.xhtml>`_ .  或者添加  *AllowEmptyInitialConfiguration* to :file:`xorg.conf` 并且添加 :file:`~/.xinitrc`. 
 
+配制文件里配置分配率 
+====================
+
+http://openmind.iteye.com/blog/1319868  或者http://forum.ubuntu.org.cn/viewtopic.php?f=48&t=346103
+
+#. 计算 cvt, 然后把 ModeLine 写入 /etc/x11/xorg.conf
+也可以调整显示方向可以在  :command:`xrander --rotate` 也可以用 `xrotate`
+
 .. codeblock:: bash
    
    xrandr --setprovideroutputsource 0x46 0x2b4
@@ -44,10 +52,21 @@ SUSE下的启动
 https://devtalk.nvidia.com/default/topic/585014/how-to-configure-x-server-to-work-headless-as-well-with-any-monitor-connected-/
 https://devtalk.nvidia.com/default/topic/567784/nvidia-325-08-optimus-no-screens-found-ee-/
 
+
+
 或者 :command:`nvidia-xconfig --allow-empty-initial-configuration` 
 
 X windows 采用的 properites and components模式，相当于screen一组，对应实体的inputs,mouse, monitor.
 
+
+如何把VNC 跑在real X display上
+==============================
+
+ubuntu 默认的  vino-server直接跑在 real display上的
+http://superuser.com/questions/136785/how-do-i-run-vino-server-without-a-monitor-attached-in-ubuntu-10-04
+
+或者使用 X11vnc 并与 --display :0 这样就行了。
+http://www.karlrunge.com/x11vnc/
 
 V3L 14.04 下的启动
 ------------------
@@ -97,6 +116,8 @@ window,menu and button has style/menustyle/buttonstyle to control outline. for t
 对于样式表还是可以分组的，这样就构成了theme,利用desc来使用一组样式表。
 对于函数一上来，那就是一个switch对于键盘与mouse操作，过滤，对于哪些操作reaction,哪些nop.
 
+对于分屏的操作，PvwmPaper 来控制显示多个 virtual Desktop.
+
 .. csv-table:: 
 
    http://www.fvwm.org/screenshots/desktops/Tavis_Ormandy-desk-1152x864/screenshot.jpg , try this one ,
@@ -109,6 +130,12 @@ window,menu and button has style/menustyle/buttonstyle to control outline. for t
    http://www.fvwm.org/screenshots/desktops/Lee_Willis-desk-1024x768/screenshot.gif ,
 
 
+lockscreen
+==========
+
+锁屏一个套独立机制，例如强制占领桌面最前端，其他功能切换不能工作，只有收入密码才能解屏。
+
+X windows 下有不少锁屏工具，例如xlock, 也有gnome-screensaver 来进行设置，而用:command:`gnome-screensaver-command -l` 来进行锁屏。
 VNC
 ===
 
@@ -134,6 +161,7 @@ Remote Display
 #. `where-does-xhost-store-the-allowed-network-addresses <http://stackoverflow.com/questions/689061/where-does-xhost-store-the-allowed-network-addresses>`_  最终还是记录的网络地址，所以当client的IP换了之后，就要删除以前重新加一次，从新获得新的IP。
 #. `X windows for android <http://stackoverflow.com/questions/12811124/x-applications-over-ssh-in-android>`_ 现在android就可以很方便远程控制我的电脑了。
    一个最简单的方法那就是利用ssh forwarding, 在linux下
+
 .. ::
  ssh -X 加主机名了
  当然，ssh本身也是可共享的，主要你把设置共享的(-M),ssh本身还有很多好玩的参数可以去看一下其manul. 并且它可以后台运行。
