@@ -14,6 +14,8 @@
 
 为什么要分区呢，是为了管理上的方便，使之具有隔离性，例如装操作系统，就要在独立的分区上。等等。另外也取与操作系统有关心，硬盘的结构MBR. 启动信息与分区表都在这里放着，但是分区表只有64节节，第一个分区占16字节，这样一个分区可如果大于2*312*512=2TB时，这个分区表就不行了。这种物理结构决定了如何进行分区。GPT分区。`EFI、UEFI、MBR、GPT技术 <http://wenku.baidu.com/view/4e9f2714fad6195f312ba677.html>`_  但是GPT模式在Windows上有很大的限制，那就是目录不能当启动盘。
 
+
+而在抽象层上，就各种各样的文件系统。linux 文件系统设计的很好，在linux里一切的资源，要么是file,要么是进程。 debugfs,Pipefs,sockFS,securityfs 这些都是虚拟的文件系统。你可以在 /proc/filessystems 里看到这些。
 .. graphviz::
 
    digraph hardisk {
@@ -40,6 +42,13 @@
  |  real data | DATA |
 
 每一个分区的超级块放在这个分区的头，如果有就在第二个逻辑块里，一般情况下，第一块是引导块，第二块为super block并且大小固定。并且格式，大小固定。
+超级块，采用的是相互链表，并且vfs做了很好的抽象，并且还支持cache,定期与硬盘同步数据。 
+http://guojing.me/linux-kernel-architecture/posts/super-block-object/
+
+每一个分区的超级块是有备分的，你可以用mke2fs -n 或者dumpe2fs 来查看，然后再e2fsk -b 来进行修复。
+http://www.cyberciti.biz/tips/understanding-unixlinux-filesystem-superblock.html
+
+
 
 
 每一个分区四大块:
@@ -83,6 +92,18 @@
 |loop device /dev/loopXXX | http://www.groad.net/bbs/read.php?tid-2352.html| 把文件以及镜象挂载| 是不是可以利用它来做系统血备份 |
 看到现在终于把文件系统看懂一些吧，文件系统分为三层，文件本身内部结构一层，文件系统一层，分区与硬盘之间是一样。当然最初的概念都是结合物理模型的，随着后期的演化，最初的概念已经不是最初了的概念了。例如文件，最初都是就是一段扇区。但是到后期文件的已经完全脱离了，那个物理模型，就是变成了长度，并且这个常度就代表一个字节，并且字节也是一个抽象概念。不同的硬件，扇区的等等的分布是不一样的，不同的文件系统，block,inode之间对扇区对应关系都是不一样的。并且在文件系统上，文件不是顺序存储的。所以也就没有办法智能恢复了，也就只能整个硬盘做一个镜象，虽然你只用了一部分空间。 并且PBR的信息是放在分区里的，如果两个分区参数不一样，也是不行，相当于把分区的信息也复制过来了。而dd只能按块来读，在块之间来做转换。所以dd是在操作系统之下进行的，如果想用dd来做，要么两个分区一模一样，包括同样的位置有同样的坏道。要么要自己去解析文件系统的文件分配自己去读写分配每一个扇区。
    
+
+
+调整分区的大小
+==============
+
+http://blog.csdn.net/hongweigg/article/details/7197203
+
+首先要自己记住分区的起始地址，然后修改分区表，然后再用 resize2fs,tune2fs 来更新文件系统的 meta data. 注意柱面号是按照unit 来计算的。 所以要学会计算这样。
+
+
+
+
 .. ::
  
    如果想用dd来做,   先做一个OS,并且在硬盘上连续存放的，并且要知道这个区域的大小，或者说估计大约的值。并且硬盘状态一样。 这样可以像Copy文件一样，那样去做了。
@@ -98,6 +119,9 @@
 
 
 可以用 :command:`dumpe2fs` 来查看文件系统，并且可以用 :command:`tune2fs` 来调整参数。
+
+
+
 
 如何制作文件系统
 ================
@@ -129,6 +153,25 @@ loop device 就是伪设备当做块设备。http://unix.stackexchange.com/quest
 `windows自带磁盘分区工具Diskpart使用介绍 <http://www.bitscn.com/os/windows7/200912/179453.html>`_ 
 分区与`格式化 <http://baike.baidu.com/view/902.htm>`_ 是两步不同的操作.格式化又分为低级，与高级，低级格式化是物理级的格式化，主要是用于划分硬盘的磁柱面、建立扇区数和选择扇区间隔比。硬盘要先低级格式化才能高级格式化，而刚出厂的硬盘已经经过了低级格式化，无须用户再进行低级格式化了。高级格式化主要是对硬盘的各个分区进行磁道的格式化，在逻辑上划分磁道。对于高级格式化，不同的操作系统有不同的格式化程序、不同的格式化结果、不同的磁道划分方法。
 
+
+同时为了支持热mount,还有 https://en.wikipedia.org/wiki/GVfs， gvfs  可以在用户态加载空间，例如把ftp,smb等等把网络mount到本地。例如
+gvfs-mount 'ftp://user@www.your-server.com/folder' 目录都在 .gvfs/ 下面。 并且其下有一堆的gvfs-ls/cat, 等等一堆的命令。
+
+
+各个系统的共享，这样就可以减少大量的配置工作，例如的所有的工作机都直接mount同一个存储目录，这样就可以大量的login以及editor的配置，可以直接使用自己本机的编辑器配置，而运行在其他机器上。 这样的并行度就会大大很多。
+
+mount.cifs 可以持 samba等等，使用fuse为基础的gvfs 可以挂载 ftp,http等。而sshfs可以直接mount ssh 帐号。
+只需要两条命令:
+:command:`apt-get install sshfs`, 然后把自己加入sshfs这个用户组就行了。
+http://www.fwolf.com/blog/post/329
+
+
+共享目录
+========
+
+#. 两种办法做这个，一种用autofs, 一次用可以使用cifs-utils. 直接mount就行。
+
+:command:`mount -t cifs -o user=xxxx,password=xxx //192.168.0.1/xxx /mnt/`
 
 #. `linux 访问windows 共享目录 <http://linhui.568.blog.163.com/blog/static/9626526820117822835844/>`_ 也可以直接使用`smbclient <http://wenku.baidu.com/view/ab3e7ffc910ef12d2af9e7bb.html>`_ 
    #. `autofs <http://www.autofs.org/>`_  our builds use it on farm
