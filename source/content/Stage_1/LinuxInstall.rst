@@ -59,6 +59,12 @@ sourcelist support three source
 
 apt-get upgrade 只是升级到当前的软件到最新版本， apt-get dist-upgrade,升级到大版本。
 
+安装列表
+========
+
+:command:`apt-get install $(grep -vE "^\s*#"|tr "\n" '')`
+http://askubuntu.com/questions/252734/apt-get-mass-install-packages-from-a-file
+
 dpkg
 ====
 
