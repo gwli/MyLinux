@@ -2,6 +2,11 @@ Linux 基本命令
 ==============
 
 
+命令补全
+--------
+
+bash 现在很强的命令补全功能，不是简单的字符串补全，而是根据上下文来补全。这些都的实现都在  /usr/share/bash-complete 中。 如果没有可以安装 apt-get install bash-complete
+service 命令，它列出系统中有 services . 
 开机关机操作
 ------------
 
@@ -69,15 +74,14 @@ grep
 ----
 
 正则表达式，是不需要转义的， :command:` grep -E` 或者 :command:`egrep`.
-
 对于输出的控制很灵活，可以计数，可以高亮，以及只显文件名，以及支持与或非。
-
 对于或的支持 可以用  :command:`grep -F` 或者 :command:`fgrep` 后接一个文件列表
 只要直接pattern列表，每一行一个，这些pattern的关系是 any(patterns)的关系。
 同时正则表达式也是支持的 
 
-
 :command:`grep -lincrE "localhost|127.0.0.1" ./* |grep -vE "tutorial|machine"`
+
+
 
 screenshot
 ----------

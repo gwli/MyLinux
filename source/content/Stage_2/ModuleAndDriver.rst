@@ -92,6 +92,12 @@ intel  ethernet 153a 网卡不稳定
 
 driver 的开发
 =============
+
 一般都是register, init, shutdown, close等等几个函数接口。
+http://10.19.226.116:8800/trac/ticket/2705
+就是标准 .so 只是链接的库不同，以及编译的选项要与主机匹配。
+http://www.tldp.org/LDP/lkmpg/2.6/html/x181.html 有详细的教程
 
 
+内核的编译都需要内核的头文件，以及symbols表，以及依赖与加载的先后关系。
+以及内核的版本号，如果开启了版本的匹配功能，则需要对应，不然不能加载。
