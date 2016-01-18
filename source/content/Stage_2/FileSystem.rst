@@ -16,6 +16,20 @@
 
 
 而在抽象层上，就各种各样的文件系统。linux 文件系统设计的很好，在linux里一切的资源，要么是file,要么是进程。 debugfs,Pipefs,sockFS,securityfs 这些都是虚拟的文件系统。你可以在 /proc/filessystems 里看到这些。
+
+
+Pipe文件系统
+============
+
+linux 里大部分进程通信靠是Pipe，同步则是由Pipe 自己实现的，由于速度不的同，各种传输之间都会buffer来缓冲。
+并且缓冲模式有 
+
+#. buffered(默认4K), (STDin)
+#. unbuffred( 1byte)(STDERR)
+#. line buffered (1K) STDOUT
+
+如果想控制这个buffer的大小，可以用stdbuf来调整。 可以查看man stdbuf.
+
 .. graphviz::
 
    digraph hardisk {
@@ -93,6 +107,17 @@ http://www.cyberciti.biz/tips/understanding-unixlinux-filesystem-superblock.html
 看到现在终于把文件系统看懂一些吧，文件系统分为三层，文件本身内部结构一层，文件系统一层，分区与硬盘之间是一样。当然最初的概念都是结合物理模型的，随着后期的演化，最初的概念已经不是最初了的概念了。例如文件，最初都是就是一段扇区。但是到后期文件的已经完全脱离了，那个物理模型，就是变成了长度，并且这个常度就代表一个字节，并且字节也是一个抽象概念。不同的硬件，扇区的等等的分布是不一样的，不同的文件系统，block,inode之间对扇区对应关系都是不一样的。并且在文件系统上，文件不是顺序存储的。所以也就没有办法智能恢复了，也就只能整个硬盘做一个镜象，虽然你只用了一部分空间。 并且PBR的信息是放在分区里的，如果两个分区参数不一样，也是不行，相当于把分区的信息也复制过来了。而dd只能按块来读，在块之间来做转换。所以dd是在操作系统之下进行的，如果想用dd来做，要么两个分区一模一样，包括同样的位置有同样的坏道。要么要自己去解析文件系统的文件分配自己去读写分配每一个扇区。
    
 
+文件系统格式
+=============
+
+不同的文件系统格式，添加了不同的功能，特别是日志文件系统，添加一些数据恢复的功能，就像数据库可以根据日志rollback最佳状态。 
+
+https://zh.wikipedia.org/wiki/Ext4 增加了在线整理磁盘碎片的功能， ext3 是没有的https://zh.wikipedia.org/wiki/Ext3。
+例如ext3grep,ext4magic, 大部分都是基于ext2fs_library.
+
+http://extundelete.sourceforge.net/ 可以恢复数据ext2/3/4的数据。 
+
+下一代的文件系统将是采用类似数据库的底层方式的B+ tree的文件系统。 进一步把文件系统与数据库融合在一起。
 
 调整分区的大小
 ==============
