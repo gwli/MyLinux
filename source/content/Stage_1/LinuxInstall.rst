@@ -125,6 +125,7 @@ install
 =======
 
 所有安装最终操作就是copy文件，并且配制正确的权限与属性，以及根据系统的环境，向系统注册一些信息，或者添加环境变量。  所以纯手工的操作那就是cp+chown,chmod+strip 等等。 而在 install 一条命令就把这些全度搞定了。
+http://unix.stackexchange.com/questions/94679/what-is-the-purpose-of-the-install-command
    
 
 ubuntu 发行光盘的制作 
