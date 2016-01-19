@@ -371,3 +371,7 @@ notification
 #. email, 可以通过邮件，自动发邮件
 #. 动画， 例如利用xlock,xeve,xbotton等直接在屏幕上显示动画。
 
+fortune
+=======
+
+可以随机产生诗句。
