@@ -21,6 +21,19 @@ module的依赖，以及alias,以及blacklist机制,还可以配制module的参�
 device Management
 -----------------
 
+这个事情起因是在这里http://www.kroah.com/linux/talks/ols_2003_udev_paper/Reprint-Kroah-Hartman-OLS2003.pdf
+原因硬件命名规则太死板了，例如硬盘太多，原来那种major/minor号又不够。 因为每位都8位，并且还有很预留的，另外
+是热插拔的硬件很多，总不能都事先留着吧，那样/dev的目录太大了。另外也能保证每一次都在同一个地方。这样内核就头疼了。
+
+后边就有udev这种方法，由kernel只告诉用户有硬件来了，它叫什么名字，由你告诉我，然后再用对应的driver来读取他。
+也就是为什么多个硬件可以共用一个driver,或者你可以靠一个假的硬件原因。现在有了逻辑设备。 driver与逻辑设备对应。
+我可以指这个mapping,也可以系统自己生成。系统采用第一次生成后保存下来。以后延用。
+
+mdev,udev两者实现的基理不同，udev采用 netlink的机制，自己造一个Dameo来检测 uevent,而mdev 则是注册一个回调函数来实现。 /sys/kernel/hotplug 。http://blog.csdn.net/lifengxun20121019/article/details/17403527
+
+http://git.busybox.net/busybox/plain/docs/mdev.txt
+http://wiki.gentoo.org/wiki/Mdev
+
 when you plug in a new device such as USB. which label "sdb..." will be used for it. here you can use udev. 
 1. db store the user device information
 1. *rule* how to recognize the device.  当你发现你的OS在新的硬件上，不识别，例如网卡不能用了，第一步那就是先把这个rule给删除了。* rm -fr /etc/udev/rules.d/*
