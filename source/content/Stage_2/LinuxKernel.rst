@@ -13,7 +13,6 @@ onenote:https://d.docs.live.net/0620a0b4441149e5/文档/GW%20的笔记本/快速
 每一种外设都是通过读写设备上的寄存器来进行的，寄存器又分为：控制寄存器，状态寄存器，数据寄存器。
 
 `Linux下的IO地址访问的研究 <http://wenku.baidu.com/view/00d760260722192e4536f6c7.html>`_ 
-`Linux系统启动过程分析详解 <http://wenku.baidu.com/view/f439355777232f60ddcca152.html>`_ 
 
 从Linux2.4以后，全部进程使用同一个TSS,2.4以后不再使用硬切换，而是使用软切换，寄存器不再保存在TSS中了，而是保存在task->thread中 <http://blog.csdn.net/shinesi/article/details/1933851>`_ 一个线程就对应一个LDT的一项，内核是对物理硬件所做的一层抽象。而进程则是对CPU+内存+硬盘一种抽象。而线程则是对CPU的一种抽象。
 linux 采用二级页表机制，页表目录和页表＋页内基址。　Page=4K.

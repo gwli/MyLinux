@@ -43,3 +43,5 @@ read the init code of linux kernel. to understand the shell and interpreter prog
 `Linux系统启动过程分析详解 <http://wenku.baidu.com/view/f439355777232f60ddcca152.html>`_ 
 
 module 加载在 /etc/init.d/kmod 里实现的加载哪一个driver,并且加载的顺序。
+
+
