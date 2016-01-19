@@ -131,8 +131,15 @@ http://unix.stackexchange.com/questions/94679/what-is-the-purpose-of-the-install
 ubuntu 发行光盘的制作 
 =====================
 
+现在对于linux的整个框架熟悉了之后，再怎么操作，就容易了，也就是那些stage3 tarball就看你怎么安装了。 用什么介质就要使用对应的格式。 例如光盘格式 sqfs 就是为方面其把从光盘放进内存里。 或者其他的.img格式。直接放在哪里，然后直接chroot启动，或者chroot之后再更新。或者可以在 android 的源码中可以找到各种工具  /build/tools/XXX。 例如img 解压，对比工具等等。
+
+至于采用什么格式，还得看启动kernel支持哪种类型，一般都会支持sqfs格式的。
+
+由于ISO文件中只读，于是不能写入。 于是就有casper-rw 的功能，实际就是在系统里默认mount这个目录，利用autofs,unionfs的功能http://unionfs.filesystems.org/  就实现了这个功能。也就是在USB生成一个casper-rw的文件。 并利用mkfs -f 把这个文件当做系统格式化。 dd 来生成这样一个文件。
+#. http://www.syslinux.org/wiki/index.php/ISOLINUX
+#. http://unix.stackexchange.com/questions/122832/how-to-use-casper-rw-file-for-persistance
 #. https://help.ubuntu.com/community/LiveCDCustomization
-   http://lifehacker.com/5085405/make-any-linux-directory-into-an-iso-file
+#. http://lifehacker.com/5085405/make-any-linux-directory-into-an-iso-file
 
 而casper,ubuntu 等这些用户都是动态创建的。主要过程那就是/casper/filesystem.squashfs 的制作与修改。
 而起动时需要initrd.lz 以及其修改。当然也可以利用ubuntu Customization Kit. 
