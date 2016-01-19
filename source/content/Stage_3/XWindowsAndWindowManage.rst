@@ -93,7 +93,8 @@ X windows 消息机制
    `运用xlib进行事件响应(X11 API)的小例子 <http://socol.iteye.com/blog/579720>`_  , XSelectInput ,event_mask ,  所以在linux你可以hack所有的GUI ,
    `orca <https://projects.gnome.org/orca/>`_  ,The GNOME Desktop Accessibility Guide is for users, system administrators, and anyone else who is interested in how the GNOME Desktop supports people with disabilities from an end user point of view. If you are new to GNOME, you may wish to read this documentation first. ,
 
-
+xkill 非常好用的的一个kill 工具。
+http://blog.csdn.net/xiajian2010/article/details/9796365
 Qt
 ==
 
