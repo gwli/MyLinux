@@ -80,6 +80,13 @@ kernel module usually end with *xxx.ko*.  from linux kernel 2.6, the kernel use 
 一般是要把module放在 :file:`/lib/modules/<kernel version>/kernel/driver/net` 以及去修改 :file:`/etc/modules.d/<kernel version`
 2.4 的版本 用的是module.conf,而2.6的版本用是modeprobe.conf
 所以多个硬件可以共用一个driver,只需要用alias 把硬件本身映射到一个别名。
+硬件一般用中断传递信息，而内核如何来传递这些信息用uevent, 不管你的底层是什么中断。并且uevent 通过netlink来进传送。
+
+
+底层的中断又有很多
+===================
+
+PCI总线的中断，例MSI与MSI-X中断机制。中断的级联扩展。 
 
 
 内核的调试
@@ -114,3 +121,9 @@ http://www.tldp.org/LDP/lkmpg/2.6/html/x181.html 有详细的教程
 
 内核的编译都需要内核的头文件，以及symbols表，以及依赖与加载的先后关系。
 以及内核的版本号，如果开启了版本的匹配功能，则需要对应，不然不能加载。
+
+内核用uevent与用户态通信。
+
+
+insmod/lsmod的原理。
+http://elinux.org/images/8/89/Managing_Kernel_Modules_With_kmod.pdf

@@ -74,6 +74,9 @@ http://blog.csdn.net/magod/article/details/7265555
 *multi-process and multiple thread*
 until now, I find how to use the fork, why we need the fork? when the fork the children copy the code,data from parent process. and then do their own things.  the `questions <http://bbs.csdn.net/topics/320004714>`_  of article is good, help me think. you can reference `here <http://blog.csdn.net/hairetz/article/details/4281931>`_  why need multiple process. 
 
+可以用chrt 来控制进程的调度，或者合用sysctl来进行控制。:command:`sysctl -A|grep "sched" | grep -v "domain"`
+
+https://doc.opensuse.org/documentation/html/openSUSE_121/opensuse-tuning/cha.tuning.taskscheduler.html
 
 *cputopology* 
 
