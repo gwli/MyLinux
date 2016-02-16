@@ -375,3 +375,10 @@ fortune
 =======
 
 可以随机产生诗句。
+
+
+udevadm
+=======
+
+查看硬件的变动  :command:`udevadm monitor`.
+
