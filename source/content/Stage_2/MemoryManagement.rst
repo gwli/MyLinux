@@ -51,3 +51,12 @@ page 的base为重定向，而limit是为了防止越界。
    /proc/kcore,   kernel的大小
    /etc/sysctl.conf, 来控制各种内存资源分配情况, http://blog.csdn.net/leshami/article/details/8766256 
    /etc/sysctl, 直接动态的去改内核的参数,并取代ulimit的接口
+
+进程的内存分配
+==============
+
+前1G之前是给内核用的，在gdb中通过info file 就可以看一个进程文件占用多大的空间。 
+在android, 它一般是从 0x400d0134=1G的地方开始的。
+然后就是逐section，逐文件地进行加加载。
+基本上都是 .interp->.dynsym->.dynstr->.hash->.rel.dyn->.rel.plt->.plt->.text->XXX->.rodata->.preinit_array->.init_array->fini_array->.data.rel.ro->.dynamic->.got>.bass
+
