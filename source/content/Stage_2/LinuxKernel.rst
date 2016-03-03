@@ -149,6 +149,10 @@ essentially, the Signal is relevent logic/soft interrupt with CPU and Hardware.
     2. CPU event
     3. interrupt.
 
+
+对于中断的处理，原则是要保存当前的所状态，中断处理之后，再恢复回来。 但是为了性能，而是根据需要来保存一些必要的register,而非全部。
+而这些于profiling就会影响很大，因为它要用大量的信息，例如unwind callstack.
+
 SystemLog 机制 
 --------------
 
