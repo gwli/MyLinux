@@ -95,6 +95,8 @@ X windows 消息机制
 
 xkill 非常好用的的一个kill 工具。
 http://blog.csdn.net/xiajian2010/article/details/9796365
+
+
 Qt
 ==
 
@@ -239,4 +241,10 @@ XWindows 设置屏保
        Option "off time" "0"
    EndSection
 
- 
+添加开始菜单
+============
+
+在ubuntu 中是可以 ~/.local/share/application 下添加 XXX.desktop来实现。
+全局的放在 /usr/share/applications 下面。
+
+哪一类的文件用什么软件打开，这个关联在windows下叫 class,而在ubuntu 中可在 /usr/share/application-registry中实现。
