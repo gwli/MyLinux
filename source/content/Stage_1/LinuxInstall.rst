@@ -51,10 +51,29 @@ sourcelist support three source
    APT::Get::force-yes "true";
    apt-cache search 库。
    
+如果想添加不同架构的deb
+========================
+
+可以用 APT::Architectures 
+http://stackoverflow.com/questions/6331109/how-to-setup-multiple-architecture-development-environment-under-ubuntu-11-04
+
+如何查看所有可用更新
+====================
+
+#. :command:`aptitude search '~U'`
+
+#. aptdcon, 这个可以把安装放在队列里，以及不需要root,而不需要人为等另一个install 完成。
+#. 同时采用 apt-extracttemplate 把当前系统安装包生成template. 然后在其他机器上安装。
+
+源列表格式
+==========
+
+http://manpages.ubuntu.com/manpages/wily/man5/sources.list.5.html
+
+#. `源列表格式说明 <http://windorain.net/sources-list-format/>`_ , `说明名2 <http://blog.csdn.net/xizaizhuanyong_/article/details/8170093>`_ 
 
    
    #. `apt-get  代理设置 <http://hi.baidu.com/penglaiguoguo/item/385acb1553da648c88a9569e>`_  
-   #. `源列表格式说明 <http://windorain.net/sources-list-format/>`_ , `说明名2 <http://blog.csdn.net/xizaizhuanyong_/article/details/8170093>`_ 
    #. `source list 制作方法 <http://www.debian.org/doc/manuals/apt-howto/ch-basico.zh-cn.html>`_ 
 
 apt-get upgrade 只是升级到当前的软件到最新版本， apt-get dist-upgrade,升级到大版本。
@@ -71,36 +90,40 @@ dpkg
 查询包 :command:`dpkg -l |grep vnc`
 
 删除   :command:`dpkg -r vnc`
-   
-   
-   如何快速的制作一个linux系统
-   ---------------------------
-   #. 在一个现在系统上直接把系统文件打包
 
-      .. code-block::
+安装位置的选择
+==============
+usr is stand for unix system resource,  
+http://askubuntu.com/questions/1148/what-is-the-best-place-to-install-user-apps
+如果只是zip包 standalone App，可以直接使用就放在/opt下面。 
+   
+如何快速的制作一个linux系统
+---------------------------
 
-         $tar cvzf suse11_sp3.tgz bin boot etc lib lib64 opt root sbin selinux srv usr var 
+#. 在一个现在系统上直接把系统文件打包
 
-   
-   #. 在目标机上直接硬盘分区格式化，然后解压
+   .. code-block::
 
-      .. code-block::
-         $ tar xvf suse11_sp3.tgz
-   
-   #. 并创建那些动态的目录 
-   
-      .. code-block::
-         @mkdir dev media mnt proc tmp
-   
-   4. 然后启动盘来修复起动项
-   
-      .. code-block::
-         $restore grub,
-         mount /dev/sda1 /mnt/sda1
-         grub-install --boot-directory=/mnt/sda1/boot /dev/sda1 --force
-         grub-mkconfig -o /mnt/sda1/boot/grub.cfg
+      $tar cvzf suse11_sp3.tgz bin boot etc lib lib64 opt root sbin selinux srv usr var 
 
 
+#. 在目标机上直接硬盘分区格式化，然后解压
+
+   .. code-block::
+      $ tar xvf suse11_sp3.tgz
+
+#. 并创建那些动态的目录 
+
+   .. code-block::
+      @mkdir dev media mnt proc tmp
+
+4. 然后启动盘来修复起动项
+
+   .. code-block::
+      $restore grub,
+      mount /dev/sda1 /mnt/sda1
+      grub-install --boot-directory=/mnt/sda1/boot /dev/sda1 --force
+      grub-mkconfig -o /mnt/sda1/boot/grub.cfg
 
  
    .. seealso::
@@ -234,10 +257,6 @@ showmount -e
 For all Solaris which we run NEAT, we need to mount this directory to local /mnt directory and chmod for it:
 
 
-
-
-
-
 *双系统看不到起动菜单*
 自己来搞grub,或者把linux先装一下，再然后再重装一下就Ok了。再次重装的时候，它会识别出两个系统就会自动去做。
 
@@ -284,7 +303,7 @@ Now, most of the big application use configuration. and these configuration mech
 .. ::
  
 /etc/ld.so.conf 
-    include /etc/ld.so.conf.d/*.conf
+    include /etc/ld.so.conf.d/XX.conf
 /etc/ld.so.conf.d/
    XXXXXXXXX.conf
    AAAAAAA.conf
