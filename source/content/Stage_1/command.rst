@@ -108,6 +108,8 @@ du and df
 :command:`du -csh /var/lib/state/*` 或者排序 
 :command:`du -cks * |sort -rn| head -n 10` 
 
+当发现硬件有空间，但是系统却报已经满了。
+:command:`df -i` 可以来看系统的inode是不是满了。
 
 下载工具
 --------
