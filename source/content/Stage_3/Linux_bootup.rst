@@ -78,4 +78,6 @@ https://git.busybox.net/busybox/tree/docs/mdev.txt?h=1_18_stable
    sysctl -w kernel.hotplug=/sbin/mdev
    mdev -s
 
-
+在GUI login运行的用startup Applications Preferences.
+用命令行， gnome-session-properties来管理，同时也可以~/.config/autostart下面能看到。
+http://askubuntu.com/questions/303694/where-is-startup-applications-user-config-file-for-disabled-and-enabled-applic
