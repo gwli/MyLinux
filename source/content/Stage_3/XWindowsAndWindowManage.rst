@@ -248,3 +248,6 @@ XWindows 设置屏保
 全局的放在 /usr/share/applications 下面。
 
 哪一类的文件用什么软件打开，这个关联在windows下叫 class,而在ubuntu 中可在 /usr/share/application-registry中实现。
+
+
+如果没有安装desktop,也可以手动安装，apt-get install Ubuntu-desktop
