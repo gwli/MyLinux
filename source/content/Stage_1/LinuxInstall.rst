@@ -57,6 +57,7 @@ sourcelist support three source
 可以用 APT::Architectures 
 http://stackoverflow.com/questions/6331109/how-to-setup-multiple-architecture-development-environment-under-ubuntu-11-04
 
+同时还可以下载代码 `apt-get source package-name` 就可以直接下载当前目录了。
 如何查看所有可用更新
 ====================
 
