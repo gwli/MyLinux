@@ -146,6 +146,25 @@ http://blog.csdn.net/hongweigg/article/details/7197203
 可以用 :command:`dumpe2fs` 来查看文件系统，并且可以用 :command:`tune2fs` 来调整参数。
 
 
+partclone
+=========
+
+http://partclone.org/， 
+
+.. code-block::
+   
+   partclone.ext3 -c -d -s /dev/hda1 -o hda1.img
+   cat sda1.ext3-ptcl-img.gz.a* | gunzip -c | partclone.ext3 -d -r -s - -o /dev/sda1
+   http://partclone.org/usage/partclone.php
+   ticons-1.0 --restore --filename:/mnt/work/safeos_work_dir/imgcache/A15690B1-70F2-4FA5-ADAF-D774FCB10336 --partition:1-1 --target_partition:1-1 --progress:on 
+
+
+Raid
+====
+
+https://help.ubuntu.com/community/Installation/SoftwareRAID
+http://askubuntu.com/questions/526747/setting-up-raid-1-on-14-04-with-an-existing-drive
+https://raid.wiki.kernel.org/index.php/RAID_setup
 
 
 如何制作文件系统
@@ -161,8 +180,6 @@ loop device 就是伪设备当做块设备。http://unix.stackexchange.com/quest
 #. `如何制作文件系统  <http://mcuol.com/download/upfile/armLinuxEMB10.pdf>`_  
 #. `mkfs manual  <http://study.chyangwa.com/IT/AIX/aixcmds3/mkfs.htm>`_  
 通过对gentoo对于各种概念有了更深的认识。
-
-
 
 不同的文件系统就是硬件磁盘与逻辑存储之间的映射关系。 所谓的超级块就是与文件系统有关的。
 并且存储的效率以及备份与压缩的机制。
