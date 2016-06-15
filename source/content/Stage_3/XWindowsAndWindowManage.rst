@@ -24,6 +24,17 @@ introduction
 表面上看起来很灵活的东西，发现在最后本质都是一样的，不过在上层利用编译器与宏来做了各种替换优化工作。就像那些模板一样。
 各种各样的窗口管理器，处理了平台的相关性。就像OPENGL只处理画布内的内容。
 
+
+如果想用VNC的客户端进行自动化可以用vncdotool来实现。
+https://github.com/gwli/vncdotool
+
+如果开发一个定制的客户端，可以用
+https://wiki.gnome.org/Projects/gtk-vnc
+
+现在已经一个python的版本的客户端了。
+https://github.com/techtonik/python-vnc-viewer
+
+https://code.google.com/archive/p/vnc2flv/ 把VNC desktop session保存成Flash Video file.
 XWindow 的启动分析
 ==================
 
@@ -68,6 +79,18 @@ http://superuser.com/questions/136785/how-do-i-run-vino-server-without-a-monitor
 或者使用 X11vnc 并与 --display :0 这样就行了。
 http://www.karlrunge.com/x11vnc/
 
+并且VNC是在X11与windows manager之间的层，你可以为VNC选择不同的窗口管理器。这个配置可以在:file:`~/.vnc/xstartup`
+
+VNC 的类库开发。
+http://blog.csdn.net/wuyutiancai/article/details/1497775
+配置
+http://3492zhang.itpub.net/345618/viewspace-1020431/
+
+
+命令行配置 vino-server
+http://ubuntuforums.org/showthread.php?t=266981
+vncconfig 可以对正在运行的vncserver进行配置。
+https://www.realvnc.com/products/vnc/documentation/4.2/unix/unixconfig.html
 V3L 14.04 下的启动
 ------------------
 
@@ -170,6 +193,12 @@ Remote Display
  当然，ssh本身也是可共享的，主要你把设置共享的(-M),ssh本身还有很多好玩的参数可以去看一下其manul. 并且它可以后台运行。
 #. `how-to-make-x-org-listen-to-remote-connections-on-port-6000 <http://askubuntu.com/questions/34657/how-to-make-x-org-listen-to-remote-connections-on-port-6000>`_  修改lightdm的配置文件，原来gdm已经被lightdm给换掉了，同时改掉.xserverrc中的那一行。
 
+
+remoteAPP
+=========
+
+这个对于XWindows天然的功能，而对于windows也有了相应的工具，建立在RDP的之上，
+http://www.kimknight.net/remoteapptool。 只运行APP本身。
 See also
 ========
 
