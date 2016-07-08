@@ -81,3 +81,6 @@ https://git.busybox.net/busybox/tree/docs/mdev.txt?h=1_18_stable
 在GUI login运行的用startup Applications Preferences.
 用命令行， gnome-session-properties来管理，同时也可以~/.config/autostart下面能看到。
 http://askubuntu.com/questions/303694/where-is-startup-applications-user-config-file-for-disabled-and-enabled-applic
+
+并且启动的log都放在dmesg中，如果log不全，可以把dmesg改大。 dmesg是内核缓冲区的内容，printk就是打印到这里。
+所以遇到起动问题，直接看/var/log/dmesg 中。直接通用搜索关键字来得到。
