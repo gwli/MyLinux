@@ -25,3 +25,7 @@ log system
 
 
 系统log记录了，所有用户登陆的信息，wtmp,utmp,等等，同时也记录login 失
+linux 的loglevel也是可以调的，起动的时候调整添加参数 loglevel=level,或者直接用
+dmesg -n level,或者用 echo $level>/proc/sys/kernel/printk
+或者用syslog系统调用来实现。
+http://smilejay.com/2011/12/linux_loglevel/
