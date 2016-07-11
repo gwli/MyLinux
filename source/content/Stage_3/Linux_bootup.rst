@@ -84,3 +84,4 @@ http://askubuntu.com/questions/303694/where-is-startup-applications-user-config-
 
 并且启动的log都放在dmesg中，如果log不全，可以把dmesg改大。 dmesg是内核缓冲区的内容，printk就是打印到这里。
 所以遇到起动问题，直接看/var/log/dmesg 中。直接通用搜索关键字来得到。
+内存的log的级别是可调，哪些级别打印console上也都是受此控制的。在起动的时候，
