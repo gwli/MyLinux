@@ -72,6 +72,14 @@ tar 到指定的目录
 当然也可以用tar 来代替 cp,在大量小文件的时候，可以加快速度。相当于先打包再传输。
 :command:`tar -cvf - /etc |tar -xvf -` 就是这样的目的。 
 
+
+ar
+==
+
+同tar是一类东东，现在只剩下用来打包库了，现在ld 好像只认这种ar这种格式。 如果你想重新打包。
+只要 ar -x xxx.a  && ar -c libaz.a XX.o 就可以了。
+https://www.quora.com/Whats-the-difference-between-ar-and-tar
+
 grep 
 ----
 
