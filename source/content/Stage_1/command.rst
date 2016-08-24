@@ -392,3 +392,18 @@ udevadm
 
 查看硬件的变动  :command:`udevadm monitor`.
 
+pdfgrep
+=======
+
+https://pdfgrep.org/
+
+googler
+=======
+
+命令行google工具。
+
+How2
+====
+
+命令行的stackoverflow工具。
+https://github.com/gwli/how2
