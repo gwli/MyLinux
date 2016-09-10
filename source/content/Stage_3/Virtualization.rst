@@ -8,3 +8,6 @@
 `LXC: Linux 容器工具 <http://www.ibm.com/developerworks/cn/linux/l-lxc-containers/index.html>`_  这个实现正是基于chroot 实现的进程级别的虚拟化。
 http://blog.csdn.net/cbmsft/article/details/7214371
 
+
+Docker 是一种更轻质化的容器,就为了实现大一统,达到资源与效率的平衡.
+Docker可以做什么 http://blog.2baxb.me/archives/1136 
