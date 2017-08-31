@@ -380,6 +380,7 @@ notification
 #. 声音， beep,aplay,pacmd,espeaker.
 #. email, 可以通过邮件，自动发邮件
 #. 动画， 例如利用xlock,xeve,xbotton等直接在屏幕上显示动画。
+#. 可以用 `watchdog <https://github.com/gorakhargosh/watchdog>`_ 来添加一些监控
 
 fortune
 =======
