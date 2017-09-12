@@ -1,3 +1,6 @@
+tty console
+===========
+
 现在终于明白了tty的设计原理了。简单的理解，就是一个socket通信。并且把两端通用化。例如一些编辑的功能，例如具备一些editor的初步功能。
 一个最简单功能，那就是直接for循环，就可以搞定。拿浏览器来做对比，就会一目了然，那就是终端也需要一定的rendering功能。 而这些不是应用程序本身需要
 考虑的功能。
@@ -13,6 +16,12 @@ ssh,telnet这些与在本地的xterm都同相同地方，那就是其输入输�
 
 
 /dev/console 总是指向系统的TTY，它决定了系统的信息往哪里输出，/dev/tty0总是指向当前的tty, tty[1-x] 则是独立逻辑tty设备。
+
+
+terminal 中显示符号
+===================
+
+这个关键是编码与字体的支持，只要有两者的支持就能显示，例如 `在terminal中显示数学符号 <https://unix.stackexchange.com/questions/96591/is-it-possible-to-show-mathematical-symbols-in-the-terminal>`_
 
 远程网络shell之间
 =================

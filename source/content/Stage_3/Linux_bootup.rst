@@ -39,7 +39,8 @@ http://leaf.sourceforge.net/doc/bootproc.html,linuxrc->init->RC.
 各家系统的对比。
 https://wiki.gentoo.org/wiki/Comparison_of_init_systems
 
-以及现在XIP, execute in place技术，直接起动，而不需要加载,例如使用ROM等等。这样可以大大加快启动的速度。这种一般是直接从 flash来读kernel，主要是一些嵌入式的设备。 直接启动。而不需要向PC这样的复杂。
+以及现在XIP, execute in place技术，直接起动，而不需要加载,例如使用ROM等等。这样可以大大加快启动的速度。这种一般是直接从 flash来读kernel，主要是一些嵌入式的设备。 直接启动。而不需要向PC这样的复杂。而这一块做的最好当属于现在的手机系统。
+`How to config XIP <http://www.denx.de/wiki/bin/view/DULG/ConfigureLinuxForXIP>`_ 
 
 对于SUSE 是有一些麻烦，要用到http://unix.stackexchange.com/questions/43230/how-to-run-my-script-after-suse-finished-booting-up， 写标准init 脚本并注册了。当然也简单的做法例如直接/etc/rc.d/after.local 等来进行hook, http://www.linuxidc.com/Linux/2012-09/71020.htm.
 对于windows 来说，也就是注册表了开机启动了。
@@ -63,6 +64,8 @@ http://www.ibm.com/developerworks/cn/linux/l-k26initrd/index.html
 https://wiki.ubuntu.com/Initramfs
 http://lugatgt.org/content/booting.inittools/downloads/presentation.pdf
 
+
+对于initramfs 的制作，每一个平台都有专门的工具来做。 例如， redhat 有 `dracut <http://people.redhat.com/harald/dracut.html>`_ 
 什么需要呢，例如些module没有编译在内核里，但是启动又需要的。这些就需要的。这样可以启动内核做的很少，然后灵活的定制。 这里就有一个问题，操作系统是什么加载driver的。
 并且由bootloader 利用 initrd 建立一个  / root system. 并在这里起动 kernel.
 http://www.mjmwired.net/kernel/Documentation/initrd.txt
@@ -101,3 +104,15 @@ http://askubuntu.com/questions/303694/where-is-startup-applications-user-config-
 并且启动的log都放在dmesg中，如果log不全，可以把dmesg改大。 dmesg是内核缓冲区的内容，printk就是打印到这里。
 所以遇到起动问题，直接看/var/log/dmesg 中。直接通用搜索关键字来得到。
 内存的log的级别是可调，哪些级别打印console上也都是受此控制的。在起动的时候，
+
+
+所谓的sesssion 也就是context另一个叫法，同时session <==>context<==>environment. 三种基本上是等价的一个概念只在不同level上。
+另一个编程语言的也有类似的概念。
+
+.. code-block:: python
+
+   with open(xxx) as f:
+       f.read()
+       #do something
+       f.write()
+

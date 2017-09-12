@@ -98,7 +98,7 @@ imagemaic import 命令。
 
 
 nohup
-=====
+-----
 
 http://www.cnblogs.com/allenblogs/archive/2011/05/19/2051136.html
 
@@ -181,7 +181,7 @@ cronjob
 http://stackoverflow.com/questions/18919151/crontab-day-of-the-week-syntax
 
 minicom
-=======
+-------
 
 :command:`minicom -D /dev/ttyUSB0` 
 :command:`minicom -C log.txt -D /dev/ttypUSB0` 保存log
@@ -192,7 +192,7 @@ minicom
 
 
 Development Tools
-=================
+-----------------
 
 不同平台下，会有不同的名字，
 在ubuntu 下那就是  build-essential
@@ -210,24 +210,25 @@ https://www.kernel.org/doc/Documentation/CodingStyle
 kernel-devel 包
 
 resize2fs 分区 
-==============
+--------------
 
 :command:`resize2fs -F -f -p /dev/sda1 -M` 最小化。
 
 sync
-====
+----
 
 有各种同步， sync是直接把cache中内容写回到硬盘，isync,dsync则是mail box同步，而zsync 则提供的是部分下载，文件下载到了一半，只需要同步一部分，相当于patch的功能，而rsync则是文件的同步。
 
 
 如何添加sudoer
-==============
+--------------
 
 这里有好几种做法，一种就是直接加入sudo. :command:`sudo adduser <username> sudo`
 
 或者直接在 /etc/sudoers. 
 
-.. code-block::
+.. code-block:: 
+
    %sudo ALL=(ALL:ALL) ALL
 
 #. :command:`usermod -a -G sudo <username>` 
@@ -241,7 +242,7 @@ sync
 #. 这个文里Root的一行，匹配Root一行，把no,yes. :command:`sed -i '/Root/s/no/yes' /etc/ssh/sshd_config`
 #. 如何杀掉mysql进程 :command:`ps aux |grep mysql |grep -v grep |awk `{print $2}' |xargs kill -9`, 
 
-   .. code-block::
+   .. code-block:: bash
       
       kill -TERM mysqld
       kill -9 `cat /usr/local/apache2/logs/httpd.pid`
@@ -408,3 +409,9 @@ How2
 
 命令行的stackoverflow工具。
 https://github.com/gwli/how2
+
+
+ndiff
+=====
+
+nmap 输出的diff工具。 我们可能需要各种对象的diff工具。可以对比xml文本输出。

@@ -3,4 +3,6 @@
 ######
 
 
-.. include:: /content/Stage_3/Linux_bootup.rst
+.. include:: Stage_3/Linux_bootup.rst
+.. include:: Stage_3/tty.rst
+.. include:: Stage_3/XWindowsAndWindowsManage.rst

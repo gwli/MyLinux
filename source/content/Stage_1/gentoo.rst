@@ -20,3 +20,9 @@ http://www.linuxforums.org/forum/gentoo-linux/191522-gentoo-stage-1-installation
 https://wiki.gentoo.org/wiki/Genkernel
 https://wiki.gentoo.org/wiki/Initramfs/Guide
 https://gitweb.gentoo.org/proj/genkernel.git
+
+对于ntfs-3g 找不到2.8的库
+==========================
+
+经过对比好的机器上的库的依赖，发现只是ln 不对，在出错的机器上的，libfuse.so.2 -> libfuse.so.2.7,而机器 上是有 libfuse.so.2.9
+ntfs-3g 要求 2.8. 所以2.9肯定可以用。 所以只用修改一下软链就行了。
