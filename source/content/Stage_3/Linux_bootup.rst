@@ -14,10 +14,26 @@ linux 的生与死
 
 实践上 init 现在已经支持并行了，并且之间也是有依赖关系与event的话，起动依赖配置放在 /etc/init/XX.conf中, 所以当然也可以对此的应用如此的定制。
 
-gentoo用OPENRC来实现一套并行机制， centos则采用的队列来实现机制。http://man7.org/linux/man-pages/man7/dracut.modules.7.html
+gentoo用OPENRC来实现一套并行机制， 
+
+.. code-block:: bash
+   
+   # show dependency
+   rc-udpate show
+   # add 
+   rc-update add root boot
+
+
+ gentoo os 有时候发现开机启动后根目录是只读，可能的原因就是 :file:`/etc/init.d/root` 没有加到启动项中。
+ https://wiki.gentoo.org/wiki/OpenRC
+
+
+
+
+centos则采用的队列来实现机制。http://man7.org/linux/man-pages/man7/dracut.modules.7.html
 主要的功能那就是rc本身也支持语法输法，这样就可以很方便的进行定制。 
 init 是一个event-based daemon,1号进程. 给出更宽泛的地义，那是context, exec 等等。 只管输入输出，与环境变量。
-http://linuxmafia.com/faq/Admin/init.html， *sbin/init* 是第一进程。 rc-.>(run control).
+http://linuxmafia.com/faq/Admin/init.html， *sbin/init*  是第一进程。 rc-.>(run control).
 http://leaf.sourceforge.net/doc/bootproc.html,linuxrc->init->RC.
 
 各家系统的对比。
@@ -25,9 +41,9 @@ https://wiki.gentoo.org/wiki/Comparison_of_init_systems
 
 以及现在XIP, execute in place技术，直接起动，而不需要加载,例如使用ROM等等。这样可以大大加快启动的速度。这种一般是直接从 flash来读kernel，主要是一些嵌入式的设备。 直接启动。而不需要向PC这样的复杂。
 
-   对于SUSE 是有一些麻烦，要用到http://unix.stackexchange.com/questions/43230/how-to-run-my-script-after-suse-finished-booting-up， 写标准init 脚本并注册了。当然也简单的做法例如直接/etc/rc.d/after.local 等来进行hook, http://www.linuxidc.com/Linux/2012-09/71020.htm.
-   对于windows 来说，也就是注册表了开机启动了。
-   不同的系统对于这部分都有不同的优化。
+对于SUSE 是有一些麻烦，要用到http://unix.stackexchange.com/questions/43230/how-to-run-my-script-after-suse-finished-booting-up， 写标准init 脚本并注册了。当然也简单的做法例如直接/etc/rc.d/after.local 等来进行hook, http://www.linuxidc.com/Linux/2012-09/71020.htm.
+对于windows 来说，也就是注册表了开机启动了。
+不同的系统对于这部分都有不同的优化。
 
 ubuntu 中bootup https://help.ubuntu.com/community/UbuntuBootupHowto, 并且这里有一个service 的模板可以用。
 
@@ -59,7 +75,7 @@ module 加载在 /etc/init.d/kmod 里实现的加载哪一个driver,并且加载
 
 http://leaf.sourceforge.net/doc/bootproc.html 这里说细的linux启动流程。
 
-并且启动过程是可以打断的加入参数 break=init就可以了，或者在起动的时候按快捷键，例如按 Ifor gentoo os.https://wiki.debian.org/BootProcess
+并且启动过程是可以打断的加入参数 break=init就可以了，或者在起动的时候按快捷键，例如按 :kbd:`I` for gentoo os. `https://wiki.debian.org/BootProcess
 
 
 init 开始并行化，event_base化。
