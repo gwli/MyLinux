@@ -37,7 +37,7 @@ sourcelist support three source
 #. `add-apt-repository <http://www.cnblogs.com/cute/archive/2012/05/21/2511571.html>`_  ,`PPA <How do I use software from a PPA?]] [[https://launchpad.net/ubuntu/+ppas>`_  is Personal Package Archives (PPA) allow you to upload Ubuntu source packages to be built and published as an apt repository by Launchpad. 
 
    
-.. ::
+.. code-block:: bash
  
    apt-get --yes install $something
    
@@ -51,6 +51,14 @@ sourcelist support three source
    APT::Get::force-yes "true";
    apt-cache search 库。
    
+如果出现 出现PGP key error 缺 key
+---------------------------------
+
+.. code-block:: bash
+
+   sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 437D05B5 3E5C1192
+   sudo apt-get update
+
 如果想添加不同架构的deb
 ========================
 
@@ -58,6 +66,7 @@ sourcelist support three source
 http://stackoverflow.com/questions/6331109/how-to-setup-multiple-architecture-development-environment-under-ubuntu-11-04
 
 同时还可以下载代码 `apt-get source package-name` 就可以直接下载当前目录了。
+
 如何查看所有可用更新
 ====================
 
@@ -88,12 +97,16 @@ http://askubuntu.com/questions/252734/apt-get-mass-install-packages-from-a-file
 dpkg
 ====
 
-查询包 :command:`dpkg -l |grep vnc`
+#. 查询包 :command:`dpkg -l |grep vnc`
+#. 删除   :command:`dpkg -r vnc`
+#. 查看依赖 :command:`apt-cache depends packagename`
+#. 查看安装了哪些文件 :commmand:`dpkg -L packagename`
 
-删除   :command:`dpkg -r vnc`
+
 
 安装位置的选择
 ==============
+
 usr is stand for unix system resource,  
 http://askubuntu.com/questions/1148/what-is-the-best-place-to-install-user-apps
 如果只是zip包 standalone App，可以直接使用就放在/opt下面。 
@@ -106,6 +119,8 @@ http://askubuntu.com/questions/1148/what-is-the-best-place-to-install-user-apps
    .. code-block::
 
       $tar cvzf suse11_sp3.tgz bin boot etc lib lib64 opt root sbin selinux srv usr var 
+      tar -czpf --one-file-system / | ssh name@hostname "(cat >ssh_systemrootfs.tgz)"
+
 
 
 #. 在目标机上直接硬盘分区格式化，然后解压
@@ -221,11 +236,18 @@ Install NFS on Ubuntu
 
 #. sudo apt-get install nfs-kernel-server
 #. Edit /etc/exports, add line at the end of file:
+
+   .. code-block:: bash
+
       /home/tss3st  *(rw,sync,no_root_squash)
+
 #. Restart NFS service
-sudo service portmap restart
-sudo service nfs-kernel-server restart
-showmount -e
+   
+   .. code-block:: bash
+
+      sudo service portmap restart
+      sudo service nfs-kernel-server restart
+      showmount -e
 
 ######Mount A:/home/A/ on Solaris
 1. Login to B as user "root"
@@ -275,12 +297,13 @@ For all Solaris which we run NEAT, we need to mount this directory to local /mnt
 -- Main.GangweiLi - 15 Jan 2013
 
 
-*使用户具有sudo功能*
+使用户具有sudo功能
+-------------------
+
 addsuer "victor"
 sudo usermod -G adm -a victor
 vim /etc/sudoers     copy root to a new line change root to victor
 
--- Main.GangweiLi - 15 Jan 2013
 
 
 *backup and restore*

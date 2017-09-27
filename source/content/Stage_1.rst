@@ -3,6 +3,7 @@
 ######
 
 .. include:: Stage_1/command.rst
+.. include:: Stage_1/LinuxInstall.rst
 .. include:: Stage_1/DirectoryLayout.rst
 .. include:: Stage_1/gentoo.rst
 .. include:: Stage_1/ubuntu.rst
