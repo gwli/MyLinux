@@ -1,3 +1,7 @@
+******
+gentoo
+******
+
 vebegin,veend, ebegin,eend. ewarning
 ====================================
 
@@ -7,6 +11,10 @@ ewaring 给你前面加个* 并且还绿色.
 对于rc.local的输出,没有有产生,是在于被 重定向到/dev/null中了.
 
 只需要这个改掉了就行了.https://forums.gentoo.org/viewtopic-t-1009110.html?sid=ab27cf116dba07711a215b9a7ae8f3bb
+
+.. code-block:: bash
+
+   echo "rc_verbose=yes" > /etc/conf.d/local
 
 可以参考https://devmanual.gentoo.org/ebuild-writing/messages/index.html message的格式化.
 
