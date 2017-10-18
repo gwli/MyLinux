@@ -1,6 +1,10 @@
+******
 Centos
 ******
 
+
+how to config 
+=============
 
 #. sshd run on startup
    :command:`chkconfig sshd on`
@@ -185,4 +189,5 @@ you can use vino-preference to config.
 
 unlock keyring
 --------------
+
 rm -fr ~/.gnomme2/default/default.keyring

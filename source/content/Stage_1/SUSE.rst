@@ -1,8 +1,21 @@
+****
 SUSE
-====
+****
 
-如何安装NV driver
------------------
+安装要求 
+========
+
+#. install build toolchain
+#. auto login as root
+#. config vnc
+#. install nvidia driver
+#. disable fireware
+#. setup ssh 
+#. startup application
+
+
+如何安装 nvidia driver
+======================
 
 .. code-block:: bash
 
@@ -14,6 +27,7 @@ SUSE
 
 #. chkconfig 启动service http://superuser.com/questions/752448/how-to-make-a-service-start-in-suse-enterprise-linux
 #. How to run my script after SuSE finished booting up http://unix.stackexchange.com/questions/43230/how-to-run-my-script-after-suse-finished-booting-up
+
 #. disable firewall
 
    .. code-block:: bash

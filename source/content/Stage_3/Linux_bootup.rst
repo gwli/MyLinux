@@ -1,3 +1,7 @@
+**************
+linux bootup
+**************
+
 linux 的生与死
 ==============
 
@@ -5,12 +9,12 @@ linux 的生与死
 内存结构可以用http://code.metager.de/source/xref/linux/utils/kmod/libkmod/libkmod-module.c#63 这里看到，采用的struct然后里边就是指针了。形成一个列表。insmod,rmmod插入，列表，查询列表的过程。
 
 
-   linux 启动模式是由 `linux的运行模式：Runlevel详细解析 <http://linux.ccidnet.com/art/9513/20070428/1072625&#95;1.html>`_  决定的，它是由 `/etc/inittab <http://book.51cto.com/art/200906/127324.htm>`_  来控制的，telinit 是用来发送信号进行init. shutdown reboot都是跟 runlevel相关，默认的level,都在rc.XX.d下软链接，并且也是00-99的数字，并且SK表示特殊的意义来开始。原来的GTL的方式是在学习RC 机制。
+linux 启动模式是由 `linux的运行模式：Runlevel详细解析 <http://linux.ccidnet.com/art/9513/20070428/1072625&#95;1.html>`_  决定的，它是由 `/etc/inittab <http://book.51cto.com/art/200906/127324.htm>`_  来控制的，telinit 是用来发送信号进行init. shutdown reboot都是跟 runlevel相关，默认的level,都在rc.XX.d下软链接，并且也是00-99的数字，并且SK表示特殊的意义来开始。原来的GTL的方式是在学习RC 机制。
    
+  
+对于系统的控制，很大部分那就是各种service的起动的控制，系统基本起来了，就是各种服务进程，这个主要就在init.d这个阶段进行，如何开机自己等都是在此做的，同时自己需要一些定制的也主要集中此的。
    
-   对于系统的控制，很大部分那就是各种service的起动的控制，系统基本起来了，就是各种服务进程，这个主要就在init.d这个阶段进行，如何开机自己等都是在此做的，同时自己需要一些定制的也主要集中此的。
-   
-   对于ubuntu简单直接，/ect/rc.local就可以了。并且可以查看rc.d 这个目录下东东。 这个每个系统也是不一样的。同时有些系统已经支持并行启动了，例如SUSE中已经支持了。具休可查看/ect/rc.d/README,并且在/etc/rc.d/boot中控制。 一旦并行就会有步同步依赖的问题，也这也是各种before,after 机制的原因，这些就是用来控制顺序的吧。
+对于ubuntu简单直接，/ect/rc.local就可以了。并且可以查看rc.d 这个目录下东东。 这个每个系统也是不一样的。同时有些系统已经支持并行启动了，例如SUSE中已经支持了。具休可查看/ect/rc.d/README,并且在/etc/rc.d/boot中控制。 一旦并行就会有步同步依赖的问题，也这也是各种before,after 机制的原因，这些就是用来控制顺序的吧。
 
 实践上 init 现在已经支持并行了，并且之间也是有依赖关系与event的话，起动依赖配置放在 /etc/init/XX.conf中, 所以当然也可以对此的应用如此的定制。
 
@@ -24,8 +28,8 @@ gentoo用OPENRC来实现一套并行机制，
    rc-update add root boot
 
 
- gentoo os 有时候发现开机启动后根目录是只读，可能的原因就是 :file:`/etc/init.d/root` 没有加到启动项中。
- https://wiki.gentoo.org/wiki/OpenRC
+gentoo os 有时候发现开机启动后根目录是只读，可能的原因就是 :file:`/etc/init.d/root` 没有加到启动项中。
+https://wiki.gentoo.org/wiki/OpenRC
 
 
 
@@ -115,4 +119,73 @@ http://askubuntu.com/questions/303694/where-is-startup-applications-user-config-
        f.read()
        #do something
        f.write()
+
+无盘启动
+========
+
+到现在为止，我们已经用过U盘启动，光盘启动,到现在的无盘启动。
+
+#. U盘启动我们用的是syslinux实现的
+
+#. 光盘启动，我们的是isolinux来实现的
+#. 无盘启动，我们需要PXElinux来做了。
+
+实现步骤
+
+#. 设置网卡支持网盘启动
+#. DHCP server上指定 tftp server 的地址，以及需要开机启动文件与配置
+#. 然后PXE client 下载并执行
+
+
+启动的核心，从哪里下载启动镜象，并且启动。
+现在网卡中默认的都是 http://ipxe.org/ 客户端
+
+.. code-block:: bash
+   
+
+   #Press Ctrl-B at this point, and you should reach the iPXE command line:
+   iPXE>
+   #You can list the network devices that iPXE has detected using the ifstat command:
+   iPXE> ifstat
+     net0: 52:54:00:12:34:56 using rtl8139 on PCI00:03.0 (closed)
+       [Link:up, TX:0 TXE:0 RX:0 RXE:0]
+   #and acquire an IP address using the dhcp command:
+     iPXE> dhcp
+     DHCP (net0 52:54:00:12:34:56).... ok
+   #You can examine the IP configuration and other DHCP options:
+   
+     iPXE> route
+     net0: 10.0.0.155/255.255.255.0 gw 10.0.0.1
+     iPXE> show dns
+     net0.dhcp/dns:ipv4 = 10.0.0.6
+   #You can boot something over the network. Unlike a traditional PXE ROM, iPXE is able to boot over a wide area network such as the Internet. If the machine you are testing is connected to the Internet, you can boot the iPXE demonstration script:
+   
+     iPXE> chain http://boot.ipxe.org/demo/boot.php 
+   
+
+boot.php 的内容
+
+.. code-block:: bash
+
+   #!ipxe
+
+   kernel vmlinuz-3.16.0-rc4 bootfile=http://boot.ipxe.org/demo/boot.php fastboot initrd=initrd.img
+   initrd initrd.img
+boot    
+
+
+动态的启动脚本
+==============
+
+这样还可以从自动的生成配置文件 
+
+.. code-block:: bash
+
+   http://192.168.0.1/boot.php?mac=${net0/mac}&asset=${asset:uristring}
+
+
+Booting from PXE of Realtek of agent
+====================================
+
+http://www.ipcop.org/1.4.0/en/install/html/installing-from-pxe-boot.html
 
