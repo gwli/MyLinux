@@ -19,6 +19,9 @@ SUSE
 
 .. code-block:: bash
 
+   # install kernel source
+   # insert 2nd DVD
+   zypper install kernel-source
    rcxdm start
    ./NVIDIA-linux-x86_64.run
    rcxdm stop
