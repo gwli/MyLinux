@@ -12,6 +12,7 @@ SUSE
 #. disable fireware
 #. setup ssh 
 #. startup application
+#. config /etc/fstab
 
 
 如何安装 nvidia driver
