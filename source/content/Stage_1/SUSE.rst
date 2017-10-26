@@ -7,12 +7,21 @@ SUSE
 
 #. install build toolchain
 #. auto login as root
-#. config vnc
+#. config vnc  yast/vnc administrator
 #. install nvidia driver
 #. disable fireware
 #. setup ssh 
 #. startup application
 #. config /etc/fstab
+#. disable screen lock
+
+
+.. note::
+   
+  gnome-control-center 控制面板
+
+
+
 
 
 如何安装 nvidia driver

@@ -12,7 +12,7 @@ usb 启动盘制作
 
 要想让其可启动，就要让BIOS能够认出来，也就是BIOS本身具有相应的驱动，或者中间的转接，然后是在其引导有引导代码类似于grub的代码能执行，并加载相应的kernel.
 
-` 用AT&T 汇编实现 第一个bootloader <http://www.imsiren.com/archives/917>`_   BIOS 通电-将磁盘第一个扇区512字节copy到内存的0x0000:0x7c0处，并将CS寄存器设置为0x0000,IP设置为0x07c0, 因为现在CPU处于实模式下，所以CPU下一条将要执行的指令就是CS:IP 将是 0x:0000:0x7c0, 这样就能挂靠 到我们写的bootloader了。
+`用AT&T 汇编实现 第一个bootloader <http://www.imsiren.com/archives/917>`_   BIOS 通电-将磁盘第一个扇区512字节copy到内存的0x0000:0x7c0处，并将CS寄存器设置为0x0000,IP设置为0x07c0, 因为现在CPU处于实模式下，所以CPU下一条将要执行的指令就是CS:IP 将是 0x:0000:0x7c0, 这样就能挂靠 到我们写的bootloader了。
 
 所以只要把USB变成可引导盘，并且分区格式化并不会影响MBR，因为这个是分区之外的事情。 然后就可以像里面copy kernel了。这也就是为什么，今天直接往U盘copy 光盘内容就可以用了的原因。
 
@@ -83,10 +83,11 @@ http://manpages.ubuntu.com/manpages/wily/man5/sources.list.5.html
 #. `源列表格式说明 <http://windorain.net/sources-list-format/>`_ , `说明名2 <http://blog.csdn.net/xizaizhuanyong_/article/details/8170093>`_ 
 
    
-   #. `apt-get  代理设置 <http://hi.baidu.com/penglaiguoguo/item/385acb1553da648c88a9569e>`_  
-   #. `source list 制作方法 <http://www.debian.org/doc/manuals/apt-howto/ch-basico.zh-cn.html>`_ 
+#. `apt-get  代理设置 <http://hi.baidu.com/penglaiguoguo/item/385acb1553da648c88a9569e>`_  
+#. `source list 制作方法 <http://www.debian.org/doc/manuals/apt-howto/ch-basico.zh-cn.html>`_ 
 
 apt-get upgrade 只是升级到当前的软件到最新版本， apt-get dist-upgrade,升级到大版本。
+或者用 :command:`sudo do-release-upgrade`
 
 安装列表
 ========

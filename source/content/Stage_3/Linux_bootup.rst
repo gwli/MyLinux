@@ -189,3 +189,20 @@ Booting from PXE of Realtek of agent
 
 http://www.ipcop.org/1.4.0/en/install/html/installing-from-pxe-boot.html
 
+
+
+无盘启动方案
+============
+
+#. 安装网卡，并注册网卡信息
+   
+#. 自举安装safeos
+    #. 检查自己是否需要安装soafeos 
+    #. 自safeos中添加自己demo 在GTL service之前，然后自动提交service中。
+#. safeos 启动之后
+    #. 是否刷机
+    #. reserve 机器
+    #. 刷机
+    #. unreserve 机器 
+    #. 自动更新 E:\windows OS自动配置
+    #. 自动设置 Stage to 1
