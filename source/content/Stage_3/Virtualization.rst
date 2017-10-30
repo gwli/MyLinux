@@ -14,7 +14,7 @@ http://blog.csdn.net/cbmsft/article/details/7214371
 
 
 Docker 是一种更轻质化的容器,就为了实现大一统,达到资源与效率的平衡.
-Docker可以做什么 http://blog.2baxb.me/archives/1136 
+Docker 可以做什么 http://blog.2baxb.me/archives/1136 
 
 
 Grid 

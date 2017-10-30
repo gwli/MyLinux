@@ -450,3 +450,20 @@ use ssh in pip line
    .. code-block:: bash
     
       tar czf - /home/localuser/filefolder | ssh remote-machine@ip.address.of.remote.machine tar -xvzf -C /home/remoteuser/
+
+
+chroot
+======
+
+特别来修复坏的系统，用chroot特别有用。
+
+.. code-block:: bash
+
+   mount /sda2 /mnt/sda2 
+   mount -t proc /proc /mnt/sda2/proc
+   mount --rbind /sys /mnt/sda2/sys
+   mount --make-rslave /mnt/sda2/sys
+   mount --rbind /dev /mnt/sda2/dev
+   mount --make-rslave /mnt/sda2/dev
+   
+   chroot /mnt/sda2 /bin/bash

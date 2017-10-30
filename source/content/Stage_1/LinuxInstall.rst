@@ -342,3 +342,46 @@ Now, most of the big application use configuration. and these configuration mech
 each one type of archive file, would support XXgrep,XXcat,xxxfind,xxxless. 
 
 ???BLOCK MISSING
+
+can't resolve dns
+=================
+
+只需要设置一下DNS，就是 */etc/resolve.conf* 
+
+常见的配置
+
+.. code-block:: bash
+   
+   nameserver 127.0.1.1
+   search nvidia.com
+
+如何修复系统 
+============
+
+https://help.ubuntu.com/community/LiveCdRecovery
+
+#. livecd 起动
+#. chroot to harddisk 
+
+   .. code-block:: bash
+   
+      mount /sda2 /mnt/sda2 
+      mount -t proc /proc /mnt/sda2/proc
+      mount --rbind /sys /mnt/sda2/sys
+      mount --make-rslave /mnt/sda2/sys
+      mount --rbind /dev /mnt/sda2/dev
+      mount --make-rslave /mnt/sda2/dev
+      
+      chroot /mnt/sda2 /bin/bash
+      
+      #open 2nd terminal
+      cat /etc/resolve.conf /mnt/sda2/etc/resolve.conf
+      apt remove <bad package>
+      apt autoremove
+      apt update
+      apt install <right packages>
+      #apt install linux-generic
+      apt upgrade      
+
+
+
