@@ -1,5 +1,13 @@
+********
+文件系统 
+********
+
 介绍
 ====
+
+文件系统是随着硬件的发展，以及数据存储发展的业务需要而不断向前发展的，并且两者之间的桥梁。
+
+为充分利用内存空间，我们建立一系列的内存文件系统。随着数据量越来越大，我们也就需要分布式的文件系统。以及种备份的容灾的需求。
 
 `文件系统 <http://wenku.baidu.com/view/aef3dbc69ec3d5bbfd0a74f3.html>`_ ，任何时候不明白的都先回来看看最原始的教材。文件系统基本的功能，就是文件管理与目录管理。以及磁盘空间分配使用。
 为什么要有这么多种文件系统。原因在于一定是不同的硬件实现。底层的实现是不样的。例如磁片硬件，与flash,以及固态硬盘，以及 人们对数据操作要求的不同。这种逻辑的需求与硬件结合的接口就是文件系统。对于不同的存储读写需求以及硬件实现，就会不同的实现实现算法机制。而这些就是文件系统。
@@ -16,6 +24,18 @@
 
 
 而在抽象层上，就各种各样的文件系统。linux 文件系统设计的很好，在linux里一切的资源，要么是file,要么是进程。 debugfs,Pipefs,sockFS,securityfs 这些都是虚拟的文件系统。你可以在 /proc/filessystems 里看到这些。
+
+而在linux中每一个进程空间只有一个根文件系统。 并且一个device都根据自身的结构形成自己文件系统结构。在异构系统之间，我们通过mount,来建立之间的不同系统之间通信桥梁。相当于在我的系统里，/xxx/XXX 就是你的入口点，往下的目录都是你的。即然是一个通信机制。就会信息通信协议，通信的方向是双方的，还是单方的。这也就有了四种
+
+.. list-table::
+   
+   private
+   shared
+   slave
+   unbindable 
+
+具体可以说明见 `kernel doc <https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt>`_
+`应用挂载名称空间 <https://www.ibm.com/developerworks/cn/linux/l-mount-namespaces.html>`_ 来讲这些，空间的隔离，linux中使用各种各样的命名空间。
 
 
 Pipe文件系统
@@ -49,11 +69,18 @@ linux 里大部分进程通信靠是Pipe，同步则是由Pipe 自己实现的�
    }
    
 
- | fdisk |  Partition Table |
- | format/mkfs |   DBR |
- | filesystem (inode )| FAT | `这个是基于文件系统的 <http://blog.csdn.net/qianjintianguo/article/details/712590>`_ ，是不同的，主要inode 的结构。
- |    ^ | DIR |
- |  real data | DATA |
++--------------------+------+-------------------------------------------------------------------------------------------------------------------+
+|  fdisk             |      | Partition Table                                                                                                   |
++--------------------+------+-------------------------------------------------------------------------------------------------------------------+
+| format/mkfs        |  DBR |                                                                                                                   |
++--------------------+------+-------------------------------------------------------------------------------------------------------------------+
+| filesystem (inode )| FAT  | `这个是基于文件系统的 <http://blog.csdn.net/qianjintianguo/article/details/712590>`_ ，是不同的，主要inode的结构。|
++--------------------+------+-------------------------------------------------------------------------------------------------------------------+
+|    ^               | DIR  |                                                                                                                   |
++--------------------+------+-------------------------------------------------------------------------------------------------------------------+
+|  real data         | DATA |                                                                                                                   |
++--------------------+------+-------------------------------------------------------------------------------------------------------------------+
+
 
 每一个分区的超级块放在这个分区的头，如果有就在第二个逻辑块里，一般情况下，第一块是引导块，第二块为super block并且大小固定。并且格式，大小固定。
 超级块，采用的是相互链表，并且vfs做了很好的抽象，并且还支持cache,定期与硬盘同步数据。 
@@ -68,8 +95,9 @@ http://www.cyberciti.biz/tips/understanding-unixlinux-filesystem-superblock.html
 每一个分区四大块:
 
 .. graphviz::
+
    digraph filesystem {
-      partition  [ shape=Record, label="boot block|super block | inode index block |data block"]
+      partition  [ shape=Record, label="boot block|super block | inode index block | data block"]
    }
 
 `各种挂载问题 <http://man.chinaunix.net/linux/mandrake/cmuo/admin/camount3.html>`_ 
@@ -94,21 +122,45 @@ http://www.cyberciti.biz/tips/understanding-unixlinux-filesystem-superblock.html
 在DOS或Windows系统下，基本分区必须以柱面为单位划分（Sectors*Heads个扇区），如对于CHS为764/256/63的硬盘，分区的最小尺寸为256*63*512/1048576=7.875MB.
 `深入浅出硬盘分区表 <http://www.vckbase.com/index.php/wv/260.html>`_ 分区表实际上一个单向的链表。
 
-　　由于硬盘的第一个扇区已经被引导扇区占用，所以一般来说，硬盘的第一个磁道（0头0道）的其余62个扇区是不会被分区占用的。某些分区软件甚至将第一个柱面全部空出来。并且分区中就有一项，那就是第一个分区前面有多少个隐藏扇区。其实每个分区都会有一个引导扇区，也就是`VBR <http://en.wikipedia.org/wiki/Volume_boot_record>`_ ,整个硬盘的Boot record就是MBR。
+由于硬盘的第一个扇区已经被引导扇区占用，所以一般来说，硬盘的第一个磁道（0头0道）的其余62个扇区是不会被分区占用的。某些分区软件甚至将第一个柱面全部空出来。并且分区中就有一项，那就是第一个分区前面有多少个隐藏扇区。其实每个分区都会有一个引导扇区，也就是`VBR <http://en.wikipedia.org/wiki/Volume_boot_record>`_ ,整个硬盘的Boot record就是MBR。
 
 现在明白了，老大的要讲故事，也就是要问为什么需要。同时也就是事情的前因后果，以及历史。自己如何早些问，那些文件系统有什么区别，现在也就早明白。直到现在才问。所以现在才明白。
  
-| ext2 | http://learn.akae.cn/media/ch29s02.html |
-| ntfs  |http://bbs.intohard.com/thread-66957-1-1.html, http://blog.csdn.net/daidodo/article/details/2702648  | `mount utfs as rw <http://www.linuxquestions.org/questions/linux-newbie-8/error-mounting-mount-unknown-filesystem-type-ntfs-926355/>`_  use fuse and ntfs-3g|
-| FAT | http://www.sjhf.net/document/fat/#4.3%20%20FAT%E8%A1%A8%E5%92%8C%E6%95%B0%E6%8D%AE%E7%9A%84%E5%AD%98%E5%82%A8%E5%8E%9F%E5%88%99 |
-| rootfs |http://blog.21ic.com/user1/2216/archives/2006/25028.html |
-|ramfs, rootfs, initrd and initramfs | http://hi.baidu.com/nuvtgbuqntbfgpq/item/537f1638797a88c01b9696f4 |
-|loop device /dev/loopXXX | http://www.groad.net/bbs/read.php?tid-2352.html| 把文件以及镜象挂载| 是不是可以利用它来做系统血备份 |
+.. csv-table::
+
+   ext2 , http://learn.akae.cn/media/ch29s02.html ,
+   ntfs , http://bbs.intohard.com/thread-66957-1-1.html, http://blog.csdn.net/daidodo/article/details/2702648  , `mount utfs as rw <http://www.linuxquestions.org/questions/linux-newbie-8/error-mounting-mount-unknown-filesystem-type-ntfs-926355/>`_  use fuse and ntfs-3g,
+   FAT , http://www.sjhf.net/document/fat/#4.3%20%20FAT%E8%A1%A8%E5%92%8C%E6%95%B0%E6%8D%AE%E7%9A%84%E5%AD%98%E5%82%A8%E5%8E%9F%E5%88%99 ,
+   rootfs , http://blog.21ic.com/user1/2216/archives/2006/25028.html ,
+   ramfs, rootfs, initrd and initramfs , http://hi.baidu.com/nuvtgbuqntbfgpq/item/537f1638797a88c01b9696f4 ,
+   loop device /dev/loopXXX , http://www.groad.net/bbs/read.php?tid-2352.html , 把文件以及镜象挂载, 是不是可以利用它来做系统血备份 ,
+
 看到现在终于把文件系统看懂一些吧，文件系统分为三层，文件本身内部结构一层，文件系统一层，分区与硬盘之间是一样。当然最初的概念都是结合物理模型的，随着后期的演化，最初的概念已经不是最初了的概念了。例如文件，最初都是就是一段扇区。但是到后期文件的已经完全脱离了，那个物理模型，就是变成了长度，并且这个常度就代表一个字节，并且字节也是一个抽象概念。不同的硬件，扇区的等等的分布是不一样的，不同的文件系统，block,inode之间对扇区对应关系都是不一样的。并且在文件系统上，文件不是顺序存储的。所以也就没有办法智能恢复了，也就只能整个硬盘做一个镜象，虽然你只用了一部分空间。 并且PBR的信息是放在分区里的，如果两个分区参数不一样，也是不行，相当于把分区的信息也复制过来了。而dd只能按块来读，在块之间来做转换。所以dd是在操作系统之下进行的，如果想用dd来做，要么两个分区一模一样，包括同样的位置有同样的坏道。要么要自己去解析文件系统的文件分配自己去读写分配每一个扇区。
    
 
+
+分布式文件系统 
+==============
+
+基本要求，
+
+#. 全局名字空间
+#. 缓存一致性
+#. 安全性
+#. 可用性
+#. 可扩展性
+
+[#R1]_ 介绍了AFS，GFS，Lustre的分布式文件系统。
+
 文件系统格式
 =============
+
+
+.. image:: fs_capacity.png
+
+.. figure:: fs_performance.png
+   
+   https://www.ibm.com/developerworks/cn/linux/l-jfs/
 
 不同的文件系统格式，添加了不同的功能，特别是日志文件系统，添加一些数据恢复的功能，就像数据库可以根据日志rollback最佳状态。 
 
@@ -117,17 +169,16 @@ https://zh.wikipedia.org/wiki/Ext4 增加了在线整理磁盘碎片的功能，
 
 http://extundelete.sourceforge.net/ 可以恢复数据ext2/3/4的数据。 
 
-下一代的文件系统将是采用类似数据库的底层方式的B+ tree的文件系统。 进一步把文件系统与数据库融合在一起。
+下一代的文件系统 `Btrfs <https://zh.wikipedia.org/wiki/Btrfs>`_ 将是采用类似数据库的底层方式的B+ tree的文件系统。 进一步把文件系统与数据库融合在一起。
 
+Btrfs 的简介 https://www.ibm.com/developerworks/cn/linux/l-cn-btrfs/index.htmloo
+不同文件系统的性能分析 https://www.cnblogs.com/tommyli/p/3201047.html
 调整分区的大小
 ==============
 
 http://blog.csdn.net/hongweigg/article/details/7197203
 
 首先要自己记住分区的起始地址，然后修改分区表，然后再用 resize2fs,tune2fs 来更新文件系统的 meta data. 注意柱面号是按照unit 来计算的。 所以要学会计算这样。
-
-
-
 
  
 如果想用dd来做,   先做一个OS,并且在硬盘上连续存放的，并且要知道这个区域的大小，或者说估计大约的值。并且硬盘状态一样。 这样可以像Copy文件一样，那样去做了。
@@ -139,13 +190,7 @@ dd if=XXX.iso of=/dev/<usbpartition>  bs=4k
 cat  XXX.iso > /dev/<usbpartition>
 
 
-   
-
-
-
-
 分区是对硬盘的一个抽象，对于ＯＳ来说，分区基本硬盘是一样的，并且分区上面还可以逻辑分区。block是对 扇区的一种抽象。文件相当于heads, 而目录相当于cylinders.
-
 
 可以用 :command:`dumpe2fs` 来查看文件系统，并且可以用 :command:`tune2fs` 来调整参数。
 
@@ -163,12 +208,23 @@ http://partclone.org/，
    ticons-1.0 --restore --filename:/mnt/work/safeos_work_dir/imgcache/A15690B1-70F2-4FA5-ADAF-D774FCB10336 --partition:1-1 --target_partition:1-1 --progress:on 
 
 
+partclone 对于ntfs 的支持比较有限，所以基本上还都是使用 ticons.   
+
+
+tree
+====
+
+用来查看filesystem的树型结构，并且通过用pattern过滤，以及控制输出各种格式XML,HTML以及--du 的功能。
+
 Raid
 ====
 
-https://help.ubuntu.com/community/Installation/SoftwareRAID
-http://askubuntu.com/questions/526747/setting-up-raid-1-on-14-04-with-an-existing-drive
-https://raid.wiki.kernel.org/index.php/RAID_setup
+#. https://help.ubuntu.com/community/Installation/SoftwareRAID
+#. http://askubuntu.com/questions/526747/setting-up-raid-1-on-14-04-with-an-existing-drive
+#. https://raid.wiki.kernel.org/index.php/RAID_setup
+#. `七种raid配置通俗说明 <https://www.zhihu.com/question/20131784>`_
+
+原理是采用编码的冗余原理。
 
 
 如何制作文件系统
@@ -196,6 +252,7 @@ loop device 就是伪设备当做块设备。http://unix.stackexchange.com/quest
 
 `sfdisk <http://jarson.blog.51cto.com/1422982/573541>`_   是分区为了逻辑设备，就像人们有了多个硬盘一样。这个是由硬盘前面的分区表来决定的。而分区表的大小决定了，你可以有多少个分区，并且在分区表建立文件系统，在linux 下有各种各样的mkfs工具来供你使用。然后加载在OS上，这里就要mount了。
 对于mount 由于这个概念泛化了。你可以mount 本地硬盘，也可以远程（NFS，autofs,samba) 还以把本地文件本身当做文件系统进行访问。同时也可以用bind 来把一个目录绑到另一个目录里，来避免ln的不足.`mount --bind挂载功能，避免ln -s链接的不足 <http://blog.csdn.net/islandstar/article/details/7774121>`_ ,`mount --bind 的妙用  <http://www.cnitblog.com/gouzhuang/archive/2012/07/15/65503.html>`_ 
+
 `windows自带磁盘分区工具Diskpart使用介绍 <http://www.bitscn.com/os/windows7/200912/179453.html>`_ 
 分区与`格式化 <http://baike.baidu.com/view/902.htm>`_ 是两步不同的操作.格式化又分为低级，与高级，低级格式化是物理级的格式化，主要是用于划分硬盘的磁柱面、建立扇区数和选择扇区间隔比。硬盘要先低级格式化才能高级格式化，而刚出厂的硬盘已经经过了低级格式化，无须用户再进行低级格式化了。高级格式化主要是对硬盘的各个分区进行磁道的格式化，在逻辑上划分磁道。对于高级格式化，不同的操作系统有不同的格式化程序、不同的格式化结果、不同的磁道划分方法。
 
@@ -220,15 +277,19 @@ http://www.fwolf.com/blog/post/329
 :command:`mount -t cifs -o user=xxxx,password=xxx //192.168.0.1/xxx /mnt/`
 
 #. `linux 访问windows 共享目录 <http://linhui.568.blog.163.com/blog/static/9626526820117822835844/>`_ 也可以直接使用`smbclient <http://wenku.baidu.com/view/ab3e7ffc910ef12d2af9e7bb.html>`_ 
-   #. `autofs <http://www.autofs.org/>`_  our builds use it on farm
-.. ::
+#. `autofs <http://www.autofs.org/>`_  our builds use it on farm
+
+#. 如果自己想用FUSE系统直接支持和种http,ftp等等在线系统。可以用
+https://www.stavros.io/posts/python-fuse-filesystem/ 来实现。
+
+.. code-block::
  
-       apt-get install autofs
-        mkdir /network
-        auto.master  
-                /network /etc/auto.mymounts --timeout=35 --ghost
-        auto.mymounts 
-               prerelease -fstype=cifs,rw,noperm,user=devtools_tester1,pass=nvidia3d,dom=nvidia.com ://builds/prerelease
+   apt-get install autofs
+    mkdir /network
+    auto.master  
+            /network /etc/auto.mymounts --timeout=35 --ghost
+    auto.mymounts 
+           prerelease -fstype=cifs,rw,noperm,user=devtools_tester1,pass=nvidia3d,dom=nvidia.com ://builds/prerelease
    
 
 #. `cifs common interface  filesystem <http://linux-cifs.samba.org/>`_  
@@ -274,7 +335,15 @@ HardLink and softlink
 
 http://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/  hardlink 一个用途那就是做备份，要比copy更加快速方便。
 
-`Easy Automated Snapshot-Style Backups with Linux and Rsync <http://www.mikerubel.org/computers/rsync_snapshots/#Incremental>`_ 
+`Easy Automated Snapshot-Style Backups with Linux and Rsync <http://www.mikerubel.org/computers/rsync_snapshots/#Incremental>`_  可以快速建立一个 hourly,daily,and weekly.snapshots. 并且一个快速 rotate 机制，就是一个重命名。
+
+.. code-block:: bash
+   
+   rm back.3
+   mv back.2 back.3
+   mv back.1 back.2
+   mv back.0 back.1
+   rsync -a --delete source_directory/ backup.0/ 
 
 See also
 ========
@@ -290,7 +359,7 @@ See also
 Paper
 =====
 
-   `Data processing virus protecton on partition table <http://www.google.com/patents?hl=zh-CN&lr=&vid=USPAT5367682&id=UWgeAAAAEBAJ&oi=fnd&dq=partition+table&printsec=abstract#v=onepage&q=partition%20table&f=false>`_ 
+#. `Data processing virus protecton on partition table <http://www.google.com/patents?hl=zh-CN&lr=&vid=USPAT5367682&id=UWgeAAAAEBAJ&oi=fnd&dq=partition+table&printsec=abstract#v=onepage&q=partition%20table&f=false>`_ 
 #. `court law of disk  <http://www.cybersecurity.my/data/content&#95;files/13/71.pdf>`_  
 #. `parition ID <http://en.wikipedia.org/wiki/Partition&#95;type>`_  
 #. `对/dev/shm认识 <http://www.xifenfei.com/1605.html>`_  
@@ -342,3 +411,9 @@ Thinking
 #. charactor device
 #. FIFO
 #. unix domain socket
+
+
+References
+==========
+
+.. [#R1] http://www.jianshu.com/p/c6a530365bea
