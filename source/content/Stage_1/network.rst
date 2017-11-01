@@ -14,6 +14,8 @@ dns lookup
 
 nslookup 可以查询IP,或者域名。
 
+:file:`/etc/resolve.conf` 来配置DNS 
+
 IP 冲突
 =======
 
@@ -55,6 +57,19 @@ IP 冲突
 #. 用dhclient
 
    :command:`dhclient -r && sleep 20 && dhclient`
+
+dhcp 的配置文件在 /etc/sysconfig/network/dhcp
+
+.. code-block:: bash
+
+   # If it happens during booting it won't be a problem and you can
+   # safely say "yes" here. For a roaming notebook with X kept running, "no"
+   # makes more sense.
+   #
+   DHCLIENT_SET_HOSTNAME="no"
+   
+   ## Type:        string
+   ## Default:     AUTO
 
 
 gentoo 的网卡启动过程

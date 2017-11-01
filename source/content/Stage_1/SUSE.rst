@@ -58,3 +58,5 @@ SUSE
 
       DISPLAYMANAGER_AUTOLOGIN=”root”
 
+#. add repo source
+   yast2>software repository
