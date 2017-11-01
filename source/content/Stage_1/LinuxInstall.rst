@@ -67,10 +67,21 @@ http://stackoverflow.com/questions/6331109/how-to-setup-multiple-architecture-de
 
 同时还可以下载代码 `apt-get source package-name` 就可以直接下载当前目录了。
 
+
+
 如何查看所有可用更新
 ====================
 
 #. :command:`aptitude search '~U'`
+#. 可用命令
+  
+   .. code-block:: bash
+      
+      apt list
+      apt search
+      apt full-upgrade
+      apt install
+      apt remove
 
 #. aptdcon, 这个可以把安装放在队列里，以及不需要root,而不需要人为等另一个install 完成。
 #. 同时采用 apt-extracttemplate 把当前系统安装包生成template. 然后在其他机器上安装。

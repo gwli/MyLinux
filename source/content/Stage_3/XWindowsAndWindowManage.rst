@@ -35,6 +35,7 @@ https://wiki.gnome.org/Projects/gtk-vnc
 https://github.com/techtonik/python-vnc-viewer
 
 https://code.google.com/archive/p/vnc2flv/ 把VNC desktop session保存成Flash Video file.
+
 XWindow 的启动分析
 ==================
 
@@ -91,6 +92,7 @@ http://3492zhang.itpub.net/345618/viewspace-1020431/
 http://ubuntuforums.org/showthread.php?t=266981
 vncconfig 可以对正在运行的vncserver进行配置。
 https://www.realvnc.com/products/vnc/documentation/4.2/unix/unixconfig.html
+
 V3L 14.04 下的启动
 ------------------
 
@@ -98,7 +100,7 @@ V3L 14.04 下的启动
 
 
 X windows 消息机制 
-=======================
+==================
 
 
 .. csv-table:: 
@@ -118,6 +120,20 @@ X windows 消息机制
 
 xkill 非常好用的的一个kill 工具。
 http://blog.csdn.net/xiajian2010/article/details/9796365
+
+
+ubuntu 16.04 的恢复
+-------------------
+
+.. code-block:: bash
+   
+   apt upgrade
+   dpkg -l |grep "xserver-xorg"
+   xserver-xorg
+   xserver-input-all 键鼠不能用，安装就是这些出了问题。
+   xserver-video-all 管理显示。
+   ubuntu-desktop 安装窗口管理器
+
 
 
 Qt
@@ -162,6 +178,7 @@ lockscreen
 锁屏一个套独立机制，例如强制占领桌面最前端，其他功能切换不能工作，只有收入密码才能解屏。
 
 X windows 下有不少锁屏工具，例如xlock, 也有gnome-screensaver 来进行设置，而用:command:`gnome-screensaver-command -l` 来进行锁屏。
+
 VNC
 ===
 
@@ -194,9 +211,12 @@ Remote Display
 #. `X windows for android <http://stackoverflow.com/questions/12811124/x-applications-over-ssh-in-android>`_ 现在android就可以很方便远程控制我的电脑了。
    一个最简单的方法那就是利用ssh forwarding, 在linux下
 
-.. ::
- ssh -X 加主机名了
- 当然，ssh本身也是可共享的，主要你把设置共享的(-M),ssh本身还有很多好玩的参数可以去看一下其manul. 并且它可以后台运行。
+.. code-block:: bash
+
+   ssh -X 加主机名了
+
+当然，ssh本身也是可共享的，主要你把设置共享的(-M),ssh本身还有很多好玩的参数可以去看一下其manul. 并且它可以后台运行。
+
 #. `how-to-make-x-org-listen-to-remote-connections-on-port-6000 <http://askubuntu.com/questions/34657/how-to-make-x-org-listen-to-remote-connections-on-port-6000>`_  修改lightdm的配置文件，原来gdm已经被lightdm给换掉了，同时改掉.xserverrc中的那一行。
 
 
@@ -205,6 +225,7 @@ remoteAPP
 
 这个对于XWindows天然的功能，而对于windows也有了相应的工具，建立在RDP的之上，
 http://www.kimknight.net/remoteapptool。 只运行APP本身。
+
 See also
 ========
 
@@ -226,7 +247,6 @@ See also
 
 Thinking
 ========
-
 
 
 看来自己当年在TWiki写的东西，要想办法恢复出来，这样的话，把这些给完完全全的给整理出来了。同时把 Work.XVirtualFramebuffer的应用也加载进来。
@@ -286,3 +306,36 @@ XWindows 设置屏保
 
 
 如果没有安装desktop,也可以手动安装，apt-get install Ubuntu-desktop
+
+Session的管理
+=============
+
+Multiuser
+   Enable / Disable multiuser mode.
+
+Acladd
+   Enable a specific user.
+
+Aclchg
+   Change a users permissions.
+
+Acldel
+   Disable a specific user.
+
+Aclgrp
+   Grant a user permissions to other users.
+
+Displays
+   List all active users at their displays.
+
+Umask
+   Predefine access to new windows.
+
+Wall
+   Write a message to all users.
+
+Writelock
+    Grant exclusive window access.
+
+Su
+  Substitute user.

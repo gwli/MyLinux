@@ -16,6 +16,8 @@ nslookup 可以查询IP,或者域名。
 
 :file:`/etc/resolve.conf` 来配置DNS 
 
+但是其他域名管理，以及LDAP等等以及NIS都是通过NSS来管理的,配置文件在 :file:`/etc/nsswitch.conf` .
+
 IP 冲突
 =======
 

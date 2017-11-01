@@ -60,3 +60,14 @@ SUSE
 
 #. add repo source
    yast2>software repository
+
+
+YAST2
+=====
+
+SUSE 自带的大规模安装部署工具。https://www.suse.com/zh-cn/documentation/sles11/singlehtml/book_sle_deployment/cha.deployment.remoteinst.html#sec.deployment.remoteinst.scenario.vncpxe 
+
+SUSE 的部署指南
+https://www.suse.com/documentation
+
+https://www.suse.com/zh-cn/documentation/sles11/singlehtml/book_sle_deployment/book_sle_deployment.html

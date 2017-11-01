@@ -9,3 +9,8 @@ Ubuntu
    - lightdm.conf
 
 #. gtl
+
+How to build Your own Kernel
+============================
+
+https://wiki.ubuntu.com/Kernel/BuildYourOwnKernel
