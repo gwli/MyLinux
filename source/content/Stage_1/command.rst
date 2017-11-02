@@ -161,8 +161,9 @@ linux专门一条:command:`rename` 指令。例如 我要把  *.txt* 变成 *.rs
 
 .. csv-table::
    
-   行, sed,grep,head,tail
+   行,sed,grep,head,tail
    例,awk,column
+
 
 在文件添加一行，一个方法那就是用vim就可以了。
 如果只是简单的行尾，那就是>>就搞定了。
@@ -473,8 +474,17 @@ chroot
    
    chroot /mnt/sda2 /bin/bash
 
-当然还有schroot, dchroot 具体见 `此 <https://askubuntu.com/questions/158847/what-is-the-difference-of-chroot-dchroot-and-schroot>`_
+当然还有schroot, dchroot,pivot_root 具体见 `此 <https://askubuntu.com/questions/158847/what-is-the-difference-of-chroot-dchroot-and-schroot>`_
+pivot_root和chroot的主要区别是，pivot_root主要是把整个系统切换到一个新的root目录，而移除对之前root文件系统的依赖，这样你就能够umount原先的root文件系统。而chroot是针对某个进程，而系统的其它部分依旧运行于老的root目录。
+  
+.. code-block:: bash
 
+   #! /bin/sh
+   mount -n -t proc proc /proc
+   echo 0x0100 >/proc/sys/kernel/real-root-dev
+   umount -n /proc
+
+mount 的时候，会把mount的所有信息都放在 :file:`/etc/mtab` 但是当 `/etc` 只读的情况下，就会mount失改，这时候就会用到 mount -n 不写 /etc/mtab
 
 gtop
 ====
