@@ -173,6 +173,29 @@ boot.php 的内容
    initrd initrd.img
 boot    
 
+how to config PXE server
+========================
+
+http://blog.csdn.net/robertkun/article/details/16851109
+
+#. copy the form ISO cd
+   
+   .. code-block:: bash
+
+      cp /mnt/iso/isolinux/isolinux.cfg      /tftpboot/pxelinux.cfg/default  
+      cp /mnt/iso/images/pxeboot/initrd.img  /tftpboot/  
+      cp /mnt/iso/images/pxeboot/vmlinuz     /tftpboot/  
+
+boot from nfs
+=============
+
+http://ipxe.org/appnote/ubuntu_live
+
+boot from http
+==============
+
+http://ipxe.org/appnote/xenserver
+可以参考这个试一试
 
 动态的启动脚本
 ==============

@@ -94,8 +94,6 @@ http://guojing.me/linux-kernel-architecture/posts/super-block-object/
 http://www.cyberciti.biz/tips/understanding-unixlinux-filesystem-superblock.html
 
 
-
-
 每一个分区四大块:
 
 .. graphviz::
@@ -235,19 +233,59 @@ Raid
 
 `新型的 raid 技术 <http://alanwu.blog.51cto.com/3652632/1289661>`_
 
+linux 采用 mdadm 来实现 :file:`/etc/mdadm.conf` .
+
+.. code-block:: bash
+   
+   # mdadm -C /dev/md0 -a yes -l 5 -n 3 /dev/sd{b,c,d}1 
+   mdadm: array /dev/md0 started. 
+    
+   -C ：创建一个阵列，后跟阵列名称
+   -l ：指定阵列的级别；
+   -n ：指定阵列中活动devices的数目
+
+   [root@bogon ~]# mdadm --detail /dev/md0 
+    /dev/md0: 
+            Version : 0.90 
+      Creation Time : Tue Mar 15 08:17:52 2011 
+         Raid Level : raid5 
+         Array Size : 9783296 (9.33 GiB 10.02 GB) 
+      Used Dev Size : 4891648 (4.67 GiB 5.01 GB) 
+       Raid Devices : 3 
+      Total Devices : 3 
+    Preferred Minor : 0 
+        Persistence : Superblock is persistent 
+     
+        Update Time : Tue Mar 15 08:20:25 2011 
+              State : clean 
+     Active Devices : 3 
+    Working Devices : 3 
+     Failed Devices : 0 
+      Spare Devices : 0 
+     
+             Layout : left-symmetric    校验规则
+         Chunk Size : 64K 
+     
+               UUID : e0d929d1:69d7aacd:5ffcdf9b:c1aaf02d 
+             Events : 0.2 
+     
+        Number   Major   Minor   RaidDevice State 
+           0       8       17        0      active sync   /dev/sdb1 
+           1       8       33        1      active sync   /dev/sdc1 
+           2       8       49        2      active sync   /dev/sdd1 
+
 
 如何制作文件系统
 ================
 
 mount 各种各样的文件系统，loop 表示把本地文件当做文件系统来进行挂载。同时也还可以重新mount --bind 挂载点。对于物理分区有的时候会用完，添加就需要重起机器。所以也就产生了LVM. 逻辑分区。随着云计算到来，一切的虚拟化。原来的系统都是建立物理设备上的，现在都直接在逻辑设备上了。这样就具有更大的移值性，就像我们的CAS就是把逻辑拓扑与物理拓扑的隔离。LVM就在物理分区与文件系统之间又加了一层。文件系统直接建在LVM。
-
 loop device 就是伪设备当做块设备。http://unix.stackexchange.com/questions/4535/what-is-a-loop-device-when-mounting
-
 数据的存储系统是任何一个现代系统必不可少的一部分。它关系着系统是否高效与稳定。使用数据库要求太多，而文件系统而是最灵活的，但是效率可能没有数据高。为了结合自己的数据存储需求，产生定制的文件系统，而非通过的OS文件系统。例如版本控制的文件存储系统，以及现在云计算系统都有自己存储系统。例如Google的GFS。`fuse <http://fuse.sourceforge.net/>`_ 文件系统是在用户空间的文件系统。`如何使用 <http://www.ibm.com/developerworks/cn/linux/l-fuse/>`_ 。并且通过它可以把一些服务当做文件系统来使用。例如google的mail空间。以及ftp等等。
 
 #. `SquashFS HOWTO (一) ---简介 <http://blog.csdn.net/karmy/article/details/1427315>`_  
 #. `如何制作文件系统  <http://mcuol.com/download/upfile/armLinuxEMB10.pdf>`_  
 #. `mkfs manual  <http://study.chyangwa.com/IT/AIX/aixcmds3/mkfs.htm>`_  
+
 通过对gentoo对于各种概念有了更深的认识。
 
 不同的文件系统就是硬件磁盘与逻辑存储之间的映射关系。 所谓的超级块就是与文件系统有关的。

@@ -128,7 +128,7 @@ http://askubuntu.com/questions/1148/what-is-the-best-place-to-install-user-apps
 
 #. 在一个现在系统上直接把系统文件打包
 
-   .. code-block::
+   .. code-block:: bash
 
       $tar cvzf suse11_sp3.tgz bin boot etc lib lib64 opt root sbin selinux srv usr var 
       tar -czpf --one-file-system / | ssh name@hostname "(cat >ssh_systemrootfs.tgz)"
@@ -137,17 +137,20 @@ http://askubuntu.com/questions/1148/what-is-the-best-place-to-install-user-apps
 
 #. 在目标机上直接硬盘分区格式化，然后解压
 
-   .. code-block::
+   .. code-block:: bash
+
       $ tar xvf suse11_sp3.tgz
 
 #. 并创建那些动态的目录 
 
-   .. code-block::
+   .. code-block:: bash
+
       @mkdir dev media mnt proc tmp
 
 4. 然后启动盘来修复起动项
 
-   .. code-block::
+   .. code-block:: bash
+
       $restore grub,
       mount /dev/sda1 /mnt/sda1
       grub-install --boot-directory=/mnt/sda1/boot /dev/sda1 --force
@@ -202,10 +205,10 @@ preseed 目录是用来存放预配置文件。
 实现也是采用grub来起动的。
 
 
-.. ::
+
  
-       Creat bootable usb 
-   ===========================
+Creat bootable usb 
+==================
 
 #. Download syslinux on windows
       http://www.kernel.org/pub/linux/utils/boot/syslinux/syslinux-4.04.zip
@@ -226,9 +229,9 @@ preseed 目录是用来存放预配置文件。
 
 `create-a-usb-stick-on-windows <http://www.ubuntu.com/download/help/create-a-usb-stick-on-windows>`_ 
 
-.. ::
+.. code-block:: bash
  
-cat ***ISO  >/dev/sdb ;sync
+   cat ***ISO  >/dev/sdb ;sync
 
 
 network install
@@ -261,7 +264,8 @@ Install NFS on Ubuntu
       sudo service nfs-kernel-server restart
       showmount -e
 
-######Mount A:/home/A/ on Solaris
+### Mount A:/home/A/ on Solaris
+
 1. Login to B as user "root"
 2. Create directory:
 
@@ -288,7 +292,7 @@ Install NFS on Ubuntu
    ln -s /mnt/svlinux01/home/A/automation/mail/ /home/A/WWW/automation/mail/,
 
 
-#### Mount and chmod on each Solaris
+*Mount and chmod on each Solaris*
 For all Solaris which we run NEAT, we need to mount this directory to local /mnt directory and chmod for it:
 
 
@@ -319,6 +323,7 @@ vim /etc/sudoers     copy root to a new line change root to victor
 
 
 *backup and restore*
+
 when backup and restore, there is three things to know:
 %BROWN%
 #.  size of data 
