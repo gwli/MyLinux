@@ -7,6 +7,7 @@
 .. include:: Stage_3/tty.rst
 .. include:: Stage_3/XWindowsAndWindowsManage.rst
 .. include:: Stage_3/IO.rst
+.. include:: Stage_3/USBOverIP.rst
 .. include:: Stage_3/Linux_bootup.rst
 .. include:: Stage_3/LinuxInput.rst
 .. include:: Stage_3/logsystem.rst

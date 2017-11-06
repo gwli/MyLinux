@@ -16,6 +16,26 @@ http://blog.csdn.net/cbmsft/article/details/7214371
 Docker 是一种更轻质化的容器,就为了实现大一统,达到资源与效率的平衡.
 Docker 可以做什么 http://blog.2baxb.me/archives/1136 
 
+Docker
+======
+
+最快的安装方式，:command:`curl -sSL https://get.docker.com/ |sh -`
+并且Docker现在发展的很成熟，可以实现各种level的虚拟化。
+
+一个进程的，直接使用 :command:`docker run` 或者多进程service级别的docker-composer.
+以及多host的docker-machine(自动安装docker）,以及集群水平的swarms,`Kubernetes <https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/>`_ (google开发的自动部署的docker工具)，能够实现load labance. 同时能够提供虚拟的网络的，overlay.   
+
+同时也提供自动配置，Dockerfile ,Compose.yaml 等等。 
+
+对于数据存储资源可以 volume绑定.
+
+对于docker image的存储可以有自建registery. 同时还有各家的docker cloud可以用。
+
+#. 常用命令的查询 `Docker <https://github.com/eon01/DockerCheatSheet>`_ 
+#. 中文版不错的书 `Docker 从入门到实践 <https://www.gitbook.com/book/yeasy/docker_practice/details>`_
+
+#. Docker 的存储实现原理 https://segmentfault.com/a/1190000007168476，不同文件系统支持的水平与性能也都不一样。
+
 
 Grid 
 ====
