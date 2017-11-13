@@ -2,6 +2,7 @@ Introduction
 ============
 
 http://en.wikipedia.org/wiki/Xvfb virtual is reality. it come to true. due the hardware, we could have logic device for it. 
+
 See also
 ========
 

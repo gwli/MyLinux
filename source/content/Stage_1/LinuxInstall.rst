@@ -51,6 +51,9 @@ sourcelist support three source
    APT::Get::force-yes "true";
    apt-cache search 库。
    
+   // get the lib url 
+   apt-cache policy "xxxlib" 
+  
 如果出现 出现PGP key error 缺 key
 ---------------------------------
 

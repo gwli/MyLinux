@@ -36,6 +36,16 @@ Docker
 
 #. Docker 的存储实现原理 https://segmentfault.com/a/1190000007168476，不同文件系统支持的水平与性能也都不一样。
 
+network and service
+====================
+
+在Docker的container里起一个sshi serivice
+
+.. code-block:: bash
+    
+   apt update && apt install openssh-server
+   /usr/sbin/sshd
+   #. config the sshd alow the root
 
 Grid 
 ====
