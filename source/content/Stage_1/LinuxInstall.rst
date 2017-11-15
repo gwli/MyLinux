@@ -73,6 +73,16 @@ https://help.ubuntu.com/community/AptGet/Howto
    apt -f install
    auto-apt ./configure 
 
+
+如何自动添加编译的包
+====================
+
+https://wiki.ubuntu.com/AutoDeb
+
+.. code-block:: bash
+   auto-apt ./configure
+   autodeb  archive.tar.gz
+
 如果想添加不同架构的deb
 ========================
 
