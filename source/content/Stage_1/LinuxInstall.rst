@@ -62,6 +62,17 @@ sourcelist support three source
    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 437D05B5 3E5C1192
    sudo apt-get update
 
+
+如何修复依赖破坏的包
+====================
+
+https://help.ubuntu.com/community/AptGet/Howto
+
+.. code-block:: bash
+
+   apt -f install
+   auto-apt ./configure 
+
 如果想添加不同架构的deb
 ========================
 
