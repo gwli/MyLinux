@@ -92,6 +92,39 @@ http://stackoverflow.com/questions/6331109/how-to-setup-multiple-architecture-de
 同时还可以下载代码 `apt-get source package-name` 就可以直接下载当前目录了。
 
 
+如何安装新版本上的package
+=========================
+
+#. 直接使用 Pin的方法，本质就是添加新版本的源，以及修改 /etc/apt/preferences https://help.ubuntu.com/community/PinningHowto
+#. 自己从源码编译
+
+   .. code-block:: bash
+      
+      apt-add-repository "deb-src ....."
+      apt-get update
+      apt-get build-dep firefox-3.0
+      apt-get -b source -t "release branch" firefox-3.0
+      make && make install
+
+#. 直接使用 `UbuntuBackports <https://help.ubuntu.com/community/UbuntuBackports>`_
+
+
+如何保持一个包不更新
+====================
+
+.. code-block:: bash
+   #   
+   sudo apt-mark hold <packagename>
+   #check 
+   apt-cache policy <packagename>
+   # unhold
+   echo xxxxx install |dpkg --set-selections
+ 
+
+如何troubleshot 包管理
+======================
+
+https://help.ubuntu.com/community/PackageManagerTroubleshootingProcedure
 
 如何查看所有可用更新
 ====================
@@ -147,6 +180,13 @@ usr is stand for unix system resource,
 http://askubuntu.com/questions/1148/what-is-the-best-place-to-install-user-apps
 如果只是zip包 standalone App，可以直接使用就放在/opt下面。 
    
+
+
+下一代包管理器
+==============
+
+https://nixos.org/nix/
+
 如何快速的制作一个linux系统
 ---------------------------
 
