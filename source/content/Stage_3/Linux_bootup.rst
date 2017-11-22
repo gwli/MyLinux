@@ -1,6 +1,6 @@
-**************
+************
 linux bootup
-**************
+************
 
 linux 的生与死
 ==============
@@ -68,6 +68,18 @@ http://www.ibm.com/developerworks/cn/linux/l-k26initrd/index.html
 https://wiki.ubuntu.com/Initramfs
 http://lugatgt.org/content/booting.inittools/downloads/presentation.pdf
 
+解压 initrd
+-----------
+
+.. code-block:: bash
+   
+   cp  /boot/initrd.img-`uname-r` .
+   file XXX.img
+   mv  XXX.gz
+   gunzip XXXX.gz
+   file XXXX
+   cpio -idmv < XXXX
+
 
 对于initramfs 的制作，每一个平台都有专门的工具来做。 例如， redhat 有 `dracut <http://people.redhat.com/harald/dracut.html>`_ 
 什么需要呢，例如些module没有编译在内核里，但是启动又需要的。这些就需要的。这样可以启动内核做的很少，然后灵活的定制。 这里就有一个问题，操作系统是什么加载driver的。
@@ -76,6 +88,11 @@ http://www.mjmwired.net/kernel/Documentation/initrd.txt
 read the init code of linux kernel. to understand the shell and interpreter programming.   
 `Linux系统下init进程的前世今生 <http://bbs.chinaunix.net/thread-3685404-1-1.html>`_   `init/main.c sourcecode <http://lxr.linux.no/linux-old+v0.11/init/main.c#L168>`_ 
 
+
+当你更改了系统的启动配置，就需要更新一个initramfs,这样才能保证起动不不加载。经常遇到现象，那就 /etc/modprubes.d/nvidia-installer-disable-nouveau.conf中 blacklist nouevu 但是起动时还是加载了。
+
+一个终极办法，那直接发在 :file:`/lib/modules/xxxxkernel_version/kernel/drivers/gpu/drm/nouveau/nouveau.ko` 的改名。
+然后 :command:`update-inittramfs -u` 更新一下。 而 :file:`/etc/initramfs-tools` 是其配置文件。
 
 `Linux系统启动过程分析详解 <http://wenku.baidu.com/view/f439355777232f60ddcca152.html>`_ 
 module 加载在 /etc/init.d/kmod 里实现的加载哪一个driver,并且加载的顺序。而这些应该在init之前。

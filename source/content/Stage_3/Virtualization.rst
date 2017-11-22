@@ -36,9 +36,43 @@ Docker
 
 #. Docker 的存储实现原理 https://segmentfault.com/a/1190000007168476，不同文件系统支持的水平与性能也都不一样。
 
-network and service
-====================
 
+dokcer 对于集群的支持 有Docker service,以及swarm等模式的支持。 http://liubin.org/blog/2016/06/17/whats-new-in-docker-1-dot-12-dot-0/
+
+
+how to upload to hub.docker.com
+===============================
+
+.. code-block:: bash
+   
+   docker images 
+   docker tag  bb38976d03cf yourhubusername/verse_gapminder:firsttry
+   docker push yourhubusername/verse_gapminder:firsttry
+
+how to automate-build from with Github
+======================================
+
+
+共享GUI与host
+=============
+
+主要是采用的方式，那就是共享socket 的模式。
+
+permission
+==========
+
+
+.. code-block:: bash 
+
+   docker: Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.26/containers/create: dial unix /var/run/docker.sock: connect: permission denied.
+   See 'docker run --help'.
+   sudo usermod -a -G docker $USER
+   logout/login
+
+network and service
+-------------------
+
+docker --run --it --net=bridge
 在Docker的container里起一个sshi serivice
 
 .. code-block:: bash
@@ -46,6 +80,7 @@ network and service
    apt update && apt install openssh-server
    /usr/sbin/sshd
    #. config the sshd alow the root
+   docker run -p  8022:22 
 
 Grid 
 ====

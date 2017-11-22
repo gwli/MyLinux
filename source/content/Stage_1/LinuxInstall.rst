@@ -31,6 +31,7 @@ gentoo also has its own package system and configuration management system.
 
 
 sourcelist support three source
+
 #. deb
 #. deb-src
 #. ppa
@@ -73,6 +74,16 @@ https://help.ubuntu.com/community/AptGet/Howto
    apt -f install
    auto-apt ./configure 
 
+多版本安装 
+==========
+
+就像python 可以有自己的virtualenv, 对于系统级的其他应用可以用alternatives 命令的相关方式。来管进行管理
+配置。
+
+.. code-block:: bash
+
+   alternatives -install XX
+   update-alternatives
 
 如何自动添加编译的包
 ====================
