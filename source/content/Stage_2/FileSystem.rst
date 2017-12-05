@@ -200,6 +200,11 @@ cat  XXX.iso > /dev/<usbpartition>
 可以用 :command:`dumpe2fs` 来查看文件系统，并且可以用 :command:`tune2fs` 来调整参数。
 
 
+
+由于物理磁盘受限于空间的大小，扩展起来不是很方便，这就有了逻辑磁盘的概念。lvm. 先在物理磁盘上建立phiycal Volume, 多个PV 可以组成一个VG，然后在每一个VG上可以建立LV，当然LV可也可以扩VG。而LV就当做一个分区来用。并且随时能够调整大小。 pv,vg,lv.
+
+.. image:: /Stage_2/fs/lv.jpg
+
 partclone
 =========
 
