@@ -60,6 +60,15 @@ ubuntu 中bootup https://help.ubuntu.com/community/UbuntuBootupHowto, 并且这�
 http://man7.org/linux/man-pages/man7/bootparam.7.html
 https://www.kernel.org/doc/Documentation/kernel-parameters.txt
 
+启动三步grub
+
+.. code-block:: bash
+   
+   grub> set root=(hd0,1)
+   grub> linux /boot/vmlinuz-4.4.xxx-generic xxxxoptions
+   grub> initrd /boot/initrd.img-xxxxx-generic
+   grub> boot
+
 例如要不要使用 initrd,可以直接使用 noinitrd,就可以了。具体其他的起动参数都是可以从上面的文档中查到。如果使用initrd,内核启动就会为两个阶段
 #. 内核启动前， grub会把initrd 先加载到内存中
 #. 内核启动后，先利用 initird中一些文件，来完成加载驱动模块，
