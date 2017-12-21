@@ -16,6 +16,11 @@ nslookup 可以查询IP,或者域名。
 
 :file:`/etc/resolve.conf` 来配置DNS 
 
+.. code-block:: bash
+   
+   nameserver 10.19.189.252
+   search xxx.com
+
 但是其他域名管理，以及LDAP等等以及NIS都是通过NSS来管理的,配置文件在 :file:`/etc/nsswitch.conf` .
 
 IP 冲突
@@ -74,6 +79,20 @@ dhcp 的配置文件在 /etc/sysconfig/network/dhcp
    ## Default:     AUTO
 
 
+如何配置双机共享网络 
+--------------------
+
+https://askubuntu.com/questions/169473/sharing-connection-to-other-pcs-via-wired-ethernet
+
+#. 选择编辑网络 
+#. 建立一个新连接
+#. ipv4 setting 选择 "share to other computers"
+#. ifconfig 就能看到这个端口上起了一个DHCPserver. 也可以用以下命令
+   
+   .. code-block:: bash
+      
+      ifconfig eth0 [-]pointtopoint [addre]
+
 gentoo 的网卡启动过程
 ---------------------
 
@@ -88,4 +107,25 @@ gentoo 的网卡启动过程
    #. SUSE 的启动是并行的，是用.before, .after等来实现的。
    #. 
 
+SSH
+===
+
+.. code-block:: bash
+
+   #.forward X
+   ssh -X user@hostname
+   
+   #no password login
+   #. ssh-keygen
+   #. ssh-copy-id user@remotehost
+   #. vim ~/.ssh/config  (file owner 600)
+      
+      Host devbox
+         HostName <IP>
+         Port 22
+         User test
+         PreferredAuthentications publickey
+         IdentityFile ~/.ssh/id_rsa
+   
+  
 #. 对于
