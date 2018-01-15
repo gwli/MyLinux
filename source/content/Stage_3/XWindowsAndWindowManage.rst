@@ -193,7 +193,7 @@ XWindows 恢复
 
 `dconf <http://en.wikipedia.org/wiki/Dconf>`_ 可以用来调整配置
 
-例如XWindow墨屏没有显示可以用. :command:`sudo dconf -f /org/compiz` 进行恢复。 
+例如XWindow墨屏没有显示可以用. :command:`sudo dconf reset -f /org/compiz` 进行恢复。 
 对于 Gnome 定制可以参考 http://askubuntu.com/questions/22313/what-is-dconf-what-is-its-function-and-how-do-i-use-it
 
 
@@ -201,6 +201,21 @@ XWindows 恢复
 /var/log/lightdm/xxx.log 它会保存至少两次的log. 
 看log时，查error message查出来，并找到error依赖找出来，最简单的方法那就是第一个error为root cause.
 一般情况都是由于系统的变动引起的，某些资源找到不了，重新加载，例如重装，手动修改配置文件就能搞定。
+
+
+常见还有权限问题:
+ls -lA ~/.XAuto*
+ls -lA ~/.ICE*
+
+还可以重装nvidia driver,
+
+.. code-block:: bash
+
+   sudo ubuntu-driver autoinstall
+   
+   #
+   sudo service lightdm stop
+   sudo dpkg-reconfigure lightdm
 
 Remote Display
 ==============
