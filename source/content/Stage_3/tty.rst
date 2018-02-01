@@ -29,4 +29,9 @@ terminal 中显示符号
 ssh 的过程。
 远程网络终端和本机shell之间建立了一条双向通道--“远程网络终端-(套接字)--本机协议处理进程--主终端--从终端--shell”
 
+serial IO 的原理
+================
+
+CPU -> driver ->bus ->I/O pin
+http://www.tldp.org/HOWTO/Serial-HOWTO-4.html
 

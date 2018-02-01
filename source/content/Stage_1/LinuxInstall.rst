@@ -35,6 +35,7 @@ sourcelist support three source
 #. deb
 #. deb-src
 #. ppa
+
 #. `add-apt-repository <http://www.cnblogs.com/cute/archive/2012/05/21/2511571.html>`_  ,`PPA <How do I use software from a PPA?]] [[https://launchpad.net/ubuntu/+ppas>`_  is Personal Package Archives (PPA) allow you to upload Ubuntu source packages to be built and published as an apt repository by Launchpad. 
 
    
@@ -55,6 +56,8 @@ sourcelist support three source
    // get the lib url 
    apt-cache policy "xxxlib" 
   
+在17.10之后，就可以直接使用 apturl 来直接从网址安装了，https://help.ubuntu.com/community/AptURL
+
 如果出现 出现PGP key error 缺 key
 ---------------------------------
 
@@ -97,8 +100,9 @@ https://wiki.ubuntu.com/AutoDeb
 如果想添加不同架构的deb
 ========================
 
-可以用 APT::Architectures 
+可以用 APT::Architectures
 http://stackoverflow.com/questions/6331109/how-to-setup-multiple-architecture-development-environment-under-ubuntu-11-04
+或者使用 dpkg --add-architecture arm64 这样来实现。或者安装某一个包时直接使用 *xxx:<arch>* 例如 `libglog4cxx10-dev:i386`
 
 同时还可以下载代码 `apt-get source package-name` 就可以直接下载当前目录了。
 
