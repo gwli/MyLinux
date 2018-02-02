@@ -335,6 +335,8 @@ Install NFS on Ubuntu
 
       /home/tss3st  *(rw,sync,no_root_squash)
 
+**
+
 #. Restart NFS service
    
    .. code-block:: bash
@@ -357,6 +359,7 @@ Install NFS on Ubuntu
 .. csv-table:: 
 
    mount -F nfs -o rw A:/home/A/   /mnt/A/home/A,
+   fs-nts3  <IP>:/remotepathin_etc_exports <localPath>
 
 4. Chmod:
 
