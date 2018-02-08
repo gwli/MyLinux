@@ -154,7 +154,7 @@ http://www.vpsee.com/2011/01/how-to-detect-if-a-linux-system-running-on-a-virtua
 --------------
 
 linux专门一条:command:`rename` 指令。例如 我要把  *.txt* 变成 *.rst*
-:command:`rename 's/.txt/.rst/ *.txt` 
+:command:`rename 's/.txt/.rst/ XX.txt` 
 
 取文件的部分内容
 ----------------
@@ -221,6 +221,11 @@ sync
 
 有各种同步， sync是直接把cache中内容写回到硬盘，isync,dsync则是mail box同步，而zsync 则提供的是部分下载，文件下载到了一半，只需要同步一部分，相当于patch的功能，而rsync则是文件的同步。
 
+.. code-block:: bash
+   
+   ssh-keygen 
+   ssh-copy-id user@remote_host  
+   rsync  user@remote_host:~/XXXX  Local_path/XXXX
 
 如何添加sudoer
 --------------
