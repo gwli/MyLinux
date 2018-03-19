@@ -26,6 +26,20 @@ gentoo用OPENRC来实现一套并行机制，
    rc-udpate show
    # add 
    rc-update add root boot
+   # get all service list
+   rc-service -l 
+  
+
+如何把添加卡到默认启动
+----------------------
+
+.. code-block:: bash
+   
+   cd /etc/init.d/
+   cp net.eth0  net.<newid>
+   rc-update delete net.eth0 default
+   rc-update add  net.<newid> default  
+   
 
 
 gentoo os 有时候发现开机启动后根目录是只读，可能的原因就是 :file:`/etc/init.d/root` 没有加到启动项中。
@@ -252,7 +266,7 @@ http://www.ipcop.org/1.4.0/en/install/html/installing-from-pxe-boot.html
 #. 安装网卡，并注册网卡信息
    
 #. 自举安装safeos
-    #. 检查自己是否需要安装soafeos 
+    #. 检查自己是否需要安装safeos 
     #. 自safeos中添加自己demo 在GTL service之前，然后自动提交service中。
 #. safeos 启动之后
     #. 是否刷机
