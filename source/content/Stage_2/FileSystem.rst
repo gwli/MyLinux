@@ -403,6 +403,19 @@ http://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/  hardlink 一
 
 文件系统的消息的类型与数量也是固定的，可以用api来得到，mount --make-rslave 等等就是控制的消息的传递。 同时也可以用 `gardgem <guardgem.org>`_ 以及系统默认的watch 的命令一样。这样的工具也特别需要例如node.js开发的时候就提供这的工具。实时更新重起 service.
 
+
+分区表的格式
+============
+
+硬盘的分区格式是用signature 来区分的，如果是总是识别的不对，应该原来signature没有清除掉，或者不同的软件的默认的读写位置不对。
+如何用dd来查询硬盘的头部信息直接来得到或者直接修改。
+
+.. code-block:: bash
+   
+   parted -l #查看分区格式
+   dd if=/dev/sdb skip=1 count=1 |hexdump -C #查看内容
+   dd if=/dev/zero count=1 seek=1 of=/dev/sdb #把内容清除为零
+
 See also
 ========
 
