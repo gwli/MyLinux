@@ -34,3 +34,37 @@ https://gitweb.gentoo.org/proj/genkernel.git
 
 经过对比好的机器上的库的依赖，发现只是ln 不对，在出错的机器上的，libfuse.so.2 -> libfuse.so.2.7,而机器 上是有 libfuse.so.2.9
 ntfs-3g 要求 2.8. 所以2.9肯定可以用。 所以只用修改一下软链就行了。
+
+直接使用livecd的编译
+=====================
+
+.. code-block:: bash
+   
+   cp /proc/config.gz .
+   gunzip config.gz
+   cat config >/usr/src/linux/.config
+   you find bzImage from /usr/src/linux/arch/x86/boot/bzImage
+
+
+升级
+====
+
+#. 下载minimal-livecd
+#.  configureation for STAGE3
+#.  cp config for livecd (x86)
+    - create bzImage
+    - create initramfs(应该与bzImage的arch一致).
+
+#. 更新fdisk
+#. install perl lib.
+#. install grub
+#.  
+#.  create mpcd, and tarball.
+#.
+
+genkernel
+=========
+
+sys-kernel/genkernel
+/usr/share/genkernel 有各种现成的脚本
+

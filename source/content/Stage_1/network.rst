@@ -129,3 +129,11 @@ SSH
    
   
 #. 对于
+
+如何扫描机器IP
+============== 
+
+.. code-block:: bash
+
+   nmap -p 22 --open -sV 10.19.189.0/24 >sshservers
+   grep -B 4 'OpenSSH 5.8p1' sshservers

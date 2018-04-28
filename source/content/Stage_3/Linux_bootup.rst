@@ -139,6 +139,7 @@ mdev是用来创建 /dev的目录， 使用方法
 https://git.busybox.net/busybox/tree/docs/mdev.txt?h=1_18_stable
 
 所以当你发现硬件没有发现的时候，直接使用 :command:`mdev -s`, 就可以了。
+
 或者
 
 .. code-block::
@@ -169,6 +170,7 @@ http://askubuntu.com/questions/303694/where-is-startup-applications-user-config-
 无盘启动
 ========
 
+
 到现在为止，我们已经用过U盘启动，光盘启动,到现在的无盘启动。
 
 #. U盘启动我们用的是syslinux实现的
@@ -183,7 +185,7 @@ http://askubuntu.com/questions/303694/where-is-startup-applications-user-config-
 #. 然后PXE client 下载并执行
 
 
-启动的核心，从哪里下载启动镜象，并且启动。
+启动的核心，从哪里下载启动镜象，并且启动。并且在一个现有的网络中，DHCP server是由IP控制的，并不能随意的改变，一个更加灵活的方案，那就是替换网卡的PXE固件，然后可以任意指定地址来进行
 现在网卡中默认的都是 http://ipxe.org/ 客户端
 
 .. code-block:: bash

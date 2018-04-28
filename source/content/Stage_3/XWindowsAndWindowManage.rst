@@ -234,6 +234,10 @@ Remote Display
 
 #. `how-to-make-x-org-listen-to-remote-connections-on-port-6000 <http://askubuntu.com/questions/34657/how-to-make-x-org-listen-to-remote-connections-on-port-6000>`_  修改lightdm的配置文件，原来gdm已经被lightdm给换掉了，同时改掉.xserverrc中的那一行。
 
+PAM
+===
+
+Pluggable Authentication Modules, 就是为模块化验证密码，方便系统的各个组件来用。配置文件在 /etc/pam.d/
 
 remoteAPP
 =========
