@@ -93,6 +93,11 @@ http://guojing.me/linux-kernel-architecture/posts/super-block-object/
 每一个分区的超级块是有备分的，你可以用mke2fs -n 或者dumpe2fs 来查看，然后再e2fsk -b 来进行修复。
 http://www.cyberciti.biz/tips/understanding-unixlinux-filesystem-superblock.html
 
+supperblock 中存储 文件系统的格式，inode/block的总数，以及使用量，剩余量等信息。
+.block与 inode的大小（block 一般为1，2，4K,这些存储真实的数据，大文件可以用block,小文件可以的block,
+inode一般为124/256 byte).
+inode  存储的文件信息，例如文件属性，文件的权限,修改日期等等，文件名的链接，最后是文件数据block的地址。
+http://www.voidcn.com/article/p-mttgftgp-gn.html
 
 每一个分区四大块:
 
