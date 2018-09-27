@@ -1,0 +1,1504 @@
+[    0.000000] Linux version 4.15.0-20-generic (buildd@lgw01-amd64-039) (gcc version 7.3.0 (Ubuntu 7.3.0-16ubuntu3)) #21-Ubuntu SMP Tue Apr 24 06:16:15 UTC 2018 (Ubuntu 4.15.0-20.21-generic 4.15.17)
+[    0.000000] Command line: BOOT_IMAGE=/boot/vmlinuz-4.15.0-20-generic root=/dev/sda1 ro quiet splash vt.handoff=1
+[    0.000000] KERNEL supported cpus:
+[    0.000000]   Intel GenuineIntel
+[    0.000000]   AMD AuthenticAMD
+[    0.000000]   Centaur CentaurHauls
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x001: 'x87 floating point registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x002: 'SSE registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x004: 'AVX registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x008: 'MPX bounds registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x010: 'MPX CSR'
+[    0.000000] x86/fpu: xstate_offset[2]:  576, xstate_sizes[2]:  256
+[    0.000000] x86/fpu: xstate_offset[3]:  832, xstate_sizes[3]:   64
+[    0.000000] x86/fpu: xstate_offset[4]:  896, xstate_sizes[4]:   64
+[    0.000000] x86/fpu: Enabled xstate features 0x1f, context size is 960 bytes, using 'compacted' format.
+[    0.000000] e820: BIOS-provided physical RAM map:
+[    0.000000] BIOS-e820: [mem 0x0000000000000000 (  0B)-0x000000000009c3ff (624.999023K)] usable
+[    0.000000] BIOS-e820: [mem 0x000000000009c400 (625.0K)-0x000000000009ffff (639.999023K)] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000000e0000 (896.0K)-0x00000000000fffff (1023.999023K)] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000000100000 (1.0M)-0x00000000985fafff (2.38084G)] usable
+[    0.000000] BIOS-e820: [mem 0x00000000985fb000 (2.38084G)-0x0000000098631fff (2.38105G)] ACPI data
+[    0.000000] BIOS-e820: [mem 0x0000000098632000 (2.38105G)-0x00000000989e1fff (2.384651G)] usable
+[    0.000000] BIOS-e820: [mem 0x00000000989e2000 (2.384651G)-0x00000000989e2fff (2.384655G)] ACPI NVS
+[    0.000000] BIOS-e820: [mem 0x00000000989e3000 (2.384655G)-0x00000000989e3fff (2.384659G)] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000989e4000 (2.384659G)-0x00000000a55f5fff (2.583946G)] usable
+[    0.000000] BIOS-e820: [mem 0x00000000a55f6000 (2.583946G)-0x00000000a6e7efff (2.607906G)] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000a6e7f000 (2.607906G)-0x00000000a6e92fff (2.607983G)] ACPI data
+[    0.000000] BIOS-e820: [mem 0x00000000a6e93000 (2.607983G)-0x00000000a6f8efff (2.608944G)] usable
+[    0.000000] BIOS-e820: [mem 0x00000000a6f8f000 (2.608944G)-0x00000000a72b6fff (2.612026G)] ACPI NVS
+[    0.000000] BIOS-e820: [mem 0x00000000a72b7000 (2.612026G)-0x00000000a7ba1fff (2.620735G)] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000a7ba2000 (2.620735G)-0x00000000a7bfffff (2.621094G)] usable
+[    0.000000] BIOS-e820: [mem 0x00000000a7c00000 (2.621094G)-0x00000000a7ffffff (2.625G)] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000f8000000 (3.875G)-0x00000000fbffffff (3.9375G)] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000fe000000 (3.96875G)-0x00000000fe010fff (3.968815G)] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000fec00000 (3.980469G)-0x00000000fec00fff (3.980473G)] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000fed00000 (3.981445G)-0x00000000fed00fff (3.981449G)] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000fee00000 (3.982422G)-0x00000000fee00fff (3.982426G)] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000ff000000 (3.984375G)-0x00000000ffffffff (4.0G)] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000100000000 (4.0G)-0x0000000456ffffff (17.359375G)] usable
+[    0.000000] NX (Execute Disable) protection: active
+[    0.000000] random: fast init done
+[    0.000000] SMBIOS 3.0.0 present.
+[    0.000000] DMI: System manufacturer System Product Name/PRIME B250M-PLUS, BIOS 0809 07/10/2017
+[    0.000000] e820: update [mem 0x00000000-0x00000fff] usable ==> reserved
+[    0.000000] e820: remove [mem 0x000a0000-0x000fffff] usable
+[    0.000000] e820: last_pfn = 0x457000 max_arch_pfn = 0x400000000
+[    0.000000] MTRR default type: write-back
+[    0.000000] MTRR fixed ranges enabled:
+[    0.000000]   00000-9FFFF write-back
+[    0.000000]   A0000-BFFFF uncachable
+[    0.000000]   C0000-FFFFF write-protect
+[    0.000000] MTRR variable ranges enabled:
+[    0.000000]   0 base 00C0000000 mask 7FC0000000 uncachable
+[    0.000000]   1 base 00B0000000 mask 7FF0000000 uncachable
+[    0.000000]   2 base 00A8000000 mask 7FF8000000 uncachable
+[    0.000000]   3 disabled
+[    0.000000]   4 disabled
+[    0.000000]   5 disabled
+[    0.000000]   6 disabled
+[    0.000000]   7 disabled
+[    0.000000]   8 disabled
+[    0.000000]   9 disabled
+[    0.000000] x86/PAT: Configuration [0-7]: WB  WC  UC- UC  WB  WP  UC- WT  
+[    0.000000] e820: last_pfn = 0xa7c00 max_arch_pfn = 0x400000000
+[    0.000000] found SMP MP-table at [mem 0x000fcc70-0x000fcc7f] mapped at [        (ptrval)]
+[    0.000000] Scanning 1 areas for low memory corruption
+[    0.000000] Base memory trampoline at [        (ptrval)] 96000 size 24576
+[    0.000000] Using GB pages for direct mapping
+[    0.000000] BRK [0x30413e000, 0x30413efff] PGTABLE
+[    0.000000] BRK [0x30413f000, 0x30413ffff] PGTABLE
+[    0.000000] BRK [0x304140000, 0x304140fff] PGTABLE
+[    0.000000] BRK [0x304141000, 0x304141fff] PGTABLE
+[    0.000000] BRK [0x304142000, 0x304142fff] PGTABLE
+[    0.000000] BRK [0x304143000, 0x304143fff] PGTABLE
+[    0.000000] BRK [0x304144000, 0x304144fff] PGTABLE
+[    0.000000] BRK [0x304145000, 0x304145fff] PGTABLE
+[    0.000000] BRK [0x304146000, 0x304146fff] PGTABLE
+[    0.000000] BRK [0x304147000, 0x304147fff] PGTABLE
+[    0.000000] BRK [0x304148000, 0x304148fff] PGTABLE
+[    0.000000] BRK [0x304149000, 0x304149fff] PGTABLE
+[    0.000000] RAMDISK: [mem 0x31b3e000-0x34d96fff]
+[    0.000000] ACPI: Early table checksum verification disabled
+[    0.000000] ACPI: RSDP 0x00000000000F05B0 000024 (v02 ALASKA)
+[    0.000000] ACPI: XSDT 0x00000000985FB0B0 0000D4 (v01 ALASKA A M I    01072009 AMI  00010013)
+[    0.000000] ACPI: FACP 0x0000000098624F78 000114 (v06 ALASKA A M I    01072009 AMI  00010013)
+[    0.000000] ACPI: DSDT 0x00000000985FB218 029D5A (v02 ALASKA A M I    01072009 INTL 20160422)
+[    0.000000] ACPI: FACS 0x00000000A72B6F00 000040
+[    0.000000] ACPI: APIC 0x0000000098625090 0000BC (v03 ALASKA A M I    01072009 AMI  00010013)
+[    0.000000] ACPI: FPDT 0x0000000098625150 000044 (v01 ALASKA A M I    01072009 AMI  00010013)
+[    0.000000] ACPI: FIDT 0x0000000098625198 00009C (v01 ALASKA A M I    01072009 AMI  00010013)
+[    0.000000] ACPI: WSMT 0x0000000098630F40 000028 (v01 ALASKA A M I    01072009 AMI  00010013)
+[    0.000000] ACPI: MCFG 0x0000000098625290 00003C (v01 ALASKA A M I    01072009 MSFT 00000097)
+[    0.000000] ACPI: SSDT 0x00000000986252D0 0003A3 (v01 SataRe SataTabl 00001000 INTL 20160422)
+[    0.000000] ACPI: SSDT 0x0000000098625678 003063 (v02 SaSsdt SaSsdt   00003000 INTL 20160422)
+[    0.000000] ACPI: SSDT 0x00000000986286E0 0025A5 (v02 PegSsd PegSsdt  00001000 INTL 20160422)
+[    0.000000] ACPI: HPET 0x000000009862AC88 000038 (v01 INTEL  KBL      00000001 MSFT 0000005F)
+[    0.000000] ACPI: SSDT 0x000000009862ACC0 000024 (v02 INTEL  OEM_RTD3 00001000 INTL 20160422)
+[    0.000000] ACPI: SSDT 0x000000009862ACE8 000DE5 (v02 INTEL  Ther_Rvp 00001000 INTL 20160422)
+[    0.000000] ACPI: SSDT 0x000000009862BAD0 000B1D (v02 INTEL  xh_rvp08 00000000 INTL 20160422)
+[    0.000000] ACPI: UEFI 0x000000009862C5F0 000042 (v01 ALASKA A M I    00000002      01000013)
+[    0.000000] ACPI: SSDT 0x000000009862C638 000EDE (v02 CpuRef CpuSsdt  00003000 INTL 20160422)
+[    0.000000] ACPI: LPIT 0x000000009862D518 000094 (v01 INTEL  KBL      00000000 MSFT 0000005F)
+[    0.000000] ACPI: SSDT 0x000000009862D5B0 000141 (v02 INTEL  HdaDsp   00000000 INTL 20160422)
+[    0.000000] ACPI: SSDT 0x000000009862D6F8 00029F (v02 INTEL  sensrhub 00000000 INTL 20160422)
+[    0.000000] ACPI: SSDT 0x000000009862D998 003002 (v02 INTEL  PtidDevc 00001000 INTL 20160422)
+[    0.000000] ACPI: SSDT 0x00000000986309A0 00050D (v02 INTEL  TbtTypeC 00000000 INTL 20160422)
+[    0.000000] ACPI: DBGP 0x0000000098630EB0 000034 (v01 INTEL           00000002 MSFT 0000005F)
+[    0.000000] ACPI: DBG2 0x0000000098630EE8 000054 (v00 INTEL           00000002 MSFT 0000005F)
+[    0.000000] ACPI: Local APIC address 0xfee00000
+[    0.000000] No NUMA configuration found
+[    0.000000] Faking a node at [mem 0x0000000000000000 (  0B)-0x0000000456ffffff (17.359375G)]
+[    0.000000] NODE_DATA(0) allocated [mem 0x456fd5000-0x456ffffff]
+[    0.000000] Zone ranges:
+[    0.000000]   DMA      [mem 0x0000000000001000 (4.0K)-0x0000000000ffffff (15.999999M)]
+[    0.000000]   DMA32    [mem 0x0000000001000000 (16.0M)-0x00000000ffffffff (4.0G)]
+[    0.000000]   Normal   [mem 0x0000000100000000 (4.0G)-0x0000000456ffffff (17.359375G)]
+[    0.000000]   Device   empty
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000000001000 (4.0K)-0x000000000009bfff (623.999023K)]
+[    0.000000]   node   0: [mem 0x0000000000100000 (1.0M)-0x00000000985fafff (2.38084G)]
+[    0.000000]   node   0: [mem 0x0000000098632000 (2.38105G)-0x00000000989e1fff (2.384651G)]
+[    0.000000]   node   0: [mem 0x00000000989e4000 (2.384659G)-0x00000000a55f5fff (2.583946G)]
+[    0.000000]   node   0: [mem 0x00000000a6e93000 (2.607983G)-0x00000000a6f8efff (2.608944G)]
+[    0.000000]   node   0: [mem 0x00000000a7ba2000 (2.620735G)-0x00000000a7bfffff (2.621094G)]
+[    0.000000]   node   0: [mem 0x0000000100000000 (4.0G)-0x0000000456ffffff (17.359375G)]
+[    0.000000] Initmem setup node 0 [mem 0x0000000000001000 (4.0K)-0x0000000456ffffff (17.359375G)]
+[    0.000000] On node 0 totalpages: 4179634
+[    0.000000]   DMA zone: 64 pages used for memmap
+[    0.000000]   DMA zone: 21 pages reserved
+[    0.000000]   DMA zone: 3995 pages, LIFO batch:0
+[    0.000000]   DMA32 zone: 10525 pages used for memmap
+[    0.000000]   DMA32 zone: 673559 pages, LIFO batch:31
+[    0.000000]   Normal zone: 54720 pages used for memmap
+[    0.000000]   Normal zone: 3502080 pages, LIFO batch:31
+[    0.000000] Reserved but unavailable: 101 pages
+[    0.000000] ACPI: PM-Timer IO Port: 0x1808
+[    0.000000] ACPI: Local APIC address 0xfee00000
+[    0.000000] ACPI: LAPIC_NMI (acpi_id[0x01] high edge lint[0x1])
+[    0.000000] ACPI: LAPIC_NMI (acpi_id[0x02] high edge lint[0x1])
+[    0.000000] ACPI: LAPIC_NMI (acpi_id[0x03] high edge lint[0x1])
+[    0.000000] ACPI: LAPIC_NMI (acpi_id[0x04] high edge lint[0x1])
+[    0.000000] ACPI: LAPIC_NMI (acpi_id[0x05] high edge lint[0x1])
+[    0.000000] ACPI: LAPIC_NMI (acpi_id[0x06] high edge lint[0x1])
+[    0.000000] ACPI: LAPIC_NMI (acpi_id[0x07] high edge lint[0x1])
+[    0.000000] ACPI: LAPIC_NMI (acpi_id[0x08] high edge lint[0x1])
+[    0.000000] IOAPIC[0]: apic_id 2, version 32, address 0xfec00000, GSI 0-119
+[    0.000000] ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)
+[    0.000000] ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 high level)
+[    0.000000] ACPI: IRQ0 used by override.
+[    0.000000] ACPI: IRQ9 used by override.
+[    0.000000] Using ACPI (MADT) for SMP configuration information
+[    0.000000] ACPI: HPET id: 0x8086a201 base: 0xfed00000
+[    0.000000] smpboot: Allowing 8 CPUs, 0 hotplug CPUs
+[    0.000000] PM: Registered nosave memory: [mem 0x00000000-0x00000fff]
+[    0.000000] PM: Registered nosave memory: [mem 0x0009c000-0x0009cfff]
+[    0.000000] PM: Registered nosave memory: [mem 0x0009d000-0x0009ffff]
+[    0.000000] PM: Registered nosave memory: [mem 0x000a0000-0x000dffff]
+[    0.000000] PM: Registered nosave memory: [mem 0x000e0000-0x000fffff]
+[    0.000000] PM: Registered nosave memory: [mem 0x985fb000-0x98631fff]
+[    0.000000] PM: Registered nosave memory: [mem 0x989e2000-0x989e2fff]
+[    0.000000] PM: Registered nosave memory: [mem 0x989e3000-0x989e3fff]
+[    0.000000] PM: Registered nosave memory: [mem 0xa55f6000-0xa6e7efff]
+[    0.000000] PM: Registered nosave memory: [mem 0xa6e7f000-0xa6e92fff]
+[    0.000000] PM: Registered nosave memory: [mem 0xa6f8f000-0xa72b6fff]
+[    0.000000] PM: Registered nosave memory: [mem 0xa72b7000-0xa7ba1fff]
+[    0.000000] PM: Registered nosave memory: [mem 0xa7c00000-0xa7ffffff]
+[    0.000000] PM: Registered nosave memory: [mem 0xa8000000-0xf7ffffff]
+[    0.000000] PM: Registered nosave memory: [mem 0xf8000000-0xfbffffff]
+[    0.000000] PM: Registered nosave memory: [mem 0xfc000000-0xfdffffff]
+[    0.000000] PM: Registered nosave memory: [mem 0xfe000000-0xfe010fff]
+[    0.000000] PM: Registered nosave memory: [mem 0xfe011000-0xfebfffff]
+[    0.000000] PM: Registered nosave memory: [mem 0xfec00000-0xfec00fff]
+[    0.000000] PM: Registered nosave memory: [mem 0xfec01000-0xfecfffff]
+[    0.000000] PM: Registered nosave memory: [mem 0xfed00000-0xfed00fff]
+[    0.000000] PM: Registered nosave memory: [mem 0xfed01000-0xfedfffff]
+[    0.000000] PM: Registered nosave memory: [mem 0xfee00000-0xfee00fff]
+[    0.000000] PM: Registered nosave memory: [mem 0xfee01000-0xfeffffff]
+[    0.000000] PM: Registered nosave memory: [mem 0xff000000-0xffffffff]
+[    0.000000] e820: [mem 0xa8000000-0xf7ffffff] available for PCI devices
+[    0.000000] Booting paravirtualized kernel on bare hardware
+[    0.000000] clocksource: refined-jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645519600211568 ns
+[    0.000000] setup_percpu: NR_CPUS:8192 nr_cpumask_bits:8 nr_cpu_ids:8 nr_node_ids:1
+[    0.000000] percpu: Embedded 46 pages/cpu @        (ptrval) s151552 r8192 d28672 u262144
+[    0.000000] pcpu-alloc: s151552 r8192 d28672 u262144 alloc=1*2097152
+[    0.000000] pcpu-alloc: [0] 0 1 2 3 4 5 6 7 
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 4114304
+[    0.000000] Policy zone: Normal
+[    0.000000] Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.15.0-20-generic root=/dev/sda1 ro quiet splash vt.handoff=1
+[    0.000000] Calgary: detecting Calgary via BIOS EBDA area
+[    0.000000] Calgary: Unable to locate Rio Grande table in EBDA - bailing!
+[    0.000000] Memory: 16309148K/16718536K available (12300K kernel code, 2470K rwdata, 4240K rodata, 2404K init, 2416K bss, 409388K reserved, 0K cma-reserved)
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=8, Nodes=1
+[    0.000000] Kernel/User page tables isolation: enabled
+[    0.000000] ftrace: allocating 39065 entries in 153 pages
+[    0.000000] Hierarchical RCU implementation.
+[    0.000000] 	RCU restricting CPUs from NR_CPUS=8192 to nr_cpu_ids=8.
+[    0.000000] 	Tasks RCU enabled.
+[    0.000000] RCU: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=8
+[    0.000000] NR_IRQS: 524544, nr_irqs: 2048, preallocated irqs: 16
+[    0.000000] vt handoff: transparent VT on vt#1
+[    0.000000] Console: colour dummy device 80x25
+[    0.000000] console [tty0] enabled
+[    0.000000] ACPI: Core revision 20170831
+[    0.000000] ACPI: 12 ACPI AML tables successfully acquired and loaded
+[    0.000000] clocksource: hpet: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 79635855245 ns
+[    0.000000] hpet clockevent registered
+[    0.004000] APIC: Switch to symmetric I/O mode setup
+[    0.004000] x2apic: IRQ remapping doesn't support X2APIC mode
+[    0.008000] ..TIMER: vector=0x30 apic1=0 pin1=2 apic2=-1 pin2=-1
+[    0.028000] tsc: Detected 3600.000 MHz processor
+[    0.028000] Calibrating delay loop (skipped), value calculated using timer frequency.. 7200.00 BogoMIPS (lpj=14400000)
+[    0.028000] pid_max: default: 32768 minimum: 301
+[    0.028000] Security Framework initialized
+[    0.028000] Yama: becoming mindful.
+[    0.028000] AppArmor: AppArmor initialized
+[    0.028000] Dentry cache hash table entries: 2097152 (order: 12, 16777216 bytes)
+[    0.028000] Inode-cache hash table entries: 1048576 (order: 11, 8388608 bytes)
+[    0.028000] Mount-cache hash table entries: 32768 (order: 6, 262144 bytes)
+[    0.028000] Mountpoint-cache hash table entries: 32768 (order: 6, 262144 bytes)
+[    0.028000] CPU: Physical Processor ID: 0
+[    0.028000] CPU: Processor Core ID: 0
+[    0.028000] mce: CPU supports 10 MCE banks
+[    0.028000] CPU0: Thermal monitoring enabled (TM1)
+[    0.028000] process: using mwait in idle threads
+[    0.028000] Last level iTLB entries: 4KB 64, 2MB 8, 4MB 8
+[    0.028000] Last level dTLB entries: 4KB 64, 2MB 0, 4MB 0, 1GB 4
+[    0.028000] Spectre V2 : Mitigation: Full generic retpoline
+[    0.028000] Spectre V2 : Spectre v2 mitigation: Filling RSB on context switch
+[    0.028000] Freeing SMP alternatives memory: 36K
+[    0.028000] TSC deadline timer enabled
+[    0.028000] smpboot: CPU0: Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz (family: 0x6, model: 0x9e, stepping: 0x9)
+[    0.028000] Performance Events: PEBS fmt3+, Skylake events, 32-deep LBR, full-width counters, Intel PMU driver.
+[    0.028000] ... version:                4
+[    0.028000] ... bit width:              48
+[    0.028000] ... generic registers:      4
+[    0.028000] ... value mask:             0000ffffffffffff
+[    0.028000] ... max period:             00007fffffffffff
+[    0.028000] ... fixed-purpose events:   3
+[    0.028000] ... event mask:             000000070000000f
+[    0.028000] Hierarchical SRCU implementation.
+[    0.028000] smp: Bringing up secondary CPUs ...
+[    0.028000] x86: Booting SMP configuration:
+[    0.028000] .... node  #0, CPUs:      #1
+[    0.028035] NMI watchdog: Enabled. Permanently consumes one hw-PMU counter.
+[    0.028035]  #2 #3 #4 #5 #6 #7
+[    0.032006] smp: Brought up 1 node, 8 CPUs
+[    0.032006] smpboot: Max logical packages: 1
+[    0.032006] smpboot: Total of 8 processors activated (57600.00 BogoMIPS)
+[    0.036320] devtmpfs: initialized
+[    0.036320] x86/mm: Memory block size: 128MB
+[    0.036765] evm: security.selinux
+[    0.036766] evm: security.SMACK64
+[    0.036766] evm: security.SMACK64EXEC
+[    0.036766] evm: security.SMACK64TRANSMUTE
+[    0.036767] evm: security.SMACK64MMAP
+[    0.036767] evm: security.apparmor
+[    0.036767] evm: security.ima
+[    0.036768] evm: security.capability
+[    0.036777] PM: Registering ACPI NVS region [mem 0x989e2000-0x989e2fff] (4096 bytes)
+[    0.036777] PM: Registering ACPI NVS region [mem 0xa6f8f000-0xa72b6fff] (3309568 bytes)
+[    0.036777] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+[    0.036777] futex hash table entries: 2048 (order: 5, 131072 bytes)
+[    0.036777] pinctrl core: initialized pinctrl subsystem
+[    0.036777] RTC time:  2:45:51, date: 09/27/18
+[    0.036777] NET: Registered protocol family 16
+[    0.036777] audit: initializing netlink subsys (disabled)
+[    0.036777] audit: type=2000 audit(1538016351.036:1): state=initialized audit_enabled=0 res=1
+[    0.036777] cpuidle: using governor ladder
+[    0.036777] cpuidle: using governor menu
+[    0.036777] ACPI FADT declares the system doesn't support PCIe ASPM, so disable it
+[    0.036777] ACPI: bus type PCI registered
+[    0.036777] acpiphp: ACPI Hot Plug PCI Controller Driver version: 0.5
+[    0.036777] PCI: MMCONFIG for domain 0000 [bus 00-3f] at [mem 0xf8000000-0xfbffffff] (base 0xf8000000)
+[    0.036777] PCI: MMCONFIG at [mem 0xf8000000-0xfbffffff] reserved in E820
+[    0.036777] PCI: Using configuration type 1 for base access
+[    0.036860] HugeTLB registered 1.00 GiB page size, pre-allocated 0 pages
+[    0.036860] HugeTLB registered 2.00 MiB page size, pre-allocated 0 pages
+[    0.036861] ACPI: Added _OSI(Module Device)
+[    0.036861] ACPI: Added _OSI(Processor Device)
+[    0.036861] ACPI: Added _OSI(3.0 _SCP Extensions)
+[    0.036861] ACPI: Added _OSI(Processor Aggregator Device)
+[    0.040286] ACPI: Executed 38 blocks of module-level executable AML code
+[    0.055025] ACPI: Dynamic OEM Table Load:
+[    0.055025] ACPI: SSDT 0xFFFFA0A9440EA800 000759 (v02 PmRef  Cpu0Ist  00003000 INTL 20160422)
+[    0.055025] ACPI: Executed 1 blocks of module-level executable AML code
+[    0.055025] ACPI: \_PR_.CPU0: _OSC native thermal LVT Acked
+[    0.056760] ACPI: Dynamic OEM Table Load:
+[    0.056765] ACPI: SSDT 0xFFFFA0A943CF2000 0003FF (v02 PmRef  Cpu0Cst  00003001 INTL 20160422)
+[    0.056954] ACPI: Executed 1 blocks of module-level executable AML code
+[    0.057026] ACPI: Dynamic OEM Table Load:
+[    0.057026] ACPI: SSDT 0xFFFFA0A9441C3800 00065C (v02 PmRef  ApIst    00003000 INTL 20160422)
+[    0.057026] ACPI: Executed 1 blocks of module-level executable AML code
+[    0.057026] ACPI: Dynamic OEM Table Load:
+[    0.057026] ACPI: SSDT 0xFFFFA0A943E06A00 00018A (v02 PmRef  ApCst    00003000 INTL 20160422)
+[    0.057127] ACPI: Executed 1 blocks of module-level executable AML code
+[    0.061537] ACPI: Interpreter enabled
+[    0.061567] ACPI: (supports S0 S3 S4 S5)
+[    0.061568] ACPI: Using IOAPIC for interrupt routing
+[    0.061597] PCI: Using host bridge windows from ACPI; if necessary, use "pci=nocrs" and report a bug
+[    0.062473] ACPI: Enabled 6 GPEs in block 00 to 7F
+[    0.064950] ACPI: Power Resource [PG00] (on)
+[    0.065256] ACPI: Power Resource [PG01] (on)
+[    0.065558] ACPI: Power Resource [PG02] (on)
+[    0.065558] ACPI: Power Resource [WRST] (on)
+[    0.065558] ACPI: Power Resource [WRST] (on)
+[    0.065558] ACPI: Power Resource [WRST] (on)
+[    0.065558] ACPI: Power Resource [WRST] (on)
+[    0.065558] ACPI: Power Resource [WRST] (on)
+[    0.065840] ACPI: Power Resource [WRST] (on)
+[    0.066196] ACPI: Power Resource [WRST] (on)
+[    0.066550] ACPI: Power Resource [WRST] (on)
+[    0.066905] ACPI: Power Resource [WRST] (on)
+[    0.067260] ACPI: Power Resource [WRST] (on)
+[    0.067617] ACPI: Power Resource [WRST] (on)
+[    0.067971] ACPI: Power Resource [WRST] (on)
+[    0.068330] ACPI: Power Resource [WRST] (on)
+[    0.068684] ACPI: Power Resource [WRST] (on)
+[    0.069038] ACPI: Power Resource [WRST] (on)
+[    0.069394] ACPI: Power Resource [WRST] (on)
+[    0.069747] ACPI: Power Resource [WRST] (on)
+[    0.071158] ACPI: Power Resource [WRST] (on)
+[    0.071516] ACPI: Power Resource [WRST] (on)
+[    0.071877] ACPI: Power Resource [WRST] (on)
+[    0.085461] ACPI: Power Resource [FN00] (off)
+[    0.085542] ACPI: Power Resource [FN01] (off)
+[    0.085621] ACPI: Power Resource [FN02] (off)
+[    0.085699] ACPI: Power Resource [FN03] (off)
+[    0.085775] ACPI: Power Resource [FN04] (off)
+[    0.087210] ACPI: PCI Root Bridge [PCI0] (domain 0000 [bus 00-3e])
+[    0.087215] acpi PNP0A08:00: _OSC: OS supports [ExtendedConfig ASPM ClockPM Segments MSI]
+[    0.087397] acpi PNP0A08:00: _OSC: platform does not support [PCIeHotplug PME]
+[    0.087570] acpi PNP0A08:00: _OSC: OS now controls [AER PCIeCapability]
+[    0.087571] acpi PNP0A08:00: FADT indicates ASPM is unsupported, using BIOS configuration
+[    0.088522] PCI host bridge to bus 0000:00
+[    0.088524] pci_bus 0000:00: root bus resource [io  0x0000-0x0cf7 window]
+[    0.088525] pci_bus 0000:00: root bus resource [io  0x0d00-0xffff window]
+[    0.088526] pci_bus 0000:00: root bus resource [mem 0x000a0000-0x000bffff window]
+[    0.088527] pci_bus 0000:00: root bus resource [mem 0xa8000000-0xf7ffffff window]
+[    0.088528] pci_bus 0000:00: root bus resource [mem 0xfd000000-0xfe7fffff window]
+[    0.088529] pci_bus 0000:00: root bus resource [bus 00-3e]
+[    0.088535] pci 0000:00:00.0: [8086:591f] type 00 class 0x060000
+[    0.088824] pci 0000:00:01.0: [8086:1901] type 01 class 0x060400
+[    0.088856] pci 0000:00:01.0: PME# supported from D0 D3hot D3cold
+[    0.089084] pci 0000:00:14.0: [8086:a2af] type 00 class 0x0c0330
+[    0.089102] pci 0000:00:14.0: reg 0x10: [mem 0xf7130000-0xf713ffff 64bit]
+[    0.089159] pci 0000:00:14.0: PME# supported from D3hot D3cold
+[    0.089358] pci 0000:00:16.0: [8086:a2ba] type 00 class 0x078000
+[    0.089380] pci 0000:00:16.0: reg 0x10: [mem 0xf714d000-0xf714dfff 64bit]
+[    0.089443] pci 0000:00:16.0: PME# supported from D3hot
+[    0.089614] pci 0000:00:17.0: [8086:a282] type 00 class 0x010601
+[    0.089628] pci 0000:00:17.0: reg 0x10: [mem 0xf7148000-0xf7149fff]
+[    0.089633] pci 0000:00:17.0: reg 0x14: [mem 0xf714c000-0xf714c0ff]
+[    0.089639] pci 0000:00:17.0: reg 0x18: [io  0xf050-0xf057]
+[    0.089645] pci 0000:00:17.0: reg 0x1c: [io  0xf040-0xf043]
+[    0.089650] pci 0000:00:17.0: reg 0x20: [io  0xf020-0xf03f]
+[    0.089656] pci 0000:00:17.0: reg 0x24: [mem 0xf714b000-0xf714b7ff]
+[    0.089689] pci 0000:00:17.0: PME# supported from D3hot
+[    0.089819] pci 0000:00:1c.0: [8086:a294] type 01 class 0x060400
+[    0.089872] pci 0000:00:1c.0: PME# supported from D0 D3hot D3cold
+[    0.090045] pci 0000:00:1d.0: [8086:a298] type 01 class 0x060400
+[    0.090095] pci 0000:00:1d.0: PME# supported from D0 D3hot D3cold
+[    0.090242] pci 0000:00:1d.2: [8086:a29a] type 01 class 0x060400
+[    0.090294] pci 0000:00:1d.2: PME# supported from D0 D3hot D3cold
+[    0.090463] pci 0000:00:1f.0: [8086:a2c8] type 00 class 0x060100
+[    0.090676] pci 0000:00:1f.2: [8086:a2a1] type 00 class 0x058000
+[    0.090690] pci 0000:00:1f.2: reg 0x10: [mem 0xf7144000-0xf7147fff]
+[    0.090852] pci 0000:00:1f.3: [8086:a2f0] type 00 class 0x040300
+[    0.090876] pci 0000:00:1f.3: reg 0x10: [mem 0xf7140000-0xf7143fff 64bit]
+[    0.090904] pci 0000:00:1f.3: reg 0x20: [mem 0xf7120000-0xf712ffff 64bit]
+[    0.090947] pci 0000:00:1f.3: PME# supported from D3hot D3cold
+[    0.091156] pci 0000:00:1f.4: [8086:a2a3] type 00 class 0x0c0500
+[    0.091215] pci 0000:00:1f.4: reg 0x10: [mem 0xf714a000-0xf714a0ff 64bit]
+[    0.091284] pci 0000:00:1f.4: reg 0x20: [io  0xf000-0xf01f]
+[    0.091479] pci 0000:00:1f.6: [8086:15b8] type 00 class 0x020000
+[    0.091504] pci 0000:00:1f.6: reg 0x10: [mem 0xf7100000-0xf711ffff]
+[    0.091603] pci 0000:00:1f.6: PME# supported from D0 D3hot D3cold
+[    0.091752] pci 0000:01:00.0: [10de:1b06] type 00 class 0x030000
+[    0.091769] pci 0000:01:00.0: reg 0x10: [mem 0xf6000000-0xf6ffffff]
+[    0.091778] pci 0000:01:00.0: reg 0x14: [mem 0xe0000000-0xefffffff 64bit pref]
+[    0.091787] pci 0000:01:00.0: reg 0x1c: [mem 0xf0000000-0xf1ffffff 64bit pref]
+[    0.091793] pci 0000:01:00.0: reg 0x24: [io  0xe000-0xe07f]
+[    0.091799] pci 0000:01:00.0: reg 0x30: [mem 0xf7000000-0xf707ffff pref]
+[    0.091888] pci 0000:01:00.1: [10de:10ef] type 00 class 0x040300
+[    0.091900] pci 0000:01:00.1: reg 0x10: [mem 0xf7080000-0xf7083fff]
+[    0.108042] pci 0000:00:01.0: PCI bridge to [bus 01]
+[    0.108049] pci 0000:00:01.0:   bridge window [io  0xe000-0xefff]
+[    0.108055] pci 0000:00:01.0:   bridge window [mem 0xf6000000-0xf70fffff]
+[    0.108074] pci 0000:00:01.0:   bridge window [mem 0xe0000000-0xf1ffffff 64bit pref]
+[    0.108127] pci 0000:02:00.0: [10de:13bb] type 00 class 0x030000
+[    0.108150] pci 0000:02:00.0: reg 0x10: [mem 0xf4000000-0xf4ffffff]
+[    0.108161] pci 0000:02:00.0: reg 0x14: [mem 0xc0000000-0xcfffffff 64bit pref]
+[    0.108171] pci 0000:02:00.0: reg 0x1c: [mem 0xd0000000-0xd1ffffff 64bit pref]
+[    0.108178] pci 0000:02:00.0: reg 0x24: [io  0xd000-0xd07f]
+[    0.108184] pci 0000:02:00.0: reg 0x30: [mem 0xf5000000-0xf507ffff pref]
+[    0.108355] pci 0000:02:00.1: [10de:0fbc] type 00 class 0x040300
+[    0.108374] pci 0000:02:00.1: reg 0x10: [mem 0xf5080000-0xf5083fff]
+[    0.108514] pci 0000:00:1c.0: PCI bridge to [bus 02]
+[    0.108516] pci 0000:00:1c.0:   bridge window [io  0xd000-0xdfff]
+[    0.108518] pci 0000:00:1c.0:   bridge window [mem 0xf4000000-0xf50fffff]
+[    0.108522] pci 0000:00:1c.0:   bridge window [mem 0xc0000000-0xd1ffffff 64bit pref]
+[    0.108563] acpiphp: Slot [1] registered
+[    0.108566] pci 0000:00:1d.0: PCI bridge to [bus 03]
+[    0.108619] pci 0000:04:00.0: [10ec:8168] type 00 class 0x020000
+[    0.108643] pci 0000:04:00.0: reg 0x10: [io  0xc000-0xc0ff]
+[    0.108665] pci 0000:04:00.0: reg 0x18: [mem 0xf2104000-0xf2104fff 64bit pref]
+[    0.108680] pci 0000:04:00.0: reg 0x20: [mem 0xf2100000-0xf2103fff 64bit pref]
+[    0.108760] pci 0000:04:00.0: supports D1 D2
+[    0.108761] pci 0000:04:00.0: PME# supported from D0 D1 D2 D3hot D3cold
+[    0.108863] pci 0000:00:1d.2: PCI bridge to [bus 04]
+[    0.108865] pci 0000:00:1d.2:   bridge window [io  0xc000-0xcfff]
+[    0.108869] pci 0000:00:1d.2:   bridge window [mem 0xf2100000-0xf21fffff 64bit pref]
+[    0.110746] ACPI: PCI Interrupt Link [LNKA] (IRQs 3 4 5 6 10 *11 12 14 15)
+[    0.110797] ACPI: PCI Interrupt Link [LNKB] (IRQs 3 4 5 6 *10 11 12 14 15)
+[    0.110847] ACPI: PCI Interrupt Link [LNKC] (IRQs 3 4 5 6 10 *11 12 14 15)
+[    0.110896] ACPI: PCI Interrupt Link [LNKD] (IRQs 3 4 5 6 10 *11 12 14 15)
+[    0.110945] ACPI: PCI Interrupt Link [LNKE] (IRQs 3 4 5 6 10 *11 12 14 15)
+[    0.110994] ACPI: PCI Interrupt Link [LNKF] (IRQs 3 4 5 6 10 *11 12 14 15)
+[    0.111043] ACPI: PCI Interrupt Link [LNKG] (IRQs 3 4 5 6 10 *11 12 14 15)
+[    0.111093] ACPI: PCI Interrupt Link [LNKH] (IRQs 3 4 5 6 10 *11 12 14 15)
+[    0.112006] SCSI subsystem initialized
+[    0.112010] libata version 3.00 loaded.
+[    0.112019] pci 0000:01:00.0: vgaarb: setting as boot VGA device
+[    0.112019] pci 0000:01:00.0: vgaarb: VGA device added: decodes=io+mem,owns=io+mem,locks=none
+[    0.112019] pci 0000:02:00.0: vgaarb: VGA device added: decodes=io+mem,owns=none,locks=none
+[    0.112019] pci 0000:02:00.0: vgaarb: bridge control possible
+[    0.112019] pci 0000:01:00.0: vgaarb: bridge control possible
+[    0.112019] vgaarb: loaded
+[    0.112028] ACPI: bus type USB registered
+[    0.112036] usbcore: registered new interface driver usbfs
+[    0.112040] usbcore: registered new interface driver hub
+[    0.112053] usbcore: registered new device driver usb
+[    0.112075] EDAC MC: Ver: 3.0.0
+[    0.112075] PCI: Using ACPI for IRQ routing
+[    0.118469] PCI: pci_cache_line_size set to 64 bytes
+[    0.118513] e820: reserve RAM buffer [mem 0x0009c400-0x0009ffff]
+[    0.118514] e820: reserve RAM buffer [mem 0x985fb000-0x9bffffff]
+[    0.118515] e820: reserve RAM buffer [mem 0x989e2000-0x9bffffff]
+[    0.118515] e820: reserve RAM buffer [mem 0xa55f6000-0xa7ffffff]
+[    0.118516] e820: reserve RAM buffer [mem 0xa6f8f000-0xa7ffffff]
+[    0.118517] e820: reserve RAM buffer [mem 0xa7c00000-0xa7ffffff]
+[    0.118517] e820: reserve RAM buffer [mem 0x457000000-0x457ffffff]
+[    0.118570] NetLabel: Initializing
+[    0.118570] NetLabel:  domain hash size = 128
+[    0.118571] NetLabel:  protocols = UNLABELED CIPSOv4 CALIPSO
+[    0.118579] NetLabel:  unlabeled traffic allowed by default
+[    0.120058] hpet0: at MMIO 0xfed00000, IRQs 2, 8, 0, 0, 0, 0, 0, 0
+[    0.120062] hpet0: 8 comparators, 64-bit 24.000000 MHz counter
+[    0.124014] clocksource: Switched to clocksource hpet
+[    0.130470] VFS: Disk quotas dquot_6.6.0
+[    0.130479] VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+[    0.130538] AppArmor: AppArmor Filesystem Enabled
+[    0.130550] pnp: PnP ACPI init
+[    0.130729] system 00:00: [io  0x0290-0x029f] has been reserved
+[    0.130732] system 00:00: Plug and Play ACPI device, IDs PNP0c02 (active)
+[    0.131006] pnp 00:01: [dma 0 disabled]
+[    0.131036] pnp 00:01: Plug and Play ACPI device, IDs PNP0501 (active)
+[    0.131225] system 00:02: [io  0x0680-0x069f] has been reserved
+[    0.131226] system 00:02: [io  0xffff] has been reserved
+[    0.131227] system 00:02: [io  0xffff] has been reserved
+[    0.131228] system 00:02: [io  0xffff] has been reserved
+[    0.131229] system 00:02: [io  0x1800-0x18fe] has been reserved
+[    0.131230] system 00:02: [io  0x164e-0x164f] has been reserved
+[    0.131232] system 00:02: Plug and Play ACPI device, IDs PNP0c02 (active)
+[    0.131304] system 00:03: [io  0x0800-0x087f] has been reserved
+[    0.131306] system 00:03: Plug and Play ACPI device, IDs PNP0c02 (active)
+[    0.131319] pnp 00:04: Plug and Play ACPI device, IDs PNP0b00 (active)
+[    0.131345] system 00:05: [io  0x1854-0x1857] has been reserved
+[    0.131347] system 00:05: Plug and Play ACPI device, IDs INT3f0d PNP0c02 (active)
+[    0.131550] system 00:06: [mem 0xfed10000-0xfed17fff] has been reserved
+[    0.131551] system 00:06: [mem 0xfed18000-0xfed18fff] has been reserved
+[    0.131552] system 00:06: [mem 0xfed19000-0xfed19fff] has been reserved
+[    0.131553] system 00:06: [mem 0xf8000000-0xfbffffff] has been reserved
+[    0.131554] system 00:06: [mem 0xfed20000-0xfed3ffff] has been reserved
+[    0.131555] system 00:06: [mem 0xfed90000-0xfed93fff] has been reserved
+[    0.131556] system 00:06: [mem 0xfed45000-0xfed8ffff] has been reserved
+[    0.131557] system 00:06: [mem 0xff000000-0xffffffff] has been reserved
+[    0.131558] system 00:06: [mem 0xfee00000-0xfeefffff] could not be reserved
+[    0.131559] system 00:06: [mem 0xf7fe0000-0xf7ffffff] has been reserved
+[    0.131562] system 00:06: Plug and Play ACPI device, IDs PNP0c02 (active)
+[    0.131593] system 00:07: [mem 0xfd000000-0xfdabffff] has been reserved
+[    0.131594] system 00:07: [mem 0xfdad0000-0xfdadffff] has been reserved
+[    0.131595] system 00:07: [mem 0xfdac0000-0xfdacffff] has been reserved
+[    0.131596] system 00:07: [mem 0xfdae0000-0xfdaeffff] has been reserved
+[    0.131597] system 00:07: [mem 0xfdaf0000-0xfdafffff] has been reserved
+[    0.131598] system 00:07: [mem 0xfdb00000-0xfdffffff] has been reserved
+[    0.131599] system 00:07: [mem 0xfe000000-0xfe01ffff] could not be reserved
+[    0.131600] system 00:07: [mem 0xfe036000-0xfe03bfff] has been reserved
+[    0.131601] system 00:07: [mem 0xfe03d000-0xfe3fffff] has been reserved
+[    0.131602] system 00:07: [mem 0xfe410000-0xfe7fffff] has been reserved
+[    0.131605] system 00:07: Plug and Play ACPI device, IDs PNP0c02 (active)
+[    0.131862] system 00:08: [io  0xfe00-0xfefe] has been reserved
+[    0.131864] system 00:08: Plug and Play ACPI device, IDs PNP0c02 (active)
+[    0.132945] system 00:09: [mem 0xfdaf0000-0xfdafffff] has been reserved
+[    0.132947] system 00:09: [mem 0xfdae0000-0xfdaeffff] has been reserved
+[    0.132948] system 00:09: [mem 0xfdac0000-0xfdacffff] has been reserved
+[    0.132951] system 00:09: Plug and Play ACPI device, IDs PNP0c02 (active)
+[    0.133723] pnp: PnP ACPI: found 10 devices
+[    0.140848] clocksource: acpi_pm: mask: 0xffffff max_cycles: 0xffffff, max_idle_ns: 2085701024 ns
+[    0.140862] pci 0000:00:1d.0: bridge window [io  0x1000-0x0fff] to [bus 03] add_size 1000
+[    0.140863] pci 0000:00:1d.0: bridge window [mem 0x00100000-0x000fffff 64bit pref] to [bus 03] add_size 200000 add_align 100000
+[    0.140865] pci 0000:00:1d.0: bridge window [mem 0x00100000-0x000fffff] to [bus 03] add_size 200000 add_align 100000
+[    0.140872] pci 0000:00:1d.0: BAR 14: assigned [mem 0xa8000000-0xa81fffff]
+[    0.140875] pci 0000:00:1d.0: BAR 15: assigned [mem 0xa8200000-0xa83fffff 64bit pref]
+[    0.140876] pci 0000:00:1d.0: BAR 13: assigned [io  0x2000-0x2fff]
+[    0.140878] pci 0000:00:01.0: PCI bridge to [bus 01]
+[    0.140880] pci 0000:00:01.0:   bridge window [io  0xe000-0xefff]
+[    0.140881] pci 0000:00:01.0:   bridge window [mem 0xf6000000-0xf70fffff]
+[    0.140883] pci 0000:00:01.0:   bridge window [mem 0xe0000000-0xf1ffffff 64bit pref]
+[    0.140886] pci 0000:00:1c.0: PCI bridge to [bus 02]
+[    0.140887] pci 0000:00:1c.0:   bridge window [io  0xd000-0xdfff]
+[    0.140889] pci 0000:00:1c.0:   bridge window [mem 0xf4000000-0xf50fffff]
+[    0.140891] pci 0000:00:1c.0:   bridge window [mem 0xc0000000-0xd1ffffff 64bit pref]
+[    0.140894] pci 0000:00:1d.0: PCI bridge to [bus 03]
+[    0.140896] pci 0000:00:1d.0:   bridge window [io  0x2000-0x2fff]
+[    0.140898] pci 0000:00:1d.0:   bridge window [mem 0xa8000000-0xa81fffff]
+[    0.140900] pci 0000:00:1d.0:   bridge window [mem 0xa8200000-0xa83fffff 64bit pref]
+[    0.140904] pci 0000:00:1d.2: PCI bridge to [bus 04]
+[    0.140905] pci 0000:00:1d.2:   bridge window [io  0xc000-0xcfff]
+[    0.140909] pci 0000:00:1d.2:   bridge window [mem 0xf2100000-0xf21fffff 64bit pref]
+[    0.140912] pci_bus 0000:00: resource 4 [io  0x0000-0x0cf7 window]
+[    0.140913] pci_bus 0000:00: resource 5 [io  0x0d00-0xffff window]
+[    0.140914] pci_bus 0000:00: resource 6 [mem 0x000a0000-0x000bffff window]
+[    0.140915] pci_bus 0000:00: resource 7 [mem 0xa8000000-0xf7ffffff window]
+[    0.140916] pci_bus 0000:00: resource 8 [mem 0xfd000000-0xfe7fffff window]
+[    0.140917] pci_bus 0000:01: resource 0 [io  0xe000-0xefff]
+[    0.140918] pci_bus 0000:01: resource 1 [mem 0xf6000000-0xf70fffff]
+[    0.140918] pci_bus 0000:01: resource 2 [mem 0xe0000000-0xf1ffffff 64bit pref]
+[    0.140919] pci_bus 0000:02: resource 0 [io  0xd000-0xdfff]
+[    0.140920] pci_bus 0000:02: resource 1 [mem 0xf4000000-0xf50fffff]
+[    0.140921] pci_bus 0000:02: resource 2 [mem 0xc0000000-0xd1ffffff 64bit pref]
+[    0.140922] pci_bus 0000:03: resource 0 [io  0x2000-0x2fff]
+[    0.140923] pci_bus 0000:03: resource 1 [mem 0xa8000000-0xa81fffff]
+[    0.140924] pci_bus 0000:03: resource 2 [mem 0xa8200000-0xa83fffff 64bit pref]
+[    0.140925] pci_bus 0000:04: resource 0 [io  0xc000-0xcfff]
+[    0.140925] pci_bus 0000:04: resource 2 [mem 0xf2100000-0xf21fffff 64bit pref]
+[    0.141053] NET: Registered protocol family 2
+[    0.141167] TCP established hash table entries: 131072 (order: 8, 1048576 bytes)
+[    0.141278] TCP bind hash table entries: 65536 (order: 8, 1048576 bytes)
+[    0.141346] TCP: Hash tables configured (established 131072 bind 65536)
+[    0.141369] UDP hash table entries: 8192 (order: 6, 262144 bytes)
+[    0.141394] UDP-Lite hash table entries: 8192 (order: 6, 262144 bytes)
+[    0.141435] NET: Registered protocol family 1
+[    0.141614] pci 0000:01:00.0: Video device with shadowed ROM at [mem 0x000c0000-0x000dffff]
+[    0.141636] PCI: CLS 64 bytes, default 64
+[    0.141654] Unpacking initramfs...
+[    0.662906] Freeing initrd memory: 51556K
+[    0.662926] PCI-DMA: Using software bounce buffering for IO (SWIOTLB)
+[    0.662928] software IO TLB [mem 0xa15f6000-0xa55f6000] (64MB) mapped at [0000000064726bb4-00000000c3b1f48d]
+[    0.663166] clocksource: tsc: mask: 0xffffffffffffffff max_cycles: 0x33e452fbb2f, max_idle_ns: 440795236593 ns
+[    0.663372] Scanning for low memory corruption every 60 seconds
+[    0.663861] Initialise system trusted keyrings
+[    0.663866] Key type blacklist registered
+[    0.663925] workingset: timestamp_bits=36 max_order=22 bucket_order=0
+[    0.664606] zbud: loaded
+[    0.664934] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[    0.665052] fuse init (API version 7.26)
+[    0.667203] Key type asymmetric registered
+[    0.667204] Asymmetric key parser 'x509' registered
+[    0.667220] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 246)
+[    0.667262] io scheduler noop registered
+[    0.667262] io scheduler deadline registered
+[    0.667285] io scheduler cfq registered (default)
+[    0.667950] pcieport 0000:00:1c.0: AER enabled with IRQ 120
+[    0.667964] pcieport 0000:00:1d.2: AER enabled with IRQ 121
+[    0.668025] vesafb: mode is 640x480x32, linelength=2560, pages=0
+[    0.668025] vesafb: scrolling: redraw
+[    0.668026] vesafb: Truecolor: size=8:8:8:8, shift=24:16:8:0
+[    0.668033] vesafb: framebuffer at 0xf1000000, mapped to 0x000000003f77a226, using 1216k, total 1216k
+[    0.668098] Console: switching to colour frame buffer device 80x30
+[    0.668103] fb0: VESA VGA frame buffer device
+[    0.668112] intel_idle: MWAIT substates: 0x142120
+[    0.668113] intel_idle: v0.4.1 model 0x9E
+[    0.668408] intel_idle: lapic_timer_reliable_states 0xffffffff
+[    0.668497] input: Sleep Button as /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0E:00/input/input0
+[    0.668506] ACPI: Sleep Button [SLPB]
+[    0.668525] input: Power Button as /devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0C:00/input/input1
+[    0.668531] ACPI: Power Button [PWRB]
+[    0.668549] input: Power Button as /devices/LNXSYSTM:00/LNXPWRBN:00/input/input2
+[    0.668600] ACPI: Power Button [PWRF]
+[    0.728755] (NULL device *): hwmon_device_register() is deprecated. Please convert the driver to use hwmon_device_register_with_info().
+[    0.788251] thermal LNXTHERM:00: registered as thermal_zone0
+[    0.788251] ACPI: Thermal Zone [TZ00] (28 C)
+[    0.788387] thermal LNXTHERM:01: registered as thermal_zone1
+[    0.788388] ACPI: Thermal Zone [TZ01] (30 C)
+[    0.788540] Serial: 8250/16550 driver, 32 ports, IRQ sharing enabled
+[    0.809349] 00:01: ttyS0 at I/O 0x3f8 (irq = 4, base_baud = 115200) is a 16550A
+[    0.811699] Linux agpgart interface v0.103
+[    0.813358] loop: module loaded
+[    0.813446] libphy: Fixed MDIO Bus: probed
+[    0.813446] tun: Universal TUN/TAP device driver, 1.6
+[    0.813486] PPP generic driver version 2.4.2
+[    0.813527] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[    0.813528] ehci-pci: EHCI PCI platform driver
+[    0.813534] ehci-platform: EHCI generic platform driver
+[    0.813539] ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+[    0.813540] ohci-pci: OHCI PCI platform driver
+[    0.813544] ohci-platform: OHCI generic platform driver
+[    0.813547] uhci_hcd: USB Universal Host Controller Interface driver
+[    0.813634] xhci_hcd 0000:00:14.0: xHCI Host Controller
+[    0.813639] xhci_hcd 0000:00:14.0: new USB bus registered, assigned bus number 1
+[    0.814712] xhci_hcd 0000:00:14.0: hcc params 0x200077c1 hci version 0x100 quirks 0x00009810
+[    0.814716] xhci_hcd 0000:00:14.0: cache line size of 64 is not supported
+[    0.814819] usb usb1: New USB device found, idVendor=1d6b, idProduct=0002
+[    0.814820] usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    0.814821] usb usb1: Product: xHCI Host Controller
+[    0.814822] usb usb1: Manufacturer: Linux 4.15.0-20-generic xhci-hcd
+[    0.814822] usb usb1: SerialNumber: 0000:00:14.0
+[    0.814934] hub 1-0:1.0: USB hub found
+[    0.814945] hub 1-0:1.0: 12 ports detected
+[    0.816134] xhci_hcd 0000:00:14.0: xHCI Host Controller
+[    0.816136] xhci_hcd 0000:00:14.0: new USB bus registered, assigned bus number 2
+[    0.816156] usb usb2: New USB device found, idVendor=1d6b, idProduct=0003
+[    0.816157] usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    0.816157] usb usb2: Product: xHCI Host Controller
+[    0.816158] usb usb2: Manufacturer: Linux 4.15.0-20-generic xhci-hcd
+[    0.816159] usb usb2: SerialNumber: 0000:00:14.0
+[    0.816260] hub 2-0:1.0: USB hub found
+[    0.816267] hub 2-0:1.0: 6 ports detected
+[    0.816884] i8042: PNP: No PS/2 controller found.
+[    0.817021] mousedev: PS/2 mouse device common for all mice
+[    0.817318] rtc_cmos 00:04: RTC can wake from S4
+[    0.817693] rtc_cmos 00:04: rtc core: registered rtc_cmos as rtc0
+[    0.817772] rtc_cmos 00:04: alarms up to one month, y3k, 242 bytes nvram, hpet irqs
+[    0.817776] i2c /dev entries driver
+[    0.817800] device-mapper: uevent: version 1.0.3
+[    0.817853] device-mapper: ioctl: 4.37.0-ioctl (2017-09-20) initialised: dm-devel@redhat.com
+[    0.817855] intel_pstate: Intel P-state driver initializing
+[    0.817904] intel_pstate: Disabling energy efficiency optimization
+[    0.818871] intel_pstate: HWP enabled
+[    0.819286] ledtrig-cpu: registered to indicate activity on CPUs
+[    0.819879] resource sanity check: requesting [mem 0xfdffe800-0xfe0007ff], which spans more than pnp 00:07 [mem 0xfdb00000-0xfdffffff]
+[    0.819882] caller pmc_core_probe+0x99/0x224 mapping multiple BARs
+[    0.819885] intel_pmc_core:  initialized
+[    0.820061] NET: Registered protocol family 10
+[    0.823089] Segment Routing with IPv6
+[    0.823099] NET: Registered protocol family 17
+[    0.823188] Key type dns_resolver registered
+[    0.823868] RAS: Correctable Errors collector initialized.
+[    0.823884] microcode: sig=0x906e9, pf=0x2, revision=0x5e
+[    0.824096] microcode: Microcode Update Driver: v2.2.
+[    0.824103] sched_clock: Marking stable (824092820, 0)->(802340354, 21752466)
+[    0.824466] registered taskstats version 1
+[    0.824471] Loading compiled-in X.509 certificates
+[    0.825815] Loaded X.509 cert 'Build time autogenerated kernel key: f4ad6a5babf67650e4ceb385fa5dda8e4a178208'
+[    0.825826] zswap: loaded using pool lzo/zbud
+[    0.827798] Key type big_key registered
+[    0.827800] Key type trusted registered
+[    0.828846] Key type encrypted registered
+[    0.828847] AppArmor: AppArmor sha1 policy hashing enabled
+[    0.828848] ima: No TPM chip found, activating TPM-bypass! (rc=-19)
+[    0.828857] evm: HMAC attrs: 0x1
+[    0.829667]   Magic number: 2:493:764
+[    0.829678] event_source breakpoint: hash matches
+[    0.829861] rtc_cmos 00:04: setting system clock to 2018-09-27 02:45:52 UTC (1538016352)
+[    0.829946] BIOS EDD facility v0.16 2004-Jun-25, 0 devices found
+[    0.829946] EDD information not available.
+[    0.831373] Freeing unused kernel memory: 2404K
+[    0.831374] Write protecting the kernel read-only data: 20480k
+[    0.831764] Freeing unused kernel memory: 2008K
+[    0.833889] Freeing unused kernel memory: 1904K
+[    0.837499] x86/mm: Checked W+X mappings: passed, no W+X pages found.
+[    0.837499] x86/mm: Checking user space page tables
+[    0.841002] x86/mm: Checked W+X mappings: passed, no W+X pages found.
+[    0.902465] pps_core: LinuxPPS API ver. 1 registered
+[    0.902466] ahci 0000:00:17.0: version 3.0
+[    0.902466] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.902826] r8169 Gigabit Ethernet driver 2.3LK-NAPI loaded
+[    0.902830] r8169 0000:04:00.0: can't disable ASPM; OS doesn't have ASPM control
+[    0.903212] PTP clock support registered
+[    0.903378] r8169 0000:04:00.0 eth0: RTL8168evl/8111evl at 0x0000000028e01427, 00:e0:4c:68:04:46, XID 0c900800 IRQ 124
+[    0.903379] r8169 0000:04:00.0 eth0: jumbo features [frames: 9200 bytes, tx checksumming: ko]
+[    0.905891] e1000e: Intel(R) PRO/1000 Network Driver - 3.2.6-k
+[    0.905891] e1000e: Copyright(c) 1999 - 2015 Intel Corporation.
+[    0.912864] ahci 0000:00:17.0: AHCI 0001.0301 32 slots 6 ports 6 Gbps 0x3f impl SATA mode
+[    0.912866] ahci 0000:00:17.0: flags: 64bit ncq sntf led clo only pio slum part ems deso sadm sds apst 
+[    0.923721] r8169 0000:04:00.0 enp4s0: renamed from eth0
+[    0.972663] scsi host0: ahci
+[    0.972924] scsi host1: ahci
+[    0.973141] scsi host2: ahci
+[    0.973271] scsi host3: ahci
+[    0.973516] scsi host4: ahci
+[    0.973700] scsi host5: ahci
+[    0.973721] ata1: SATA max UDMA/133 abar m2048@0xf714b000 port 0xf714b100 irq 123
+[    0.973722] ata2: SATA max UDMA/133 abar m2048@0xf714b000 port 0xf714b180 irq 123
+[    0.973723] ata3: SATA max UDMA/133 abar m2048@0xf714b000 port 0xf714b200 irq 123
+[    0.973725] ata4: SATA max UDMA/133 abar m2048@0xf714b000 port 0xf714b280 irq 123
+[    0.973726] ata5: SATA max UDMA/133 abar m2048@0xf714b000 port 0xf714b300 irq 123
+[    0.973730] ata6: SATA max UDMA/133 abar m2048@0xf714b000 port 0xf714b380 irq 123
+[    0.974029] e1000e 0000:00:1f.6: Interrupt Throttling Rate (ints/sec) set to dynamic conservative mode
+[    1.152032] usb 1-3: new low-speed USB device number 2 using xhci_hcd
+[    1.220654] e1000e 0000:00:1f.6 0000:00:1f.6 (uninitialized): registered PHC clock
+[    1.288318] ata4: SATA link down (SStatus 4 SControl 300)
+[    1.288429] ata6: SATA link down (SStatus 4 SControl 300)
+[    1.288471] ata3: SATA link up 6.0 Gbps (SStatus 133 SControl 300)
+[    1.288508] ata1: SATA link down (SStatus 4 SControl 300)
+[    1.288542] ata5: SATA link down (SStatus 4 SControl 300)
+[    1.288566] ata2: SATA link down (SStatus 4 SControl 300)
+[    1.289340] ata3.00: ACPI cmd ef/10:06:00:00:00:00 (SET FEATURES) succeeded
+[    1.289341] ata3.00: ACPI cmd f5/00:00:00:00:00:00 (SECURITY FREEZE LOCK) filtered out
+[    1.289343] ata3.00: ACPI cmd b1/c1:00:00:00:00:00 (DEVICE CONFIGURATION OVERLAY) filtered out
+[    1.290013] ata3.00: ATA-10: WDC WD10EZEX-08WN4A0, 02.01A02, max UDMA/100
+[    1.290014] ata3.00: 1953525168 sectors, multi 16: LBA48 NCQ (depth 31/32), AA
+[    1.291062] ata3.00: ACPI cmd ef/10:06:00:00:00:00 (SET FEATURES) succeeded
+[    1.291063] ata3.00: ACPI cmd f5/00:00:00:00:00:00 (SECURITY FREEZE LOCK) filtered out
+[    1.291065] ata3.00: ACPI cmd b1/c1:00:00:00:00:00 (DEVICE CONFIGURATION OVERLAY) filtered out
+[    1.291696] ata3.00: configured for UDMA/100
+[    1.291865] e1000e 0000:00:1f.6 eth0: (PCI Express:2.5GT/s:Width x1) 10:7b:44:7c:b1:71
+[    1.291866] e1000e 0000:00:1f.6 eth0: Intel(R) PRO/1000 Network Connection
+[    1.291947] scsi 2:0:0:0: Direct-Access     ATA      WDC WD10EZEX-08W 1A02 PQ: 0 ANSI: 5
+[    1.292041] e1000e 0000:00:1f.6 eth0: MAC: 12, PHY: 12, PBA No: FFFFFF-0FF
+[    1.292343] sd 2:0:0:0: Attached scsi generic sg0 type 0
+[    1.292577] sd 2:0:0:0: [sda] 1953525168 512-byte logical blocks: (1.00 TB/932 GiB)
+[    1.292578] sd 2:0:0:0: [sda] 4096-byte physical blocks
+[    1.292598] sd 2:0:0:0: [sda] Write Protect is off
+[    1.292599] sd 2:0:0:0: [sda] Mode Sense: 00 3a 00 00
+[    1.292653] sd 2:0:0:0: [sda] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+[    1.292830] e1000e 0000:00:1f.6 enp0s31f6: renamed from eth0
+[    1.314052] usb 1-3: New USB device found, idVendor=045e, idProduct=07b6
+[    1.314053] usb 1-3: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[    1.314054] usb 1-3: Product: Comfort Curve Keyboard 3000
+[    1.314054] usb 1-3: Manufacturer: Microsoft
+[    1.315420]  sda: sda1 sda2 sda3 sda4
+[    1.316365] sd 2:0:0:0: [sda] Attached SCSI disk
+[    1.440154] usb 1-4: new low-speed USB device number 3 using xhci_hcd
+[    1.592742] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[    1.592743] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[    1.592744] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[    1.592745] usb 1-4: Manufacturer: Microsoft 
+[    1.596326] hidraw: raw HID events driver (C) Jiri Kosina
+[    1.609520] usbcore: registered new interface driver usbhid
+[    1.609520] usbhid: USB HID core driver
+[    1.610860] input: Microsoft Comfort Curve Keyboard 3000 as /devices/pci0000:00/0000:00:14.0/usb1/1-3/1-3:1.0/0003:045E:07B6.0001/input/input3
+[    1.668295] hid-generic 0003:045E:07B6.0001: input,hidraw0: USB HID v1.11 Keyboard [Microsoft Comfort Curve Keyboard 3000] on usb-0000:00:14.0-3/input0
+[    1.668405] input: Microsoft Comfort Curve Keyboard 3000 as /devices/pci0000:00/0000:00:14.0/usb1/1-3/1-3:1.1/0003:045E:07B6.0002/input/input4
+[    1.692389] clocksource: Switched to clocksource tsc
+[    1.728332] hid-generic 0003:045E:07B6.0002: input,hidraw1: USB HID v1.11 Device [Microsoft Comfort Curve Keyboard 3000] on usb-0000:00:14.0-3/input1
+[    1.728398] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0003/input/input5
+[    1.728506] hid-generic 0003:045E:00CB.0003: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[    2.932786] EXT4-fs (sda1): mounted filesystem with ordered data mode. Opts: (null)
+[    3.615228] ip_tables: (C) 2000-2006 Netfilter Core Team
+[    3.648491] systemd[1]: systemd 237 running in system mode. (+PAM +AUDIT +SELINUX +IMA +APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ +LZ4 +SECCOMP +BLKID +ELFUTILS +KMOD -IDN2 +IDN -PCRE2 default-hierarchy=hybrid)
+[    3.668128] systemd[1]: Detected architecture x86-64.
+[    3.686368] systemd[1]: Set hostname to <DEVTOOLS-qa29>.
+[    3.893461] random: crng init done
+[    4.768882] systemd[1]: Reached target Remote File Systems.
+[    4.769008] systemd[1]: Created slice System Slice.
+[    4.769041] systemd[1]: Listening on udev Kernel Socket.
+[    4.769075] systemd[1]: Listening on Journal Socket (/dev/log).
+[    4.769131] systemd[1]: Listening on Journal Audit Socket.
+[    4.769160] systemd[1]: Listening on Syslog Socket.
+[    4.769235] systemd[1]: Created slice system-systemd\x2dfsck.slice.
+[    5.088945] lp: driver loaded but no devices found
+[    5.098195] ppdev: user-space parallel port driver
+[    5.156850] EXT4-fs (sda1): re-mounted. Opts: errors=remount-ro
+[    7.967387] systemd-journald[283]: Received request to flush runtime journal from PID 1
+[    8.068845] RAPL PMU: API unit is 2^-32 Joules, 5 fixed counters, 655360 ms ovfl timer
+[    8.068846] RAPL PMU: hw unit of domain pp0-core 2^-14 Joules
+[    8.068846] RAPL PMU: hw unit of domain package 2^-14 Joules
+[    8.068847] RAPL PMU: hw unit of domain dram 2^-14 Joules
+[    8.068847] RAPL PMU: hw unit of domain pp1-gpu 2^-14 Joules
+[    8.068847] RAPL PMU: hw unit of domain psys 2^-14 Joules
+[    8.075652] AVX2 version of gcm_enc/dec engaged.
+[    8.075652] AES CTR mode by8 optimization enabled
+[    8.077006] shpchp: Standard Hot Plug PCI Controller Driver version: 0.4
+[    8.081180] mei_me 0000:00:16.0: enabling device (0000 -> 0002)
+[    8.101442] kvm: disabled by bios
+[    8.108752] intel_rapl: Found RAPL domain package
+[    8.108753] intel_rapl: Found RAPL domain core
+[    8.108754] intel_rapl: Found RAPL domain dram
+[    8.123191] snd_hda_intel 0000:01:00.1: Disabling MSI
+[    8.123193] snd_hda_intel 0000:01:00.1: Handle vga_switcheroo audio client
+[    8.123265] snd_hda_intel 0000:02:00.1: Disabling MSI
+[    8.123267] snd_hda_intel 0000:02:00.1: Handle vga_switcheroo audio client
+[    8.162944] snd_hda_codec_realtek hdaudioC0D0: autoconfig for ALC887-VD: line_outs=4 (0x14/0x15/0x16/0x17/0x0) type:line
+[    8.162947] snd_hda_codec_realtek hdaudioC0D0:    speaker_outs=0 (0x0/0x0/0x0/0x0/0x0)
+[    8.162948] snd_hda_codec_realtek hdaudioC0D0:    hp_outs=1 (0x1b/0x0/0x0/0x0/0x0)
+[    8.162949] snd_hda_codec_realtek hdaudioC0D0:    mono: mono_out=0x0
+[    8.162950] snd_hda_codec_realtek hdaudioC0D0:    dig-out=0x11/0x0
+[    8.162951] snd_hda_codec_realtek hdaudioC0D0:    inputs:
+[    8.162953] snd_hda_codec_realtek hdaudioC0D0:      Front Mic=0x19
+[    8.162954] snd_hda_codec_realtek hdaudioC0D0:      Rear Mic=0x18
+[    8.162955] snd_hda_codec_realtek hdaudioC0D0:      Line=0x1a
+[    8.169338] asus_wmi: ASUS WMI generic driver loaded
+[    8.170095] asus_wmi: Initialization: 0x0
+[    8.170121] asus_wmi: BIOS WMI version: 0.9
+[    8.170222] asus_wmi: SFUN value: 0x0
+[    8.170600] input: Eee PC WMI hotkeys as /devices/platform/eeepc-wmi/input/input6
+[    8.170730] asus_wmi: Number of fans: 1
+[    8.200924] input: HDA Intel PCH Front Mic as /devices/pci0000:00/0000:00:1f.3/sound/card0/input7
+[    8.200972] input: HDA Intel PCH Rear Mic as /devices/pci0000:00/0000:00:1f.3/sound/card0/input8
+[    8.201017] input: HDA Intel PCH Line as /devices/pci0000:00/0000:00:1f.3/sound/card0/input9
+[    8.201059] input: HDA Intel PCH Line Out Front as /devices/pci0000:00/0000:00:1f.3/sound/card0/input10
+[    8.201110] input: HDA Intel PCH Line Out Surround as /devices/pci0000:00/0000:00:1f.3/sound/card0/input11
+[    8.201154] input: HDA Intel PCH Line Out CLFE as /devices/pci0000:00/0000:00:1f.3/sound/card0/input12
+[    8.201195] input: HDA Intel PCH Line Out Side as /devices/pci0000:00/0000:00:1f.3/sound/card0/input13
+[    8.201236] input: HDA Intel PCH Front Headphone as /devices/pci0000:00/0000:00:1f.3/sound/card0/input14
+[    8.502852] ipmi message handler version 39.2
+[    8.512654] ipmi device interface
+[    8.980420] input: HDA NVidia HDMI/DP,pcm=3 as /devices/pci0000:00/0000:00:01.0/0000:01:00.1/sound/card1/input19
+[    8.980491] input: HDA NVidia HDMI/DP,pcm=7 as /devices/pci0000:00/0000:00:01.0/0000:01:00.1/sound/card1/input20
+[    8.980549] input: HDA NVidia HDMI/DP,pcm=8 as /devices/pci0000:00/0000:00:01.0/0000:01:00.1/sound/card1/input21
+[    8.980600] input: HDA NVidia HDMI/DP,pcm=9 as /devices/pci0000:00/0000:00:01.0/0000:01:00.1/sound/card1/input22
+[    8.980709] input: HDA NVidia HDMI/DP,pcm=3 as /devices/pci0000:00/0000:00:1c.0/0000:02:00.1/sound/card2/input15
+[    8.980753] input: HDA NVidia HDMI/DP,pcm=7 as /devices/pci0000:00/0000:00:1c.0/0000:02:00.1/sound/card2/input16
+[    8.980781] input: HDA NVidia HDMI/DP,pcm=8 as /devices/pci0000:00/0000:00:1c.0/0000:02:00.1/sound/card2/input17
+[    8.980806] input: HDA NVidia HDMI/DP,pcm=9 as /devices/pci0000:00/0000:00:1c.0/0000:02:00.1/sound/card2/input18
+[    9.363144] nvidia: loading out-of-tree module taints kernel.
+[    9.363149] nvidia: module license 'NVIDIA' taints kernel.
+[    9.363149] Disabling lock debugging due to kernel taint
+[    9.367339] nvidia: module verification failed: signature and/or required key missing - tainting kernel
+[    9.373315] nvidia-nvlink: Nvlink Core is being initialized, major device number 238
+[    9.373546] nvidia 0000:01:00.0: vgaarb: changed VGA decodes: olddecodes=io+mem,decodes=none:owns=io+mem
+[    9.472941] nvidia 0000:02:00.0: enabling device (0000 -> 0003)
+[    9.473004] nvidia 0000:02:00.0: vgaarb: changed VGA decodes: olddecodes=io+mem,decodes=none:owns=none
+[    9.572421] NVRM: loading NVIDIA UNIX x86_64 Kernel Module  410.49  Sat Sep  8 22:19:40 CDT 2018 (using threaded interrupts)
+[    9.603758] nvidia-modeset: Loading NVIDIA Kernel Mode Setting Driver for UNIX platforms  410.49  Sat Sep  8 22:04:55 CDT 2018
+[    9.611303] [drm] [nvidia-drm] [GPU ID 0x00000100] Loading driver
+[    9.611304] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:01:00.0 on minor 0
+[    9.611338] [drm] [nvidia-drm] [GPU ID 0x00000200] Loading driver
+[    9.611339] [drm] Initialized nvidia-drm 0.0.0 20160202 for 0000:02:00.0 on minor 1
+[   12.638922] audit: type=1400 audit(1538016364.302:2): apparmor="STATUS" operation="profile_load" profile="unconfined" name="libreoffice-senddoc" pid=698 comm="apparmor_parser"
+[   12.638925] audit: type=1400 audit(1538016364.302:3): apparmor="STATUS" operation="profile_load" profile="unconfined" name="libreoffice-senddoc//sanitized_helper" pid=698 comm="apparmor_parser"
+[   12.638936] audit: type=1400 audit(1538016364.302:4): apparmor="STATUS" operation="profile_load" profile="unconfined" name="libreoffice-oopslash" pid=697 comm="apparmor_parser"
+[   12.639045] audit: type=1400 audit(1538016364.302:5): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/bin/man" pid=696 comm="apparmor_parser"
+[   12.639047] audit: type=1400 audit(1538016364.302:6): apparmor="STATUS" operation="profile_load" profile="unconfined" name="man_filter" pid=696 comm="apparmor_parser"
+[   12.639048] audit: type=1400 audit(1538016364.302:7): apparmor="STATUS" operation="profile_load" profile="unconfined" name="man_groff" pid=696 comm="apparmor_parser"
+[   12.639314] audit: type=1400 audit(1538016364.302:8): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/sbin/dhclient" pid=692 comm="apparmor_parser"
+[   12.639316] audit: type=1400 audit(1538016364.302:9): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/lib/NetworkManager/nm-dhcp-client.action" pid=692 comm="apparmor_parser"
+[   12.639317] audit: type=1400 audit(1538016364.302:10): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/lib/NetworkManager/nm-dhcp-helper" pid=692 comm="apparmor_parser"
+[   12.639318] audit: type=1400 audit(1538016364.302:11): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/lib/connman/scripts/dhclient-script" pid=692 comm="apparmor_parser"
+[   15.162329] IPv6: ADDRCONF(NETDEV_UP): enp0s31f6: link is not ready
+[   15.348192] IPv6: ADDRCONF(NETDEV_UP): enp0s31f6: link is not ready
+[   15.350562] IPv6: ADDRCONF(NETDEV_UP): enp4s0: link is not ready
+[   15.482378] r8169 0000:04:00.0 enp4s0: link down
+[   15.482380] r8169 0000:04:00.0 enp4s0: link down
+[   15.482445] IPv6: ADDRCONF(NETDEV_UP): enp4s0: link is not ready
+[   18.599335] r8169 0000:04:00.0 enp4s0: link up
+[   18.599349] IPv6: ADDRCONF(NETDEV_CHANGE): enp4s0: link becomes ready
+[   73.296902] usb 1-4: USB disconnect, device number 3
+[   74.822326] usb 1-4: new low-speed USB device number 4 using xhci_hcd
+[   74.974597] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[   74.974603] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[   74.974607] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[   74.974610] usb 1-4: Manufacturer: Microsoft 
+[   74.978542] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0004/input/input23
+[   74.978960] hid-generic 0003:045E:00CB.0004: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[   84.417613] ACPI Warning: \_SB.PCI0.RP05.PXSX._DSM: Argument #4 type mismatch - Found [Buffer], ACPI requires [Package] (20170831/nsarguments-100)
+[  135.176920] usb 1-4: USB disconnect, device number 4
+[  136.702614] usb 1-4: new low-speed USB device number 5 using xhci_hcd
+[  136.855075] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[  136.855081] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[  136.855085] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[  136.855088] usb 1-4: Manufacturer: Microsoft 
+[  136.858811] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0005/input/input24
+[  136.919138] hid-generic 0003:045E:00CB.0005: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[  197.064906] usb 1-4: USB disconnect, device number 5
+[  198.592767] usb 1-4: new low-speed USB device number 6 using xhci_hcd
+[  198.744967] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[  198.744973] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[  198.744977] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[  198.744980] usb 1-4: Manufacturer: Microsoft 
+[  198.748645] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0006/input/input25
+[  198.809236] hid-generic 0003:045E:00CB.0006: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[  258.936906] usb 1-4: USB disconnect, device number 6
+[  260.462776] usb 1-4: new low-speed USB device number 7 using xhci_hcd
+[  260.614614] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[  260.614620] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[  260.614624] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[  260.614628] usb 1-4: Manufacturer: Microsoft 
+[  260.618023] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0007/input/input26
+[  260.618352] hid-generic 0003:045E:00CB.0007: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[  320.824908] usb 1-4: USB disconnect, device number 7
+[  322.351049] usb 1-4: new low-speed USB device number 8 using xhci_hcd
+[  322.503494] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[  322.503500] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[  322.503504] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[  322.503508] usb 1-4: Manufacturer: Microsoft 
+[  322.507512] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0008/input/input27
+[  322.508022] hid-generic 0003:045E:00CB.0008: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[  382.688905] usb 1-4: USB disconnect, device number 8
+[  384.216397] usb 1-4: new low-speed USB device number 9 using xhci_hcd
+[  384.368709] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[  384.368715] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[  384.368720] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[  384.368723] usb 1-4: Manufacturer: Microsoft 
+[  384.372415] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0009/input/input28
+[  384.432826] hid-generic 0003:045E:00CB.0009: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[  444.552907] usb 1-4: USB disconnect, device number 9
+[  446.078371] usb 1-4: new low-speed USB device number 10 using xhci_hcd
+[  446.230704] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[  446.230710] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[  446.230714] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[  446.230718] usb 1-4: Manufacturer: Microsoft 
+[  446.234447] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.000A/input/input29
+[  446.294852] hid-generic 0003:045E:00CB.000A: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[  506.440908] usb 1-4: USB disconnect, device number 10
+[  507.968601] usb 1-4: new low-speed USB device number 11 using xhci_hcd
+[  508.120970] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[  508.120976] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[  508.120981] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[  508.120984] usb 1-4: Manufacturer: Microsoft 
+[  508.124671] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.000B/input/input30
+[  508.125115] hid-generic 0003:045E:00CB.000B: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[  568.312906] usb 1-4: USB disconnect, device number 11
+[  569.841348] usb 1-4: new low-speed USB device number 12 using xhci_hcd
+[  569.993706] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[  569.993712] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[  569.993716] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[  569.993720] usb 1-4: Manufacturer: Microsoft 
+[  569.997522] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.000C/input/input31
+[  569.997962] hid-generic 0003:045E:00CB.000C: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[  630.192906] usb 1-4: USB disconnect, device number 12
+[  631.718143] usb 1-4: new low-speed USB device number 13 using xhci_hcd
+[  631.870484] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[  631.870490] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[  631.870494] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[  631.870498] usb 1-4: Manufacturer: Microsoft 
+[  631.874220] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.000D/input/input32
+[  631.934635] hid-generic 0003:045E:00CB.000D: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[  692.080907] usb 1-4: USB disconnect, device number 13
+[  693.606173] usb 1-4: new low-speed USB device number 14 using xhci_hcd
+[  693.758489] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[  693.758495] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[  693.758499] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[  693.758503] usb 1-4: Manufacturer: Microsoft 
+[  693.762503] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.000E/input/input33
+[  693.822653] hid-generic 0003:045E:00CB.000E: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[  753.968907] usb 1-4: USB disconnect, device number 14
+[  755.493728] usb 1-4: new low-speed USB device number 15 using xhci_hcd
+[  755.646077] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[  755.646083] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[  755.646087] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[  755.646091] usb 1-4: Manufacturer: Microsoft 
+[  755.650041] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.000F/input/input34
+[  755.650474] hid-generic 0003:045E:00CB.000F: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[  815.832923] usb 1-4: USB disconnect, device number 15
+[  817.360996] usb 1-4: new low-speed USB device number 16 using xhci_hcd
+[  817.513295] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[  817.513301] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[  817.513305] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[  817.513309] usb 1-4: Manufacturer: Microsoft 
+[  817.516969] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0010/input/input35
+[  817.517349] hid-generic 0003:045E:00CB.0010: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[  877.720907] usb 1-4: USB disconnect, device number 16
+[  879.248083] usb 1-4: new low-speed USB device number 17 using xhci_hcd
+[  879.400431] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[  879.400437] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[  879.400441] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[  879.400445] usb 1-4: Manufacturer: Microsoft 
+[  879.404086] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0011/input/input36
+[  879.404450] hid-generic 0003:045E:00CB.0011: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[  939.600886] usb 1-4: USB disconnect, device number 17
+[  941.127080] usb 1-4: new low-speed USB device number 18 using xhci_hcd
+[  941.279293] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[  941.279298] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[  941.279303] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[  941.279306] usb 1-4: Manufacturer: Microsoft 
+[  941.283080] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0012/input/input37
+[  941.343376] hid-generic 0003:045E:00CB.0012: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 1001.392909] usb 1-4: USB disconnect, device number 18
+[ 1002.917960] usb 1-4: new low-speed USB device number 19 using xhci_hcd
+[ 1003.070296] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 1003.070301] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 1003.070306] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 1003.070310] usb 1-4: Manufacturer: Microsoft 
+[ 1003.074140] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0013/input/input38
+[ 1003.134423] hid-generic 0003:045E:00CB.0013: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 1063.192909] usb 1-4: USB disconnect, device number 19
+[ 1064.719631] usb 1-4: new low-speed USB device number 20 using xhci_hcd
+[ 1064.872076] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 1064.872082] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 1064.872086] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 1064.872090] usb 1-4: Manufacturer: Microsoft 
+[ 1064.876031] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0014/input/input39
+[ 1064.876588] hid-generic 0003:045E:00CB.0014: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 1125.064906] usb 1-4: USB disconnect, device number 20
+[ 1126.592030] usb 1-4: new low-speed USB device number 21 using xhci_hcd
+[ 1126.744292] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 1126.744298] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 1126.744302] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 1126.744306] usb 1-4: Manufacturer: Microsoft 
+[ 1126.747959] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0015/input/input40
+[ 1126.748357] hid-generic 0003:045E:00CB.0015: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 1186.936908] usb 1-4: USB disconnect, device number 21
+[ 1188.468886] usb 1-4: new low-speed USB device number 22 using xhci_hcd
+[ 1188.621187] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 1188.621193] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 1188.621197] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 1188.621201] usb 1-4: Manufacturer: Microsoft 
+[ 1188.625081] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0016/input/input41
+[ 1188.625495] hid-generic 0003:045E:00CB.0016: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 1248.816909] usb 1-4: USB disconnect, device number 22
+[ 1250.342091] usb 1-4: new low-speed USB device number 23 using xhci_hcd
+[ 1250.494491] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 1250.494497] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 1250.494502] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 1250.494505] usb 1-4: Manufacturer: Microsoft 
+[ 1250.498243] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0017/input/input42
+[ 1250.558315] hid-generic 0003:045E:00CB.0017: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 1310.608904] usb 1-4: USB disconnect, device number 23
+[ 1312.135565] usb 1-4: new low-speed USB device number 24 using xhci_hcd
+[ 1312.287681] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 1312.287687] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 1312.287691] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 1312.287695] usb 1-4: Manufacturer: Microsoft 
+[ 1312.291418] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0018/input/input43
+[ 1312.351792] hid-generic 0003:045E:00CB.0018: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 1372.400907] usb 1-4: USB disconnect, device number 24
+[ 1373.929255] usb 1-4: new low-speed USB device number 25 using xhci_hcd
+[ 1374.081598] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 1374.081603] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 1374.081608] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 1374.081611] usb 1-4: Manufacturer: Microsoft 
+[ 1374.085468] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0019/input/input44
+[ 1374.145505] hid-generic 0003:045E:00CB.0019: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 1434.280904] usb 1-4: USB disconnect, device number 25
+[ 1435.807120] usb 1-4: new low-speed USB device number 26 using xhci_hcd
+[ 1435.959534] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 1435.959540] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 1435.959544] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 1435.959548] usb 1-4: Manufacturer: Microsoft 
+[ 1435.963229] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.001A/input/input45
+[ 1436.023347] hid-generic 0003:045E:00CB.001A: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 1496.088905] usb 1-4: USB disconnect, device number 26
+[ 1497.617112] usb 1-4: new low-speed USB device number 27 using xhci_hcd
+[ 1497.769486] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 1497.769492] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 1497.769497] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 1497.769500] usb 1-4: Manufacturer: Microsoft 
+[ 1497.773200] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.001B/input/input46
+[ 1497.833528] hid-generic 0003:045E:00CB.001B: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 1557.976908] usb 1-4: USB disconnect, device number 27
+[ 1559.503209] usb 1-4: new low-speed USB device number 28 using xhci_hcd
+[ 1559.655486] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 1559.655492] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 1559.655496] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 1559.655500] usb 1-4: Manufacturer: Microsoft 
+[ 1559.659506] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.001C/input/input47
+[ 1559.659999] hid-generic 0003:045E:00CB.001C: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 1619.848904] usb 1-4: USB disconnect, device number 28
+[ 1621.377391] usb 1-4: new low-speed USB device number 29 using xhci_hcd
+[ 1621.529706] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 1621.529711] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 1621.529716] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 1621.529719] usb 1-4: Manufacturer: Microsoft 
+[ 1621.533688] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.001D/input/input48
+[ 1621.534187] hid-generic 0003:045E:00CB.001D: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 1681.720906] usb 1-4: USB disconnect, device number 29
+[ 1683.247634] usb 1-4: new low-speed USB device number 30 using xhci_hcd
+[ 1683.400090] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 1683.400096] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 1683.400101] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 1683.400104] usb 1-4: Manufacturer: Microsoft 
+[ 1683.404037] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.001E/input/input49
+[ 1683.404460] hid-generic 0003:045E:00CB.001E: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 1743.584903] usb 1-4: USB disconnect, device number 30
+[ 1745.109931] usb 1-4: new low-speed USB device number 31 using xhci_hcd
+[ 1745.261970] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 1745.261976] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 1745.261980] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 1745.261984] usb 1-4: Manufacturer: Microsoft 
+[ 1745.265603] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.001F/input/input50
+[ 1745.265999] hid-generic 0003:045E:00CB.001F: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 1805.448902] usb 1-4: USB disconnect, device number 31
+[ 1806.976260] usb 1-4: new low-speed USB device number 32 using xhci_hcd
+[ 1807.128598] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 1807.128604] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 1807.128608] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 1807.128612] usb 1-4: Manufacturer: Microsoft 
+[ 1807.132484] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0020/input/input51
+[ 1807.132998] hid-generic 0003:045E:00CB.0020: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 1867.320905] usb 1-4: USB disconnect, device number 32
+[ 1868.846626] usb 1-4: new low-speed USB device number 33 using xhci_hcd
+[ 1868.998967] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 1868.998973] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 1868.998977] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 1868.998981] usb 1-4: Manufacturer: Microsoft 
+[ 1869.002734] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0021/input/input52
+[ 1869.063075] hid-generic 0003:045E:00CB.0021: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 1929.192922] usb 1-4: USB disconnect, device number 33
+[ 1930.721016] usb 1-4: new low-speed USB device number 34 using xhci_hcd
+[ 1930.873296] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 1930.873302] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 1930.873306] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 1930.873310] usb 1-4: Manufacturer: Microsoft 
+[ 1930.877126] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0022/input/input53
+[ 1930.877464] hid-generic 0003:045E:00CB.0022: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 1991.064906] usb 1-4: USB disconnect, device number 34
+[ 1992.591428] usb 1-4: new low-speed USB device number 35 using xhci_hcd
+[ 1992.743705] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 1992.743711] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 1992.743715] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 1992.743719] usb 1-4: Manufacturer: Microsoft 
+[ 1992.747484] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0023/input/input54
+[ 1992.748025] hid-generic 0003:045E:00CB.0023: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 2052.928908] usb 1-4: USB disconnect, device number 35
+[ 2054.453848] usb 1-4: new low-speed USB device number 36 using xhci_hcd
+[ 2054.606184] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 2054.606190] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 2054.606194] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 2054.606198] usb 1-4: Manufacturer: Microsoft 
+[ 2054.610089] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0024/input/input55
+[ 2054.610433] hid-generic 0003:045E:00CB.0024: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 2114.792906] usb 1-4: USB disconnect, device number 36
+[ 2116.320574] usb 1-4: new low-speed USB device number 37 using xhci_hcd
+[ 2116.472710] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 2116.472716] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 2116.472720] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 2116.472724] usb 1-4: Manufacturer: Microsoft 
+[ 2116.476597] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0025/input/input56
+[ 2116.476989] hid-generic 0003:045E:00CB.0025: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 2176.672905] usb 1-4: USB disconnect, device number 37
+[ 2178.199099] usb 1-4: new low-speed USB device number 38 using xhci_hcd
+[ 2178.351490] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 2178.351495] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 2178.351500] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 2178.351504] usb 1-4: Manufacturer: Microsoft 
+[ 2178.355548] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0026/input/input57
+[ 2178.356052] hid-generic 0003:045E:00CB.0026: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 2238.544905] usb 1-4: USB disconnect, device number 38
+[ 2240.070027] usb 1-4: new low-speed USB device number 39 using xhci_hcd
+[ 2240.222293] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 2240.222299] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 2240.222303] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 2240.222307] usb 1-4: Manufacturer: Microsoft 
+[ 2240.226117] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0027/input/input58
+[ 2240.226573] hid-generic 0003:045E:00CB.0027: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 2300.432906] usb 1-4: USB disconnect, device number 39
+[ 2301.961273] usb 1-4: new low-speed USB device number 40 using xhci_hcd
+[ 2302.113597] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 2302.113603] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 2302.113607] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 2302.113611] usb 1-4: Manufacturer: Microsoft 
+[ 2302.117507] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0028/input/input59
+[ 2302.117975] hid-generic 0003:045E:00CB.0028: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 2362.312932] usb 1-4: USB disconnect, device number 40
+[ 2363.840843] usb 1-4: new low-speed USB device number 41 using xhci_hcd
+[ 2363.993072] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 2363.993078] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 2363.993082] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 2363.993086] usb 1-4: Manufacturer: Microsoft 
+[ 2363.997092] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0029/input/input60
+[ 2363.997571] hid-generic 0003:045E:00CB.0029: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 2424.192914] usb 1-4: USB disconnect, device number 41
+[ 2425.720690] usb 1-4: new low-speed USB device number 42 using xhci_hcd
+[ 2425.872965] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 2425.872971] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 2425.872975] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 2425.872979] usb 1-4: Manufacturer: Microsoft 
+[ 2425.876711] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.002A/input/input61
+[ 2425.877172] hid-generic 0003:045E:00CB.002A: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 2486.072906] usb 1-4: USB disconnect, device number 42
+[ 2487.600775] usb 1-4: new low-speed USB device number 43 using xhci_hcd
+[ 2487.752966] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 2487.752972] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 2487.752976] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 2487.752980] usb 1-4: Manufacturer: Microsoft 
+[ 2487.756641] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.002B/input/input62
+[ 2487.817215] hid-generic 0003:045E:00CB.002B: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 2547.952902] usb 1-4: USB disconnect, device number 43
+[ 2549.481048] usb 1-4: new low-speed USB device number 44 using xhci_hcd
+[ 2549.633489] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 2549.633495] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 2549.633499] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 2549.633503] usb 1-4: Manufacturer: Microsoft 
+[ 2549.637472] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.002C/input/input63
+[ 2549.638082] hid-generic 0003:045E:00CB.002C: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 2609.824900] usb 1-4: USB disconnect, device number 44
+[ 2611.353579] usb 1-4: new low-speed USB device number 45 using xhci_hcd
+[ 2611.505713] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 2611.505719] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 2611.505723] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 2611.505726] usb 1-4: Manufacturer: Microsoft 
+[ 2611.509756] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.002D/input/input64
+[ 2611.510300] hid-generic 0003:045E:00CB.002D: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 2671.704903] usb 1-4: USB disconnect, device number 45
+[ 2673.230228] usb 1-4: new low-speed USB device number 46 using xhci_hcd
+[ 2673.382597] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 2673.382603] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 2673.382608] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 2673.382611] usb 1-4: Manufacturer: Microsoft 
+[ 2673.386245] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.002E/input/input65
+[ 2673.386715] hid-generic 0003:045E:00CB.002E: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 2733.568907] usb 1-4: USB disconnect, device number 46
+[ 2735.095039] usb 1-4: new low-speed USB device number 47 using xhci_hcd
+[ 2735.247292] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 2735.247298] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 2735.247302] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 2735.247306] usb 1-4: Manufacturer: Microsoft 
+[ 2735.250949] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.002F/input/input66
+[ 2735.311476] hid-generic 0003:045E:00CB.002F: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 2795.464856] usb 1-4: USB disconnect, device number 47
+[ 2796.991982] usb 1-4: new low-speed USB device number 48 using xhci_hcd
+[ 2797.144292] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 2797.144298] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 2797.144302] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 2797.144306] usb 1-4: Manufacturer: Microsoft 
+[ 2797.148146] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0030/input/input67
+[ 2797.208381] hid-generic 0003:045E:00CB.0030: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 2857.272907] usb 1-4: USB disconnect, device number 48
+[ 2858.801038] usb 1-4: new low-speed USB device number 49 using xhci_hcd
+[ 2858.953295] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 2858.953301] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 2858.953305] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 2858.953309] usb 1-4: Manufacturer: Microsoft 
+[ 2858.957154] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0031/input/input68
+[ 2859.017472] hid-generic 0003:045E:00CB.0031: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 2919.152869] usb 1-4: USB disconnect, device number 49
+[ 2920.682203] usb 1-4: new low-speed USB device number 50 using xhci_hcd
+[ 2920.834403] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 2920.834409] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 2920.834413] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 2920.834417] usb 1-4: Manufacturer: Microsoft 
+[ 2920.838115] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0032/input/input69
+[ 2920.838768] hid-generic 0003:045E:00CB.0032: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 2981.048906] usb 1-4: USB disconnect, device number 50
+[ 2982.575456] usb 1-4: new low-speed USB device number 51 using xhci_hcd
+[ 2982.727713] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 2982.727719] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 2982.727723] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 2982.727726] usb 1-4: Manufacturer: Microsoft 
+[ 2982.731495] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0033/input/input70
+[ 2982.732023] hid-generic 0003:045E:00CB.0033: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 3042.920904] usb 1-4: USB disconnect, device number 51
+[ 3044.448793] usb 1-4: new low-speed USB device number 52 using xhci_hcd
+[ 3044.601073] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 3044.601079] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 3044.601084] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 3044.601088] usb 1-4: Manufacturer: Microsoft 
+[ 3044.605115] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0034/input/input71
+[ 3044.605605] hid-generic 0003:045E:00CB.0034: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 3104.792915] usb 1-4: USB disconnect, device number 52
+[ 3106.318202] usb 1-4: new low-speed USB device number 53 using xhci_hcd
+[ 3106.470488] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 3106.470493] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 3106.470498] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 3106.470502] usb 1-4: Manufacturer: Microsoft 
+[ 3106.474244] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0035/input/input72
+[ 3106.534616] hid-generic 0003:045E:00CB.0035: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 3166.704909] usb 1-4: USB disconnect, device number 53
+[ 3168.231676] usb 1-4: new low-speed USB device number 54 using xhci_hcd
+[ 3168.384073] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 3168.384079] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 3168.384083] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 3168.384087] usb 1-4: Manufacturer: Microsoft 
+[ 3168.387716] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0036/input/input73
+[ 3168.448067] hid-generic 0003:045E:00CB.0036: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 3228.584905] usb 1-4: USB disconnect, device number 54
+[ 3230.113209] usb 1-4: new low-speed USB device number 55 using xhci_hcd
+[ 3230.265486] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 3230.265491] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 3230.265496] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 3230.265500] usb 1-4: Manufacturer: Microsoft 
+[ 3230.269216] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0037/input/input74
+[ 3230.269605] hid-generic 0003:045E:00CB.0037: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 3290.464906] usb 1-4: USB disconnect, device number 55
+[ 3291.990786] usb 1-4: new low-speed USB device number 56 using xhci_hcd
+[ 3292.142967] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 3292.142973] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 3292.142977] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 3292.142981] usb 1-4: Manufacturer: Microsoft 
+[ 3292.146636] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0038/input/input75
+[ 3292.207229] hid-generic 0003:045E:00CB.0038: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 3352.344906] usb 1-4: USB disconnect, device number 56
+[ 3353.872424] usb 1-4: new low-speed USB device number 57 using xhci_hcd
+[ 3354.024711] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 3354.024716] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 3354.024721] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 3354.024725] usb 1-4: Manufacturer: Microsoft 
+[ 3354.028561] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0039/input/input76
+[ 3354.028941] hid-generic 0003:045E:00CB.0039: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 3414.224905] usb 1-4: USB disconnect, device number 57
+[ 3415.750074] usb 1-4: new low-speed USB device number 58 using xhci_hcd
+[ 3415.902489] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 3415.902495] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 3415.902499] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 3415.902503] usb 1-4: Manufacturer: Microsoft 
+[ 3415.906505] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.003A/input/input77
+[ 3415.907082] hid-generic 0003:045E:00CB.003A: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 3476.096907] usb 1-4: USB disconnect, device number 58
+[ 3477.623774] usb 1-4: new low-speed USB device number 59 using xhci_hcd
+[ 3477.776077] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 3477.776083] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 3477.776087] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 3477.776091] usb 1-4: Manufacturer: Microsoft 
+[ 3477.780089] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.003B/input/input78
+[ 3477.780622] hid-generic 0003:045E:00CB.003B: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 3537.976903] usb 1-4: USB disconnect, device number 59
+[ 3539.505504] usb 1-4: new low-speed USB device number 60 using xhci_hcd
+[ 3539.657708] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 3539.657714] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 3539.657718] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 3539.657722] usb 1-4: Manufacturer: Microsoft 
+[ 3539.661722] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.003C/input/input79
+[ 3539.662121] hid-generic 0003:045E:00CB.003C: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 3599.848904] usb 1-4: USB disconnect, device number 60
+[ 3601.375272] usb 1-4: new low-speed USB device number 61 using xhci_hcd
+[ 3601.527593] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 3601.527599] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 3601.527603] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 3601.527607] usb 1-4: Manufacturer: Microsoft 
+[ 3601.531551] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.003D/input/input80
+[ 3601.591741] hid-generic 0003:045E:00CB.003D: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 3661.736904] usb 1-4: USB disconnect, device number 61
+[ 3663.265045] usb 1-4: new low-speed USB device number 62 using xhci_hcd
+[ 3663.417492] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 3663.417498] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 3663.417502] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 3663.417506] usb 1-4: Manufacturer: Microsoft 
+[ 3663.421491] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.003E/input/input81
+[ 3663.421763] hid-generic 0003:045E:00CB.003E: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 3723.616905] usb 1-4: USB disconnect, device number 62
+[ 3725.146850] usb 1-4: new low-speed USB device number 63 using xhci_hcd
+[ 3725.299184] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 3725.299190] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 3725.299194] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 3725.299198] usb 1-4: Manufacturer: Microsoft 
+[ 3725.303020] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.003F/input/input82
+[ 3725.363262] hid-generic 0003:045E:00CB.003F: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 3785.496909] usb 1-4: USB disconnect, device number 63
+[ 3787.024675] usb 1-4: new low-speed USB device number 64 using xhci_hcd
+[ 3787.177074] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 3787.177080] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 3787.177084] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 3787.177088] usb 1-4: Manufacturer: Microsoft 
+[ 3787.180808] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0040/input/input83
+[ 3787.241068] hid-generic 0003:045E:00CB.0040: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 3847.392903] usb 1-4: USB disconnect, device number 64
+[ 3848.918512] usb 1-4: new low-speed USB device number 65 using xhci_hcd
+[ 3849.070704] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 3849.070709] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 3849.070714] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 3849.070717] usb 1-4: Manufacturer: Microsoft 
+[ 3849.074449] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0041/input/input84
+[ 3849.074928] hid-generic 0003:045E:00CB.0041: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 3909.264903] usb 1-4: USB disconnect, device number 65
+[ 3910.792366] usb 1-4: new low-speed USB device number 66 using xhci_hcd
+[ 3910.944705] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 3910.944711] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 3910.944715] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 3910.944719] usb 1-4: Manufacturer: Microsoft 
+[ 3910.948756] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0042/input/input85
+[ 3911.008797] hid-generic 0003:045E:00CB.0042: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 3971.168903] usb 1-4: USB disconnect, device number 66
+[ 3972.694235] usb 1-4: new low-speed USB device number 67 using xhci_hcd
+[ 3972.846599] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 3972.846605] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 3972.846609] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 3972.846613] usb 1-4: Manufacturer: Microsoft 
+[ 3972.850506] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0043/input/input86
+[ 3972.910691] hid-generic 0003:045E:00CB.0043: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 4033.024904] usb 1-4: USB disconnect, device number 67
+[ 4034.552113] usb 1-4: new low-speed USB device number 68 using xhci_hcd
+[ 4034.704490] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 4034.704496] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 4034.704500] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 4034.704504] usb 1-4: Manufacturer: Microsoft 
+[ 4034.708309] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0044/input/input87
+[ 4034.768560] hid-generic 0003:045E:00CB.0044: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 4094.904903] usb 1-4: USB disconnect, device number 68
+[ 4096.430004] usb 1-4: new low-speed USB device number 69 using xhci_hcd
+[ 4096.582293] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 4096.582299] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 4096.582304] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 4096.582307] usb 1-4: Manufacturer: Microsoft 
+[ 4096.586008] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0045/input/input88
+[ 4096.586440] hid-generic 0003:045E:00CB.0045: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 4156.776868] usb 1-4: USB disconnect, device number 69
+[ 4158.305352] usb 1-4: new low-speed USB device number 70 using xhci_hcd
+[ 4158.457596] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 4158.457602] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 4158.457606] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 4158.457610] usb 1-4: Manufacturer: Microsoft 
+[ 4158.461546] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0046/input/input89
+[ 4158.521795] hid-generic 0003:045E:00CB.0046: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 4218.680926] usb 1-4: USB disconnect, device number 70
+[ 4220.208194] usb 1-4: new low-speed USB device number 71 using xhci_hcd
+[ 4220.360488] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 4220.360494] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 4220.360498] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 4220.360502] usb 1-4: Manufacturer: Microsoft 
+[ 4220.364503] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0047/input/input90
+[ 4220.364775] hid-generic 0003:045E:00CB.0047: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 4280.552903] usb 1-4: USB disconnect, device number 71
+[ 4282.079355] usb 1-4: new low-speed USB device number 72 using xhci_hcd
+[ 4282.231486] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 4282.231492] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 4282.231496] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 4282.231500] usb 1-4: Manufacturer: Microsoft 
+[ 4282.235215] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0048/input/input91
+[ 4282.295594] hid-generic 0003:045E:00CB.0048: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 4342.432907] usb 1-4: USB disconnect, device number 72
+[ 4343.958786] usb 1-4: new low-speed USB device number 73 using xhci_hcd
+[ 4344.110967] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 4344.110973] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 4344.110977] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 4344.110981] usb 1-4: Manufacturer: Microsoft 
+[ 4344.114675] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0049/input/input92
+[ 4344.175038] hid-generic 0003:045E:00CB.0049: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 4404.232905] usb 1-4: USB disconnect, device number 73
+[ 4405.758461] usb 1-4: new low-speed USB device number 74 using xhci_hcd
+[ 4405.910708] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 4405.910714] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 4405.910718] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 4405.910722] usb 1-4: Manufacturer: Microsoft 
+[ 4405.914556] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.004A/input/input93
+[ 4405.974861] hid-generic 0003:045E:00CB.004A: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 4466.112904] usb 1-4: USB disconnect, device number 74
+[ 4467.638364] usb 1-4: new low-speed USB device number 75 using xhci_hcd
+[ 4467.790596] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 4467.790601] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 4467.790605] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 4467.790609] usb 1-4: Manufacturer: Microsoft 
+[ 4467.794331] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.004B/input/input94
+[ 4467.794777] hid-generic 0003:045E:00CB.004B: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 4527.992904] usb 1-4: USB disconnect, device number 75
+[ 4529.518439] usb 1-4: new low-speed USB device number 76 using xhci_hcd
+[ 4529.670722] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 4529.670728] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 4529.670732] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 4529.670736] usb 1-4: Manufacturer: Microsoft 
+[ 4529.674728] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.004C/input/input95
+[ 4529.675241] hid-generic 0003:045E:00CB.004C: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 4589.880907] usb 1-4: USB disconnect, device number 76
+[ 4591.406693] usb 1-4: new low-speed USB device number 77 using xhci_hcd
+[ 4591.558965] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 4591.558970] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 4591.558975] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 4591.558978] usb 1-4: Manufacturer: Microsoft 
+[ 4591.562665] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.004D/input/input96
+[ 4591.563072] hid-generic 0003:045E:00CB.004D: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 4651.744905] usb 1-4: USB disconnect, device number 77
+[ 4653.271097] usb 1-4: new low-speed USB device number 78 using xhci_hcd
+[ 4653.423489] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 4653.423495] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 4653.423499] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 4653.423503] usb 1-4: Manufacturer: Microsoft 
+[ 4653.427488] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.004E/input/input97
+[ 4653.427938] hid-generic 0003:045E:00CB.004E: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 4713.608903] usb 1-4: USB disconnect, device number 78
+[ 4715.135633] usb 1-4: new low-speed USB device number 79 using xhci_hcd
+[ 4715.287965] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 4715.287971] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 4715.287975] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 4715.287979] usb 1-4: Manufacturer: Microsoft 
+[ 4715.291703] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.004F/input/input98
+[ 4715.291968] hid-generic 0003:045E:00CB.004F: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 4775.480906] usb 1-4: USB disconnect, device number 79
+[ 4777.008290] usb 1-4: new low-speed USB device number 80 using xhci_hcd
+[ 4777.160595] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 4777.160601] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 4777.160605] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 4777.160609] usb 1-4: Manufacturer: Microsoft 
+[ 4777.164216] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0050/input/input99
+[ 4777.164789] hid-generic 0003:045E:00CB.0050: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 4837.360903] usb 1-4: USB disconnect, device number 80
+[ 4838.889055] usb 1-4: new low-speed USB device number 81 using xhci_hcd
+[ 4839.041290] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 4839.041295] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 4839.041300] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 4839.041303] usb 1-4: Manufacturer: Microsoft 
+[ 4839.045137] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0051/input/input100
+[ 4839.045588] hid-generic 0003:045E:00CB.0051: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 4899.232901] usb 1-4: USB disconnect, device number 81
+[ 4900.757903] usb 1-4: new low-speed USB device number 82 using xhci_hcd
+[ 4900.910179] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 4900.910185] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 4900.910189] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 4900.910193] usb 1-4: Manufacturer: Microsoft 
+[ 4900.914049] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0052/input/input101
+[ 4900.914568] hid-generic 0003:045E:00CB.0052: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 4961.096903] usb 1-4: USB disconnect, device number 82
+[ 4962.622837] usb 1-4: new low-speed USB device number 83 using xhci_hcd
+[ 4962.775179] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 4962.775185] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 4962.775189] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 4962.775193] usb 1-4: Manufacturer: Microsoft 
+[ 4962.778931] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0053/input/input102
+[ 4962.779409] hid-generic 0003:045E:00CB.0053: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 5022.960904] usb 1-4: USB disconnect, device number 83
+[ 5024.487848] usb 1-4: new low-speed USB device number 84 using xhci_hcd
+[ 5024.640057] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 5024.640063] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 5024.640067] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 5024.640071] usb 1-4: Manufacturer: Microsoft 
+[ 5024.643669] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0054/input/input103
+[ 5024.704280] hid-generic 0003:045E:00CB.0054: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 5084.768906] usb 1-4: USB disconnect, device number 84
+[ 5086.296916] usb 1-4: new low-speed USB device number 85 using xhci_hcd
+[ 5086.449077] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 5086.449082] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 5086.449087] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 5086.449091] usb 1-4: Manufacturer: Microsoft 
+[ 5086.453050] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0055/input/input104
+[ 5086.513388] hid-generic 0003:045E:00CB.0055: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
+[ 5146.656904] usb 1-4: USB disconnect, device number 85
+[ 5148.182050] usb 1-4: new low-speed USB device number 86 using xhci_hcd
+[ 5148.334490] usb 1-4: New USB device found, idVendor=045e, idProduct=00cb
+[ 5148.334496] usb 1-4: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[ 5148.334501] usb 1-4: Product: Microsoft Basic Optical Mouse v2.0 
+[ 5148.334504] usb 1-4: Manufacturer: Microsoft 
+[ 5148.338502] input: Microsoft  Microsoft Basic Optical Mouse v2.0  as /devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0056/input/input105
+[ 5148.398510] hid-generic 0003:045E:00CB.0056: input,hidraw2: USB HID v1.11 Mouse [Microsoft  Microsoft Basic Optical Mouse v2.0 ] on usb-0000:00:14.0-4/input0
