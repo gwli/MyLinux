@@ -1,0 +1,393 @@
+[    80.374] 
+X.Org X Server 1.19.6
+Release Date: 2017-12-20
+[    80.374] X Protocol Version 11, Revision 0
+[    80.374] Build Operating System: Linux 4.4.0-119-generic x86_64 Ubuntu
+[    80.374] Current Operating System: Linux DEVTOOLS-qa29 4.15.0-20-generic #21-Ubuntu SMP Tue Apr 24 06:16:15 UTC 2018 x86_64
+[    80.374] Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.15.0-20-generic root=/dev/sda1 ro quiet splash vt.handoff=1
+[    80.374] Build Date: 13 April 2018  08:07:36PM
+[    80.374] xorg-server 2:1.19.6-1ubuntu4 (For technical support please see http://www.ubuntu.com/support) 
+[    80.374] Current version of pixman: 0.34.0
+[    80.374] 	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+[    80.374] Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+[    80.374] (==) Log file: "/var/log/Xorg.0.log", Time: Thu Sep 27 10:40:18 2018
+[    80.384] (==) Using config file: "/etc/X11/xorg.conf"
+[    80.384] (==) Using system config directory "/usr/share/X11/xorg.conf.d"
+[    80.408] (==) ServerLayout "Layout0"
+[    80.408] (**) |-->Screen "Screen0" (0)
+[    80.408] (**) |   |-->Monitor "Monitor0"
+[    80.409] (**) |   |-->Device "Device0"
+[    80.409] (**) |-->Input Device "Keyboard0"
+[    80.409] (**) |-->Input Device "Mouse0"
+[    80.409] (==) Automatically adding devices
+[    80.409] (==) Automatically enabling devices
+[    80.409] (==) Automatically adding GPU devices
+[    80.409] (==) Automatically binding GPU devices
+[    80.410] (==) Max clients allowed: 256, resource mask: 0x1fffff
+[    80.417] (WW) The directory "/usr/share/fonts/X11/cyrillic" does not exist.
+[    80.417] 	Entry deleted from font path.
+[    80.417] (WW) The directory "/usr/share/fonts/X11/100dpi/" does not exist.
+[    80.417] 	Entry deleted from font path.
+[    80.417] (WW) The directory "/usr/share/fonts/X11/75dpi/" does not exist.
+[    80.417] 	Entry deleted from font path.
+[    80.417] (WW) The directory "/usr/share/fonts/X11/100dpi" does not exist.
+[    80.417] 	Entry deleted from font path.
+[    80.417] (WW) The directory "/usr/share/fonts/X11/75dpi" does not exist.
+[    80.417] 	Entry deleted from font path.
+[    80.417] (==) FontPath set to:
+	/usr/share/fonts/X11/misc,
+	/usr/share/fonts/X11/Type1,
+	built-ins
+[    80.417] (==) ModulePath set to "/usr/lib/xorg/modules"
+[    80.417] (WW) Hotplugging is on, devices using drivers 'kbd', 'mouse' or 'vmmouse' will be disabled.
+[    80.417] (WW) Disabling Keyboard0
+[    80.417] (WW) Disabling Mouse0
+[    80.417] (II) Loader magic: 0x55c7d1ba1020
+[    80.417] (II) Module ABI versions:
+[    80.417] 	X.Org ANSI C Emulation: 0.4
+[    80.417] 	X.Org Video Driver: 23.0
+[    80.417] 	X.Org XInput driver : 24.1
+[    80.417] 	X.Org Server Extension : 10.0
+[    80.419] (--) using VT number 2
+
+[    80.419] (II) systemd-logind: logind integration requires -keeptty and -keeptty was not provided, disabling logind integration
+[    80.420] (II) xfree86: Adding drm device (/dev/dri/card0)
+[    80.420] (II) xfree86: Adding drm device (/dev/dri/card1)
+[    80.424] (--) PCI:*(0:1:0:0) 10de:1b06:10de:120f rev 161, Mem @ 0xf6000000/16777216, 0xe0000000/268435456, 0xf0000000/33554432, I/O @ 0x0000e000/128, BIOS @ 0x????????/131072
+[    80.424] (--) PCI: (0:2:0:0) 10de:13bb:10de:1098 rev 162, Mem @ 0xf4000000/16777216, 0xc0000000/268435456, 0xd0000000/33554432, I/O @ 0x0000d000/128, BIOS @ 0x????????/524288
+[    80.424] (II) LoadModule: "glx"
+[    80.427] (II) Loading /usr/lib/xorg/modules/extensions/libglx.so
+[    80.468] (II) Module glx: vendor="X.Org Foundation"
+[    80.468] 	compiled for 1.19.6, module version = 1.0.0
+[    80.468] 	ABI class: X.Org Server Extension, version 10.0
+[    80.468] (II) LoadModule: "nvidia"
+[    80.469] (II) Loading /usr/lib/xorg/modules/drivers/nvidia_drv.so
+[    80.513] (II) Module nvidia: vendor="NVIDIA Corporation"
+[    80.513] 	compiled for 4.0.2, module version = 1.0.0
+[    80.513] 	Module class: X.Org Video Driver
+[    80.522] (II) NVIDIA dlloader X Driver  410.48  Thu Sep  6 06:27:34 CDT 2018
+[    80.523] (II) NVIDIA Unified Driver for all Supported NVIDIA GPUs
+[    80.549] (II) Loading sub module "fb"
+[    80.549] (II) LoadModule: "fb"
+[    80.549] (II) Loading /usr/lib/xorg/modules/libfb.so
+[    80.554] (II) Module fb: vendor="X.Org Foundation"
+[    80.554] 	compiled for 1.19.6, module version = 1.0.0
+[    80.554] 	ABI class: X.Org ANSI C Emulation, version 0.4
+[    80.554] (II) Loading sub module "wfb"
+[    80.554] (II) LoadModule: "wfb"
+[    80.554] (II) Loading /usr/lib/xorg/modules/libwfb.so
+[    80.557] (II) Module wfb: vendor="X.Org Foundation"
+[    80.557] 	compiled for 1.19.6, module version = 1.0.0
+[    80.557] 	ABI class: X.Org ANSI C Emulation, version 0.4
+[    80.557] (II) Loading sub module "ramdac"
+[    80.557] (II) LoadModule: "ramdac"
+[    80.557] (II) Module "ramdac" already built-in
+[    80.558] (**) NVIDIA(0): Depth 24, (--) framebuffer bpp 32
+[    80.558] (==) NVIDIA(0): RGB weight 888
+[    80.558] (==) NVIDIA(0): Default visual is TrueColor
+[    80.558] (==) NVIDIA(0): Using gamma correction (1.0, 1.0, 1.0)
+[    80.559] (**) NVIDIA(0): Enabling 2D acceleration
+[    80.559] (II) Loading sub module "glxserver_nvidia"
+[    80.559] (II) LoadModule: "glxserver_nvidia"
+[    80.559] (II) Loading /usr/lib/xorg/modules/extensions/libglxserver_nvidia.so
+[    80.794] (II) Module glxserver_nvidia: vendor="NVIDIA Corporation"
+[    80.794] 	compiled for 4.0.2, module version = 1.0.0
+[    80.794] 	Module class: X.Org Server Extension
+[    80.797] (II) NVIDIA GLX Module  410.48  Thu Sep  6 06:24:45 CDT 2018
+[    81.721] (--) NVIDIA(0): Valid display device(s) on GPU-0 at PCI:1:0:0
+[    81.721] (--) NVIDIA(0):     DFP-0 (boot)
+[    81.721] (--) NVIDIA(0):     DFP-1
+[    81.721] (--) NVIDIA(0):     DFP-2
+[    81.721] (--) NVIDIA(0):     DFP-3
+[    81.721] (--) NVIDIA(0):     DFP-4
+[    81.721] (--) NVIDIA(0):     DFP-5
+[    81.721] (--) NVIDIA(0):     DFP-6
+[    81.722] (II) NVIDIA(0): NVIDIA GPU GeForce GTX 1080 Ti (GP102-A) at PCI:1:0:0 (GPU-0)
+[    81.722] (--) NVIDIA(0): Memory: 11534336 kBytes
+[    81.722] (--) NVIDIA(0): VideoBIOS: 86.02.39.00.01
+[    81.722] (II) NVIDIA(0): Detected PCI Express Link width: 16X
+[    81.751] (--) NVIDIA(GPU-0): Samsung U28E590 (DFP-0): connected
+[    81.751] (--) NVIDIA(GPU-0): Samsung U28E590 (DFP-0): Internal TMDS
+[    81.751] (--) NVIDIA(GPU-0): Samsung U28E590 (DFP-0): 600.0 MHz maximum pixel clock
+[    81.751] (--) NVIDIA(GPU-0): 
+[    81.751] (--) NVIDIA(GPU-0): DFP-1: disconnected
+[    81.751] (--) NVIDIA(GPU-0): DFP-1: Internal DisplayPort
+[    81.751] (--) NVIDIA(GPU-0): DFP-1: 1440.0 MHz maximum pixel clock
+[    81.751] (--) NVIDIA(GPU-0): 
+[    81.751] (--) NVIDIA(GPU-0): DFP-2: disconnected
+[    81.751] (--) NVIDIA(GPU-0): DFP-2: Internal TMDS
+[    81.751] (--) NVIDIA(GPU-0): DFP-2: 165.0 MHz maximum pixel clock
+[    81.751] (--) NVIDIA(GPU-0): 
+[    81.751] (--) NVIDIA(GPU-0): DFP-3: disconnected
+[    81.751] (--) NVIDIA(GPU-0): DFP-3: Internal DisplayPort
+[    81.751] (--) NVIDIA(GPU-0): DFP-3: 1440.0 MHz maximum pixel clock
+[    81.751] (--) NVIDIA(GPU-0): 
+[    81.751] (--) NVIDIA(GPU-0): DFP-4: disconnected
+[    81.751] (--) NVIDIA(GPU-0): DFP-4: Internal TMDS
+[    81.751] (--) NVIDIA(GPU-0): DFP-4: 165.0 MHz maximum pixel clock
+[    81.751] (--) NVIDIA(GPU-0): 
+[    81.751] (--) NVIDIA(GPU-0): DFP-5: disconnected
+[    81.751] (--) NVIDIA(GPU-0): DFP-5: Internal DisplayPort
+[    81.751] (--) NVIDIA(GPU-0): DFP-5: 1440.0 MHz maximum pixel clock
+[    81.751] (--) NVIDIA(GPU-0): 
+[    81.751] (--) NVIDIA(GPU-0): DFP-6: disconnected
+[    81.751] (--) NVIDIA(GPU-0): DFP-6: Internal TMDS
+[    81.751] (--) NVIDIA(GPU-0): DFP-6: 165.0 MHz maximum pixel clock
+[    81.751] (--) NVIDIA(GPU-0): 
+[    81.755] (==) NVIDIA(0): 
+[    81.755] (==) NVIDIA(0): No modes were requested; the default mode "nvidia-auto-select"
+[    81.755] (==) NVIDIA(0):     will be used as the requested mode.
+[    81.755] (==) NVIDIA(0): 
+[    81.755] (II) NVIDIA(0): Validated MetaModes:
+[    81.755] (II) NVIDIA(0):     "DFP-0:nvidia-auto-select"
+[    81.755] (II) NVIDIA(0): Virtual screen size determined to be 3840 x 2160
+[    81.759] (--) NVIDIA(0): DPI set to (159, 156); computed from "UseEdidDpi" X config
+[    81.759] (--) NVIDIA(0):     option
+[    81.759] (--) Depth 24 pixmap format is 32 bpp
+[    83.121] (--) NVIDIA(0): Valid display device(s) on GPU-1 at PCI:2:0:0
+[    83.121] (--) NVIDIA(0):     CRT-0
+[    83.121] (--) NVIDIA(0):     DFP-0
+[    83.121] (--) NVIDIA(0):     DFP-1
+[    83.121] (--) NVIDIA(0):     DFP-2
+[    83.127] (--) NVIDIA(GPU-1): CRT-0: disconnected
+[    83.127] (--) NVIDIA(GPU-1): CRT-0: 400.0 MHz maximum pixel clock
+[    83.127] (--) NVIDIA(GPU-1): 
+[    83.131] (--) NVIDIA(GPU-1): DFP-0: disconnected
+[    83.131] (--) NVIDIA(GPU-1): DFP-0: Internal TMDS
+[    83.131] (--) NVIDIA(GPU-1): DFP-0: 330.0 MHz maximum pixel clock
+[    83.131] (--) NVIDIA(GPU-1): 
+[    83.132] (--) NVIDIA(GPU-1): DFP-1: disconnected
+[    83.132] (--) NVIDIA(GPU-1): DFP-1: Internal TMDS
+[    83.132] (--) NVIDIA(GPU-1): DFP-1: 165.0 MHz maximum pixel clock
+[    83.132] (--) NVIDIA(GPU-1): 
+[    83.132] (--) NVIDIA(GPU-1): DFP-2: disconnected
+[    83.132] (--) NVIDIA(GPU-1): DFP-2: Internal DisplayPort
+[    83.132] (--) NVIDIA(GPU-1): DFP-2: 960.0 MHz maximum pixel clock
+[    83.132] (--) NVIDIA(GPU-1): 
+[    83.155] (II) NVIDIA(GPU-1): NVIDIA GPU Quadro K620 (GM107GL-A) at PCI:2:0:0 (GPU-1)
+[    83.155] (--) NVIDIA(GPU-1): Memory: 2097152 kBytes
+[    83.155] (--) NVIDIA(GPU-1): VideoBIOS: 82.07.39.00.01
+[    83.155] (II) NVIDIA(GPU-1): Detected PCI Express Link width: 16X
+[    83.156] (II) NVIDIA: Using 24576.00 MB of virtual memory for indirect memory
+[    83.156] (II) NVIDIA:     access.
+[    83.171] (II) NVIDIA(0): Setting mode "DFP-0:nvidia-auto-select"
+[    83.243] (==) NVIDIA(0): Disabling shared memory pixmaps
+[    83.243] (==) NVIDIA(0): Backing store enabled
+[    83.243] (==) NVIDIA(0): Silken mouse enabled
+[    83.244] (**) NVIDIA(0): DPMS enabled
+[    83.253] (II) Loading sub module "dri2"
+[    83.253] (II) LoadModule: "dri2"
+[    83.253] (II) Module "dri2" already built-in
+[    83.253] (II) NVIDIA(0): [DRI2] Setup complete
+[    83.253] (II) NVIDIA(0): [DRI2]   VDPAU driver: nvidia
+[    83.253] (--) RandR disabled
+[    83.255] (II) SELinux: Disabled on system
+[    83.255] (II) Initializing extension GLX
+[    83.255] (II) Indirect GLX disabled.
+[    83.497] (II) config/udev: Adding input device Power Button (/dev/input/event2)
+[    83.497] (**) Power Button: Applying InputClass "libinput keyboard catchall"
+[    83.497] (II) LoadModule: "libinput"
+[    83.497] (II) Loading /usr/lib/xorg/modules/input/libinput_drv.so
+[    83.517] (II) Module libinput: vendor="X.Org Foundation"
+[    83.517] 	compiled for 1.19.6, module version = 0.27.1
+[    83.517] 	Module class: X.Org XInput Driver
+[    83.517] 	ABI class: X.Org XInput driver, version 24.1
+[    83.517] (II) Using input driver 'libinput' for 'Power Button'
+[    83.517] (**) Power Button: always reports core events
+[    83.517] (**) Option "Device" "/dev/input/event2"
+[    83.517] (**) Option "_source" "server/udev"
+[    83.518] (II) event2  - Power Button: is tagged by udev as: Keyboard
+[    83.518] (II) event2  - Power Button: device is a keyboard
+[    83.518] (II) event2  - Power Button: device removed
+[    83.544] (**) Option "config_info" "udev:/sys/devices/LNXSYSTM:00/LNXPWRBN:00/input/input2/event2"
+[    83.544] (II) XINPUT: Adding extended input device "Power Button" (type: KEYBOARD, id 6)
+[    83.544] (**) Option "xkb_layout" "cn,us"
+[    83.544] (**) Option "xkb_variant" ","
+[    83.562] (II) event2  - Power Button: is tagged by udev as: Keyboard
+[    83.563] (II) event2  - Power Button: device is a keyboard
+[    83.563] (II) config/udev: Adding input device Power Button (/dev/input/event1)
+[    83.563] (**) Power Button: Applying InputClass "libinput keyboard catchall"
+[    83.563] (II) Using input driver 'libinput' for 'Power Button'
+[    83.563] (**) Power Button: always reports core events
+[    83.563] (**) Option "Device" "/dev/input/event1"
+[    83.563] (**) Option "_source" "server/udev"
+[    83.563] (II) event1  - Power Button: is tagged by udev as: Keyboard
+[    83.563] (II) event1  - Power Button: device is a keyboard
+[    83.563] (II) event1  - Power Button: device removed
+[    83.584] (**) Option "config_info" "udev:/sys/devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0C:00/input/input1/event1"
+[    83.584] (II) XINPUT: Adding extended input device "Power Button" (type: KEYBOARD, id 7)
+[    83.584] (**) Option "xkb_layout" "cn,us"
+[    83.584] (**) Option "xkb_variant" ","
+[    83.584] (II) event1  - Power Button: is tagged by udev as: Keyboard
+[    83.584] (II) event1  - Power Button: device is a keyboard
+[    83.584] (II) config/udev: Adding input device Sleep Button (/dev/input/event0)
+[    83.584] (**) Sleep Button: Applying InputClass "libinput keyboard catchall"
+[    83.584] (II) Using input driver 'libinput' for 'Sleep Button'
+[    83.584] (**) Sleep Button: always reports core events
+[    83.584] (**) Option "Device" "/dev/input/event0"
+[    83.584] (**) Option "_source" "server/udev"
+[    83.585] (II) event0  - Sleep Button: is tagged by udev as: Keyboard
+[    83.585] (II) event0  - Sleep Button: device is a keyboard
+[    83.585] (II) event0  - Sleep Button: device removed
+[    83.612] (**) Option "config_info" "udev:/sys/devices/LNXSYSTM:00/LNXSYBUS:00/PNP0C0E:00/input/input0/event0"
+[    83.612] (II) XINPUT: Adding extended input device "Sleep Button" (type: KEYBOARD, id 8)
+[    83.612] (**) Option "xkb_layout" "cn,us"
+[    83.612] (**) Option "xkb_variant" ","
+[    83.613] (II) event0  - Sleep Button: is tagged by udev as: Keyboard
+[    83.613] (II) event0  - Sleep Button: device is a keyboard
+[    83.614] (II) config/udev: Adding input device HDA NVidia HDMI/DP,pcm=3 (/dev/input/event15)
+[    83.614] (II) No input driver specified, ignoring this device.
+[    83.614] (II) This device may have been added with another device file.
+[    83.615] (II) config/udev: Adding input device HDA NVidia HDMI/DP,pcm=7 (/dev/input/event16)
+[    83.615] (II) No input driver specified, ignoring this device.
+[    83.615] (II) This device may have been added with another device file.
+[    83.615] (II) config/udev: Adding input device HDA NVidia HDMI/DP,pcm=8 (/dev/input/event17)
+[    83.616] (II) No input driver specified, ignoring this device.
+[    83.616] (II) This device may have been added with another device file.
+[    83.616] (II) config/udev: Adding input device HDA NVidia HDMI/DP,pcm=9 (/dev/input/event18)
+[    83.616] (II) No input driver specified, ignoring this device.
+[    83.616] (II) This device may have been added with another device file.
+[    83.618] (II) config/udev: Adding input device Microsoft Comfort Curve Keyboard 3000 (/dev/input/event3)
+[    83.618] (**) Microsoft Comfort Curve Keyboard 3000: Applying InputClass "libinput keyboard catchall"
+[    83.618] (II) Using input driver 'libinput' for 'Microsoft Comfort Curve Keyboard 3000'
+[    83.618] (**) Microsoft Comfort Curve Keyboard 3000: always reports core events
+[    83.618] (**) Option "Device" "/dev/input/event3"
+[    83.618] (**) Option "_source" "server/udev"
+[    83.619] (II) event3  - Microsoft Comfort Curve Keyboard 3000: is tagged by udev as: Keyboard
+[    83.619] (II) event3  - Microsoft Comfort Curve Keyboard 3000: device is a keyboard
+[    83.619] (II) event3  - Microsoft Comfort Curve Keyboard 3000: device removed
+[    83.640] (**) Option "config_info" "udev:/sys/devices/pci0000:00/0000:00:14.0/usb1/1-3/1-3:1.0/0003:045E:07B6.0001/input/input3/event3"
+[    83.640] (II) XINPUT: Adding extended input device "Microsoft Comfort Curve Keyboard 3000" (type: KEYBOARD, id 9)
+[    83.640] (**) Option "xkb_layout" "cn,us"
+[    83.640] (**) Option "xkb_variant" ","
+[    83.641] (II) event3  - Microsoft Comfort Curve Keyboard 3000: is tagged by udev as: Keyboard
+[    83.641] (II) event3  - Microsoft Comfort Curve Keyboard 3000: device is a keyboard
+[    83.643] (II) config/udev: Adding input device Microsoft Comfort Curve Keyboard 3000 (/dev/input/event4)
+[    83.643] (**) Microsoft Comfort Curve Keyboard 3000: Applying InputClass "libinput keyboard catchall"
+[    83.643] (II) Using input driver 'libinput' for 'Microsoft Comfort Curve Keyboard 3000'
+[    83.643] (**) Microsoft Comfort Curve Keyboard 3000: always reports core events
+[    83.643] (**) Option "Device" "/dev/input/event4"
+[    83.643] (**) Option "_source" "server/udev"
+[    83.644] (II) event4  - Microsoft Comfort Curve Keyboard 3000: is tagged by udev as: Keyboard
+[    83.644] (II) event4  - Microsoft Comfort Curve Keyboard 3000: device is a keyboard
+[    83.644] (II) event4  - Microsoft Comfort Curve Keyboard 3000: device removed
+[    83.680] (II) libinput: Microsoft Comfort Curve Keyboard 3000: needs a virtual subdevice
+[    83.680] (**) Option "config_info" "udev:/sys/devices/pci0000:00/0000:00:14.0/usb1/1-3/1-3:1.1/0003:045E:07B6.0002/input/input4/event4"
+[    83.680] (II) XINPUT: Adding extended input device "Microsoft Comfort Curve Keyboard 3000" (type: MOUSE, id 10)
+[    83.680] (**) Option "AccelerationScheme" "none"
+[    83.680] (**) Microsoft Comfort Curve Keyboard 3000: (accel) selected scheme none/0
+[    83.680] (**) Microsoft Comfort Curve Keyboard 3000: (accel) acceleration factor: 2.000
+[    83.680] (**) Microsoft Comfort Curve Keyboard 3000: (accel) acceleration threshold: 4
+[    83.681] (II) event4  - Microsoft Comfort Curve Keyboard 3000: is tagged by udev as: Keyboard
+[    83.681] (II) event4  - Microsoft Comfort Curve Keyboard 3000: device is a keyboard
+[    83.683] (II) config/udev: Adding input device Microsoft  Microsoft Basic Optical Mouse v2.0  (/dev/input/event5)
+[    83.683] (**) Microsoft  Microsoft Basic Optical Mouse v2.0 : Applying InputClass "libinput pointer catchall"
+[    83.683] (II) Using input driver 'libinput' for 'Microsoft  Microsoft Basic Optical Mouse v2.0 '
+[    83.683] (**) Microsoft  Microsoft Basic Optical Mouse v2.0 : always reports core events
+[    83.683] (**) Option "Device" "/dev/input/event5"
+[    83.683] (**) Option "_source" "server/udev"
+[    83.740] (II) event5  - Microsoft  Microsoft Basic Optical Mouse v2.0 : is tagged by udev as: Mouse
+[    83.740] (II) event5  - Microsoft  Microsoft Basic Optical Mouse v2.0 : device is a pointer
+[    83.741] (II) event5  - Microsoft  Microsoft Basic Optical Mouse v2.0 : device removed
+[    83.788] (**) Option "config_info" "udev:/sys/devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/0003:045E:00CB.0004/input/input23/event5"
+[    83.788] (II) XINPUT: Adding extended input device "Microsoft  Microsoft Basic Optical Mouse v2.0 " (type: MOUSE, id 11)
+[    83.788] (**) Option "AccelerationScheme" "none"
+[    83.788] (**) Microsoft  Microsoft Basic Optical Mouse v2.0 : (accel) selected scheme none/0
+[    83.788] (**) Microsoft  Microsoft Basic Optical Mouse v2.0 : (accel) acceleration factor: 2.000
+[    83.788] (**) Microsoft  Microsoft Basic Optical Mouse v2.0 : (accel) acceleration threshold: 4
+[    83.848] (II) event5  - Microsoft  Microsoft Basic Optical Mouse v2.0 : is tagged by udev as: Mouse
+[    83.848] (II) event5  - Microsoft  Microsoft Basic Optical Mouse v2.0 : device is a pointer
+[    83.850] (II) config/udev: Adding input device Microsoft  Microsoft Basic Optical Mouse v2.0  (/dev/input/mouse0)
+[    83.850] (II) No input driver specified, ignoring this device.
+[    83.850] (II) This device may have been added with another device file.
+[    83.851] (II) config/udev: Adding input device HDA NVidia HDMI/DP,pcm=3 (/dev/input/event19)
+[    83.851] (II) No input driver specified, ignoring this device.
+[    83.851] (II) This device may have been added with another device file.
+[    83.852] (II) config/udev: Adding input device HDA NVidia HDMI/DP,pcm=7 (/dev/input/event20)
+[    83.852] (II) No input driver specified, ignoring this device.
+[    83.852] (II) This device may have been added with another device file.
+[    83.853] (II) config/udev: Adding input device HDA NVidia HDMI/DP,pcm=8 (/dev/input/event21)
+[    83.853] (II) No input driver specified, ignoring this device.
+[    83.853] (II) This device may have been added with another device file.
+[    83.853] (II) config/udev: Adding input device HDA NVidia HDMI/DP,pcm=9 (/dev/input/event22)
+[    83.853] (II) No input driver specified, ignoring this device.
+[    83.853] (II) This device may have been added with another device file.
+[    83.853] (II) config/udev: Adding input device HDA Intel PCH Line Out Surround (/dev/input/event10)
+[    83.853] (II) No input driver specified, ignoring this device.
+[    83.853] (II) This device may have been added with another device file.
+[    83.853] (II) config/udev: Adding input device HDA Intel PCH Line Out CLFE (/dev/input/event11)
+[    83.853] (II) No input driver specified, ignoring this device.
+[    83.853] (II) This device may have been added with another device file.
+[    83.854] (II) config/udev: Adding input device HDA Intel PCH Line Out Side (/dev/input/event12)
+[    83.854] (II) No input driver specified, ignoring this device.
+[    83.854] (II) This device may have been added with another device file.
+[    83.854] (II) config/udev: Adding input device HDA Intel PCH Front Headphone (/dev/input/event13)
+[    83.854] (II) No input driver specified, ignoring this device.
+[    83.854] (II) This device may have been added with another device file.
+[    83.854] (II) config/udev: Adding input device HDA Intel PCH Front Mic (/dev/input/event6)
+[    83.854] (II) No input driver specified, ignoring this device.
+[    83.854] (II) This device may have been added with another device file.
+[    83.854] (II) config/udev: Adding input device HDA Intel PCH Rear Mic (/dev/input/event7)
+[    83.854] (II) No input driver specified, ignoring this device.
+[    83.854] (II) This device may have been added with another device file.
+[    83.854] (II) config/udev: Adding input device HDA Intel PCH Line (/dev/input/event8)
+[    83.854] (II) No input driver specified, ignoring this device.
+[    83.854] (II) This device may have been added with another device file.
+[    83.854] (II) config/udev: Adding input device HDA Intel PCH Line Out Front (/dev/input/event9)
+[    83.854] (II) No input driver specified, ignoring this device.
+[    83.854] (II) This device may have been added with another device file.
+[    83.854] (II) config/udev: Adding input device Eee PC WMI hotkeys (/dev/input/event14)
+[    83.854] (**) Eee PC WMI hotkeys: Applying InputClass "libinput keyboard catchall"
+[    83.854] (II) Using input driver 'libinput' for 'Eee PC WMI hotkeys'
+[    83.854] (**) Eee PC WMI hotkeys: always reports core events
+[    83.854] (**) Option "Device" "/dev/input/event14"
+[    83.854] (**) Option "_source" "server/udev"
+[    83.855] (II) event14 - Eee PC WMI hotkeys: is tagged by udev as: Keyboard
+[    83.855] (II) event14 - Eee PC WMI hotkeys: device is a keyboard
+[    83.855] (II) event14 - Eee PC WMI hotkeys: device removed
+[    83.880] (**) Option "config_info" "udev:/sys/devices/platform/eeepc-wmi/input/input14/event14"
+[    83.880] (II) XINPUT: Adding extended input device "Eee PC WMI hotkeys" (type: KEYBOARD, id 12)
+[    83.880] (**) Option "xkb_layout" "cn,us"
+[    83.880] (**) Option "xkb_variant" ","
+[    83.880] (II) event14 - Eee PC WMI hotkeys: is tagged by udev as: Keyboard
+[    83.880] (II) event14 - Eee PC WMI hotkeys: device is a keyboard
+[    83.884] (**) Microsoft Comfort Curve Keyboard 3000: Applying InputClass "libinput keyboard catchall"
+[    83.884] (II) Using input driver 'libinput' for 'Microsoft Comfort Curve Keyboard 3000'
+[    83.884] (**) Microsoft Comfort Curve Keyboard 3000: always reports core events
+[    83.884] (**) Option "Device" "/dev/input/event4"
+[    83.884] (**) Option "_source" "_driver/libinput"
+[    83.884] (II) libinput: Microsoft Comfort Curve Keyboard 3000: is a virtual subdevice
+[    83.884] (**) Option "config_info" "udev:/sys/devices/pci0000:00/0000:00:14.0/usb1/1-3/1-3:1.1/0003:045E:07B6.0002/input/input4/event4"
+[    83.884] (II) XINPUT: Adding extended input device "Microsoft Comfort Curve Keyboard 3000" (type: KEYBOARD, id 13)
+[    83.884] (**) Option "xkb_layout" "cn,us"
+[    83.884] (**) Option "xkb_variant" ","
+[    83.914] (--) NVIDIA(GPU-0): Samsung U28E590 (DFP-0): connected
+[    83.914] (--) NVIDIA(GPU-0): Samsung U28E590 (DFP-0): Internal TMDS
+[    83.914] (--) NVIDIA(GPU-0): Samsung U28E590 (DFP-0): 600.0 MHz maximum pixel clock
+[    83.914] (--) NVIDIA(GPU-0): 
+[    83.944] (--) NVIDIA(GPU-0): Samsung U28E590 (DFP-0): connected
+[    83.944] (--) NVIDIA(GPU-0): Samsung U28E590 (DFP-0): Internal TMDS
+[    83.944] (--) NVIDIA(GPU-0): Samsung U28E590 (DFP-0): 600.0 MHz maximum pixel clock
+[    83.944] (--) NVIDIA(GPU-0): 
+[    86.881] (II) event2  - Power Button: device removed
+[    86.920] (II) event1  - Power Button: device removed
+[    86.960] (II) event0  - Sleep Button: device removed
+[    86.976] (II) event3  - Microsoft Comfort Curve Keyboard 3000: device removed
+[    86.992] (II) event5  - Microsoft  Microsoft Basic Optical Mouse v2.0 : device removed
+[    87.024] (II) event14 - Eee PC WMI hotkeys: device removed
+[    87.040] (II) event4  - Microsoft Comfort Curve Keyboard 3000: device removed
+[    87.059] (II) UnloadModule: "libinput"
+[    87.060] (II) UnloadModule: "libinput"
+[    87.060] (II) UnloadModule: "libinput"
+[    87.060] (II) UnloadModule: "libinput"
+[    87.060] (II) UnloadModule: "libinput"
+[    87.060] (II) UnloadModule: "libinput"
+[    87.060] (II) UnloadModule: "libinput"
+[    87.060] (II) UnloadModule: "libinput"
+[    88.361] (II) NVIDIA(GPU-0): Deleting GPU-0
+[    88.361] (II) NVIDIA(GPU-1): Renaming GPU-1 to GPU-0
+[    88.361] (II) NVIDIA(GPU-0): Deleting GPU-0
+[    88.378] (II) Server terminated successfully (0). Closing log file.

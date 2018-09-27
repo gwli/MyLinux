@@ -1,0 +1,169 @@
+[  1125.153] 
+X.Org X Server 1.19.6
+Release Date: 2017-12-20
+[  1125.153] X Protocol Version 11, Revision 0
+[  1125.153] Build Operating System: Linux 4.4.0-119-generic x86_64 Ubuntu
+[  1125.153] Current Operating System: Linux DEVTOOLS-qa29 4.15.0-20-generic #21-Ubuntu SMP Tue Apr 24 06:16:15 UTC 2018 x86_64
+[  1125.153] Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.15.0-20-generic root=/dev/sda1 ro quiet splash vt.handoff=1
+[  1125.153] Build Date: 13 April 2018  08:07:36PM
+[  1125.153] xorg-server 2:1.19.6-1ubuntu4 (For technical support please see http://www.ubuntu.com/support) 
+[  1125.153] Current version of pixman: 0.34.0
+[  1125.153] 	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+[  1125.153] Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+[  1125.153] (==) Log file: "/var/log/Xorg.0.log", Time: Thu Sep 27 10:21:36 2018
+[  1125.153] (==) Using config file: "/etc/X11/xorg.conf"
+[  1125.153] (==) Using system config directory "/usr/share/X11/xorg.conf.d"
+[  1125.153] (==) ServerLayout "Layout0"
+[  1125.153] (**) |-->Screen "Screen0" (0)
+[  1125.153] (**) |   |-->Monitor "Monitor0"
+[  1125.153] (**) |   |-->Device "Device0"
+[  1125.153] (**) |-->Input Device "Keyboard0"
+[  1125.153] (**) |-->Input Device "Mouse0"
+[  1125.153] (==) Automatically adding devices
+[  1125.153] (==) Automatically enabling devices
+[  1125.153] (==) Automatically adding GPU devices
+[  1125.153] (==) Automatically binding GPU devices
+[  1125.153] (==) Max clients allowed: 256, resource mask: 0x1fffff
+[  1125.153] (WW) The directory "/usr/share/fonts/X11/cyrillic" does not exist.
+[  1125.153] 	Entry deleted from font path.
+[  1125.153] (WW) The directory "/usr/share/fonts/X11/100dpi/" does not exist.
+[  1125.153] 	Entry deleted from font path.
+[  1125.153] (WW) The directory "/usr/share/fonts/X11/75dpi/" does not exist.
+[  1125.153] 	Entry deleted from font path.
+[  1125.153] (WW) The directory "/usr/share/fonts/X11/100dpi" does not exist.
+[  1125.153] 	Entry deleted from font path.
+[  1125.153] (WW) The directory "/usr/share/fonts/X11/75dpi" does not exist.
+[  1125.153] 	Entry deleted from font path.
+[  1125.153] (==) FontPath set to:
+	/usr/share/fonts/X11/misc,
+	/usr/share/fonts/X11/Type1,
+	built-ins
+[  1125.153] (==) ModulePath set to "/usr/lib/xorg/modules"
+[  1125.153] (WW) Hotplugging is on, devices using drivers 'kbd', 'mouse' or 'vmmouse' will be disabled.
+[  1125.153] (WW) Disabling Keyboard0
+[  1125.153] (WW) Disabling Mouse0
+[  1125.153] (II) Loader magic: 0x560055369020
+[  1125.153] (II) Module ABI versions:
+[  1125.153] 	X.Org ANSI C Emulation: 0.4
+[  1125.153] 	X.Org Video Driver: 23.0
+[  1125.153] 	X.Org XInput driver : 24.1
+[  1125.153] 	X.Org Server Extension : 10.0
+[  1125.154] (--) using VT number 2
+
+[  1125.154] (II) systemd-logind: logind integration requires -keeptty and -keeptty was not provided, disabling logind integration
+[  1125.154] (II) xfree86: Adding drm device (/dev/dri/card0)
+[  1125.154] (II) xfree86: Adding drm device (/dev/dri/card1)
+[  1125.155] (--) PCI:*(0:1:0:0) 10de:1dbe:10de:0000 rev 161, Mem @ 0xf6000000/16777216, 0xe0000000/268435456, 0xf0000000/33554432, I/O @ 0x0000e000/128, BIOS @ 0x????????/131072
+[  1125.155] (--) PCI: (0:2:0:0) 10de:13bb:10de:1098 rev 162, Mem @ 0xf4000000/16777216, 0xc0000000/268435456, 0xd0000000/33554432, I/O @ 0x0000d000/128, BIOS @ 0x????????/524288
+[  1125.155] (II) LoadModule: "glx"
+[  1125.155] (II) Loading /usr/lib/xorg/modules/extensions/libglx.so
+[  1125.156] (II) Module glx: vendor="X.Org Foundation"
+[  1125.156] 	compiled for 1.19.6, module version = 1.0.0
+[  1125.156] 	ABI class: X.Org Server Extension, version 10.0
+[  1125.156] (II) LoadModule: "nvidia"
+[  1125.156] (II) Loading /usr/lib/xorg/modules/drivers/nvidia_drv.so
+[  1125.156] (II) Module nvidia: vendor="NVIDIA Corporation"
+[  1125.156] 	compiled for 4.0.2, module version = 1.0.0
+[  1125.156] 	Module class: X.Org Video Driver
+[  1125.156] (II) NVIDIA dlloader X Driver  410.48  Thu Sep  6 06:27:34 CDT 2018
+[  1125.156] (II) NVIDIA Unified Driver for all Supported NVIDIA GPUs
+[  1125.172] (II) Loading sub module "fb"
+[  1125.172] (II) LoadModule: "fb"
+[  1125.173] (II) Loading /usr/lib/xorg/modules/libfb.so
+[  1125.173] (II) Module fb: vendor="X.Org Foundation"
+[  1125.173] 	compiled for 1.19.6, module version = 1.0.0
+[  1125.173] 	ABI class: X.Org ANSI C Emulation, version 0.4
+[  1125.173] (II) Loading sub module "wfb"
+[  1125.173] (II) LoadModule: "wfb"
+[  1125.173] (II) Loading /usr/lib/xorg/modules/libwfb.so
+[  1125.173] (II) Module wfb: vendor="X.Org Foundation"
+[  1125.173] 	compiled for 1.19.6, module version = 1.0.0
+[  1125.173] 	ABI class: X.Org ANSI C Emulation, version 0.4
+[  1125.173] (II) Loading sub module "ramdac"
+[  1125.173] (II) LoadModule: "ramdac"
+[  1125.173] (II) Module "ramdac" already built-in
+[  1125.173] (**) NVIDIA(0): Depth 24, (--) framebuffer bpp 32
+[  1125.173] (==) NVIDIA(0): RGB weight 888
+[  1125.173] (==) NVIDIA(0): Default visual is TrueColor
+[  1125.173] (==) NVIDIA(0): Using gamma correction (1.0, 1.0, 1.0)
+[  1125.173] (**) NVIDIA(0): Enabling 2D acceleration
+[  1125.173] (II) Loading sub module "glxserver_nvidia"
+[  1125.173] (II) LoadModule: "glxserver_nvidia"
+[  1125.173] (II) Loading /usr/lib/xorg/modules/extensions/libglxserver_nvidia.so
+[  1125.175] (II) Module glxserver_nvidia: vendor="NVIDIA Corporation"
+[  1125.175] 	compiled for 4.0.2, module version = 1.0.0
+[  1125.175] 	Module class: X.Org Server Extension
+[  1125.175] (II) NVIDIA GLX Module  410.48  Thu Sep  6 06:24:45 CDT 2018
+[  1125.559] (--) NVIDIA(0): Valid display device(s) on GPU-0 at PCI:1:0:0
+[  1125.559] (--) NVIDIA(0):     DFP-0 (boot)
+[  1125.559] (--) NVIDIA(0):     DFP-1
+[  1125.559] (--) NVIDIA(0):     DFP-2
+[  1125.559] (--) NVIDIA(0):     DFP-3
+[  1125.559] (--) NVIDIA(0):     DFP-4
+[  1125.559] (--) NVIDIA(0):     DFP-5
+[  1125.559] (--) NVIDIA(0):     DFP-6
+[  1125.559] (--) NVIDIA(0):     DFP-7
+[  1125.559] (--) NVIDIA(0):     DFP-8
+[  1125.560] (II) NVIDIA(0): NVIDIA GPU Graphics Device (GV100GL-A) at PCI:1:0:0 (GPU-0)
+[  1125.560] (--) NVIDIA(0): Memory: 16777216 kBytes
+[  1125.560] (--) NVIDIA(0): VideoBIOS: 88.00.37.00.00
+[  1125.560] (II) NVIDIA(0): Detected PCI Express Link width: 16X
+[  1125.560] (--) NVIDIA(GPU-0): DFP-0: disconnected
+[  1125.560] (--) NVIDIA(GPU-0): DFP-0: Internal TMDS
+[  1125.560] (--) NVIDIA(GPU-0): DFP-0: 330.0 MHz maximum pixel clock
+[  1125.560] (--) NVIDIA(GPU-0): 
+[  1125.560] (--) NVIDIA(GPU-0): DFP-1: disconnected
+[  1125.560] (--) NVIDIA(GPU-0): DFP-1: Internal DisplayPort
+[  1125.560] (--) NVIDIA(GPU-0): DFP-1: 1440.0 MHz maximum pixel clock
+[  1125.560] (--) NVIDIA(GPU-0): 
+[  1125.560] (--) NVIDIA(GPU-0): DFP-2: disconnected
+[  1125.560] (--) NVIDIA(GPU-0): DFP-2: Internal TMDS
+[  1125.560] (--) NVIDIA(GPU-0): DFP-2: 165.0 MHz maximum pixel clock
+[  1125.560] (--) NVIDIA(GPU-0): 
+[  1125.560] (--) NVIDIA(GPU-0): DFP-3: disconnected
+[  1125.560] (--) NVIDIA(GPU-0): DFP-3: Internal DisplayPort
+[  1125.560] (--) NVIDIA(GPU-0): DFP-3: 1440.0 MHz maximum pixel clock
+[  1125.560] (--) NVIDIA(GPU-0): 
+[  1125.561] (--) NVIDIA(GPU-0): DFP-4: disconnected
+[  1125.561] (--) NVIDIA(GPU-0): DFP-4: Internal TMDS
+[  1125.561] (--) NVIDIA(GPU-0): DFP-4: 165.0 MHz maximum pixel clock
+[  1125.561] (--) NVIDIA(GPU-0): 
+[  1125.561] (--) NVIDIA(GPU-0): DFP-5: disconnected
+[  1125.561] (--) NVIDIA(GPU-0): DFP-5: Internal DisplayPort
+[  1125.561] (--) NVIDIA(GPU-0): DFP-5: 1440.0 MHz maximum pixel clock
+[  1125.561] (--) NVIDIA(GPU-0): 
+[  1125.561] (--) NVIDIA(GPU-0): DFP-6: disconnected
+[  1125.561] (--) NVIDIA(GPU-0): DFP-6: Internal TMDS
+[  1125.561] (--) NVIDIA(GPU-0): DFP-6: 165.0 MHz maximum pixel clock
+[  1125.561] (--) NVIDIA(GPU-0): 
+[  1125.561] (--) NVIDIA(GPU-0): DFP-7: disconnected
+[  1125.561] (--) NVIDIA(GPU-0): DFP-7: Internal DisplayPort
+[  1125.561] (--) NVIDIA(GPU-0): DFP-7: 1440.0 MHz maximum pixel clock
+[  1125.561] (--) NVIDIA(GPU-0): 
+[  1125.561] (--) NVIDIA(GPU-0): DFP-8: disconnected
+[  1125.561] (--) NVIDIA(GPU-0): DFP-8: Internal TMDS
+[  1125.561] (--) NVIDIA(GPU-0): DFP-8: 165.0 MHz maximum pixel clock
+[  1125.561] (--) NVIDIA(GPU-0): 
+[  1125.561] (EE) NVIDIA(0): Failed to assign any connected display devices to X screen 0. 
+[  1125.561] (EE) NVIDIA(0):     Set AllowEmptyInitialConfiguration if you want the server
+[  1125.561] (EE) NVIDIA(0):     to start anyway
+[  1125.561] (EE) NVIDIA(0): Failing initialization of X screen 0
+[  1125.615] (II) UnloadModule: "nvidia"
+[  1125.615] (II) UnloadSubModule: "glxserver_nvidia"
+[  1125.615] (II) Unloading glxserver_nvidia
+[  1125.615] (II) UnloadSubModule: "wfb"
+[  1125.615] (II) UnloadSubModule: "fb"
+[  1125.615] (EE) Screen(s) found, but none have a usable configuration.
+[  1125.615] (EE) 
+Fatal server error:
+[  1125.615] (EE) no screens found(EE) 
+[  1125.615] (EE) 
+Please consult the The X.Org Foundation support 
+	 at http://wiki.x.org
+ for help. 
+[  1125.615] (EE) Please also check the log file at "/var/log/Xorg.0.log" for additional information.
+[  1125.615] (EE) 
+[  1125.649] (EE) Server terminated with error (1). Closing log file.
