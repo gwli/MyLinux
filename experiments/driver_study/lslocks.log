@@ -1,0 +1,5 @@
+COMMAND           PID  TYPE SIZE MODE  M START END PATH
+thermald          777 POSIX   0B WRITE 0     0   0 /run/thermald/thermald.pid
+whoopsie         1044 FLOCK   0B WRITE 0     0   0 /run/lock/whoopsie/lock
+cron              802 FLOCK   4B WRITE 0     0   0 /run/crond.pid
+systemd-timesyn   709 FLOCK      WRITE 0     0   0 /run...

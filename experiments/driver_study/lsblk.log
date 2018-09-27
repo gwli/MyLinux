@@ -1,0 +1,26 @@
+NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+loop0    7:0    0 140.9M  1 loop /snap/gnome-3-26-1604/70
+loop1    7:1    0   2.2M  1 loop /snap/gnome-calculator/222
+loop2    7:2    0  14.5M  1 loop /snap/gnome-logs/43
+loop3    7:3    0  14.5M  1 loop /snap/gnome-logs/40
+loop4    7:4    0   2.3M  1 loop /snap/gnome-calculator/238
+loop5    7:5    0    13M  1 loop /snap/gnome-characters/117
+loop6    7:6    0 139.5M  1 loop /snap/gnome-3-26-1604/64
+loop7    7:7    0  14.5M  1 loop /snap/gnome-logs/37
+loop8    7:8    0   3.7M  1 loop /snap/gnome-system-monitor/57
+loop9    7:9    0  42.1M  1 loop /snap/gtk-common-themes/701
+loop10   7:10   0  87.9M  1 loop /snap/core/5328
+loop11   7:11   0   2.3M  1 loop /snap/gnome-calculator/199
+loop12   7:12   0  34.7M  1 loop /snap/gtk-common-themes/319
+loop13   7:13   0   3.7M  1 loop /snap/gnome-system-monitor/54
+loop14   7:14   0  86.9M  1 loop /snap/core/4917
+loop15   7:15   0   3.7M  1 loop /snap/gnome-system-monitor/51
+loop16   7:16   0    87M  1 loop /snap/core/5145
+loop17   7:17   0    13M  1 loop /snap/gnome-characters/124
+loop18   7:18   0   140M  1 loop /snap/gnome-3-26-1604/62
+loop19   7:19   0    13M  1 loop /snap/gnome-characters/103
+sda      8:0    0 931.5G  0 disk 
+├─sda1   8:1    0 111.8G  0 part /
+├─sda2   8:2    0 478.9G  0 part 
+├─sda3   8:3    0   3.7G  0 part 
+└─sda4   8:4    0   1.9G  0 part /mnt/grubpart

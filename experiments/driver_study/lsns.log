@@ -1,0 +1,13 @@
+        NS TYPE   NPROCS   PID USER             COMMAND
+4026531835 cgroup    173     1 root             /sbin/init splash
+4026531836 pid       173     1 root             /sbin/init splash
+4026531837 user      173     1 root             /sbin/init splash
+4026531838 uts       173     1 root             /sbin/init splash
+4026531839 ipc       173     1 root             /sbin/init splash
+4026531840 mnt       167     1 root             /sbin/init splash
+4026531861 mnt         1    55 root             kdevtmpfs
+4026531993 net       173     1 root             /sbin/init splash
+4026532185 mnt         1   314 root             /lib/systemd/systemd-udevd
+4026532233 mnt         1   708 systemd-resolve  /lib/systemd/systemd-resolved
+4026532379 mnt         1   709 systemd-timesync /lib/systemd/systemd-timesyncd
+4026532380 mnt         2   797 root             /usr/sbin/NetworkManager --no-daemon

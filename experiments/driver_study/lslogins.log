@@ -1,0 +1,44 @@
+  UID USER                PROC PWD-LOCK PWD-DENY LAST-LOGIN GECOS
+    0 root                 164        0        0      10:53 root
+    1 daemon                 0        0        1            daemon
+    2 bin                    0        0        1            bin
+    3 sys                    0        0        1            sys
+    4 sync                   0        0        1            sync
+    5 games                  0        0        1            games
+    6 man                    0        0        1            man
+    7 lp                     0        0        1            lp
+    8 mail                   0        0        1            mail
+    9 news                   0        0        1            news
+   10 uucp                   0        0        1            uucp
+   13 proxy                  0        0        1            proxy
+   33 www-data               0        0        1            www-data
+   34 backup                 0        0        1            backup
+   38 list                   0        0        1            Mailing List Manager
+   39 irc                    0        0        1            ircd
+   41 gnats                  0        0        1            Gnats Bug-Reporting System (admin)
+  100 systemd-network        0        0        1            systemd Network Management,,,
+  101 systemd-resolve        1        0        1            systemd Resolver,,,
+  102 syslog                 1        0        1            
+  103 messagebus             1        0        1            
+  104 _apt                   0        0        1            
+  105 uuidd                  0        0        1            
+  106 avahi-autoipd          0        0        1            Avahi autoip daemon,,,
+  107 usbmux                 0        0        1            usbmux daemon,,,
+  108 dnsmasq                0        0        1            dnsmasq,,,
+  109 rtkit                  0        0        1            RealtimeKit,,,
+  110 speech-dispatcher      0        0        1            Speech Dispatcher,,,
+  111 whoopsie               1        0        1            
+  112 kernoops               2        0        1            Kernel Oops Tracking Daemon,,,
+  113 saned                  0        0        1            
+  114 pulse                  0        0        1            PulseAudio daemon,,,
+  115 avahi                  2        0        1            Avahi mDNS daemon,,,
+  116 colord                 0        0        1            colord colour management daemon,,,
+  117 hplip                  0        0        1            HPLIP system user,,,
+  118 geoclue                0        0        1            
+  119 gnome-initial-setup    0        0        1            
+  120 gdm                    0        0        1            Gnome Display Manager
+  121 sshd                   0        0        1            
+  122 pgcharts               0        0        1            pgcharts,,,
+  123 lightdm                0        0        1            Light Display Manager
+ 1000 test                   0        0        0            test,,,
+65534 nobody                 0        0        1            nobody
