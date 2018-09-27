@@ -56,4 +56,4 @@ function! Hex2addr3(hexstr)
 	endif
 
 endfunction
-g/mem/s#0x[0-9a-z]\{16}#\=printf("%s (%4s)",submatch(0),Hex2addr3(submatch(0)))#gc
+g/mem\|BRK/s#0x[0-9a-z]\{8,16}#\=printf("%s (%4s)",submatch(0),Hex2addr3(submatch(0)))#gc
