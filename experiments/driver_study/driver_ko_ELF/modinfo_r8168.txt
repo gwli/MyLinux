@@ -1,0 +1,46 @@
+vili2@devtools-vili1:/sys/module/r8169/sections$ modinfo r8169
+filename:       /lib/modules/4.13.0-37-generic/kernel/drivers/net/ethernet/realtek/r8169.ko
+firmware:       rtl_nic/rtl8107e-2.fw
+firmware:       rtl_nic/rtl8107e-1.fw
+firmware:       rtl_nic/rtl8168h-2.fw
+firmware:       rtl_nic/rtl8168h-1.fw
+firmware:       rtl_nic/rtl8168g-3.fw
+firmware:       rtl_nic/rtl8168g-2.fw
+firmware:       rtl_nic/rtl8106e-2.fw
+firmware:       rtl_nic/rtl8106e-1.fw
+firmware:       rtl_nic/rtl8411-2.fw
+firmware:       rtl_nic/rtl8411-1.fw
+firmware:       rtl_nic/rtl8402-1.fw
+firmware:       rtl_nic/rtl8168f-2.fw
+firmware:       rtl_nic/rtl8168f-1.fw
+firmware:       rtl_nic/rtl8105e-1.fw
+firmware:       rtl_nic/rtl8168e-3.fw
+firmware:       rtl_nic/rtl8168e-2.fw
+firmware:       rtl_nic/rtl8168e-1.fw
+firmware:       rtl_nic/rtl8168d-2.fw
+firmware:       rtl_nic/rtl8168d-1.fw
+version:        2.3LK-NAPI
+license:        GPL
+description:    RealTek RTL-8169 Gigabit Ethernet driver
+author:         Realtek and the Linux r8169 crew <netdev@vger.kernel.org>
+srcversion:     6AEF6059A78EA4D99CF1E29
+alias:          pci:v00000001d00008168sv*sd00002410bc*sc*i*
+alias:          pci:v00001737d00001032sv*sd00000024bc*sc*i*
+alias:          pci:v000016ECd00000116sv*sd*bc*sc*i*
+alias:          pci:v00001259d0000C107sv*sd*bc*sc*i*
+alias:          pci:v00001186d00004302sv*sd*bc*sc*i*
+alias:          pci:v00001186d00004300sv*sd*bc*sc*i*
+alias:          pci:v00001186d00004300sv00001186sd00004B10bc*sc*i*
+alias:          pci:v000010ECd00008169sv*sd*bc*sc*i*
+alias:          pci:v000010ECd00008168sv*sd*bc*sc*i*
+alias:          pci:v000010ECd00008167sv*sd*bc*sc*i*
+alias:          pci:v000010ECd00008161sv*sd*bc*sc*i*
+alias:          pci:v000010ECd00008136sv*sd*bc*sc*i*
+alias:          pci:v000010ECd00008129sv*sd*bc*sc*i*
+depends:        mii
+intree:         Y
+name:           r8169
+vermagic:       4.13.0-37-generic SMP mod_unload 
+parm:           use_dac:Enable PCI DAC. Unsafe on 32 bit PCI slot. (int)
+parm:           debug:Debug verbosity level (0=none, ..., 16=all) (int)
+
