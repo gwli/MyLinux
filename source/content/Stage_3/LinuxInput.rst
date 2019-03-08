@@ -1,6 +1,8 @@
 Input设备
 =========
 
+.. image:: http://www.emyard.com/wp-content/uploads/2018/05/clip_image003.jpg
+
 Document/input/input-programming.txt
 键盘模式：
 键盘模式有4种， 在Linux 下可以用vc_kbd_mode（老版本中是kbd_mode）参数来设置和显示模式：
