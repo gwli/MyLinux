@@ -1,6 +1,8 @@
 Input设备
 =========
 
+核心问题，如何实现硬件输入与逻辑对象之间的映射。
+
 .. image:: http://www.emyard.com/wp-content/uploads/2018/05/clip_image002.jpg
 .. image:: http://www.emyard.com/wp-content/uploads/2018/05/clip_image003.jpg
 
