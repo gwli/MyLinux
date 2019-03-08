@@ -1,6 +1,7 @@
 Input设备
 =========
 
+.. image:: http://www.emyard.com/wp-content/uploads/2018/05/clip_image002.jpg
 .. image:: http://www.emyard.com/wp-content/uploads/2018/05/clip_image003.jpg
 
 Document/input/input-programming.txt
