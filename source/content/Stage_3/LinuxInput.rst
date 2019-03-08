@@ -1,3 +1,43 @@
+Input设备
+=========
+
+Document/input/input-programming.txt
+键盘模式：
+键盘模式有4种， 在Linux 下可以用vc_kbd_mode（老版本中是kbd_mode）参数来设置和显示模式：
+1） Scancode mode （raw ）raw模式：将键盘端口上读出的扫描码放入缓冲区
+2） Keycode mode (mediumraw) mediumraw模式：将扫描码过滤为键盘码放入缓冲区
+3） ASCII mode (XLATE ) XLATE模式：识别各种键盘码的组合，转换为TTY终端代码放入缓冲区
+4） UTF-8 MODE (UNICODE) Unicode 模式：UNICODE模式基本上与XLATE相同，只不过可以通过数字小键盘间接输入UNICODE代码。
+   在keyboard.c中，不涉及底层操作，也不涉及到任何体系结构，他主要负责：键盘初始化、键盘tasklet的挂入、按键盘后的处理、keymap的装入、scancode的转化、与TTY设备的通信
+
+#. 信号流程
+   
+   * 硬件中断-> input subsystem->
+
+#. udev的关系
+   
+   * /lib/udev/hwdb.d/60-keyboard.hwdb,键盘的mapping也都在这个文件里。
+
+#. linux 各个位置文件的位置
+#. 触摸屏的检测， 可以driver检测然后上报 input-subsystem. 只是前端不同。对于后端可以保持不变。
+   * 触摸屏的虚拟键，只要driver能识别上报就行。
+
+#. 如何troubleshoot
+   * evtest  :* apt install evtest*
+   * xev 
+   
+   .. code-block:: bash
+      
+      udevadm hwdb --update
+      udevadm trigger /dev/input/eventXX
+
+从这个 `https://bugs.launchpad.net/ubuntu/+source/systemd/+bug/1597415`_ 分析开始。 
+
+硬件与driver 的关联是在
+
+*/proc/bus/input/devices 这里对应的， handlers + devices.
+* In /lib/udev/hwdb.d/60-keyboard.hwdb
+
 
 最终真实硬件，都会变成文件对象，其实大部分的硬件都是基于寄存器的，无非提供了硬件复用机制，就像CPU一样，同样的道理适用于其他硬件，首先每一个硬件抽象化，然后映射到真实硬件的部分。而每一个抽象硬件，都有其独立寄存器，就像所谓的context,正所谓的open,close其实本质就是实现一个小的context,并且实现环境切换以得到复用，这也是 with context manager的实现的原理。
 
@@ -9,9 +49,9 @@
 可以用 os.open打开同一个文件即可。并且不用缓冲区即可。
 
 .. seealso::
-   * `linux input子系统详截 <http://wenku.baidu.com/view/a6c4b6bfc77da26925c5b001.html>`_  %IF{" '' = '' " then="" else="- "}%
-   * `Android 【真机】与【模拟器】触摸屏事件的模拟差异分析 <http://www.linuxidc.com/Linux/2011-06/37906.htm>`_  %IF{" '' = '' " then="" else="- "}%
-   * `区分/dev/tty、/dev/console、/dev/pts、/dev/ttyn <http://bbs.chinaunix.net/thread-2080479-1-1.html>`_  %IF{" '' = '' " then="" else="- "}%
+   * `linux input子系统详截 <http://wenku.baidu.com/view/a6c4b6bfc77da26925c5b001.html>`_ 
+   * `Android 【真机】与【模拟器】触摸屏事件的模拟差异分析 <http://www.linuxidc.com/Linux/2011-06/37906.htm>`_  
+   * `区分/dev/tty、/dev/console、/dev/pts、/dev/ttyn <http://bbs.chinaunix.net/thread-2080479-1-1.html>`_  
 
 thinking
 --------
