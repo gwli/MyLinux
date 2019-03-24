@@ -1,7 +1,7 @@
 Linux 的目录结构
 ****************
 
-.. figure:: images/LinuxFileTree.png
+.. figure:: /Stage_1/images/LinuxFileTree.png
     :width: 400px
     :align: center
     :height: 200px

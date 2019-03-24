@@ -5,14 +5,24 @@ Linux 基本命令
 命令补全
 --------
 
-bash 现在很强的命令补全功能，不是简单的字符串补全，而是根据上下文来补全。这些都的实现都在  /usr/share/bash-complete 中。 如果没有可以安装 apt-get install bash-complete
+bash 的命令补全功能，不只是简单的字符串补全，而是根据上下文来补全。这些都的实现都在  /usr/share/bash-complete 中。 如果没有可以安装 apt-get install bash-complete
+
+.. image::  https://asciinema.org/a/LUcAqGRm2vJc8sQYUlhO4fIef
+
 service 命令，它列出系统中有 services . 
 
-开机关机操作
-------------
+关机操作
+--------
 
-#. 开机:  /sbin/halt
-#. 关机:  /sbin/poweroff
+#. 关机:  
+   
+   .. code-block:: bash
+
+      /sbin/halt #杀掉所有进程，只是关掉CPU
+      /sbin/poweroff #除了halt,关掉主板的各种设备，最后关电 
+      shutdown -h now  #可以执行额外的脚本
+      init 0
+
 #. 重启： /sbin/reboot 
 
 修改密码：password
