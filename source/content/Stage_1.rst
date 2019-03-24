@@ -2,13 +2,13 @@
 基础篇
 ######
 
-.. include:: Stage_1/command.rst
-.. include:: Stage_1/network.rst
-.. include:: Stage_1/powermanagerment.rst
-.. include:: Stage_1/LinuxInstall.rst
 .. include:: Stage_1/DirectoryLayout.rst
-.. include:: Stage_1/gentoo.rst
-.. include:: Stage_1/ubuntu.rst
+.. include:: Stage_1/Command.rst
+.. include:: Stage_1/LinuxInstall.rst
+.. include:: Stage_1/Network.rst
+.. include:: Stage_1/Powermanagerment.rst
+.. include:: Stage_1/Gentoo.rst
+.. include:: Stage_1/Ubuntu.rst
 .. include:: Stage_1/SUSE.rst
 .. include:: Stage_1/CENTOS.rst
 
