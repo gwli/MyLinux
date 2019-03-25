@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>log system &mdash; My Linux 0.3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="My Linux 0.3 documentation" href="../../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">My Linux 0.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="log-system">
+<h1>log system<a class="headerlink" href="#log-system" title="Permalink to this headline">¶</a></h1>
+<p>??????ٵ??˽?һ??ϵͳ?????ҵõ???ʵ??????ʱ???ݣ????????????ϸ?ڣ???ô?鿴log?Ǿ?????Ҫ???顣</p>
+<p>?ϸ??????? linux?? /proc ,/system  ?ȵȶ?????logϵͳ?ɡ?</p>
+<p>???????????ֱ??ʹ??logger?أ?:command:<cite>logger</cite> ֱ??ʹ?á?
+?÷? <a class="reference external" href="http://blog.longwin.com.tw/2011/11/linux-data-syslog-logger-2011/">http://blog.longwin.com.tw/2011/11/linux-data-syslog-logger-2011/</a>??</p>
+<p><strong class="command">loginctl</strong> ???????????ж??????????</p>
+<p><strong class="command">logsave</strong> ?е??????? <strong class="command">tee</strong> ?Ĺ??ܣ? ????ʱʱ?鿴log?Ĺ???ʱ???Ҿ???ʹ?? <strong class="command">tail -f</strong> .</p>
+<p><strong class="command">logresolve</strong> ??apache log??IP??ַ????hostname. ?????һ???滻?ͺ????׵?ʵ???ˡ?</p>
+<p>??logcat Ҳ?ǲ????????Ļ??ơ?</p>
+<p>??һ????Ҫ?Ļ???logrotate ?Զ???????????εĻ??ơ?</p>
+<p><strong class="command">logrotate</strong>  ?????? <code class="file docutils literal"><span class="pre">/etc/logrotate.conf</span></code> ????????ÿһ??log?Ĵ?С?????ٴΣ?????ѹ????ʽ?ȵȡ? ÿһ?? app ?????????һ???Լ???log conf ???? <code class="file docutils literal"><span class="pre">/etc/logrotate.d/</span></code> ???档</p>
+<p>ϵͳlog??¼?ˣ??????û???½????Ϣ??wtmp,utmp,?ȵȣ?ͬʱҲ??¼login ʧ
+linux ??loglevelҲ?ǿ??Ե??ģ??𶯵?ʱ???????Ӳ??? loglevel=level,????ֱ????
+dmesg -n level,?????? echo $level&gt;/proc/sys/kernel/printk
+??????syslogϵͳ??????ʵ?֡?
+<a class="reference external" href="http://smilejay.com/2011/12/linux_loglevel/">http://smilejay.com/2011/12/linux_loglevel/</a></p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/content/Stage_3/logsystem.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">My Linux 0.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2014, gangwei.li.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,564 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>文件系统 &mdash; My Linux 0.3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="My Linux 0.3 documentation" href="../../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">My Linux 0.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>文件系统<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>介绍<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>文件系统是随着硬件的发展，以及数据存储发展的业务需要而不断向前发展的，并且两者之间的桥梁。</p>
+<p>为充分利用内存空间，我们建立一系列的内存文件系统。随着数据量越来越大，我们也就需要分布式的文件系统。以及种备份的容灾的需求。</p>
+<p><a class="reference external" href="http://wenku.baidu.com/view/aef3dbc69ec3d5bbfd0a74f3.html">文件系统</a> ，任何时候不明白的都先回来看看最原始的教材。文件系统基本的功能，就是文件管理与目录管理。以及磁盘空间分配使用。
+为什么要有这么多种文件系统。原因在于一定是不同的硬件实现。底层的实现是不样的。例如磁片硬件，与flash,以及固态硬盘，以及 人们对数据操作要求的不同。这种逻辑的需求与硬件结合的接口就是文件系统。对于不同的存储读写需求以及硬件实现，就会不同的实现实现算法机制。而这些就是文件系统。</p>
+<p>对于硬件来说，对于磁盘片来说，那就是CHS。三级了。而对于flash也就又不一样了。 还是拿CHS模型来说，CHS最终还是定位到扇区上，每一个磁道的扇区数是不同的，最外圈的最大，最内圈的最小。每一个硬盘的参数表会有这些值的。
+但是对CHS这种分区表方式会8G限制的问题，就有了后来的LBA模式，但是LBA模式最大支持2T限制。 CHS的MBR都是早期老掉牙方案了，虽然大部分讲分区原理都还在讲，但是拿这些理论已经不能解释现在的硬盘分区原理了，例如为什么现在分区是可以用GUID的。不过现在方案兼容老式的MBR。现在你看到的磁盘参数AAAA cylinders, BBBB Headers, CCCC sectors. 主要是为了让你换算LBA值来用的。LBA是绝对扇区号。换算方法是在这里`这里 &lt;<a class="reference external" href="http://wenku.baidu.com/view/30e874c789eb172ded63b7c6.html">http://wenku.baidu.com/view/30e874c789eb172ded63b7c6.html</a>&gt;`_ . 而AAAA，BBBB，CCCC会做为硬盘参数的。
+在往后会更大。这个主要是由于MBR机制造成的，因为MBR只留了６４个字节给分区表。现在又出了一种新机制EFI方案中GPT表。<a class="reference external" href="http://wenku.baidu.com/view/b32e3ac0bb4cf7ec4afed027.html">这里</a> 有详细的说明。</p>
+<p>对应的逻辑设备分为族/块，卷/分区。对应的逻辑存储单位，如何把逻辑单位与物理单位对应起来，就是格式化的过程，在Windows里就是format, 在linux里就是mkfs这条命令的过程之一。系统之上操作都是基于逻辑单位操作的。例如现在是利用的位图来表示，一个位表示一个逻辑单位的空闲与否。同样大小的位图可以多少空间，取决于这个逻辑单位的大小。这个颗粒度的大小匹配你的存储对象的特点。而这些管理都是基于分区的，每一个分区内部肯定首先这些控制模块，还是这些控制模块是放在全局的。每一个最小单位chunk只能在一个文件里，两个文件不能共享同一个chunk.就是为什么你经常看到的，文件的大小与实际占用空间大小是不一样的原因，因为文件本身的大小不可能每次都正好是最小单位的整数倍。</p>
+<p>对于管理还说还inode. 对于文件数据本身是可读可写，以及是否支持加密压缩等等。实现起来都是不一样的。每是每一个文件系统都能够提供的。并且还有。例如日志文件系统。对于文件的操作都是如何记录存储的。并且如何进行数据恢复。 常见的存储需求：本身是可读可写，以及是否支持加密压缩，数据恢复功能，读多还是写多，是大数据多还是小数据多等等。以及`性能的要求 &lt;<a class="reference external" href="http://wenku.baidu.com/view/a8608606cc175527072208a7.html">http://wenku.baidu.com/view/a8608606cc175527072208a7.html</a>&gt;`_ 。</p>
+<p>为什么要分区呢，是为了管理上的方便，使之具有隔离性，例如装操作系统，就要在独立的分区上。等等。另外也取与操作系统有关心，硬盘的结构MBR. 启动信息与分区表都在这里放着，但是分区表只有64节节，第一个分区占16字节，这样一个分区可如果大于2*312*512=2TB时，这个分区表就不行了。这种物理结构决定了如何进行分区。GPT分区。<a class="reference external" href="http://wenku.baidu.com/view/4e9f2714fad6195f312ba677.html">EFI、UEFI、MBR、GPT技术</a>  但是GPT模式在Windows上有很大的限制，那就是目录不能当启动盘。</p>
+<p>而在抽象层上，就各种各样的文件系统。linux 文件系统设计的很好，在linux里一切的资源，要么是file,要么是进程。 debugfs,Pipefs,sockFS,securityfs 这些都是虚拟的文件系统。你可以在 /proc/filessystems 里看到这些。</p>
+<p>而在linux中每一个进程空间只有一个根文件系统。 并且一个device都根据自身的结构形成自己文件系统结构。在异构系统之间，我们通过mount,来建立之间的不同系统之间通信桥梁。相当于在我的系统里，/xxx/XXX 就是你的入口点，往下的目录都是你的。即然是一个通信机制。就会信息通信协议，通信的方向是双方的，还是单方的。这也就有了四种</p>
+<p>具体可以说明见 <a class="reference external" href="https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt">kernel doc</a>
+<a class="reference external" href="https://www.ibm.com/developerworks/cn/linux/l-mount-namespaces.html">应用挂载名称空间</a> 来讲这些，空间的隔离，linux中使用各种各样的命名空间。</p>
+</div>
+<div class="section" id="pipe">
+<h2>Pipe文件系统<a class="headerlink" href="#pipe" title="Permalink to this headline">¶</a></h2>
+<p>linux 里大部分进程通信靠是Pipe，同步则是由Pipe 自己实现的，由于速度不的同，各种传输之间都会buffer来缓冲。
+并且缓冲模式有</p>
+<ol class="arabic simple">
+<li>buffered(默认4K), (STDin)</li>
+<li>unbuffred( 1byte)(STDERR)</li>
+<li>line buffered (1K) STDOUT</li>
+</ol>
+<p>如果想控制这个buffer的大小，可以用stdbuf来调整。 可以查看man stdbuf.</p>
+<p><a class="reference external" href="http://blog.csdn.net/morphad/article/details/9219843">http://blog.csdn.net/morphad/article/details/9219843</a>
+Pipe 文件系统的实现原理，pipefs 是虚拟的文件系统，使用用户空间的内存，挂载在内容中，并没有在根文件系统中。 用 <em>kern_mount</em> 来实现。</p>
+<p class="graphviz">
+<img src="../../_images/graphviz-154502cdd41c75bec45ce38737b63f3329fe6edd.png" alt="digraph hardisk {
+   HardDisk [shape=MRecord, label =&lt;
+     &lt;table&gt;
+      &lt;tr&gt;
+         &lt;td&gt;
+               &lt;table&gt;&lt;tr&gt;&lt;td&gt;MBR&lt;/td&gt; &lt;td&gt;Partition Table&lt;/td&gt; &lt;/tr&gt;&lt;/table&gt;
+         &lt;/td&gt;
+         &lt;td&gt;DBR &lt;/td&gt;
+         &lt;td&gt;FAT &lt;/td&gt;
+         &lt;td&gt;DIR &lt;/td&gt;
+         &lt;td&gt;DATA &lt;/td&gt;
+      &lt;/tr&gt;
+     &lt;/table&gt;
+&gt;];
+}" />
+</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="4%" />
+<col width="82%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>fdisk</td>
+<td>&nbsp;</td>
+<td>Partition Table</td>
+</tr>
+<tr class="row-even"><td>format/mkfs</td>
+<td>DBR</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>filesystem (inode )</td>
+<td>FAT</td>
+<td><a class="reference external" href="http://blog.csdn.net/qianjintianguo/article/details/712590">这个是基于文件系统的</a> ，是不同的，主要inode的结构。</td>
+</tr>
+<tr class="row-even"><td>^</td>
+<td>DIR</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>real data</td>
+<td>DATA</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>每一个分区的超级块放在这个分区的头，如果有就在第二个逻辑块里，一般情况下，第一块是引导块，第二块为super block并且大小固定。并且格式，大小固定。
+超级块，采用的是相互链表，并且vfs做了很好的抽象，并且还支持cache,定期与硬盘同步数据。
+<a class="reference external" href="http://guojing.me/linux-kernel-architecture/posts/super-block-object/">http://guojing.me/linux-kernel-architecture/posts/super-block-object/</a></p>
+<p>每一个分区的超级块是有备分的，你可以用mke2fs -n 或者dumpe2fs 来查看，然后再e2fsk -b 来进行修复。
+<a class="reference external" href="http://www.cyberciti.biz/tips/understanding-unixlinux-filesystem-superblock.html">http://www.cyberciti.biz/tips/understanding-unixlinux-filesystem-superblock.html</a></p>
+<p>supperblock 中存储 文件系统的格式，inode/block的总数，以及使用量，剩余量等信息。
+.block与 inode的大小（block 一般为1，2，4K,这些存储真实的数据，大文件可以用block,小文件可以的block,
+inode一般为124/256 byte).
+inode  存储的文件信息，例如文件属性，文件的权限,修改日期等等，文件名的链接，最后是文件数据block的地址。
+<a class="reference external" href="http://www.voidcn.com/article/p-mttgftgp-gn.html">http://www.voidcn.com/article/p-mttgftgp-gn.html</a></p>
+<p>每一个分区四大块:</p>
+<p class="graphviz">
+<img src="../../_images/graphviz-25402fbf68c1ac2745c9944050b35789a561be8f.png" alt="digraph filesystem {
+   partition  [ shape=Record, label=&quot;boot block|super block | inode index block | data block&quot;]
+}" />
+</p>
+<p><a class="reference external" href="http://man.chinaunix.net/linux/mandrake/cmuo/admin/camount3.html">各种挂载问题</a></p>
+<p>并且这个根文件系统是在内存里。 可以通过chroot 来修系统 的根在哪里。这在很多地方都能用到，例如安装机制，例如 apache中，当然不能一般用户得以/etc/目录了，所以要把 apache中根目录要改掉才行。并且还可以其他目录拼接成一个新的目录。</p>
+<p>例一个用法，那就是修复系统时可以用到，例如 <a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Base">https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Base</a> 把proc 从加载一下，</p>
+<p>每一个进程的都会记录自己的根目录在哪里，这样才能解析绝对目录与相对路径。</p>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://wenku.baidu.com/view/b131844d2e3f5727a5e9620d.html">硬盘知识,硬盘逻辑结构,硬盘MBR详解</a> 64 字节的分区表</li>
+<li>` Partition Tables &lt;<a class="reference external" href="http://thestarman.pcministry.com/asm/mbr/PartTables.htm">http://thestarman.pcministry.com/asm/mbr/PartTables.htm</a>&gt;`_</li>
+<li><a class="reference external" href="http://hi.baidu.com/bicener/item/b628c909039b7b1ceafe38bd">INIX文件系统中，第一个块为引导块，第二个块为超块，之后的N个块是inode位图块(表示哪几个inode被使用了，总的inode个数由超块给出)，紧接着是数据块位图，表示哪些数据块被使用了，紧接着就是inode块和数据块</a></li>
+<li><a class="reference external" href="http://alanwu.blog.51cto.com/3652632/1105681">ext3 启动过程</a></li>
+<li><a class="reference external" href="http://cs.ecust.edu.cn/snwei/studypc/operatepc/005.htm">硬盘及通用分区结构</a></li>
+</ol>
+<p><a class="reference external" href="http://wangchunhai.blog.51cto.com/225186/203621">使用sfdisk实现多操作系统引导</a>   既然说到文件系统，就会主分区以及如何引导启动的问题。无非是在主引导区放了一个自己的引导管理器，来设置起动。而GTL的实现原理在于，用sfdisk来分区，把linux放在这个上面，并且如何保证始终在这个系统。目前看来，默认到都是先到这个操作系统，然后再由这个操作来用sdisk来改分区先项。但是如何来保证每一次都要改了启动选项呢。  <a class="reference external" href="http://www.cl.cam.ac.uk/cgi-bin/manpage?8+sfdisk">其原理</a> 是的windows 里使用LBOOT的原理就是利用GDisk 先改分区表，然后再起动。sfdisk 有一堆分区表，而MBR的分区表只表示当前活动的系统可见的分区。 一共有四个启动分区，其中一个常住了linux，并且在这个linux系统里放着sfdisk里的放着一堆分区表，然后系统活动的几个放在系统分区表。并且这个linux始终是第三个分区，所改变的前两项分区表。而Windows能够看到，就是把始动分区切到这个linux分区如果不需要切系统的就不需要了。然后linux再根据自己的分区表来更新系统的分区表。 所以sfdisk 需要一个第三方的东西来保存其分区表，在这里GTL用了第三个分区自身，并且在sfdisk里的一个参数 -o file 就是那个分区表的位置。</p>
+<p>分区表除了要表示，分区的大小（通过起点，终点/长度来表示). 还需要分区的状态(活动与否），分区的类型也主要是用操作系统的类型。同一个值可能在不能操作系统下的识别是不一样的。<a class="reference external" href="http://www.cnblogs.com/hopeworld/archive/2011/03/27/1997298.html">MBR、分区表、CHS等概念</a>
+在DOS或Windows系统下，基本分区必须以柱面为单位划分（Sectors*Heads个扇区），如对于CHS为764/256/63的硬盘，分区的最小尺寸为256*63*512/1048576=7.875MB.
+<a class="reference external" href="http://www.vckbase.com/index.php/wv/260.html">深入浅出硬盘分区表</a> 分区表实际上一个单向的链表。</p>
+<p>由于硬盘的第一个扇区已经被引导扇区占用，所以一般来说，硬盘的第一个磁道（0头0道）的其余62个扇区是不会被分区占用的。某些分区软件甚至将第一个柱面全部空出来。并且分区中就有一项，那就是第一个分区前面有多少个隐藏扇区。其实每个分区都会有一个引导扇区，也就是`VBR &lt;<a class="reference external" href="http://en.wikipedia.org/wiki/Volume_boot_record">http://en.wikipedia.org/wiki/Volume_boot_record</a>&gt;`_ ,整个硬盘的Boot record就是MBR。</p>
+<p>现在明白了，老大的要讲故事，也就是要问为什么需要。同时也就是事情的前因后果，以及历史。自己如何早些问，那些文件系统有什么区别，现在也就早明白。直到现在才问。所以现在才明白。</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>ext2</td>
+<td><a class="reference external" href="http://learn.akae.cn/media/ch29s02.html">http://learn.akae.cn/media/ch29s02.html</a></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>ntfs</td>
+<td><a class="reference external" href="http://bbs.intohard.com/thread-66957-1-1.html">http://bbs.intohard.com/thread-66957-1-1.html</a></td>
+<td><a class="reference external" href="http://blog.csdn.net/daidodo/article/details/2702648">http://blog.csdn.net/daidodo/article/details/2702648</a></td>
+<td><a class="reference external" href="http://www.linuxquestions.org/questions/linux-newbie-8/error-mounting-mount-unknown-filesystem-type-ntfs-926355/">mount utfs as rw</a>  use fuse and ntfs-3g</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>FAT</td>
+<td><a class="reference external" href="http://www.sjhf.net/document/fat/#4.3%20%20FAT%E8%A1%A8%E5%92%8C%E6%95%B0%E6%8D%AE%E7%9A%84%E5%AD%98%E5%82%A8%E5%8E%9F%E5%88%99">http://www.sjhf.net/document/fat/#4.3%20%20FAT%E8%A1%A8%E5%92%8C%E6%95%B0%E6%8D%AE%E7%9A%84%E5%AD%98%E5%82%A8%E5%8E%9F%E5%88%99</a></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>rootfs</td>
+<td><a class="reference external" href="http://blog.21ic.com/user1/2216/archives/2006/25028.html">http://blog.21ic.com/user1/2216/archives/2006/25028.html</a></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>ramfs</td>
+<td>rootfs</td>
+<td>initrd and initramfs</td>
+<td><a class="reference external" href="http://hi.baidu.com/nuvtgbuqntbfgpq/item/537f1638797a88c01b9696f4">http://hi.baidu.com/nuvtgbuqntbfgpq/item/537f1638797a88c01b9696f4</a></td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>loop device /dev/loopXXX</td>
+<td><a class="reference external" href="http://www.groad.net/bbs/read.php?tid-2352.html">http://www.groad.net/bbs/read.php?tid-2352.html</a></td>
+<td>把文件以及镜象挂载</td>
+<td>是不是可以利用它来做系统血备份</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>看到现在终于把文件系统看懂一些吧，文件系统分为三层，文件本身内部结构一层，文件系统一层，分区与硬盘之间是一样。当然最初的概念都是结合物理模型的，随着后期的演化，最初的概念已经不是最初了的概念了。例如文件，最初都是就是一段扇区。但是到后期文件的已经完全脱离了，那个物理模型，就是变成了长度，并且这个常度就代表一个字节，并且字节也是一个抽象概念。不同的硬件，扇区的等等的分布是不一样的，不同的文件系统，block,inode之间对扇区对应关系都是不一样的。并且在文件系统上，文件不是顺序存储的。所以也就没有办法智能恢复了，也就只能整个硬盘做一个镜象，虽然你只用了一部分空间。 并且PBR的信息是放在分区里的，如果两个分区参数不一样，也是不行，相当于把分区的信息也复制过来了。而dd只能按块来读，在块之间来做转换。所以dd是在操作系统之下进行的，如果想用dd来做，要么两个分区一模一样，包括同样的位置有同样的坏道。要么要自己去解析文件系统的文件分配自己去读写分配每一个扇区。</p>
+</div>
+<div class="section" id="id11">
+<h2>分布式文件系统<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
+<p>基本要求，</p>
+<ol class="arabic simple">
+<li>全局名字空间</li>
+<li>缓存一致性</li>
+<li>安全性</li>
+<li>可用性</li>
+<li>可扩展性</li>
+</ol>
+<p><a class="footnote-reference" href="#r1" id="id12">[1]</a> 介绍了AFS，GFS，Lustre的分布式文件系统。</p>
+</div>
+<div class="section" id="id13">
+<h2>文件系统格式<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
+<img alt="../../_images/fs_capacity.png" src="../../_images/fs_capacity.png" />
+<div class="figure" id="id31">
+<img alt="../../_images/fs_performance.png" src="../../_images/fs_performance.png" />
+<p class="caption"><span class="caption-text"><a class="reference external" href="https://www.ibm.com/developerworks/cn/linux/l-jfs/">https://www.ibm.com/developerworks/cn/linux/l-jfs/</a></span></p>
+</div>
+<p>不同的文件系统格式，添加了不同的功能，特别是日志文件系统，添加一些数据恢复的功能，就像数据库可以根据日志rollback最佳状态。</p>
+<p><a class="reference external" href="https://zh.wikipedia.org/wiki/Ext4">https://zh.wikipedia.org/wiki/Ext4</a> 增加了在线整理磁盘碎片的功能， ext3 是没有的https://zh.wikipedia.org/wiki/Ext3。
+例如ext3grep,ext4magic, 大部分都是基于ext2fs_library.</p>
+<p><a class="reference external" href="http://extundelete.sourceforge.net/">http://extundelete.sourceforge.net/</a> 可以恢复数据ext2/3/4的数据。</p>
+<p>下一代的文件系统 <a class="reference external" href="https://zh.wikipedia.org/wiki/Btrfs">Btrfs</a> 将是采用类似数据库的底层方式的B+ tree的文件系统。 进一步把文件系统与数据库融合在一起。</p>
+<p>Btrfs 的简介 <a class="reference external" href="https://www.ibm.com/developerworks/cn/linux/l-cn-btrfs/index.htmloo">https://www.ibm.com/developerworks/cn/linux/l-cn-btrfs/index.htmloo</a>
+不同文件系统的性能分析 <a class="reference external" href="https://www.cnblogs.com/tommyli/p/3201047.html">https://www.cnblogs.com/tommyli/p/3201047.html</a></p>
+<p>android 主要是小文件，所以android系统默认是 ext4 格式。</p>
+</div>
+<div class="section" id="id14">
+<h2>调整分区的大小<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://blog.csdn.net/hongweigg/article/details/7197203">http://blog.csdn.net/hongweigg/article/details/7197203</a></p>
+<p>首先要自己记住分区的起始地址，然后修改分区表，然后再用 resize2fs,tune2fs 来更新文件系统的 meta data. 注意柱面号是按照unit 来计算的。 所以要学会计算这样。</p>
+<p>如果想用dd来做,   先做一个OS,并且在硬盘上连续存放的，并且要知道这个区域的大小，或者说估计大约的值。并且硬盘状态一样。 这样可以像Copy文件一样，那样去做了。</p>
+<p>另一个问题，分区的结构是否一样呢，如果分区的结构不样，例如索引节点的个数是不一样，这可能是按照分区的大小的百分比来进行的，如果新的分区足够大，就会出现浪费的问题，如果不够大就会可能出现错误。所以partitionclone最好的方式是能够认识文件系统。建立在文件系统上。就样可以解决这个问题了，这也就是为什么partclone要有那么多的，文件系统类型的支持。
+可以直接使用 dd if=/dev/sda of=XXX.ISO   或者cat 直接做光盘镜象，然后直接使用mount来进行挂载。</p>
+<p>dd if=XXX.iso of=/dev/&lt;usbpartition&gt;  bs=4k
+cat  XXX.iso &gt; /dev/&lt;usbpartition&gt;</p>
+<p>分区是对硬盘的一个抽象，对于ＯＳ来说，分区基本硬盘是一样的，并且分区上面还可以逻辑分区。block是对 扇区的一种抽象。文件相当于heads, 而目录相当于cylinders.</p>
+<p>可以用 <strong class="command">dumpe2fs</strong> 来查看文件系统，并且可以用 <strong class="command">tune2fs</strong> 来调整参数。</p>
+<p>由于物理磁盘受限于空间的大小，扩展起来不是很方便，这就有了逻辑磁盘的概念。lvm. 先在物理磁盘上建立phiycal Volume, 多个PV 可以组成一个VG，然后在每一个VG上可以建立LV，当然LV可也可以扩VG。而LV就当做一个分区来用。并且随时能够调整大小。 pv,vg,lv.</p>
+<img alt="Stage_2/fs/lv.jpg" src="Stage_2/fs/lv.jpg" />
+</div>
+<div class="section" id="partclone">
+<h2>partclone<a class="headerlink" href="#partclone" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://partclone.org/">http://partclone.org/</a>，</p>
+<p>partclone 对于ntfs 的支持比较有限，所以基本上还都是使用 ticons.</p>
+</div>
+<div class="section" id="tree">
+<h2>tree<a class="headerlink" href="#tree" title="Permalink to this headline">¶</a></h2>
+<p>用来查看filesystem的树型结构，并且通过用pattern过滤，以及控制输出各种格式XML,HTML以及&#8211;du 的功能。</p>
+</div>
+<div class="section" id="raid">
+<h2>Raid<a class="headerlink" href="#raid" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><a class="reference external" href="https://help.ubuntu.com/community/Installation/SoftwareRAID">https://help.ubuntu.com/community/Installation/SoftwareRAID</a></li>
+<li><a class="reference external" href="http://askubuntu.com/questions/526747/setting-up-raid-1-on-14-04-with-an-existing-drive">http://askubuntu.com/questions/526747/setting-up-raid-1-on-14-04-with-an-existing-drive</a></li>
+<li><a class="reference external" href="https://raid.wiki.kernel.org/index.php/RAID_setup">https://raid.wiki.kernel.org/index.php/RAID_setup</a></li>
+<li><a class="reference external" href="https://www.zhihu.com/question/20131784">七种raid配置通俗说明</a></li>
+</ol>
+<p>原理是采用编码的冗余原理。但是数据量越来越大，传统的raid的对于数据恢复的需要的时候间也越来越长，因为也需要进一步raid上分片/分簇来局部化坏道与修复。</p>
+<p><a class="reference external" href="http://alanwu.blog.51cto.com/3652632/1289661">新型的 raid 技术</a></p>
+<p>linux 采用 mdadm 来实现 <code class="file docutils literal"><span class="pre">/etc/mdadm.conf</span></code> .</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c1"># mdadm -C /dev/md0 -a yes -l 5 -n 3 /dev/sd{b,c,d}1</span>
+mdadm: array /dev/md0 started.
+
+-C ：创建一个阵列，后跟阵列名称
+-l ：指定阵列的级别；
+-n ：指定阵列中活动devices的数目
+
+<span class="o">[</span>root@bogon ~<span class="o">]</span><span class="c1"># mdadm --detail /dev/md0</span>
+ /dev/md0:
+         Version : 0.90
+   Creation Time : Tue Mar <span class="m">15</span> 08:17:52 2011
+      Raid Level : raid5
+      Array Size : <span class="m">9783296</span> <span class="o">(</span>9.33 GiB 10.02 GB<span class="o">)</span>
+   Used Dev Size : <span class="m">4891648</span> <span class="o">(</span>4.67 GiB 5.01 GB<span class="o">)</span>
+    Raid Devices : 3
+   Total Devices : 3
+ Preferred Minor : 0
+     Persistence : Superblock is persistent
+
+     Update Time : Tue Mar <span class="m">15</span> 08:20:25 2011
+           State : clean
+  Active Devices : 3
+ Working Devices : 3
+  Failed Devices : 0
+   Spare Devices : 0
+
+          Layout : left-symmetric    校验规则
+      Chunk Size : 64K
+
+            UUID : e0d929d1:69d7aacd:5ffcdf9b:c1aaf02d
+          Events : 0.2
+
+     Number   Major   Minor   RaidDevice State
+        <span class="m">0</span>       <span class="m">8</span>       <span class="m">17</span>        <span class="m">0</span>      active sync   /dev/sdb1
+        <span class="m">1</span>       <span class="m">8</span>       <span class="m">33</span>        <span class="m">1</span>      active sync   /dev/sdc1
+        <span class="m">2</span>       <span class="m">8</span>       <span class="m">49</span>        <span class="m">2</span>      active sync   /dev/sdd1
+</pre></div>
+</div>
+</div>
+<div class="section" id="id17">
+<h2>如何制作文件系统<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h2>
+<p>mount 各种各样的文件系统，loop 表示把本地文件当做文件系统来进行挂载。同时也还可以重新mount &#8211;bind 挂载点。对于物理分区有的时候会用完，添加就需要重起机器。所以也就产生了LVM. 逻辑分区。随着云计算到来，一切的虚拟化。原来的系统都是建立物理设备上的，现在都直接在逻辑设备上了。这样就具有更大的移值性，就像我们的CAS就是把逻辑拓扑与物理拓扑的隔离。LVM就在物理分区与文件系统之间又加了一层。文件系统直接建在LVM。
+loop device 就是伪设备当做块设备。<a class="reference external" href="http://unix.stackexchange.com/questions/4535/what-is-a-loop-device-when-mounting">http://unix.stackexchange.com/questions/4535/what-is-a-loop-device-when-mounting</a>
+数据的存储系统是任何一个现代系统必不可少的一部分。它关系着系统是否高效与稳定。使用数据库要求太多，而文件系统而是最灵活的，但是效率可能没有数据高。为了结合自己的数据存储需求，产生定制的文件系统，而非通过的OS文件系统。例如版本控制的文件存储系统，以及现在云计算系统都有自己存储系统。例如Google的GFS。<a class="reference external" href="http://fuse.sourceforge.net/">fuse</a> 文件系统是在用户空间的文件系统。<a class="reference external" href="http://www.ibm.com/developerworks/cn/linux/l-fuse/">如何使用</a> 。并且通过它可以把一些服务当做文件系统来使用。例如google的mail空间。以及ftp等等。</p>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://blog.csdn.net/karmy/article/details/1427315">SquashFS HOWTO (一) &#8212;简介</a></li>
+<li><a class="reference external" href="http://mcuol.com/download/upfile/armLinuxEMB10.pdf">如何制作文件系统</a></li>
+<li><a class="reference external" href="http://study.chyangwa.com/IT/AIX/aixcmds3/mkfs.htm">mkfs manual</a></li>
+</ol>
+<p>通过对gentoo对于各种概念有了更深的认识。</p>
+<p>不同的文件系统就是硬件磁盘与逻辑存储之间的映射关系。 所谓的超级块就是与文件系统有关的。
+并且存储的效率以及备份与压缩的机制。</p>
+<p>还有在备份的时候，先碎片整理最小化，然后再copy数据，这样会加块的速度。
+<strong class="command">e4defrag</strong> ，可以用碎片的整理，同时利用 gparted可以还直接对硬盘进行拉大与拉小，关键是存放的文件不要被覆盖。</p>
+</div>
+<div class="section" id="id20">
+<h2>分区与格式化挂载<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://jarson.blog.51cto.com/1422982/573541">sfdisk</a>   是分区为了逻辑设备，就像人们有了多个硬盘一样。这个是由硬盘前面的分区表来决定的。而分区表的大小决定了，你可以有多少个分区，并且在分区表建立文件系统，在linux 下有各种各样的mkfs工具来供你使用。然后加载在OS上，这里就要mount了。
+对于mount 由于这个概念泛化了。你可以mount 本地硬盘，也可以远程（NFS，autofs,samba) 还以把本地文件本身当做文件系统进行访问。同时也可以用bind 来把一个目录绑到另一个目录里，来避免ln的不足.`mount &#8211;bind挂载功能，避免ln -s链接的不足 &lt;<a class="reference external" href="http://blog.csdn.net/islandstar/article/details/7774121">http://blog.csdn.net/islandstar/article/details/7774121</a>&gt;`_ ,`mount &#8211;bind 的妙用  &lt;<a class="reference external" href="http://www.cnitblog.com/gouzhuang/archive/2012/07/15/65503.html">http://www.cnitblog.com/gouzhuang/archive/2012/07/15/65503.html</a>&gt;`_</p>
+<p><a class="reference external" href="http://www.bitscn.com/os/windows7/200912/179453.html">windows自带磁盘分区工具Diskpart使用介绍</a>
+分区与`格式化 &lt;<a class="reference external" href="http://baike.baidu.com/view/902.htm">http://baike.baidu.com/view/902.htm</a>&gt;`_ 是两步不同的操作.格式化又分为低级，与高级，低级格式化是物理级的格式化，主要是用于划分硬盘的磁柱面、建立扇区数和选择扇区间隔比。硬盘要先低级格式化才能高级格式化，而刚出厂的硬盘已经经过了低级格式化，无须用户再进行低级格式化了。高级格式化主要是对硬盘的各个分区进行磁道的格式化，在逻辑上划分磁道。对于高级格式化，不同的操作系统有不同的格式化程序、不同的格式化结果、不同的磁道划分方法。</p>
+<p>同时为了支持热mount,还有 <a class="reference external" href="https://en.wikipedia.org/wiki/GVfs">https://en.wikipedia.org/wiki/GVfs</a>， gvfs  可以在用户态加载空间，例如把ftp,smb等等把网络mount到本地。例如
+gvfs-mount &#8216;<a class="reference external" href="ftp://user&#64;www.your-server.com/folder">ftp://user&#64;www.your-server.com/folder</a>&#8216; 目录都在 .gvfs/ 下面。 并且其下有一堆的gvfs-ls/cat, 等等一堆的命令。</p>
+<p>例如 <a class="reference external" href="http://curlftpfs.sourceforge.net/">curlftpfs</a> 支持把http,ftp等mount到本地。</p>
+<p>各个系统的共享，这样就可以减少大量的配置工作，例如的所有的工作机都直接mount同一个存储目录，这样就可以大量的login以及editor的配置，可以直接使用自己本机的编辑器配置，而运行在其他机器上。 这样的并行度就会大大很多。</p>
+<p>mount.cifs 可以持 samba等等，使用fuse为基础的gvfs 可以挂载 ftp,http等。而sshfs可以直接mount ssh 帐号。
+只需要两条命令:
+<strong class="command">apt-get install sshfs</strong>, 然后把自己加入sshfs这个用户组就行了。
+<a class="reference external" href="http://www.fwolf.com/blog/post/329">http://www.fwolf.com/blog/post/329</a></p>
+</div>
+<div class="section" id="id22">
+<h2>共享目录<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>两种办法做这个，一种用autofs, 一次用可以使用cifs-utils. 直接mount就行。</li>
+</ol>
+<p><strong class="command">mount -t cifs -o user=xxxx,password=xxx //192.168.0.1/xxx /mnt/</strong></p>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://linhui.568.blog.163.com/blog/static/9626526820117822835844/">linux 访问windows 共享目录</a> 也可以直接使用`smbclient &lt;<a class="reference external" href="http://wenku.baidu.com/view/ab3e7ffc910ef12d2af9e7bb.html">http://wenku.baidu.com/view/ab3e7ffc910ef12d2af9e7bb.html</a>&gt;`_</li>
+<li><a class="reference external" href="http://www.autofs.org/">autofs</a>  our builds use it on farm</li>
+</ol>
+<p>#. 如果自己想用FUSE系统直接支持和种http,ftp等等在线系统。可以用
+<a class="reference external" href="https://www.stavros.io/posts/python-fuse-filesystem/">https://www.stavros.io/posts/python-fuse-filesystem/</a> 来实现。</p>
+<div class="highlight-bash"><div class="highlight"><pre>apt-get install autofs
+ mkdir /network
+ auto.master
+         /network /etc/auto.mymounts --timeout<span class="o">=</span><span class="m">35</span> --ghost
+ auto.mymounts
+        prerelease -fstype<span class="o">=</span>cifs,rw,noperm,user<span class="o">=</span>devtools_tester1,pass<span class="o">=</span>nvidia3d,dom<span class="o">=</span>nvidia.com ://builds/prerelease
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://linux-cifs.samba.org/">cifs common interface  filesystem</a></li>
+<li><a class="reference external" href="http://pic.dhe.ibm.com/infocenter/aix/v7r1/index.jsp?topic=%2Fcom.ibm.aix.cmds%2Fdoc%2Faixcmds3%2Fmkfs.htm">mkfs IBM manual</a></li>
+<li><a class="reference external" href="http://www.ibm.com/developerworks/cn/linux/filesystem/l-fs/">高级文件系统实现者指南 日志和 ReiserFS</a></li>
+</ol>
+</div>
+<div class="section" id="id23">
+<h2>硬盘检查与修复<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>extfs</td>
+<td>e2fsck -y /dev/sda1</td>
+</tr>
+<tr class="row-even"><td>HFSP</td>
+<td>fsck.htfsplus  -f -y /dev/sda1</td>
+</tr>
+<tr class="row-odd"><td>NTFS</td>
+<td>ntfsfix -d /dev/sda1</td>
+</tr>
+<tr class="row-even"><td>Reiserfs</td>
+<td>reiserfsck -a -y /dev/sda1</td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple">
+<li>e2fsck 还有一个配置文件 <code class="file docutils literal"><span class="pre">etc/e2fsck.conf</span></code></li>
+</ol>
+<p>修复的原理，那就是各种文件系统的，格式</p>
+<p><a class="reference external" href="http://m.blog.chinaunix.net/uid-20196318-id-152429.html">Ext3日志原理</a>
+<a class="reference external" href="http://unix.stackexchange.com/questions/87415/whats-the-difference-between-e2fsck-and-fsck-and-which-one-i-should-use">whats-the-difference-between-e2fsck-and-fsck-and-which-one-i-should-use</a></p>
+</div>
+<div class="section" id="man">
+<h2>man<a class="headerlink" href="#man" title="Permalink to this headline">¶</a></h2>
+<p><strong class="command">H</strong> 可以打开man的命令帮助文档。</p>
+</div>
+<div class="section" id="hardlink-and-softlink">
+<h2>HardLink and softlink<a class="headerlink" href="#hardlink-and-softlink" title="Permalink to this headline">¶</a></h2>
+<p>我们知道文件包括文件名和数据，在Linux上被分为两个部分：用户数据（user data）和元数据（metadata），用户数据主要记录文件真实内容的地方，元数据是记录文件的附加信息，比如文件大小、创建信息、所有者等信息。在Linux中的innode才是文件的唯一标示而非文件名。文件名是方便人们的记忆。</p>
+<p>为了解决文件共享的问题，Linux 引入两种链接：硬链接和软连接。</p>
+<ol class="arabic simple">
+<li>若一个innode号对应于多个文件名，则成为硬链接</li>
+<li>若文件用户数据块中存放的内容是另一个的路径名的指向，则该文件就是软链接。</li>
+</ol>
+<p><a href="#id32"><span class="problematic" id="id33">`http://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/`_</span></a></p>
+<p><a class="reference external" href="http://askubuntu.com/questions/108771/what-is-the-difference-between-a-hard-link-and-a-symbolic-link">what-is-the-difference-between-a-hard-link-and-a-symbolic-link</a></p>
+<p><a class="reference external" href="http://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/">http://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/</a>  hardlink 一个用途那就是做备份，要比copy更加快速方便。</p>
+<p><a class="reference external" href="http://www.mikerubel.org/computers/rsync_snapshots/#Incremental">Easy Automated Snapshot-Style Backups with Linux and Rsync</a>  可以快速建立一个 hourly,daily,and weekly.snapshots. 并且一个快速 rotate 机制，就是一个重命名。</p>
+<div class="highlight-bash"><div class="highlight"><pre>rm back.3
+mv back.2 back.3
+mv back.1 back.2
+mv back.0 back.1
+rsync -a --delete source_directory/ backup.0/
+</pre></div>
+</div>
+</div>
+<div class="section" id="id25">
+<h2>对于文件系统的监控<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h2>
+<p>文件系统的消息的类型与数量也是固定的，可以用api来得到，mount &#8211;make-rslave 等等就是控制的消息的传递。 同时也可以用 <a class="reference external" href="guardgem.org">gardgem</a> 以及系统默认的watch 的命令一样。这样的工具也特别需要例如node.js开发的时候就提供这的工具。实时更新重起 service.</p>
+</div>
+<div class="section" id="id26">
+<h2>分区表的格式<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h2>
+<p>硬盘的分区格式是用signature 来区分的，如果是总是识别的不对，应该原来signature没有清除掉，或者不同的软件的默认的读写位置不对。
+如何用dd来查询硬盘的头部信息直接来得到或者直接修改。</p>
+<div class="highlight-bash"><div class="highlight"><pre>parted -l <span class="c1">#查看分区格式</span>
+dd <span class="k">if</span><span class="o">=</span>/dev/sdb <span class="nv">skip</span><span class="o">=</span><span class="m">1</span> <span class="nv">count</span><span class="o">=</span><span class="m">1</span> <span class="p">|</span>hexdump -C <span class="c1">#查看内容</span>
+dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">count</span><span class="o">=</span><span class="m">1</span> <span class="nv">seek</span><span class="o">=</span><span class="m">1</span> <span class="nv">of</span><span class="o">=</span>/dev/sdb <span class="c1">#把内容清除为零</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://code.taobao.org/p/tfs/src/">TFS</a>  taobao 分布式文件系统，<a class="reference external" href="http://baike.baidu.com.cn/view/4253974.htm">TFS集群文件系统</a> 把原数据放在文件名与路径上，采用对象存储，</li>
+<li><a class="reference external" href="http://www.pcworld.com.cn/Article/ShowArticle.asp?ArticleID&amp;#61;15927">存储领域面临六大趋势</a></li>
+<li><a class="reference external" href="http://www.chinastor.com/a/jishu/OSD.html">什么是对象存储？OSD架构及原理</a>  核心是将数据通路（数据读或写）和控制通路（元数据）分离，并且基于对象存储设备</li>
+<li><a class="reference external" href="http://www.programmer.com.cn/12403/">OpenStack对象存储——Swift</a></li>
+<li><a class="reference external" href="http://www.itivy.com/ivy/archive/2012/2/16/image-storage-1.html">图片存储系统设计</a></li>
+<li><a class="reference external" href="http://forum.ubuntu.org.cn/viewtopic.php?t&amp;#61;58468">学会理解并编辑fstab</a></li>
+</ol>
+</div>
+<div class="section" id="paper">
+<h2>Paper<a class="headerlink" href="#paper" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://www.google.com/patents?hl=zh-CN&amp;lr=&amp;vid=USPAT5367682&amp;id=UWgeAAAAEBAJ&amp;oi=fnd&amp;dq=partition+table&amp;printsec=abstract#v=onepage&amp;q=partition%20table&amp;f=false">Data processing virus protecton on partition table</a></li>
+<li><a class="reference external" href="http://www.cybersecurity.my/data/content&amp;#95;files/13/71.pdf">court law of disk</a></li>
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/Partition&amp;#95;type">parition ID</a></li>
+<li><a class="reference external" href="http://www.xifenfei.com/1605.html">对/dev/shm认识</a></li>
+<li><a class="reference external" href="http://www.ibm.com/developerworks/cn/linux/l-vfs/">解析 Linux 中的 VFS 文件系统机制</a>  简单明了</li>
+<li><a class="reference external" href="http://www.ibm.com/developerworks/cn/linux/l-k26initrd/">Linux2.6 内核的 Initrd 机制解析</a>  用在内存中</li>
+<li><a class="reference external" href="http://fossies.org/dox/parted-3.1/index.html">parted-3.1 doxygen document.</a>  看看能否只更新部分硬盘</li>
+<li><a class="reference external" href="http://www.all-things-android.com/content/understanding-android-file-hierarchy">understanding-android-file-hierarchy</a>  与linux差别不大</li>
+</ol>
+</div>
+<div class="section" id="thinking">
+<h2>Thinking<a class="headerlink" href="#thinking" title="Permalink to this headline">¶</a></h2>
+<p><em>CHS</em> 记住硬盘这一物理存储结构就知道来理解一切就都会明白了，物理结构本身三级目录。柱面 磁头，扇区。第一个磁道的扇区数一样吗。柱面与磁头决定一个磁道。 grub 的原理与硬盘的结构是相关的。并且始终记住一点那就是对于处理器来说，它能做的那就是程序在哪儿，程序指针指哪从哪开始执行。开始执行前要把需要的程序加载在内存。grub其实就是做了这样的事，BIOS把MBR放在内存中，并且处理器的跳转那里。MBR放的就是grub引导程序。然后呢，grub做了三件事，要确定系统放在哪。然后从那里把去把内核镜像加载在内存中，并设置相关的环境变量，例如root目录，以及内核在哪里。 然后把执行权交给内核。</p>
+<p>&#8211; Main.GangweiLi - 15 Jan 2013</p>
+<p><em>长路径与文件夹的作用</em>
+长路径来保证文件名的唯一性，能过长路径来保正。其实也就是字符串长与短一种映射，这一个就是能够解决集体操作。一次对多个文件进行同样的操作。也就是有一种方法可以直接对压缩文件来进行操作。如果解决了这个问题，其实也要不要这么文件夹。也就不是大的问题。更多的逻辑分块的需要。</p>
+<p>&#8211; Main.GangweiLi - 12 Mar 2013</p>
+<p><em>数据库与文件系统</em>
+本质上数据库本身也是一种文件系统。对于不同的存储对象，采用不同的机制。例如一些锁碎的类似于ERP这样数据适合于数据库这种存储系统。而大的块数据例如视频则任何于直接存储于文件系统上。例如不同的文件系统对于备份以及权限的管理是不一样的。 并且还有一个分布式文件系统的问题。还有版本控制库的文件系统。并且各种文件系统有融合之意。例如mongo,TFS,GFS等等。</p>
+<p>&#8211; Main.GangweiLi - 12 Mar 2013</p>
+<p><em>内存文件系统</em>
+为了使启动更加方便，把内核更不断不分层模块化。来使其更加通用，与复用。因为内核变化速度要比文件系统要快。</p>
+<p>&#8211; Main.GangweiLi - 19 Apr 2013</p>
+<p><em>文件属性</em>
+在查找的，排序的时候，利用文件属性会具有很大的优势，另外一个文件的属性是存储在哪里的。例如我想基于文件属性的查找排序是会很有用，在win7上是可以随时调整的，但是linux上却没有发现，如何大规模对象存储。对于图象。更是如此。例如利用find可以查找有限的文件属性。
+<a class="reference external" href="http://www.ibm.com/developerworks/cn/linux/filesystem/">IBM filesystem 系列</a> 现在才对文件系统的认识有了更深的认识。需要文件系统具有什么样的能力。</p>
+</div>
+<div class="section" id="id30">
+<h2>文件系统中节点的类型<a class="headerlink" href="#id30" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>directory</li>
+<li>file</li>
+<li>symlink</li>
+<li>block device</li>
+<li>charactor device</li>
+<li>FIFO</li>
+<li>unix domain socket</li>
+</ol>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<table class="docutils footnote" frame="void" id="r1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id12">[1]</a></td><td><a class="reference external" href="http://www.jianshu.com/p/c6a530365bea">http://www.jianshu.com/p/c6a530365bea</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">文件系统</a><ul>
+<li><a class="reference internal" href="#id2">介绍</a></li>
+<li><a class="reference internal" href="#pipe">Pipe文件系统</a></li>
+<li><a class="reference internal" href="#id11">分布式文件系统</a></li>
+<li><a class="reference internal" href="#id13">文件系统格式</a></li>
+<li><a class="reference internal" href="#id14">调整分区的大小</a></li>
+<li><a class="reference internal" href="#partclone">partclone</a></li>
+<li><a class="reference internal" href="#tree">tree</a></li>
+<li><a class="reference internal" href="#raid">Raid</a></li>
+<li><a class="reference internal" href="#id17">如何制作文件系统</a></li>
+<li><a class="reference internal" href="#id20">分区与格式化挂载</a></li>
+<li><a class="reference internal" href="#id22">共享目录</a></li>
+<li><a class="reference internal" href="#id23">硬盘检查与修复</a></li>
+<li><a class="reference internal" href="#man">man</a></li>
+<li><a class="reference internal" href="#hardlink-and-softlink">HardLink and softlink</a></li>
+<li><a class="reference internal" href="#id25">对于文件系统的监控</a></li>
+<li><a class="reference internal" href="#id26">分区表的格式</a></li>
+<li><a class="reference internal" href="#see-also">See also</a></li>
+<li><a class="reference internal" href="#paper">Paper</a></li>
+<li><a class="reference internal" href="#thinking">Thinking</a></li>
+<li><a class="reference internal" href="#id30">文件系统中节点的类型</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/content/Stage_2/FileSystem.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">My Linux 0.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2014, gangwei.li.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

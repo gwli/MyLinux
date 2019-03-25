@@ -1,0 +1,988 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>内核篇 &mdash; My Linux 0.3 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="My Linux 0.3 documentation" href="../index.html" />
+    <link rel="next" title="专题篇" href="Stage_3.html" />
+    <link rel="prev" title="基础篇" href="Stage_1.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Stage_3.html" title="专题篇"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Stage_1.html" title="基础篇"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">My Linux 0.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>内核篇<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="linuxkernel">
+<h2>LinuxKernel<a class="headerlink" href="#linuxkernel" title="Permalink to this headline">¶</a></h2>
+<p>与main函数的区别就在需要链接的地方不一样，至少开头是静态链接的，对用initrd 之类的都采用两次load法，起动之前一次，起动后更新。 为了解决鸡生蛋，蛋生鸡的问题。同时对模块的热加载功能，insmode,rmmode,其实本质就是dllexport的功能。只是内核支持动态加载，而一般的应用程序做不到，只能通过gdb来这样么做。但是unreal 是能够做到一点。做到热加载的，编译之后直接可以用，不需要重起。</p>
+<p><a class="reference external" href="https://onedrive.live.com/edit.aspx/%e6%96%87%e6%a1%a3/GW%20%e7%9a%84%e7%ac%94%e8%ae%b0%e6%9c%ac?cid=0620a0b4441149e5&amp;id=documents&amp;wd=target%28%E5%BF%AB%E9%80%9F%E7%AC%94%E8%AE%B0.one%7C38E3E883-E41F-4858-BFB1-0BD8ED9EC575%2F%E4%B8%89%E8%A8%80%E4%B8%A4%E8%AF%AD%E8%81%8AKernel%EF%BC%9A%E4%BB%8ELinux%E5%88%B0FreeBSD%20-%20One%20Man%27s%20Yammer%7C80CCE1E5-1CD0-4CFE-979A-1832E55AAA29%2F%29">https://onedrive.live.com/edit.aspx/%e6%96%87%e6%a1%a3/GW%20%e7%9a%84%e7%ac%94%e8%ae%b0%e6%9c%ac?cid=0620a0b4441149e5&amp;id=documents&amp;wd=target%28%E5%BF%AB%E9%80%9F%E7%AC%94%E8%AE%B0.one%7C38E3E883-E41F-4858-BFB1-0BD8ED9EC575%2F%E4%B8%89%E8%A8%80%E4%B8%A4%E8%AF%AD%E8%81%8AKernel%EF%BC%9A%E4%BB%8ELinux%E5%88%B0FreeBSD%20-%20One%20Man%27s%20Yammer%7C80CCE1E5-1CD0-4CFE-979A-1832E55AAA29%2F%29</a>
+onenote:https://d.docs.live.net/0620a0b4441149e5/文档/GW%20的笔记本/快速笔记.one#三言两语聊Kernel：从Linux到FreeBSD%20-%20One%20Man&#8217;s%20Yammer&amp;section-id={38E3E883-E41F-4858-BFB1-0BD8ED9EC575}&amp;page-id={80CCE1E5-1CD0-4CFE-979A-1832E55AAA29}&amp;end</p>
+<p>对于linux  整体的理解在上面写的很到位。 内容启动顺序是何定义的，根据优先级，同一优先级是根据链接顺序来的。而FreeBSD 则是SYSINIT固定的。</p>
+<p><em>IO</em></p>
+<p>每一种外设都是通过读写设备上的寄存器来进行的，寄存器又分为：控制寄存器，状态寄存器，数据寄存器。</p>
+<p><a class="reference external" href="http://wenku.baidu.com/view/00d760260722192e4536f6c7.html">Linux下的IO地址访问的研究</a></p>
+<p>从Linux2.4以后，全部进程使用同一个TSS,2.4以后不再使用硬切换，而是使用软切换，寄存器不再保存在TSS中了，而是保存在task-&gt;thread中 &lt;<a class="reference external" href="http://blog.csdn.net/shinesi/article/details/1933851">http://blog.csdn.net/shinesi/article/details/1933851</a>&gt;`_ 一个线程就对应一个LDT的一项，内核是对物理硬件所做的一层抽象。而进程则是对CPU+内存+硬盘一种抽象。而线程则是对CPU的一种抽象。
+linux 采用二级页表机制，页表目录和页表＋页内基址。　Page=4K.</p>
+<p>其实一个本质问题在于，如何这样的解读内存结构，这个与包的结构是一样的，是采用TLK的模式还是表头然后内容的方式。首先是分配大小。然后要根据自定义的结构来读写内存。类的内存结构与包的结构是一样的道理。</p>
+<div class="section" id="id2">
+<h3>进程与程序的关系<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div>&lt;img src=&#8221;%ATTACHURLPATH%/C_memory.jpg&#8221; alt=&#8221;C_memory.jpg&#8221; width=&#8216;600&#8217; height=&#8216;450&#8217;  align=right /&gt;</div></blockquote>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://learn.akae.cn/media/ch18.html">C语言到汇编到机器语言到进程转换</a></li>
+<li><a class="reference external" href="http://wenku.baidu.com/view/1f70370a4a7302768e99398b.html">从内存中加载并启动一个exe</a></li>
+<li><a class="reference external" href="http://blog.csdn.net/w_s_xin/article/details/5044457">可执行程序加载到内存的过程</a>   第一步就是把文件用`mmap &lt;<a class="reference external" href="http://blog.chinaunix.net/uid-26669729-id-3077015.html">http://blog.chinaunix.net/uid-26669729-id-3077015.html</a>&gt;`_ 映射到内存中。哪些库是放在共享区，可以供所有程序去调用，或者还是用到的时候才去加载。 <a class="reference external" href="http://blog.csdn.net/tigerscorpio/article/details/6227730">Linux下程序的加载、运行和终止流程</a></li>
+<li><a class="reference external" href="http://my.oschina.net/solu/blog/2537">程序的内存分配</a> 只要看到thread_struct结构，它的那些寄存器值的大小限制。</li>
+<li><a class="reference external" href="http://wenku.baidu.com/view/51337c1ab7360b4c2e3f64ce.html">linux内核堆栈</a> 是全局数据构使用的</li>
+<li><a class="reference external" href="http://wenku.baidu.com/view/c982436d1eb91a37f1115cc4.html">GDT与LDT的关系</a></li>
+</ol>
+<p>进程数取决于GDT数据组的大小，线程的最大数取决于该系统的可用虚拟内存的大小。默认每个线程最多可拥有至多1MB大小的栈的空间。所以至多可创建2028个线程。如果减少默认堆栈的大小则可以创建更多的线程。</p>
+<p>自己学习单片机的时候，就存在一个迷惑，那些操作单片机的小片子如何来支持一个操作系统一样的东西。现在逐渐明白了，其实如何让更多的程序能在计算机跑起来。所谓的空闲，其实CPU一直没有闲着，CPU采用的心忙状态。除非CPU的所有调度都采用中断实现。单片机的存储机制只有两层，那就是寄存器与内存。CPU的操作是不能直接操作内存地址进行运行的，而是要把内容加载到自己的寄存器然后再进行计算，然后再把数据写给回去。现在CPU架构采用是统一地址，这样的话，地址就要分段了，哪些地址是可读的，哪些地址可写的。CPU执行原来就是依赖其那些寄存器。` 在此 &lt;<a class="reference external" href="http://os.51cto.com/art/201005/199799.htm">http://os.51cto.com/art/201005/199799.htm</a>&gt;`_  linux采用了内核地址与用户空间地址的做法，例如内核地址3G-4G这一段地址留取了内核来用，0-3G这段刘给了用户，用户之间隔离的，内核地址空间是共享的，这里有一个偏移量的问题，更好是3G，把内核地址减3G正好是从头开始，而用户空间从+3G就变成真实空间了。其实一个进程都是对CPU的运算结构进行了抽象，并且对CPU做了两级的抽象，那就是线程。然后由内核把每个程序相关的资源都放在一个进程结构里，一个每个进程就是GDT里的一项。即是哪一段内存给它用。记录与它相关于文件等等，然后按照CPU的结构把寄存器初始化，执行，保存结果然后再换出。每一个进程头是放在GDT中，所以去查看GDT表就以操作当前有多少进行在运行。LDT对应的是线程。一般线程只有代码执行区与寄存器的运行状态记录，而所有资源都是放在进程里。</p>
+<p>进程的内存功能分块</p>
+<ol class="arabic simple">
+<li>代码区，主要用来存储二制代码</li>
+<li>数据区 用于存放全局变量</li>
+<li>堆区，动态的进行内存的分配与回收。</li>
+<li>栈区，主要存储函数的参数以及返回地址等目的被 调用函数执行完毕后能够准确的返回到冷饮函数继续执行。</li>
+</ol>
+<p>所以一个进程如右图那分了，３G-4G的那部分地址给内核的，自己的代码区还要占据一定的空间，另外一些全局的数据空间，以及堆栈的地址空间，最后还是自由的地址空间。所以在同一个框架下，一般程序的入口地址都是相同的。然后就把程序初始地址分给CP寄存器。到底指令要占多少呢，也就是我可执行程序有多大呢，这个就要你的`指令的长度 &lt;<a class="reference external" href="http://www.mouseos.com/x64/puzzle01.html">http://www.mouseos.com/x64/puzzle01.html</a>&gt;`_ 再乘以指令数就是所要占的内存大小了. 当然只要这些计算机就能识别了。但是对于我们人来说有点难懂了。那好吧，再把符号表给加上。这里的`符号表 &lt;<a class="reference external" href="http://zh.wikipedia.org/wiki/%E7%AC%A6%E5%8F%B7%E8%A1%A8">http://zh.wikipedia.org/wiki/%E7%AC%A6%E5%8F%B7%E8%A1%A8</a>&gt;`_  来记录各种人为可读的标记。然而如何把C语言与汇编语言关联起的。是翻译的过程中如何会记录这些值的呢。</p>
+<p>地址的长度其中之一的功能，那就是寻扯空间变大了，这样的代码就可以更长了。例如8位机，如何顺序代码超过了其寻址能力的话，就无法实施了。就限制了其功能。</p>
+<p>现在回头把操作系统又看了一遍，原来进程是为了并行计算而产生的。解决了原来的只能顺序执行的问题。这样就有了数据段，程序段，进程控制块。这样进程其实就是对CPU结构以及计算机的存储单元的一种抽象。同时操作系统系统与进程的接口，就是这些信号。所在在链接时，所谓的链接器，是由内核来调用加载进程。信号是一种软中断。每一个进程对每一个信号都有一个默认的处理方式。操作系统也占用了几个。同时我们可以进程进行各种操作。通过信号。</p>
+<p>对于内存地址的真实分配可以从 dmesg里看到 VirtualKernel memory layout，也可以从 /proc/
+<a class="reference external" href="http://unix.stackexchange.com/questions/5124/what-does-the-virtual-kernel-memory-layout-in-dmesg-imply">http://unix.stackexchange.com/questions/5124/what-does-the-virtual-kernel-memory-layout-in-dmesg-imply</a></p>
+<p>一个kernel的内核也没有多大，也就几M大小，可以 ll -h /boot 就可以看到它的大小。 只是添加内存的分配与dll的扩展功能。一供也才不超过6M大小。一个指令4个字节。也就不超过 6M/4=1572864 条指令，最多需要1.5M地址就够了。 而8位的只能256条指令，16位也只64K的地址长度，32位 就有了4G的地址。 所以在32位上我们停留很长时间，因为我们32位对于我们来说，已经远远大于逻辑指令了。只所以要让上升64位，主要是数据空间的不足。而到了64位地址长度基本上就目前需求就相当于无穷大了，也很巧的周易也只推演到了64卦就停止了。</p>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://www.ituring.com.cn/article/1574">代码混淆器</a> 也提供了一种代码互相翻译的功能。</li>
+</ol>
+</div>
+</div>
+<div class="section" id="id7">
+<h2>安全策略<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<p>linux 的内核支持 security module的支持，你可以加添加各种安全模块，以及定义安全策略，例如selinux,</p>
+</div>
+<div class="section" id="id8">
+<h2>进程管理<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<p>以前是单核分时复用机制，只用考虑时间的分配，而现在出现了真正的多核与多线程机制。实时性的问题也就解决了很多。同时对于调度也有很大的区别。例如如果让进程在多个核上切换，而上车与下车都是要overhead,如何使减少。这个很重要。</p>
+<p>出现这个sched_yield, 这个API是为了提高效率，当发现自己被blocking了，就CPU的运行权交出去。以前的进程比较难控制自己的执行。
+<a class="reference external" href="http://blog.csdn.net/magod/article/details/7265555">http://blog.csdn.net/magod/article/details/7265555</a></p>
+<p><em>multi-process and multiple thread</em>
+until now, I find how to use the fork, why we need the fork? when the fork the children copy the code,data from parent process. and then do their own things.  the <a class="reference external" href="http://bbs.csdn.net/topics/320004714">questions</a>  of article is good, help me think. you can reference <a class="reference external" href="http://blog.csdn.net/hairetz/article/details/4281931">here</a>  why need multiple process.</p>
+<p>可以用chrt 来控制进程的调度，或者合用sysctl来进行控制。<strong class="command">sysctl -A|grep &quot;sched&quot; | grep -v &quot;domain&quot;</strong></p>
+<p><a class="reference external" href="https://doc.opensuse.org/documentation/html/openSUSE_121/opensuse-tuning/cha.tuning.taskscheduler.html">https://doc.opensuse.org/documentation/html/openSUSE_121/opensuse-tuning/cha.tuning.taskscheduler.html</a></p>
+<p><em>cputopology</em></p>
+<p>多核CPU拓扑， <a class="reference external" href="https://www.kernel.org/doc/Documentation/cputopology.txt">https://www.kernel.org/doc/Documentation/cputopology.txt</a></p>
+<p><a class="reference external" href="http://blog.csdn.net/russell_tao/article/details/7102297">linux内核调度算法（3）&#8211;多核系统的负载均衡</a></p>
+<p><a class="reference external" href="http://www.ibm.com/developerworks/cn/linux/l-cn-sysfs/">http://www.ibm.com/developerworks/cn/linux/l-cn-sysfs/</a>   /sys 是sysfs的挂载点，取代了/proc的大部分功能，并且经过了很好的设计。</p>
+<p>当然也可以用 man /proc 与man sysfs来得到更多信息。
+..</p>
+<div class="highlight-python"><div class="highlight"><pre>print &quot;Started with the heartbeat host $HeartbeatHost:$HeartbeatPort\n&quot;;
+
+if($ForkFlag)
+  {
+   if(fork())
+    {
+     exit(0);
+    }
+
+   close(STDIN);
+   close(STDOUT);
+   close(STDERR);
+  }
+
+SetupSocket();
+while(1)
+ {
+  SendHeartbeat();
+  sleep($SleepTime);
+ }
+</pre></div>
+</div>
+<p>%ENDCOLOR%</p>
+<div class="section" id="system-call">
+<h3>system call<a class="headerlink" href="#system-call" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first"><a class="reference external" href="http://www.csee.umbc.edu/courses/undergraduate/CMSC421/fall02/burt/projects/howto_add_systemcall.html">Adding A System Call</a>  CUDA 应该就是这么干的，添加调用，这样它才知道东东传给GPU去做。</p>
+</li>
+<li><p class="first"><a class="reference external" href="http://www.tldp.org/HOWTO/html_single/Implement-Sys-Call-Linux-2.6-i386/">Implement-Sys-Call-Linux-2.6-i386</a></p>
+<p>brk,sbrk,getrlimit,setrlimit,prlimit查看系统资源的systemcall.</p>
+</li>
+</ol>
+<p>libc的库有一个gensyscalls.py 生成 syscall 例表。 /ndk/toolchains/X/prebuild/&lt;platofrm&gt;/share/lib/syscalls 可以看到各个系统的system call 个数，现在linux 325个API。</p>
+<p>这些systemcall与大部分 shell 命令是对应的，例如mkdir等，其实本质就让shell 过程</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>while(1) {</dt>
+<dd><dl class="first docutils">
+<dt>switch {syscall} {</dt>
+<dd>case ...:  {do something};</dd>
+</dl>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>其实内核就是一个数据结构，我们只是在不断的改其设备，就像 game Engine是一样的。</p>
+</div>
+<div class="section" id="signal">
+<h3>Signal<a class="headerlink" href="#signal" title="Permalink to this headline">¶</a></h3>
+<p>before, I always feel msterious about the signal. but now I know that the signal is always with us. for example, when shutdown, the OS should close all the process, how to do this, send the signal. the basic module of process with glibc should be able to the common signal. for example we use the <em>kill -9 process</em> to let the process close.</p>
+<p>essentially, the Signal is relevent logic/soft interrupt with CPU and Hardware.
+<a class="reference external" href="http://bbs.chinaunix.net/forum.php?mod=viewthread&amp;tid=3660999&amp;page=1&amp;extra=#pid21816738">在ring 0改变watchpoint的值</a>  continus received SIGTRAP.</p>
+<blockquote>
+<div><p>for Debug, there are three way you can control.
+#. state register, this can control CPU behavoier.</p>
+<blockquote>
+<div><ol class="arabic simple" start="2">
+<li>CPU event</li>
+<li>interrupt.</li>
+</ol>
+</div></blockquote>
+</div></blockquote>
+<p>对于中断的处理，原则是要保存当前的所状态，中断处理之后，再恢复回来。 但是为了性能，而是根据需要来保存一些必要的register,而非全部。
+而这些于profiling就会影响很大，因为它要用大量的信息，例如unwind callstack.</p>
+</div>
+<div class="section" id="systemlog">
+<h3>SystemLog 机制<a class="headerlink" href="#systemlog" title="Permalink to this headline">¶</a></h3>
+<p>多进程同写一个文件，就是会同步与原子操作问题。正常情况下，每一个系统调用都是原子操作。原子操作水平是什么样的。例子函数级的，还是指令级，还是API级的，中断CPU指令级，所以所有的单指令操作都是原子操作。同时原子操作都需要下一层的支持，在同一步不可有做到真正有效原子操作。就像第三方的中立性一样。这个就需要系统构构了，例如ARM的结构，并且内核的原子操作都是直接用汇编来锁定总线来搞定的，这个是C语言做不到的。</p>
+<blockquote>
+<div><a class="reference external" href="http://blog.chinaunix.net/uid-24585858-id-2856540.html">Linux系统环境下关于多进程并发写同一个文件的讨论</a>
+<a class="reference external" href="http://www.chinaunix.net/old_jh/23/804742.html">多个进程把日志记录在同一个文件的问题</a>  利用消息队列+单进程读写文件 会大大改善IO，但是多机并行的机制呢。</div></blockquote>
+</div>
+</div>
+<div class="section" id="debug">
+<h2>debug<a class="headerlink" href="#debug" title="Permalink to this headline">¶</a></h2>
+<p>内核中开发调试是最难的，简单是直接使用log,你如dmesg,以及在内核中打开更多的debug 选项，以及klogd,以及 在内核中打开远程调试来进行debug.
+<a class="reference external" href="http://www.embeddedlinux.org.cn/html/yingjianqudong/201303/12-2480.html">http://www.embeddedlinux.org.cn/html/yingjianqudong/201303/12-2480.html</a>
+也可以采用类似于pdb的做法，动态调试直接在加入汇编指令来做。
+<a class="reference external" href="http://blog.chinaunix.net/uid-20746260-id-3044842.html">http://blog.chinaunix.net/uid-20746260-id-3044842.html</a></p>
+<p>module 本身也是 debug选项可以用的。 可以参看manual.</p>
+<div class="section" id="see-also">
+<h3>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://blog.sina.com.cn/s/blog&amp;#95;6444798b0100pslu.html">浅析动态内存分配栈与堆</a>  当数据量非常大时，使用什么策略来用内存。例如我们能同时对多少个数进行排序。</li>
+<li><a class="reference external" href="http://lxr.linux.no/+trees">linux sourcecode search</a></li>
+<li><a class="reference external" href="http://www.ibm.com/developerworks/cn/linux/l-cn-sysfs/">/sysfs 文件系统类似于/proc 但是优于/proc</a></li>
+</ol>
+</div>
+</div>
+<div class="section" id="thinking">
+<h2>Thinking<a class="headerlink" href="#thinking" title="Permalink to this headline">¶</a></h2>
+<p><em>你对linux哪一个熟</em>
+我是当linux当作一个仓库，遇到一些问题，是里面看看他都是如何实现的。然后结合自己的需求来实现。</p>
+<p>&#8211; Main.GangweiLi - 02 Dec 2012</p>
+<p>sysctl modifies kernel parameter at runtime</p>
+<p>&#8211; Main.GangweiLi - 15 Apr 2013</p>
+<p>现在对于linux的文件系统有了更加深切的认识：
+/usr/{include/src/lib)  这个里面放开发环境库
+/usr/share/ 放了一些共享的信息例如man 等。
+/lib/ 下面放的runtime lib</p>
+<p>&#8211; Main.GangweiLi - 04 Nov 2013</p>
+<p><em>对于环境变量</em> 在操作系统内部进程之间的交互，很大一部分那就是还环境变量与配置文件，例如os.system如何知道系统有哪些环境变量呢，就是通过Path来知道的，所以如何才能加一条命令呢，那需要加入相应的path就可以，就可以让其os.system得到这条命令了。</p>
+<p>&#8211; Main.GangweiLi - 17 Apr 2014</p>
+<div class="section" id="id12">
+<h3>内存结构<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<p><em>内存模型</em>
+由最初的点线面关系问题，自己理解了内存是如何转化的过程。也就是知道一个矩阵如何在内存的问题。至于类与结构体，都是我们人对被处理对象进行的建模，其实就是向量。但是向量的里面的每个成员是不一样。例如哪些是变量，哪些函数。然后哪里数据区存放的地方，以及代码存放的地方。在Ｃ与Ｃ＋＋中结构体与类都是从前往后按照先后顺序的。只要知道首地址，以及数据的长度，其实也就是ＴＬＶ格式。数据的类型就是代表数据长度。起始地址是可以推算出来的。</p>
+<p>内存地址的长度是根据ＣＰＵ的地址线来决定的。
+不同CPU的构架，内存框架结构也不一样的，一种ＵＭＡ模式所有内存地址都一样，另一种那就是分类内存，其实本质两者都是一样的，如果把他们看成内存地址的话。[[<a class="reference external" href="http://wenku.baidu.com/view/0364850b763231126edb11a8.html">http://wenku.baidu.com/view/0364850b763231126edb11a8.html</a>][内存的分类笔记]]   并且现在明白内核映像只有５１２ＫＢ的原因，并且压缩格式的原因，是始于硬件本身初以状态下能够读入程序块有多大。不同的硬件，限制不一样。最小是５１２kb.例如硬盘的０磁道０磁头０扇区。只有５１２KB.</p>
+<p>以前看龙书，有点看不动，现在再回头看龙书是那么一目了然。把内存管理那一张给看了之后，就全明白了，段页式管理是要解决两个问题。page swapping是为了解决内存不足的问题。而segment是为了解决了灵活性的问题。例如把代码改了，然后大小变了，所有地址都要重定向了。有了段之后，就把把影响变到最小，只用改段基址就可以了。就不用所有段重排了。进程结构是与CPU的物理结构相对应的。
+并且现在CPU大部分都已经支持段了吧。这个就要看CPU的性能了。首先要了解需求。在解决什么问题。那个在面试的问的问题，就已经解决了，是因为它们没有段的结构，所以不能解决灵活性的问题，它们只是简单的页式吧。page是基于硬件的，segment是基于逻辑需求的。理解这些如何快速来得到使用这些就可以根据新需求与以及硬件功能来实现新的算法了。其实就是各个层面的排序与查找了。数组的高效以及链表的灵活。现在也明白了malloc的实现原理了，其实就是在改进程的data的首尾了。
+page 的base为重定向，而limit是为了防止越界。</p>
+<p class="graphviz">
+<img src="../_images/graphviz-d264458df0377742b82c09b4c393d40ce317b38d.png" alt="digraph memoryStucture {
+    rankdir = LR;
+    node [shape = box ];
+    ZONE_DMA [  shape = record  label = &quot;&lt;f0&gt; 0-16MB  | &lt;f1&gt; INIT address 0XFFFF0  BIOS  |&lt;IDT&gt; Interrupt Table  |&lt;GDT&gt;  Global Descriptor Table |&lt;LDT&gt; Local Descriptor Table &quot;];
+    ZONE_NORMAL [label = &quot;16MB-896MB&quot;];
+    ZONE_HIGHMEM [label = &quot;896- END of Physical memory&quot;];
+    MainLayout [ shape = &quot;record&quot; label = &quot;&lt;f0&gt; ZONE_DMA |&lt;f1&gt; ZONE_NORML | &lt;f2&gt; ZONE_HIGHMEM &quot;];
+    MainLayout:f0 -&gt; ZONE_DMA:f0;
+   MainLayout:f1 -&gt; ZONE_NORMAL;
+   MainLayout:f2 -&gt; ZONE_HIGHMEM;
+
+　//IDT
+    IDT [shape =record  label =&quot;&lt;f0&gt; 256 Items 8bytes/item |{selector | keyword | offset }&quot; ];
+    ZONE_DMA:IDT -&gt; IDT:f0;
+    //GDT
+   GDT [shape = record  label = &quot;&lt;des&gt; 256 items |&lt;f0&gt; NULL | &lt;f1&gt; CODE Segment  Descriptor| &lt;f2&gt; DATA Segment Descriptor |&lt;f3&gt; SYS Segment Descriptor | &lt;f4&gt; 252 for LDT and TSS　for each TSS&quot;];
+   ZONE_DMA:GDT -&gt; GDT:f0;
+   //LDT
+   LDT [shape = record  label =&quot;&lt;fes&gt; 5 items | &lt;f0&gt; CODE segment | &lt;f1&gt; Data segment |&lt;f2&gt; BSS | &lt;f3&gt; Heap | &lt;f4&gt; stack&quot;];
+     ZONE_DMA:LDT -&gt; LDT:f0;
+
+}" />
+</p>
+<p>#. [[<a class="reference external" href="http://guaniuzhijia.blog.163.com/blog/static/16547206920109914658702/">http://guaniuzhijia.blog.163.com/blog/static/16547206920109914658702/</a>][linux下进程的堆栈大小设置  ]] %IF{&#8221; &#8216;ulimit -a 可以查看所有&#8217; = &#8216;&#8217; &#8221; then=&#8221;&#8221; else=&#8221;- &#8220;}%ulimit -a 可以查看所有
+进程可以修改栈的大小，如果没有指定那么编译就是用默认的大小限制，linux 默认８Ｍ。</p>
+<p>而如何查看这些东东呢。 linux采用的策略那就是能用我就尽量用，你需要用我就让给你。所以你会发现linux的buffer与cache会非常的大。</p>
+<table border="1" class="docutils" id="id50">
+<caption><span class="caption-text">memory management</span><a class="headerlink" href="#id50" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">command/file</th>
+<th class="head">content</th>
+<th class="head">remark</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>free</td>
+<td>查看系统的剩余内存</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>/proc/meminfo/</td>
+<td>系统占用的内存</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>/proc/pid/maps</td>
+<td>进程占用的虚拟地址</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>/proc/pid/stam</td>
+<td>进程所占用的内存</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>/proc/kcore</td>
+<td>kernel的大小</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>/etc/sysctl.conf</td>
+<td>来控制各种内存资源分配情况</td>
+<td><a class="reference external" href="http://blog.csdn.net/leshami/article/details/8766256">http://blog.csdn.net/leshami/article/details/8766256</a></td>
+</tr>
+<tr class="row-even"><td>/etc/sysctl</td>
+<td>直接动态的去改内核的参数</td>
+<td>并取代ulimit的接口</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="id13">
+<h2>进程的内存分配<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
+<p>前1G之前是给内核用的，在gdb中通过info file 就可以看一个进程文件占用多大的空间。
+在android, 它一般是从 0x400d0134=1G的地方开始的。
+然后就是逐section，逐文件地进行加加载。
+基本上都是 .interp-&gt;.dynsym-&gt;.dynstr-&gt;.hash-&gt;.rel.dyn-&gt;.rel.plt-&gt;.plt-&gt;.text-&gt;XXX-&gt;.rodata-&gt;.preinit_array-&gt;.init_array-&gt;fini_array-&gt;.data.rel.ro-&gt;.dynamic-&gt;.got&gt;.bass</p>
+</div>
+<div class="section" id="id14">
+<h2>介绍<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
+<p>文件系统是随着硬件的发展，以及数据存储发展的业务需要而不断向前发展的，并且两者之间的桥梁。</p>
+<p>为充分利用内存空间，我们建立一系列的内存文件系统。随着数据量越来越大，我们也就需要分布式的文件系统。以及种备份的容灾的需求。</p>
+<p><a class="reference external" href="http://wenku.baidu.com/view/aef3dbc69ec3d5bbfd0a74f3.html">文件系统</a> ，任何时候不明白的都先回来看看最原始的教材。文件系统基本的功能，就是文件管理与目录管理。以及磁盘空间分配使用。
+为什么要有这么多种文件系统。原因在于一定是不同的硬件实现。底层的实现是不样的。例如磁片硬件，与flash,以及固态硬盘，以及 人们对数据操作要求的不同。这种逻辑的需求与硬件结合的接口就是文件系统。对于不同的存储读写需求以及硬件实现，就会不同的实现实现算法机制。而这些就是文件系统。</p>
+<p>对于硬件来说，对于磁盘片来说，那就是CHS。三级了。而对于flash也就又不一样了。 还是拿CHS模型来说，CHS最终还是定位到扇区上，每一个磁道的扇区数是不同的，最外圈的最大，最内圈的最小。每一个硬盘的参数表会有这些值的。
+但是对CHS这种分区表方式会8G限制的问题，就有了后来的LBA模式，但是LBA模式最大支持2T限制。 CHS的MBR都是早期老掉牙方案了，虽然大部分讲分区原理都还在讲，但是拿这些理论已经不能解释现在的硬盘分区原理了，例如为什么现在分区是可以用GUID的。不过现在方案兼容老式的MBR。现在你看到的磁盘参数AAAA cylinders, BBBB Headers, CCCC sectors. 主要是为了让你换算LBA值来用的。LBA是绝对扇区号。换算方法是在这里`这里 &lt;<a class="reference external" href="http://wenku.baidu.com/view/30e874c789eb172ded63b7c6.html">http://wenku.baidu.com/view/30e874c789eb172ded63b7c6.html</a>&gt;`_ . 而AAAA，BBBB，CCCC会做为硬盘参数的。
+在往后会更大。这个主要是由于MBR机制造成的，因为MBR只留了６４个字节给分区表。现在又出了一种新机制EFI方案中GPT表。<a class="reference external" href="http://wenku.baidu.com/view/b32e3ac0bb4cf7ec4afed027.html">这里</a> 有详细的说明。</p>
+<p>对应的逻辑设备分为族/块，卷/分区。对应的逻辑存储单位，如何把逻辑单位与物理单位对应起来，就是格式化的过程，在Windows里就是format, 在linux里就是mkfs这条命令的过程之一。系统之上操作都是基于逻辑单位操作的。例如现在是利用的位图来表示，一个位表示一个逻辑单位的空闲与否。同样大小的位图可以多少空间，取决于这个逻辑单位的大小。这个颗粒度的大小匹配你的存储对象的特点。而这些管理都是基于分区的，每一个分区内部肯定首先这些控制模块，还是这些控制模块是放在全局的。每一个最小单位chunk只能在一个文件里，两个文件不能共享同一个chunk.就是为什么你经常看到的，文件的大小与实际占用空间大小是不一样的原因，因为文件本身的大小不可能每次都正好是最小单位的整数倍。</p>
+<p>对于管理还说还inode. 对于文件数据本身是可读可写，以及是否支持加密压缩等等。实现起来都是不一样的。每是每一个文件系统都能够提供的。并且还有。例如日志文件系统。对于文件的操作都是如何记录存储的。并且如何进行数据恢复。 常见的存储需求：本身是可读可写，以及是否支持加密压缩，数据恢复功能，读多还是写多，是大数据多还是小数据多等等。以及`性能的要求 &lt;<a class="reference external" href="http://wenku.baidu.com/view/a8608606cc175527072208a7.html">http://wenku.baidu.com/view/a8608606cc175527072208a7.html</a>&gt;`_ 。</p>
+<p>为什么要分区呢，是为了管理上的方便，使之具有隔离性，例如装操作系统，就要在独立的分区上。等等。另外也取与操作系统有关心，硬盘的结构MBR. 启动信息与分区表都在这里放着，但是分区表只有64节节，第一个分区占16字节，这样一个分区可如果大于2*312*512=2TB时，这个分区表就不行了。这种物理结构决定了如何进行分区。GPT分区。<a class="reference external" href="http://wenku.baidu.com/view/4e9f2714fad6195f312ba677.html">EFI、UEFI、MBR、GPT技术</a>  但是GPT模式在Windows上有很大的限制，那就是目录不能当启动盘。</p>
+<p>而在抽象层上，就各种各样的文件系统。linux 文件系统设计的很好，在linux里一切的资源，要么是file,要么是进程。 debugfs,Pipefs,sockFS,securityfs 这些都是虚拟的文件系统。你可以在 /proc/filessystems 里看到这些。</p>
+<p>而在linux中每一个进程空间只有一个根文件系统。 并且一个device都根据自身的结构形成自己文件系统结构。在异构系统之间，我们通过mount,来建立之间的不同系统之间通信桥梁。相当于在我的系统里，/xxx/XXX 就是你的入口点，往下的目录都是你的。即然是一个通信机制。就会信息通信协议，通信的方向是双方的，还是单方的。这也就有了四种</p>
+<p>具体可以说明见 <a class="reference external" href="https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt">kernel doc</a>
+<a class="reference external" href="https://www.ibm.com/developerworks/cn/linux/l-mount-namespaces.html">应用挂载名称空间</a> 来讲这些，空间的隔离，linux中使用各种各样的命名空间。</p>
+</div>
+<div class="section" id="pipe">
+<h2>Pipe文件系统<a class="headerlink" href="#pipe" title="Permalink to this headline">¶</a></h2>
+<p>linux 里大部分进程通信靠是Pipe，同步则是由Pipe 自己实现的，由于速度不的同，各种传输之间都会buffer来缓冲。
+并且缓冲模式有</p>
+<ol class="arabic simple">
+<li>buffered(默认4K), (STDin)</li>
+<li>unbuffred( 1byte)(STDERR)</li>
+<li>line buffered (1K) STDOUT</li>
+</ol>
+<p>如果想控制这个buffer的大小，可以用stdbuf来调整。 可以查看man stdbuf.</p>
+<p><a class="reference external" href="http://blog.csdn.net/morphad/article/details/9219843">http://blog.csdn.net/morphad/article/details/9219843</a>
+Pipe 文件系统的实现原理，pipefs 是虚拟的文件系统，使用用户空间的内存，挂载在内容中，并没有在根文件系统中。 用 <em>kern_mount</em> 来实现。</p>
+<p class="graphviz">
+<img src="../_images/graphviz-154502cdd41c75bec45ce38737b63f3329fe6edd.png" alt="digraph hardisk {
+   HardDisk [shape=MRecord, label =&lt;
+     &lt;table&gt;
+      &lt;tr&gt;
+         &lt;td&gt;
+               &lt;table&gt;&lt;tr&gt;&lt;td&gt;MBR&lt;/td&gt; &lt;td&gt;Partition Table&lt;/td&gt; &lt;/tr&gt;&lt;/table&gt;
+         &lt;/td&gt;
+         &lt;td&gt;DBR &lt;/td&gt;
+         &lt;td&gt;FAT &lt;/td&gt;
+         &lt;td&gt;DIR &lt;/td&gt;
+         &lt;td&gt;DATA &lt;/td&gt;
+      &lt;/tr&gt;
+     &lt;/table&gt;
+&gt;];
+}" />
+</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="4%" />
+<col width="82%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>fdisk</td>
+<td>&nbsp;</td>
+<td>Partition Table</td>
+</tr>
+<tr class="row-even"><td>format/mkfs</td>
+<td>DBR</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>filesystem (inode )</td>
+<td>FAT</td>
+<td><a class="reference external" href="http://blog.csdn.net/qianjintianguo/article/details/712590">这个是基于文件系统的</a> ，是不同的，主要inode的结构。</td>
+</tr>
+<tr class="row-even"><td>^</td>
+<td>DIR</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>real data</td>
+<td>DATA</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>每一个分区的超级块放在这个分区的头，如果有就在第二个逻辑块里，一般情况下，第一块是引导块，第二块为super block并且大小固定。并且格式，大小固定。
+超级块，采用的是相互链表，并且vfs做了很好的抽象，并且还支持cache,定期与硬盘同步数据。
+<a class="reference external" href="http://guojing.me/linux-kernel-architecture/posts/super-block-object/">http://guojing.me/linux-kernel-architecture/posts/super-block-object/</a></p>
+<p>每一个分区的超级块是有备分的，你可以用mke2fs -n 或者dumpe2fs 来查看，然后再e2fsk -b 来进行修复。
+<a class="reference external" href="http://www.cyberciti.biz/tips/understanding-unixlinux-filesystem-superblock.html">http://www.cyberciti.biz/tips/understanding-unixlinux-filesystem-superblock.html</a></p>
+<p>supperblock 中存储 文件系统的格式，inode/block的总数，以及使用量，剩余量等信息。
+.block与 inode的大小（block 一般为1，2，4K,这些存储真实的数据，大文件可以用block,小文件可以的block,
+inode一般为124/256 byte).
+inode  存储的文件信息，例如文件属性，文件的权限,修改日期等等，文件名的链接，最后是文件数据block的地址。
+<a class="reference external" href="http://www.voidcn.com/article/p-mttgftgp-gn.html">http://www.voidcn.com/article/p-mttgftgp-gn.html</a></p>
+<p>每一个分区四大块:</p>
+<p class="graphviz">
+<img src="../_images/graphviz-25402fbf68c1ac2745c9944050b35789a561be8f.png" alt="digraph filesystem {
+   partition  [ shape=Record, label=&quot;boot block|super block | inode index block | data block&quot;]
+}" />
+</p>
+<p><a class="reference external" href="http://man.chinaunix.net/linux/mandrake/cmuo/admin/camount3.html">各种挂载问题</a></p>
+<p>并且这个根文件系统是在内存里。 可以通过chroot 来修系统 的根在哪里。这在很多地方都能用到，例如安装机制，例如 apache中，当然不能一般用户得以/etc/目录了，所以要把 apache中根目录要改掉才行。并且还可以其他目录拼接成一个新的目录。</p>
+<p>例一个用法，那就是修复系统时可以用到，例如 <a class="reference external" href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Base">https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Base</a> 把proc 从加载一下，</p>
+<p>每一个进程的都会记录自己的根目录在哪里，这样才能解析绝对目录与相对路径。</p>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://wenku.baidu.com/view/b131844d2e3f5727a5e9620d.html">硬盘知识,硬盘逻辑结构,硬盘MBR详解</a> 64 字节的分区表</li>
+<li>` Partition Tables &lt;<a class="reference external" href="http://thestarman.pcministry.com/asm/mbr/PartTables.htm">http://thestarman.pcministry.com/asm/mbr/PartTables.htm</a>&gt;`_</li>
+<li><a class="reference external" href="http://hi.baidu.com/bicener/item/b628c909039b7b1ceafe38bd">INIX文件系统中，第一个块为引导块，第二个块为超块，之后的N个块是inode位图块(表示哪几个inode被使用了，总的inode个数由超块给出)，紧接着是数据块位图，表示哪些数据块被使用了，紧接着就是inode块和数据块</a></li>
+<li><a class="reference external" href="http://alanwu.blog.51cto.com/3652632/1105681">ext3 启动过程</a></li>
+<li><a class="reference external" href="http://cs.ecust.edu.cn/snwei/studypc/operatepc/005.htm">硬盘及通用分区结构</a></li>
+</ol>
+<p><a class="reference external" href="http://wangchunhai.blog.51cto.com/225186/203621">使用sfdisk实现多操作系统引导</a>   既然说到文件系统，就会主分区以及如何引导启动的问题。无非是在主引导区放了一个自己的引导管理器，来设置起动。而GTL的实现原理在于，用sfdisk来分区，把linux放在这个上面，并且如何保证始终在这个系统。目前看来，默认到都是先到这个操作系统，然后再由这个操作来用sdisk来改分区先项。但是如何来保证每一次都要改了启动选项呢。  <a class="reference external" href="http://www.cl.cam.ac.uk/cgi-bin/manpage?8+sfdisk">其原理</a> 是的windows 里使用LBOOT的原理就是利用GDisk 先改分区表，然后再起动。sfdisk 有一堆分区表，而MBR的分区表只表示当前活动的系统可见的分区。 一共有四个启动分区，其中一个常住了linux，并且在这个linux系统里放着sfdisk里的放着一堆分区表，然后系统活动的几个放在系统分区表。并且这个linux始终是第三个分区，所改变的前两项分区表。而Windows能够看到，就是把始动分区切到这个linux分区如果不需要切系统的就不需要了。然后linux再根据自己的分区表来更新系统的分区表。 所以sfdisk 需要一个第三方的东西来保存其分区表，在这里GTL用了第三个分区自身，并且在sfdisk里的一个参数 -o file 就是那个分区表的位置。</p>
+<p>分区表除了要表示，分区的大小（通过起点，终点/长度来表示). 还需要分区的状态(活动与否），分区的类型也主要是用操作系统的类型。同一个值可能在不能操作系统下的识别是不一样的。<a class="reference external" href="http://www.cnblogs.com/hopeworld/archive/2011/03/27/1997298.html">MBR、分区表、CHS等概念</a>
+在DOS或Windows系统下，基本分区必须以柱面为单位划分（Sectors*Heads个扇区），如对于CHS为764/256/63的硬盘，分区的最小尺寸为256*63*512/1048576=7.875MB.
+<a class="reference external" href="http://www.vckbase.com/index.php/wv/260.html">深入浅出硬盘分区表</a> 分区表实际上一个单向的链表。</p>
+<p>由于硬盘的第一个扇区已经被引导扇区占用，所以一般来说，硬盘的第一个磁道（0头0道）的其余62个扇区是不会被分区占用的。某些分区软件甚至将第一个柱面全部空出来。并且分区中就有一项，那就是第一个分区前面有多少个隐藏扇区。其实每个分区都会有一个引导扇区，也就是`VBR &lt;<a class="reference external" href="http://en.wikipedia.org/wiki/Volume_boot_record">http://en.wikipedia.org/wiki/Volume_boot_record</a>&gt;`_ ,整个硬盘的Boot record就是MBR。</p>
+<p>现在明白了，老大的要讲故事，也就是要问为什么需要。同时也就是事情的前因后果，以及历史。自己如何早些问，那些文件系统有什么区别，现在也就早明白。直到现在才问。所以现在才明白。</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>ext2</td>
+<td><a class="reference external" href="http://learn.akae.cn/media/ch29s02.html">http://learn.akae.cn/media/ch29s02.html</a></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>ntfs</td>
+<td><a class="reference external" href="http://bbs.intohard.com/thread-66957-1-1.html">http://bbs.intohard.com/thread-66957-1-1.html</a></td>
+<td><a class="reference external" href="http://blog.csdn.net/daidodo/article/details/2702648">http://blog.csdn.net/daidodo/article/details/2702648</a></td>
+<td><a class="reference external" href="http://www.linuxquestions.org/questions/linux-newbie-8/error-mounting-mount-unknown-filesystem-type-ntfs-926355/">mount utfs as rw</a>  use fuse and ntfs-3g</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>FAT</td>
+<td><a class="reference external" href="http://www.sjhf.net/document/fat/#4.3%20%20FAT%E8%A1%A8%E5%92%8C%E6%95%B0%E6%8D%AE%E7%9A%84%E5%AD%98%E5%82%A8%E5%8E%9F%E5%88%99">http://www.sjhf.net/document/fat/#4.3%20%20FAT%E8%A1%A8%E5%92%8C%E6%95%B0%E6%8D%AE%E7%9A%84%E5%AD%98%E5%82%A8%E5%8E%9F%E5%88%99</a></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>rootfs</td>
+<td><a class="reference external" href="http://blog.21ic.com/user1/2216/archives/2006/25028.html">http://blog.21ic.com/user1/2216/archives/2006/25028.html</a></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>ramfs</td>
+<td>rootfs</td>
+<td>initrd and initramfs</td>
+<td><a class="reference external" href="http://hi.baidu.com/nuvtgbuqntbfgpq/item/537f1638797a88c01b9696f4">http://hi.baidu.com/nuvtgbuqntbfgpq/item/537f1638797a88c01b9696f4</a></td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>loop device /dev/loopXXX</td>
+<td><a class="reference external" href="http://www.groad.net/bbs/read.php?tid-2352.html">http://www.groad.net/bbs/read.php?tid-2352.html</a></td>
+<td>把文件以及镜象挂载</td>
+<td>是不是可以利用它来做系统血备份</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>看到现在终于把文件系统看懂一些吧，文件系统分为三层，文件本身内部结构一层，文件系统一层，分区与硬盘之间是一样。当然最初的概念都是结合物理模型的，随着后期的演化，最初的概念已经不是最初了的概念了。例如文件，最初都是就是一段扇区。但是到后期文件的已经完全脱离了，那个物理模型，就是变成了长度，并且这个常度就代表一个字节，并且字节也是一个抽象概念。不同的硬件，扇区的等等的分布是不一样的，不同的文件系统，block,inode之间对扇区对应关系都是不一样的。并且在文件系统上，文件不是顺序存储的。所以也就没有办法智能恢复了，也就只能整个硬盘做一个镜象，虽然你只用了一部分空间。 并且PBR的信息是放在分区里的，如果两个分区参数不一样，也是不行，相当于把分区的信息也复制过来了。而dd只能按块来读，在块之间来做转换。所以dd是在操作系统之下进行的，如果想用dd来做，要么两个分区一模一样，包括同样的位置有同样的坏道。要么要自己去解析文件系统的文件分配自己去读写分配每一个扇区。</p>
+</div>
+<div class="section" id="id23">
+<h2>分布式文件系统<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h2>
+<p>基本要求，</p>
+<ol class="arabic simple">
+<li>全局名字空间</li>
+<li>缓存一致性</li>
+<li>安全性</li>
+<li>可用性</li>
+<li>可扩展性</li>
+</ol>
+<p><a class="footnote-reference" href="#r1" id="id24">[1]</a> 介绍了AFS，GFS，Lustre的分布式文件系统。</p>
+</div>
+<div class="section" id="id25">
+<h2>文件系统格式<a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h2>
+<img alt="content/fs_capacity.png" src="content/fs_capacity.png" />
+<div class="figure" id="id51">
+<img alt="content/fs_performance.png" src="content/fs_performance.png" />
+<p class="caption"><span class="caption-text"><a class="reference external" href="https://www.ibm.com/developerworks/cn/linux/l-jfs/">https://www.ibm.com/developerworks/cn/linux/l-jfs/</a></span></p>
+</div>
+<p>不同的文件系统格式，添加了不同的功能，特别是日志文件系统，添加一些数据恢复的功能，就像数据库可以根据日志rollback最佳状态。</p>
+<p><a class="reference external" href="https://zh.wikipedia.org/wiki/Ext4">https://zh.wikipedia.org/wiki/Ext4</a> 增加了在线整理磁盘碎片的功能， ext3 是没有的https://zh.wikipedia.org/wiki/Ext3。
+例如ext3grep,ext4magic, 大部分都是基于ext2fs_library.</p>
+<p><a class="reference external" href="http://extundelete.sourceforge.net/">http://extundelete.sourceforge.net/</a> 可以恢复数据ext2/3/4的数据。</p>
+<p>下一代的文件系统 <a class="reference external" href="https://zh.wikipedia.org/wiki/Btrfs">Btrfs</a> 将是采用类似数据库的底层方式的B+ tree的文件系统。 进一步把文件系统与数据库融合在一起。</p>
+<p>Btrfs 的简介 <a class="reference external" href="https://www.ibm.com/developerworks/cn/linux/l-cn-btrfs/index.htmloo">https://www.ibm.com/developerworks/cn/linux/l-cn-btrfs/index.htmloo</a>
+不同文件系统的性能分析 <a class="reference external" href="https://www.cnblogs.com/tommyli/p/3201047.html">https://www.cnblogs.com/tommyli/p/3201047.html</a></p>
+<p>android 主要是小文件，所以android系统默认是 ext4 格式。</p>
+</div>
+<div class="section" id="id26">
+<h2>调整分区的大小<a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://blog.csdn.net/hongweigg/article/details/7197203">http://blog.csdn.net/hongweigg/article/details/7197203</a></p>
+<p>首先要自己记住分区的起始地址，然后修改分区表，然后再用 resize2fs,tune2fs 来更新文件系统的 meta data. 注意柱面号是按照unit 来计算的。 所以要学会计算这样。</p>
+<p>如果想用dd来做,   先做一个OS,并且在硬盘上连续存放的，并且要知道这个区域的大小，或者说估计大约的值。并且硬盘状态一样。 这样可以像Copy文件一样，那样去做了。</p>
+<p>另一个问题，分区的结构是否一样呢，如果分区的结构不样，例如索引节点的个数是不一样，这可能是按照分区的大小的百分比来进行的，如果新的分区足够大，就会出现浪费的问题，如果不够大就会可能出现错误。所以partitionclone最好的方式是能够认识文件系统。建立在文件系统上。就样可以解决这个问题了，这也就是为什么partclone要有那么多的，文件系统类型的支持。
+可以直接使用 dd if=/dev/sda of=XXX.ISO   或者cat 直接做光盘镜象，然后直接使用mount来进行挂载。</p>
+<p>dd if=XXX.iso of=/dev/&lt;usbpartition&gt;  bs=4k
+cat  XXX.iso &gt; /dev/&lt;usbpartition&gt;</p>
+<p>分区是对硬盘的一个抽象，对于ＯＳ来说，分区基本硬盘是一样的，并且分区上面还可以逻辑分区。block是对 扇区的一种抽象。文件相当于heads, 而目录相当于cylinders.</p>
+<p>可以用 <strong class="command">dumpe2fs</strong> 来查看文件系统，并且可以用 <strong class="command">tune2fs</strong> 来调整参数。</p>
+<p>由于物理磁盘受限于空间的大小，扩展起来不是很方便，这就有了逻辑磁盘的概念。lvm. 先在物理磁盘上建立phiycal Volume, 多个PV 可以组成一个VG，然后在每一个VG上可以建立LV，当然LV可也可以扩VG。而LV就当做一个分区来用。并且随时能够调整大小。 pv,vg,lv.</p>
+<img alt="Stage_2/fs/lv.jpg" src="Stage_2/fs/lv.jpg" />
+</div>
+<div class="section" id="partclone">
+<h2>partclone<a class="headerlink" href="#partclone" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://partclone.org/">http://partclone.org/</a>，</p>
+<p>partclone 对于ntfs 的支持比较有限，所以基本上还都是使用 ticons.</p>
+</div>
+<div class="section" id="tree">
+<h2>tree<a class="headerlink" href="#tree" title="Permalink to this headline">¶</a></h2>
+<p>用来查看filesystem的树型结构，并且通过用pattern过滤，以及控制输出各种格式XML,HTML以及&#8211;du 的功能。</p>
+</div>
+<div class="section" id="raid">
+<h2>Raid<a class="headerlink" href="#raid" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><a class="reference external" href="https://help.ubuntu.com/community/Installation/SoftwareRAID">https://help.ubuntu.com/community/Installation/SoftwareRAID</a></li>
+<li><a class="reference external" href="http://askubuntu.com/questions/526747/setting-up-raid-1-on-14-04-with-an-existing-drive">http://askubuntu.com/questions/526747/setting-up-raid-1-on-14-04-with-an-existing-drive</a></li>
+<li><a class="reference external" href="https://raid.wiki.kernel.org/index.php/RAID_setup">https://raid.wiki.kernel.org/index.php/RAID_setup</a></li>
+<li><a class="reference external" href="https://www.zhihu.com/question/20131784">七种raid配置通俗说明</a></li>
+</ol>
+<p>原理是采用编码的冗余原理。但是数据量越来越大，传统的raid的对于数据恢复的需要的时候间也越来越长，因为也需要进一步raid上分片/分簇来局部化坏道与修复。</p>
+<p><a class="reference external" href="http://alanwu.blog.51cto.com/3652632/1289661">新型的 raid 技术</a></p>
+<p>linux 采用 mdadm 来实现 <code class="file docutils literal"><span class="pre">/etc/mdadm.conf</span></code> .</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c1"># mdadm -C /dev/md0 -a yes -l 5 -n 3 /dev/sd{b,c,d}1</span>
+mdadm: array /dev/md0 started.
+
+-C ：创建一个阵列，后跟阵列名称
+-l ：指定阵列的级别；
+-n ：指定阵列中活动devices的数目
+
+<span class="o">[</span>root@bogon ~<span class="o">]</span><span class="c1"># mdadm --detail /dev/md0</span>
+ /dev/md0:
+         Version : 0.90
+   Creation Time : Tue Mar <span class="m">15</span> 08:17:52 2011
+      Raid Level : raid5
+      Array Size : <span class="m">9783296</span> <span class="o">(</span>9.33 GiB 10.02 GB<span class="o">)</span>
+   Used Dev Size : <span class="m">4891648</span> <span class="o">(</span>4.67 GiB 5.01 GB<span class="o">)</span>
+    Raid Devices : 3
+   Total Devices : 3
+ Preferred Minor : 0
+     Persistence : Superblock is persistent
+
+     Update Time : Tue Mar <span class="m">15</span> 08:20:25 2011
+           State : clean
+  Active Devices : 3
+ Working Devices : 3
+  Failed Devices : 0
+   Spare Devices : 0
+
+          Layout : left-symmetric    校验规则
+      Chunk Size : 64K
+
+            UUID : e0d929d1:69d7aacd:5ffcdf9b:c1aaf02d
+          Events : 0.2
+
+     Number   Major   Minor   RaidDevice State
+        <span class="m">0</span>       <span class="m">8</span>       <span class="m">17</span>        <span class="m">0</span>      active sync   /dev/sdb1
+        <span class="m">1</span>       <span class="m">8</span>       <span class="m">33</span>        <span class="m">1</span>      active sync   /dev/sdc1
+        <span class="m">2</span>       <span class="m">8</span>       <span class="m">49</span>        <span class="m">2</span>      active sync   /dev/sdd1
+</pre></div>
+</div>
+</div>
+<div class="section" id="id29">
+<h2>如何制作文件系统<a class="headerlink" href="#id29" title="Permalink to this headline">¶</a></h2>
+<p>mount 各种各样的文件系统，loop 表示把本地文件当做文件系统来进行挂载。同时也还可以重新mount &#8211;bind 挂载点。对于物理分区有的时候会用完，添加就需要重起机器。所以也就产生了LVM. 逻辑分区。随着云计算到来，一切的虚拟化。原来的系统都是建立物理设备上的，现在都直接在逻辑设备上了。这样就具有更大的移值性，就像我们的CAS就是把逻辑拓扑与物理拓扑的隔离。LVM就在物理分区与文件系统之间又加了一层。文件系统直接建在LVM。
+loop device 就是伪设备当做块设备。<a class="reference external" href="http://unix.stackexchange.com/questions/4535/what-is-a-loop-device-when-mounting">http://unix.stackexchange.com/questions/4535/what-is-a-loop-device-when-mounting</a>
+数据的存储系统是任何一个现代系统必不可少的一部分。它关系着系统是否高效与稳定。使用数据库要求太多，而文件系统而是最灵活的，但是效率可能没有数据高。为了结合自己的数据存储需求，产生定制的文件系统，而非通过的OS文件系统。例如版本控制的文件存储系统，以及现在云计算系统都有自己存储系统。例如Google的GFS。<a class="reference external" href="http://fuse.sourceforge.net/">fuse</a> 文件系统是在用户空间的文件系统。<a class="reference external" href="http://www.ibm.com/developerworks/cn/linux/l-fuse/">如何使用</a> 。并且通过它可以把一些服务当做文件系统来使用。例如google的mail空间。以及ftp等等。</p>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://blog.csdn.net/karmy/article/details/1427315">SquashFS HOWTO (一) &#8212;简介</a></li>
+<li><a class="reference external" href="http://mcuol.com/download/upfile/armLinuxEMB10.pdf">如何制作文件系统</a></li>
+<li><a class="reference external" href="http://study.chyangwa.com/IT/AIX/aixcmds3/mkfs.htm">mkfs manual</a></li>
+</ol>
+<p>通过对gentoo对于各种概念有了更深的认识。</p>
+<p>不同的文件系统就是硬件磁盘与逻辑存储之间的映射关系。 所谓的超级块就是与文件系统有关的。
+并且存储的效率以及备份与压缩的机制。</p>
+<p>还有在备份的时候，先碎片整理最小化，然后再copy数据，这样会加块的速度。
+<strong class="command">e4defrag</strong> ，可以用碎片的整理，同时利用 gparted可以还直接对硬盘进行拉大与拉小，关键是存放的文件不要被覆盖。</p>
+</div>
+<div class="section" id="id32">
+<h2>分区与格式化挂载<a class="headerlink" href="#id32" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://jarson.blog.51cto.com/1422982/573541">sfdisk</a>   是分区为了逻辑设备，就像人们有了多个硬盘一样。这个是由硬盘前面的分区表来决定的。而分区表的大小决定了，你可以有多少个分区，并且在分区表建立文件系统，在linux 下有各种各样的mkfs工具来供你使用。然后加载在OS上，这里就要mount了。
+对于mount 由于这个概念泛化了。你可以mount 本地硬盘，也可以远程（NFS，autofs,samba) 还以把本地文件本身当做文件系统进行访问。同时也可以用bind 来把一个目录绑到另一个目录里，来避免ln的不足.`mount &#8211;bind挂载功能，避免ln -s链接的不足 &lt;<a class="reference external" href="http://blog.csdn.net/islandstar/article/details/7774121">http://blog.csdn.net/islandstar/article/details/7774121</a>&gt;`_ ,`mount &#8211;bind 的妙用  &lt;<a class="reference external" href="http://www.cnitblog.com/gouzhuang/archive/2012/07/15/65503.html">http://www.cnitblog.com/gouzhuang/archive/2012/07/15/65503.html</a>&gt;`_</p>
+<p><a class="reference external" href="http://www.bitscn.com/os/windows7/200912/179453.html">windows自带磁盘分区工具Diskpart使用介绍</a>
+分区与`格式化 &lt;<a class="reference external" href="http://baike.baidu.com/view/902.htm">http://baike.baidu.com/view/902.htm</a>&gt;`_ 是两步不同的操作.格式化又分为低级，与高级，低级格式化是物理级的格式化，主要是用于划分硬盘的磁柱面、建立扇区数和选择扇区间隔比。硬盘要先低级格式化才能高级格式化，而刚出厂的硬盘已经经过了低级格式化，无须用户再进行低级格式化了。高级格式化主要是对硬盘的各个分区进行磁道的格式化，在逻辑上划分磁道。对于高级格式化，不同的操作系统有不同的格式化程序、不同的格式化结果、不同的磁道划分方法。</p>
+<p>同时为了支持热mount,还有 <a class="reference external" href="https://en.wikipedia.org/wiki/GVfs">https://en.wikipedia.org/wiki/GVfs</a>， gvfs  可以在用户态加载空间，例如把ftp,smb等等把网络mount到本地。例如
+gvfs-mount &#8216;<a class="reference external" href="ftp://user&#64;www.your-server.com/folder">ftp://user&#64;www.your-server.com/folder</a>&#8216; 目录都在 .gvfs/ 下面。 并且其下有一堆的gvfs-ls/cat, 等等一堆的命令。</p>
+<p>例如 <a class="reference external" href="http://curlftpfs.sourceforge.net/">curlftpfs</a> 支持把http,ftp等mount到本地。</p>
+<p>各个系统的共享，这样就可以减少大量的配置工作，例如的所有的工作机都直接mount同一个存储目录，这样就可以大量的login以及editor的配置，可以直接使用自己本机的编辑器配置，而运行在其他机器上。 这样的并行度就会大大很多。</p>
+<p>mount.cifs 可以持 samba等等，使用fuse为基础的gvfs 可以挂载 ftp,http等。而sshfs可以直接mount ssh 帐号。
+只需要两条命令:
+<strong class="command">apt-get install sshfs</strong>, 然后把自己加入sshfs这个用户组就行了。
+<a class="reference external" href="http://www.fwolf.com/blog/post/329">http://www.fwolf.com/blog/post/329</a></p>
+</div>
+<div class="section" id="id34">
+<h2>共享目录<a class="headerlink" href="#id34" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>两种办法做这个，一种用autofs, 一次用可以使用cifs-utils. 直接mount就行。</li>
+</ol>
+<p><strong class="command">mount -t cifs -o user=xxxx,password=xxx //192.168.0.1/xxx /mnt/</strong></p>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://linhui.568.blog.163.com/blog/static/9626526820117822835844/">linux 访问windows 共享目录</a> 也可以直接使用`smbclient &lt;<a class="reference external" href="http://wenku.baidu.com/view/ab3e7ffc910ef12d2af9e7bb.html">http://wenku.baidu.com/view/ab3e7ffc910ef12d2af9e7bb.html</a>&gt;`_</li>
+<li><a class="reference external" href="http://www.autofs.org/">autofs</a>  our builds use it on farm</li>
+</ol>
+<p>#. 如果自己想用FUSE系统直接支持和种http,ftp等等在线系统。可以用
+<a class="reference external" href="https://www.stavros.io/posts/python-fuse-filesystem/">https://www.stavros.io/posts/python-fuse-filesystem/</a> 来实现。</p>
+<div class="highlight-bash"><div class="highlight"><pre>apt-get install autofs
+ mkdir /network
+ auto.master
+         /network /etc/auto.mymounts --timeout<span class="o">=</span><span class="m">35</span> --ghost
+ auto.mymounts
+        prerelease -fstype<span class="o">=</span>cifs,rw,noperm,user<span class="o">=</span>devtools_tester1,pass<span class="o">=</span>nvidia3d,dom<span class="o">=</span>nvidia.com ://builds/prerelease
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://linux-cifs.samba.org/">cifs common interface  filesystem</a></li>
+<li><a class="reference external" href="http://pic.dhe.ibm.com/infocenter/aix/v7r1/index.jsp?topic=%2Fcom.ibm.aix.cmds%2Fdoc%2Faixcmds3%2Fmkfs.htm">mkfs IBM manual</a></li>
+<li><a class="reference external" href="http://www.ibm.com/developerworks/cn/linux/filesystem/l-fs/">高级文件系统实现者指南 日志和 ReiserFS</a></li>
+</ol>
+</div>
+<div class="section" id="id35">
+<h2>硬盘检查与修复<a class="headerlink" href="#id35" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>extfs</td>
+<td>e2fsck -y /dev/sda1</td>
+</tr>
+<tr class="row-even"><td>HFSP</td>
+<td>fsck.htfsplus  -f -y /dev/sda1</td>
+</tr>
+<tr class="row-odd"><td>NTFS</td>
+<td>ntfsfix -d /dev/sda1</td>
+</tr>
+<tr class="row-even"><td>Reiserfs</td>
+<td>reiserfsck -a -y /dev/sda1</td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple">
+<li>e2fsck 还有一个配置文件 <code class="file docutils literal"><span class="pre">etc/e2fsck.conf</span></code></li>
+</ol>
+<p>修复的原理，那就是各种文件系统的，格式</p>
+<p><a class="reference external" href="http://m.blog.chinaunix.net/uid-20196318-id-152429.html">Ext3日志原理</a>
+<a class="reference external" href="http://unix.stackexchange.com/questions/87415/whats-the-difference-between-e2fsck-and-fsck-and-which-one-i-should-use">whats-the-difference-between-e2fsck-and-fsck-and-which-one-i-should-use</a></p>
+</div>
+<div class="section" id="man">
+<h2>man<a class="headerlink" href="#man" title="Permalink to this headline">¶</a></h2>
+<p><strong class="command">H</strong> 可以打开man的命令帮助文档。</p>
+</div>
+<div class="section" id="hardlink-and-softlink">
+<h2>HardLink and softlink<a class="headerlink" href="#hardlink-and-softlink" title="Permalink to this headline">¶</a></h2>
+<p>我们知道文件包括文件名和数据，在Linux上被分为两个部分：用户数据（user data）和元数据（metadata），用户数据主要记录文件真实内容的地方，元数据是记录文件的附加信息，比如文件大小、创建信息、所有者等信息。在Linux中的innode才是文件的唯一标示而非文件名。文件名是方便人们的记忆。</p>
+<p>为了解决文件共享的问题，Linux 引入两种链接：硬链接和软连接。</p>
+<ol class="arabic simple">
+<li>若一个innode号对应于多个文件名，则成为硬链接</li>
+<li>若文件用户数据块中存放的内容是另一个的路径名的指向，则该文件就是软链接。</li>
+</ol>
+<p><a href="#id52"><span class="problematic" id="id53">`http://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/`_</span></a></p>
+<p><a class="reference external" href="http://askubuntu.com/questions/108771/what-is-the-difference-between-a-hard-link-and-a-symbolic-link">what-is-the-difference-between-a-hard-link-and-a-symbolic-link</a></p>
+<p><a class="reference external" href="http://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/">http://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/</a>  hardlink 一个用途那就是做备份，要比copy更加快速方便。</p>
+<p><a class="reference external" href="http://www.mikerubel.org/computers/rsync_snapshots/#Incremental">Easy Automated Snapshot-Style Backups with Linux and Rsync</a>  可以快速建立一个 hourly,daily,and weekly.snapshots. 并且一个快速 rotate 机制，就是一个重命名。</p>
+<div class="highlight-bash"><div class="highlight"><pre>rm back.3
+mv back.2 back.3
+mv back.1 back.2
+mv back.0 back.1
+rsync -a --delete source_directory/ backup.0/
+</pre></div>
+</div>
+</div>
+<div class="section" id="id37">
+<h2>对于文件系统的监控<a class="headerlink" href="#id37" title="Permalink to this headline">¶</a></h2>
+<p>文件系统的消息的类型与数量也是固定的，可以用api来得到，mount &#8211;make-rslave 等等就是控制的消息的传递。 同时也可以用 <a class="reference external" href="guardgem.org">gardgem</a> 以及系统默认的watch 的命令一样。这样的工具也特别需要例如node.js开发的时候就提供这的工具。实时更新重起 service.</p>
+</div>
+<div class="section" id="id38">
+<h2>分区表的格式<a class="headerlink" href="#id38" title="Permalink to this headline">¶</a></h2>
+<p>硬盘的分区格式是用signature 来区分的，如果是总是识别的不对，应该原来signature没有清除掉，或者不同的软件的默认的读写位置不对。
+如何用dd来查询硬盘的头部信息直接来得到或者直接修改。</p>
+<div class="highlight-bash"><div class="highlight"><pre>parted -l <span class="c1">#查看分区格式</span>
+dd <span class="k">if</span><span class="o">=</span>/dev/sdb <span class="nv">skip</span><span class="o">=</span><span class="m">1</span> <span class="nv">count</span><span class="o">=</span><span class="m">1</span> <span class="p">|</span>hexdump -C <span class="c1">#查看内容</span>
+dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">count</span><span class="o">=</span><span class="m">1</span> <span class="nv">seek</span><span class="o">=</span><span class="m">1</span> <span class="nv">of</span><span class="o">=</span>/dev/sdb <span class="c1">#把内容清除为零</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id39">
+<h2>See also<a class="headerlink" href="#id39" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://code.taobao.org/p/tfs/src/">TFS</a>  taobao 分布式文件系统，<a class="reference external" href="http://baike.baidu.com.cn/view/4253974.htm">TFS集群文件系统</a> 把原数据放在文件名与路径上，采用对象存储，</li>
+<li><a class="reference external" href="http://www.pcworld.com.cn/Article/ShowArticle.asp?ArticleID&amp;#61;15927">存储领域面临六大趋势</a></li>
+<li><a class="reference external" href="http://www.chinastor.com/a/jishu/OSD.html">什么是对象存储？OSD架构及原理</a>  核心是将数据通路（数据读或写）和控制通路（元数据）分离，并且基于对象存储设备</li>
+<li><a class="reference external" href="http://www.programmer.com.cn/12403/">OpenStack对象存储——Swift</a></li>
+<li><a class="reference external" href="http://www.itivy.com/ivy/archive/2012/2/16/image-storage-1.html">图片存储系统设计</a></li>
+<li><a class="reference external" href="http://forum.ubuntu.org.cn/viewtopic.php?t&amp;#61;58468">学会理解并编辑fstab</a></li>
+</ol>
+</div>
+<div class="section" id="paper">
+<h2>Paper<a class="headerlink" href="#paper" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://www.google.com/patents?hl=zh-CN&amp;lr=&amp;vid=USPAT5367682&amp;id=UWgeAAAAEBAJ&amp;oi=fnd&amp;dq=partition+table&amp;printsec=abstract#v=onepage&amp;q=partition%20table&amp;f=false">Data processing virus protecton on partition table</a></li>
+<li><a class="reference external" href="http://www.cybersecurity.my/data/content&amp;#95;files/13/71.pdf">court law of disk</a></li>
+<li><a class="reference external" href="http://en.wikipedia.org/wiki/Partition&amp;#95;type">parition ID</a></li>
+<li><a class="reference external" href="http://www.xifenfei.com/1605.html">对/dev/shm认识</a></li>
+<li><a class="reference external" href="http://www.ibm.com/developerworks/cn/linux/l-vfs/">解析 Linux 中的 VFS 文件系统机制</a>  简单明了</li>
+<li><a class="reference external" href="http://www.ibm.com/developerworks/cn/linux/l-k26initrd/">Linux2.6 内核的 Initrd 机制解析</a>  用在内存中</li>
+<li><a class="reference external" href="http://fossies.org/dox/parted-3.1/index.html">parted-3.1 doxygen document.</a>  看看能否只更新部分硬盘</li>
+<li><a class="reference external" href="http://www.all-things-android.com/content/understanding-android-file-hierarchy">understanding-android-file-hierarchy</a>  与linux差别不大</li>
+</ol>
+</div>
+<div class="section" id="id43">
+<h2>Thinking<a class="headerlink" href="#id43" title="Permalink to this headline">¶</a></h2>
+<p><em>CHS</em> 记住硬盘这一物理存储结构就知道来理解一切就都会明白了，物理结构本身三级目录。柱面 磁头，扇区。第一个磁道的扇区数一样吗。柱面与磁头决定一个磁道。 grub 的原理与硬盘的结构是相关的。并且始终记住一点那就是对于处理器来说，它能做的那就是程序在哪儿，程序指针指哪从哪开始执行。开始执行前要把需要的程序加载在内存。grub其实就是做了这样的事，BIOS把MBR放在内存中，并且处理器的跳转那里。MBR放的就是grub引导程序。然后呢，grub做了三件事，要确定系统放在哪。然后从那里把去把内核镜像加载在内存中，并设置相关的环境变量，例如root目录，以及内核在哪里。 然后把执行权交给内核。</p>
+<p>&#8211; Main.GangweiLi - 15 Jan 2013</p>
+<p><em>长路径与文件夹的作用</em>
+长路径来保证文件名的唯一性，能过长路径来保正。其实也就是字符串长与短一种映射，这一个就是能够解决集体操作。一次对多个文件进行同样的操作。也就是有一种方法可以直接对压缩文件来进行操作。如果解决了这个问题，其实也要不要这么文件夹。也就不是大的问题。更多的逻辑分块的需要。</p>
+<p>&#8211; Main.GangweiLi - 12 Mar 2013</p>
+<p><em>数据库与文件系统</em>
+本质上数据库本身也是一种文件系统。对于不同的存储对象，采用不同的机制。例如一些锁碎的类似于ERP这样数据适合于数据库这种存储系统。而大的块数据例如视频则任何于直接存储于文件系统上。例如不同的文件系统对于备份以及权限的管理是不一样的。 并且还有一个分布式文件系统的问题。还有版本控制库的文件系统。并且各种文件系统有融合之意。例如mongo,TFS,GFS等等。</p>
+<p>&#8211; Main.GangweiLi - 12 Mar 2013</p>
+<p><em>内存文件系统</em>
+为了使启动更加方便，把内核更不断不分层模块化。来使其更加通用，与复用。因为内核变化速度要比文件系统要快。</p>
+<p>&#8211; Main.GangweiLi - 19 Apr 2013</p>
+<p><em>文件属性</em>
+在查找的，排序的时候，利用文件属性会具有很大的优势，另外一个文件的属性是存储在哪里的。例如我想基于文件属性的查找排序是会很有用，在win7上是可以随时调整的，但是linux上却没有发现，如何大规模对象存储。对于图象。更是如此。例如利用find可以查找有限的文件属性。
+<a class="reference external" href="http://www.ibm.com/developerworks/cn/linux/filesystem/">IBM filesystem 系列</a> 现在才对文件系统的认识有了更深的认识。需要文件系统具有什么样的能力。</p>
+</div>
+<div class="section" id="id44">
+<h2>文件系统中节点的类型<a class="headerlink" href="#id44" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>directory</li>
+<li>file</li>
+<li>symlink</li>
+<li>block device</li>
+<li>charactor device</li>
+<li>FIFO</li>
+<li>unix domain socket</li>
+</ol>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<table class="docutils footnote" frame="void" id="r1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id24">[1]</a></td><td><a class="reference external" href="http://www.jianshu.com/p/c6a530365bea">http://www.jianshu.com/p/c6a530365bea</a></td></tr>
+</tbody>
+</table>
+<p>linux下driver的安装还是很有挑战的，会遇到各种的不兼合，并且会无法适从。但是明白其加载原理之后，自然一切都了然于心了。</p>
+<p>driver起的就是逻辑设备，要想到一个linux中使用一个设备，就为其建立一个逻辑设备也就是driver,正是因为这一层逻辑设备，我们才可以各种虚拟设备。以及实现虚拟化的。</p>
+<p>这个映射关心是由udev来做实现的，而driver本身的管理是由modeprobe.conf来管理的。
+module的依赖，以及alias,以及blacklist机制,还可以配制module的参数。并且还可以不用加载直接执行就可以直接执行的。每一个module,driver的管理配置都可以放在 <cite>etc/moduleprobe.d/</cite> 下面。</p>
+<p><a class="reference external" href="https://wiki.archlinux.org/index.php/kernel_modules">kernel modules</a></p>
+<p>例如  <a class="reference external" href="http://askubuntu.com/questions/112302/how-do-i-disable-the-nouveau-kernel-driver">http://askubuntu.com/questions/112302/how-do-i-disable-the-nouveau-kernel-driver</a> 就是利用了blacklist</p>
+<p>并且一般情况下换了硬件之后，OS不工作了，或者工作不正常了，例如桌面进不去了换了显卡之后，只要重装一下，所有状态reset为正常值应该就好了。
+例如 <cite>sudo apt-get install nvidia-331</cite> 然后 <cite>reboot</cite> .</p>
+<div class="section" id="device-management">
+<h3>device Management<a class="headerlink" href="#device-management" title="Permalink to this headline">¶</a></h3>
+<p>这个事情起因是在这里http://www.kroah.com/linux/talks/ols_2003_udev_paper/Reprint-Kroah-Hartman-OLS2003.pdf
+原因硬件命名规则太死板了，例如硬盘太多，原来那种major/minor号又不够。 因为每位都8位，并且还有很预留的，另外
+是热插拔的硬件很多，总不能都事先留着吧，那样/dev的目录太大了。另外也能保证每一次都在同一个地方。这样内核就头疼了。</p>
+<p>后边就有udev这种方法，由kernel只告诉用户有硬件来了，它叫什么名字，由你告诉我，然后再用对应的driver来读取他。
+也就是为什么多个硬件可以共用一个driver,或者你可以靠一个假的硬件原因。现在有了逻辑设备。 driver与逻辑设备对应。
+我可以指这个mapping,也可以系统自己生成。系统采用第一次生成后保存下来。以后延用。</p>
+<p>mdev,udev两者实现的基理不同，udev采用 netlink的机制，自己造一个Dameo来检测 uevent,而mdev 则是注册一个回调函数来实现。 /sys/kernel/hotplug 。<a class="reference external" href="http://blog.csdn.net/lifengxun20121019/article/details/17403527">http://blog.csdn.net/lifengxun20121019/article/details/17403527</a></p>
+<p><a class="reference external" href="http://git.busybox.net/busybox/plain/docs/mdev.txt">http://git.busybox.net/busybox/plain/docs/mdev.txt</a>
+<a class="reference external" href="http://wiki.gentoo.org/wiki/Mdev">http://wiki.gentoo.org/wiki/Mdev</a></p>
+<p>when you plug in a new device such as USB. which label &#8220;sdb...&#8221; will be used for it. here you can use udev.
+1. db store the user device information
+1. <em>rule</em> how to recognize the device.  当你发现你的OS在新的硬件上，不识别，例如网卡不能用了，第一步那就是先把这个rule给删除了。* rm -fr /etc/udev/rules.d/*
+1. <a class="reference external" href="http://blog.csdn.net/absurd/article/details/1587938">udev的实现原理</a>
+1. <a class="reference external" href="http://blog.csdn.net/fjb2080/article/details/4876314">使用udevadm修改usb优盘在/dev下的名字</a>
+1. <a class="reference external" href="http://www.mike.org.cn/articles/linux-xiangjie-udev/">Linux┊详解udev</a></p>
+<p>如果你想定义硬件的命名等都是可以用 udev.rules 来解决的。
+<a class="reference external" href="http://www.reactivated.net/writing_udev_rules.html">writing udev rules</a> .</p>
+<p>如何写查询属性可以用  <strong class="command">udevinfo</strong> 或者 <strong class="command">udevadm info -qury=property -path=/sys/block/sda</strong></p>
+<p>driver 之间的依赖关系是由LKM来管理，<a class="reference external" href="http://blog.csdn.net/ruixj/article/details/3772798">如何自动加载与实现逻辑设备与物理设备的mapping</a> 主要是对应的pci数据结构，每一个硬件都会用vender,device ID,以及相对应的subID，是通过udev来实现的与管理的，这个就像windows，pnpUtils是一样的。</p>
+<p>每一个设备成功后都会占用一个端口号或者内存地址段。应该是每一个硬件都会ID之类的东东，内核来做了这个mapping,例如eth0 对应哪 一个网口。 就像我们在NEAT所做的，逻辑设备与物理设备之间的mapping. 并这个关系更规范与通用化一些。</p>
+</div>
+<div class="section" id="kernel-module-driver-install-and-debug">
+<h3>kernel module  driver install and debug<a class="headerlink" href="#kernel-module-driver-install-and-debug" title="Permalink to this headline">¶</a></h3>
+<p>kernel module usually end with <em>xxx.ko</em>.  from linux kernel 2.6, the kernel use dynamic mechanism. you dynamically insmod,rmmod .  use the depmod to generate /lib/modules/2.6.xx/modules.dep and then modprob would automatically insert the module according the modules.dep.  the driver is one of module.  the module could have alias name.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Item</th>
+<th class="head">Content</th>
+<th class="head">Remark</th>
+<th class="head">&nbsp;</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>module location</td>
+<td><em>/lib/modules/kernel version /kernel/drivers</em></td>
+<td>ethernet card driver  /lib/modules/2.6.4-gentoo-r4/kernel/drivers/net/r8168.ko</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>configuration file</td>
+<td>etc/modules.autoload.d/XX</td>
+<td>you just need to add the module name here. etc/modules.autoload.d/kernel-2.6</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>modprobe</td>
+<td>modprobe  r8168.ko</td>
+<td>the module could have alias name.  etc/modprobe.d/XXXX</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>depmod</td>
+<td>depmod -a r8168</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>dmesg</td>
+<td>kernel会将开机信息存储在ring buffer中。您若是开机时来不及查看信息，可利用dmesg来查看。开机信息亦保存在/var/log目录中，名称为dmesg的文件里。</td>
+<td>dmesg用来显示内核环缓冲区（kernel-ring buffer）内容，内核将各种消息存放在这里。在系统引导时，内核将与硬件和模块初始化相关的信息填到这个缓冲区中。内核环缓冲区中的消息对于诊断系统问题 通常非常有用。在运行dmesg时，它显示大量信息。通常通过less或grep使用管道查看dmesg的输出，这样可以更容易找到待查信息。例如，如果发现硬盘性能低下，可以使用dmesg来检查它们是否运行在DMA模式：</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://www.ibm.com/developerworks/cn/linux/l-cn-kernelmodules/">解析 Linux 内核可装载模块的版本检查机制</a> 以及 <a class="reference external" href="http://blog.aliyun.com/1123">如何突破其CRC验证</a> 简单直接把crc值，直接在elf里改成符合规定的值，说白了就是凑答案 .</li>
+<li><a class="reference external" href="http://wiki.linuxdeepin.com/index.php?title=Linux%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97">module common command</a> 以及其`实现机制 &lt;<a class="reference external" href="http://read.pudn.com/downloads37/sourcecode/unix_linux/124135/Linux%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6.PDF">http://read.pudn.com/downloads37/sourcecode/unix_linux/124135/Linux%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6.PDF</a>&gt;`_ .</li>
+</ol>
+<p>内核检测到硬件，然后去加载mapping的driver,在加载的过程中要经过modeprobe.conf这样的过虑，并且解决其依赖关系。没有对应关系就要手工加载了。
+一般是要把module放在 <code class="file docutils literal"><span class="pre">/lib/modules/&lt;kernel</span> <span class="pre">version&gt;/kernel/driver/net</span></code> 以及去修改 <code class="file docutils literal"><span class="pre">/etc/modules.d/&lt;kernel</span> <span class="pre">version</span></code>
+2.4 的版本 用的是module.conf,而2.6的版本用是modeprobe.conf
+所以多个硬件可以共用一个driver,只需要用alias 把硬件本身映射到一个别名。
+硬件一般用中断传递信息，而内核如何来传递这些信息用uevent, 不管你的底层是什么中断。并且uevent 通过netlink来进传送。</p>
+</div>
+</div>
+<div class="section" id="id46">
+<h2>底层的中断又有很多<a class="headerlink" href="#id46" title="Permalink to this headline">¶</a></h2>
+<p>PCI总线的中断，例MSI与MSI-X中断机制。中断的级联扩展。</p>
+<p>内核的调试</p>
+<p><a class="reference external" href="http://www.ibm.com/developerworks/cn/linux/l-kdb/">Linux 系统内核的调试</a>  主要有三种kgdb,SkyEye,UML三种技术。</p>
+<div class="section" id="intel-ethernet-153a">
+<h3>intel  ethernet 153a 网卡不稳定<a class="headerlink" href="#intel-ethernet-153a" title="Permalink to this headline">¶</a></h3>
+<p>查看问题的，第一个要收集信息，不要轻易破坏了环境。尽可能多的收集信息
+#.  保存error 信息
+#.  save /var/log/dmesg  与 /var/log/syslog
+#.  查看 是否内核加载了 cat /proc/modules <a href="#id48"><span class="problematic" id="id49">|</span></a>view -
+#.  根据error message进行初步的推理并验证
+#.  提炼你的问题，一句话，几个词
+#.  ehtools 查看并且修改硬件。
+#.  insmod -m 查看插入时信息
+#.  看看没有新版本可以用，看看CL.   <a class="reference external" href="http://sourceforge.net/projects/e1000/">http://sourceforge.net/projects/e1000/</a>
+#.  去官网查看相关的FAQ 以及bugs.  <a class="reference external" href="http://sourceforge.net/p/e1000/bugs/430/">http://sourceforge.net/p/e1000/bugs/430/</a>
+#.  还有那是 READE
+#.  最后看一个 开发framework,去找一个init, close函数，只需要看看其做了什么，就知道了。</p>
+</div>
+</div>
+<div class="section" id="driver">
+<h2>driver 的开发<a class="headerlink" href="#driver" title="Permalink to this headline">¶</a></h2>
+<p>一般都是register, init, shutdown, close等等几个函数接口。
+<a class="reference external" href="http://10.19.226.116:8800/trac/ticket/2705">http://10.19.226.116:8800/trac/ticket/2705</a>
+就是标准 .so 只是链接的库不同，以及编译的选项要与主机匹配。
+<a class="reference external" href="http://www.tldp.org/LDP/lkmpg/2.6/html/x181.html">http://www.tldp.org/LDP/lkmpg/2.6/html/x181.html</a> 有详细的教程</p>
+<p>内核的编译都需要内核的头文件，以及symbols表，以及依赖与加载的先后关系。
+以及内核的版本号，如果开启了版本的匹配功能，则需要对应，不然不能加载。</p>
+<p>内核用uevent与用户态通信。</p>
+<p>insmod/lsmod的原理。
+<a class="reference external" href="http://elinux.org/images/8/89/Managing_Kernel_Modules_With_kmod.pdf">http://elinux.org/images/8/89/Managing_Kernel_Modules_With_kmod.pdf</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">内核篇</a><ul>
+<li><a class="reference internal" href="#linuxkernel">LinuxKernel</a><ul>
+<li><a class="reference internal" href="#id2">进程与程序的关系</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id7">安全策略</a></li>
+<li><a class="reference internal" href="#id8">进程管理</a><ul>
+<li><a class="reference internal" href="#system-call">system call</a></li>
+<li><a class="reference internal" href="#signal">Signal</a></li>
+<li><a class="reference internal" href="#systemlog">SystemLog 机制</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#debug">debug</a><ul>
+<li><a class="reference internal" href="#see-also">See also</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#thinking">Thinking</a><ul>
+<li><a class="reference internal" href="#id12">内存结构</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id13">进程的内存分配</a></li>
+<li><a class="reference internal" href="#id14">介绍</a></li>
+<li><a class="reference internal" href="#pipe">Pipe文件系统</a></li>
+<li><a class="reference internal" href="#id23">分布式文件系统</a></li>
+<li><a class="reference internal" href="#id25">文件系统格式</a></li>
+<li><a class="reference internal" href="#id26">调整分区的大小</a></li>
+<li><a class="reference internal" href="#partclone">partclone</a></li>
+<li><a class="reference internal" href="#tree">tree</a></li>
+<li><a class="reference internal" href="#raid">Raid</a></li>
+<li><a class="reference internal" href="#id29">如何制作文件系统</a></li>
+<li><a class="reference internal" href="#id32">分区与格式化挂载</a></li>
+<li><a class="reference internal" href="#id34">共享目录</a></li>
+<li><a class="reference internal" href="#id35">硬盘检查与修复</a></li>
+<li><a class="reference internal" href="#man">man</a></li>
+<li><a class="reference internal" href="#hardlink-and-softlink">HardLink and softlink</a></li>
+<li><a class="reference internal" href="#id37">对于文件系统的监控</a></li>
+<li><a class="reference internal" href="#id38">分区表的格式</a></li>
+<li><a class="reference internal" href="#id39">See also</a></li>
+<li><a class="reference internal" href="#paper">Paper</a></li>
+<li><a class="reference internal" href="#id43">Thinking</a></li>
+<li><a class="reference internal" href="#id44">文件系统中节点的类型</a></li>
+<li><a class="reference internal" href="#references">References</a><ul>
+<li><a class="reference internal" href="#device-management">device Management</a></li>
+<li><a class="reference internal" href="#kernel-module-driver-install-and-debug">kernel module  driver install and debug</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id46">底层的中断又有很多</a><ul>
+<li><a class="reference internal" href="#intel-ethernet-153a">intel  ethernet 153a 网卡不稳定</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#driver">driver 的开发</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Stage_1.html"
+                        title="previous chapter">基础篇</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Stage_3.html"
+                        title="next chapter">专题篇</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/content/Stage_2.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Stage_3.html" title="专题篇"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Stage_1.html" title="基础篇"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">My Linux 0.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2014, gangwei.li.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

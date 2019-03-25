@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>虚拟化 &mdash; My Linux 0.3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="My Linux 0.3 documentation" href="../../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">My Linux 0.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>虚拟化<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>虚拟化本质就是松耦合，接口化。 加一个中间层。最简单的虚拟化就是 输入输出的重定向。 因为正常的情况下程序没有打开多余的输入输出的。只有0，1，2.程序只认0，1，2.不管他们绑在谁身上。</p>
+<p>再复杂一些虚拟化chroot,这样上升到context的切换。 但还不够。程序最初的设计是代码与数据分离的。 但是代码与执行本身强耦合的。这也是为什么大部分情况下，一般人讲进程与代码的关系的讲不清的原因。</p>
+<p>更进一步的虚拟就是代码，数据，执行三者都是分离的。因为当初的设计，代码的执行context要求比较大那就是 OS级的context. 也就是你看到虚拟机。有两种一种是 JVM这种。另一种那就是 virtual box以及更一层的Xen 这种。</p>
+<p>从实现上只是执行与代码的分离，而在linux 中还出现多细分的。
+<a class="reference external" href="http://www.ibm.com/developerworks/cn/linux/l-lxc-containers/index.html">LXC: Linux 容器工具</a>  这个实现正是基于chroot 实现的进程级别的虚拟化。
+<a class="reference external" href="http://blog.csdn.net/cbmsft/article/details/7214371">http://blog.csdn.net/cbmsft/article/details/7214371</a></p>
+<p>Docker 是一种更轻质化的容器,就为了实现大一统,达到资源与效率的平衡.
+Docker 可以做什么 <a class="reference external" href="http://blog.2baxb.me/archives/1136">http://blog.2baxb.me/archives/1136</a></p>
+<div class="section" id="docker">
+<h2>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h2>
+<p>最快的安装方式，<strong class="command">curl -sSL https://get.docker.com/ |sh -</strong>
+并且Docker现在发展的很成熟，可以实现各种level的虚拟化。</p>
+<p>一个进程的，直接使用 <strong class="command">docker run</strong> 或者多进程service级别的docker-composer.
+以及多host的docker-machine(自动安装docker）,以及集群水平的swarms,`Kubernetes &lt;<a class="reference external" href="https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/">https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/</a>&gt;`_ (google开发的自动部署的docker工具)，能够实现load labance. 同时能够提供虚拟的网络的，overlay.</p>
+<p>同时也提供自动配置，Dockerfile ,Compose.yaml 等等。</p>
+<p>对于数据存储资源可以 volume绑定.</p>
+<p>对于docker image的存储可以有自建registery. 同时还有各家的docker cloud可以用。</p>
+<ol class="arabic simple">
+<li>常用命令的查询 <a class="reference external" href="https://github.com/eon01/DockerCheatSheet">Docker</a></li>
+<li>中文版不错的书 <a class="reference external" href="https://www.gitbook.com/book/yeasy/docker_practice/details">Docker 从入门到实践</a></li>
+<li>Docker 的存储实现原理 <a class="reference external" href="https://segmentfault.com/a/1190000007168476">https://segmentfault.com/a/1190000007168476</a>，不同文件系统支持的水平与性能也都不一样。</li>
+</ol>
+<p>dokcer 对于集群的支持 有Docker service,以及swarm等模式的支持。 <a class="reference external" href="http://liubin.org/blog/2016/06/17/whats-new-in-docker-1-dot-12-dot-0/">http://liubin.org/blog/2016/06/17/whats-new-in-docker-1-dot-12-dot-0/</a></p>
+</div>
+<div class="section" id="how-to-upload-to-hub-docker-com">
+<h2>how to upload to hub.docker.com<a class="headerlink" href="#how-to-upload-to-hub-docker-com" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre>docker images
+docker tag  bb38976d03cf yourhubusername/verse_gapminder:firsttry
+docker push yourhubusername/verse_gapminder:firsttry
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-automate-build-from-with-github">
+<h2>how to automate-build from with Github<a class="headerlink" href="#how-to-automate-build-from-with-github" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="guihost">
+<h2>共享GUI与host<a class="headerlink" href="#guihost" title="Permalink to this headline">¶</a></h2>
+<p>主要是采用的方式，那就是共享socket 的模式。</p>
+</div>
+<div class="section" id="permission">
+<h2>permission<a class="headerlink" href="#permission" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre>docker: Got permission denied <span class="k">while</span> trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Post http://%2Fvar%2Frun%2Fdocker.sock/v1.26/containers/create: dial unix /var/run/docker.sock: connect: permission denied.
+See <span class="s1">&#39;docker run --help&#39;</span>.
+sudo usermod -a -G docker $USER
+logout/login
+</pre></div>
+</div>
+<div class="section" id="network-and-service">
+<h3>network and service<a class="headerlink" href="#network-and-service" title="Permalink to this headline">¶</a></h3>
+<p>docker &#8211;run &#8211;it &#8211;net=bridge
+在Docker的container里起一个sshi serivice</p>
+<div class="highlight-bash"><div class="highlight"><pre>apt update <span class="o">&amp;&amp;</span> apt install openssh-server
+/usr/sbin/sshd
+<span class="c1">#. config the sshd alow the root</span>
+docker run -p  8022:22
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="grid">
+<h2>Grid<a class="headerlink" href="#grid" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>vGPU profile 决定你的vGPU type.
+每一块物理卡可以虚拟出多块vGPU,但是必须是同一类型
+分配策略，深度优先，把一个块物理卡用完再用第二块卡，第二种广度优先，尽可能用新卡。</li>
+<li><a class="reference external" href="http://www.nvidia.com/object/nvidia-grid-buy.html">http://www.nvidia.com/object/nvidia-grid-buy.html</a></li>
+<li><a class="reference external" href="https://www.youtube.com/watch?v=_CQmomyOiRM">NVIDIA GRID vGPU explained</a></li>
+<li>Windows server 2016 版本对比 <a class="reference external" href="https://docs.microsoft.com/zh-cn/windows-server/get-started/2016-edition-comparison">https://docs.microsoft.com/zh-cn/windows-server/get-started/2016-edition-comparison</a></li>
+<li>type 2 与type 1 的区别 <a class="reference external" href="https://blogs.technet.microsoft.com/jhoward/2013/10/24/hyper-v-generation-2-virtual-machines-part-1/">https://blogs.technet.microsoft.com/jhoward/2013/10/24/hyper-v-generation-2-virtual-machines-part-1/</a></li>
+</ol>
+<p>#. NVIDIA GRID 对Hyper-V 的支持
+<a class="reference external" href="https://virtuallyvisual.wordpress.com/2017/01/18/nvidia-grid-and-microsoft-windows-server-oss-and-hyper-v/">https://virtuallyvisual.wordpress.com/2017/01/18/nvidia-grid-and-microsoft-windows-server-oss-and-hyper-v/</a></p>
+<ol class="arabic simple">
+<li>Latest GRID 5.0 <a class="reference external" href="https://thevirtualhorizon.com/2017/08/17/grid-5-0-pascal-support-and-more/">https://thevirtualhorizon.com/2017/08/17/grid-5-0-pascal-support-and-more/</a></li>
+</ol>
+<p>steps</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">虚拟化</a><ul>
+<li><a class="reference internal" href="#docker">Docker</a></li>
+<li><a class="reference internal" href="#how-to-upload-to-hub-docker-com">how to upload to hub.docker.com</a></li>
+<li><a class="reference internal" href="#how-to-automate-build-from-with-github">how to automate-build from with Github</a></li>
+<li><a class="reference internal" href="#guihost">共享GUI与host</a></li>
+<li><a class="reference internal" href="#permission">permission</a><ul>
+<li><a class="reference internal" href="#network-and-service">network and service</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#grid">Grid</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/content/Stage_3/Virtualization.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">My Linux 0.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2014, gangwei.li.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

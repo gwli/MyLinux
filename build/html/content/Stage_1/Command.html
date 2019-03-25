@@ -1,0 +1,618 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Linux 基本命令 &mdash; My Linux 0.3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="My Linux 0.3 documentation" href="../../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">My Linux 0.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="linux">
+<h1>Linux 基本命令<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>命令补全<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>bash 的命令补全功能，不只是简单的字符串补全，而是根据上下文来补全。这些都的实现都在  /usr/share/bash-complete 中。 如果没有可以安装 apt-get install bash-complete</p>
+<p>&lt;a href=&#8221;<a class="reference external" href="https://asciinema.org/a/LUcAqGRm2vJc8sQYUlhO4fIef?autoplay=1">https://asciinema.org/a/LUcAqGRm2vJc8sQYUlhO4fIef?autoplay=1</a>&#8221; target=&#8221;_blank&#8221;&gt;&lt;img src=&#8221;<a class="reference external" href="https://asciinema.org/a/LUcAqGRm2vJc8sQYUlhO4fIef.png">https://asciinema.org/a/LUcAqGRm2vJc8sQYUlhO4fIef.png</a>&#8221; width=&#8221;835&#8221;/&gt;&lt;/a&gt;</p>
+<p>service 命令，它列出系统中有 services .</p>
+</div>
+<div class="section" id="id2">
+<h2>关机操作<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">关机:</p>
+<div class="highlight-bash"><div class="highlight"><pre>/sbin/halt <span class="c1">#杀掉所有进程，只是关掉CPU</span>
+/sbin/poweroff <span class="c1">#除了halt,关掉主板的各种设备，最后关电</span>
+shutdown -h now  <span class="c1">#可以执行额外的脚本</span>
+init 0
+</pre></div>
+</div>
+</li>
+<li><p class="first">重启： /sbin/reboot</p>
+</li>
+</ol>
+<p>修改密码：password</p>
+</div>
+<div class="section" id="id3">
+<h2>目录操作<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>查看当前目录：pwd</li>
+<li>返回目录：cd</li>
+<li>返回上一层目录： cd ..</li>
+<li>当前目录：cd .</li>
+</ol>
+</div>
+<div class="section" id="id4">
+<h2>文件操作<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>创建目录: mkdir</li>
+<li>删除目录: rmdir</li>
+<li>打开文件(读写文件): vim</li>
+<li>关闭文件:wq</li>
+<li>移动文件: mv</li>
+<li>删除文件: rm</li>
+<li>复制文件或目录: cp</li>
+<li>在文件间建立连接: ln -s（软连接）</li>
+<li>查找文件: find</li>
+<li>基于内容查找： grep</li>
+</ol>
+</div>
+<div class="section" id="id5">
+<h2>其它<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>查看网络设备: ifconfig</li>
+<li>安装程序包: sudo apt-get</li>
+<li>查看任务管理器进程: ps</li>
+<li>查看命令历史: history</li>
+<li>产看帮助： man，help</li>
+</ol>
+</div>
+<div class="section" id="id6">
+<h2>解压<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">ext</th>
+<th class="head">cmd</th>
+<th class="head">&nbsp;</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>tar.gz</td>
+<td>tar -xzvf  abc.tar.gz</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>tar.bz2</td>
+<td>tar -xjvf  abc.tar.bz2</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>.zip</td>
+<td>unzip abc.zip</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>.rar</td>
+<td>unrar x abc.rar</td>
+<td>apt-get install unrar</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tar">
+<h2>tar 到指定的目录<a class="headerlink" href="#tar" title="Permalink to this headline">¶</a></h2>
+<p><strong class="command">tar -xzvf abc.tgz -C Dest</strong></p>
+<p><code class="docutils literal"><span class="pre">python</span> <span class="pre">tarfile</span></code> 以及 <code class="docutils literal"><span class="pre">python</span> <span class="pre">zipfile</span></code></p>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Xz">xz</a></p>
+<p>当然也可以用tar 来代替 cp,在大量小文件的时候，可以加快速度。相当于先打包再传输。
+<strong class="command">tar -cvf - /etc |tar -xvf -</strong> 就是这样的目的。</p>
+<div class="section" id="ar">
+<h3>ar<a class="headerlink" href="#ar" title="Permalink to this headline">¶</a></h3>
+<p>同tar是一类东东，现在只剩下用来打包库了，现在ld 好像只认这种ar这种格式。 如果你想重新打包。
+只要 ar -x xxx.a  &amp;&amp; ar -c libaz.a XX.o 就可以了。
+<a class="reference external" href="https://www.quora.com/Whats-the-difference-between-ar-and-tar">https://www.quora.com/Whats-the-difference-between-ar-and-tar</a></p>
+</div>
+</div>
+<div class="section" id="grep">
+<h2>grep<a class="headerlink" href="#grep" title="Permalink to this headline">¶</a></h2>
+<p>正则表达式，是不需要转义的， :command:` grep -E` 或者 <strong class="command">egrep</strong>.
+对于输出的控制很灵活，可以计数，可以高亮，以及只显文件名，以及支持与或非。
+对于或的支持 可以用  <strong class="command">grep -F</strong> 或者 <strong class="command">fgrep</strong> 后接一个文件列表
+只要直接pattern列表，每一行一个，这些pattern的关系是 any(patterns)的关系。
+同时正则表达式也是支持的</p>
+<p><strong class="command">grep -lincrE &quot;localhost|127.0.0.1&quot; ./* |grep -vE &quot;tutorial|machine&quot;</strong></p>
+</div>
+<div class="section" id="screenshot">
+<h2>screenshot<a class="headerlink" href="#screenshot" title="Permalink to this headline">¶</a></h2>
+<p>imagemaic import 命令。</p>
+</div>
+<div class="section" id="nohup">
+<h2>nohup<a class="headerlink" href="#nohup" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.cnblogs.com/allenblogs/archive/2011/05/19/2051136.html">http://www.cnblogs.com/allenblogs/archive/2011/05/19/2051136.html</a></p>
+<p>这条命令用在，你退出session,命令继续。 并且自动的重定向输出。</p>
+</div>
+<div class="section" id="du-and-df">
+<h2>du and df<a class="headerlink" href="#du-and-df" title="Permalink to this headline">¶</a></h2>
+<p>检查是否有文件分区使用率(Use%)过高(比如超过90%)</p>
+<p><strong class="command">df -h |grep -vE &quot;tmpfs|udev&quot;</strong></p>
+<p>如发现某个分区空间接近用尽,用以下命令找出占用空间最多的文件或目录：</p>
+<p><strong class="command">du -csh /var/lib/state/*</strong> 或者排序
+<strong class="command">du -cks * |sort -rn| head -n 10</strong></p>
+<p>当发现硬件有空间，但是系统却报已经满了。
+<strong class="command">df -i</strong> 可以来看系统的inode是不是满了。</p>
+</div>
+<div class="section" id="id7">
+<h2>下载工具<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<p>主要有两个wget与curl, 类似curl功能更强，支持功能更多，wget 强的主要一点，那就是 recursively download. 并且都支持管道，但是curl支持更多一些。
+例如 下载下来直接执行 <strong class="command">wget -O - |sh</strong> 。 如何编程使用的话，用curl可能更加方便一些，毕竟后面一个跨平台的库在那里支持着。</p>
+</div>
+<div class="section" id="id8">
+<h2>如何查看linux的版本<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre>/etc/issue
+/etc/debian_version
+/etc/readhat-release
+/etc/os-release
+/etc/lsb-release
+</pre></div>
+</div>
+<p>利用特征文件 <code class="file docutils literal"><span class="pre">/etc/issue</span></code> 或者 <code class="file docutils literal"><span class="pre">/etc/redhat-release</span></code> 或者 <code class="file docutils literal"><span class="pre">/etc/debian_version</span></code></p>
+<p>或者直接 <strong class="command">cat /etc/*-release</strong> 就可以看到了。</p>
+</div>
+<div class="section" id="id9">
+<h2>如何判断linux是否运行在虚拟机上<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.vpsee.com/2011/01/how-to-detect-if-a-linux-system-running-on-a-virtual-machine/">http://www.vpsee.com/2011/01/how-to-detect-if-a-linux-system-running-on-a-virtual-machine/</a></p>
+<p>主要是通过 <code class="file docutils literal"><span class="pre">/proc/vz</span>&nbsp; <span class="pre">/proc/xen/</span></code> 等文件来做的，一般这些地址会体现系统环境的。</p>
+</div>
+<div class="section" id="id10">
+<h2>文件批量重命名<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+<p>linux专门一条:command:<cite>rename</cite> 指令。例如 我要把  <em>.txt</em> 变成 <em>.rst</em>
+<strong class="command">rename 's/.txt/.rst/ XX.txt</strong></p>
+</div>
+<div class="section" id="id11">
+<h2>取文件的部分内容<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>行</td>
+<td>sed</td>
+<td>grep</td>
+<td>head</td>
+<td>tail</td>
+</tr>
+<tr class="row-even"><td>例</td>
+<td>awk</td>
+<td>column</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>在文件添加一行，一个方法那就是用vim就可以了。
+如果只是简单的行尾，那就是&gt;&gt;就搞定了。</p>
+</div>
+<div class="section" id="date">
+<h2>date<a class="headerlink" href="#date" title="Permalink to this headline">¶</a></h2>
+<p>格式化字符串   +% 例如 <strong class="command">date +%Y/%m/%d</strong> ， 另外相得到
+上周一是几号  <strong class="command">date -d 'last monday</strong> .</p>
+</div>
+<div class="section" id="cronjob">
+<h2>cronjob<a class="headerlink" href="#cronjob" title="Permalink to this headline">¶</a></h2>
+<p><strong class="command">crontab -l</strong> 列出当前所有的。
+<strong class="command">crontab -e</strong> 编辑当前cronjob。</p>
+<p><a class="reference external" href="http://stackoverflow.com/questions/18919151/crontab-day-of-the-week-syntax">http://stackoverflow.com/questions/18919151/crontab-day-of-the-week-syntax</a></p>
+</div>
+<div class="section" id="minicom">
+<h2>minicom<a class="headerlink" href="#minicom" title="Permalink to this headline">¶</a></h2>
+<p><strong class="command">minicom -D /dev/ttyUSB0</strong>
+<strong class="command">minicom -C log.txt -D /dev/ttypUSB0</strong> 保存log</p>
+<p><strong class="command">ctrl+A</strong> 来进入控制台</p>
+<p><a class="reference external" href="http://www.tldp.org/HOWTO/Text-Terminal-HOWTO-11.html">Text-Terminal-HOWTO-11.html</a>  为什么需要flow control,就是为解决速度不匹配的原因，并且解释了原理。</p>
+</div>
+<div class="section" id="development-tools">
+<h2>Development Tools<a class="headerlink" href="#development-tools" title="Permalink to this headline">¶</a></h2>
+<p>不同平台下，会有不同的名字，
+在ubuntu 下那就是  build-essential
+在centos 下 那就是 Development Tools</p>
+<p><strong class="command">pkg-config</strong> 用来查看这个系统所安装库的，编译选项，以及所在的位置。而不需要人为去记住每一个库的编译选项。 在make 文件中常见的那就是</p>
+</div>
+<div class="section" id="centos-development-tools">
+<h2>centos 的development tools<a class="headerlink" href="#centos-development-tools" title="Permalink to this headline">¶</a></h2>
+<p>indent, C语言的格式美化工具。</p>
+<p><a class="reference external" href="https://www.kernel.org/doc/Documentation/CodingStyle">https://www.kernel.org/doc/Documentation/CodingStyle</a>
+kernel-devel 包</p>
+</div>
+<div class="section" id="resize2fs">
+<h2>resize2fs 分区<a class="headerlink" href="#resize2fs" title="Permalink to this headline">¶</a></h2>
+<p><strong class="command">resize2fs -F -f -p /dev/sda1 -M</strong> 最小化。</p>
+</div>
+<div class="section" id="sync">
+<h2>sync<a class="headerlink" href="#sync" title="Permalink to this headline">¶</a></h2>
+<p>有各种同步， sync是直接把cache中内容写回到硬盘，isync,dsync则是mail box同步，而zsync 则提供的是部分下载，文件下载到了一半，只需要同步一部分，相当于patch的功能，而rsync则是文件的同步。</p>
+<div class="highlight-bash"><div class="highlight"><pre>ssh-keygen
+ssh-copy-id user@remote_host
+rsync  user@remote_host:~/XXXX  Local_path/XXXX
+</pre></div>
+</div>
+</div>
+<div class="section" id="sudoer">
+<h2>如何添加sudoer<a class="headerlink" href="#sudoer" title="Permalink to this headline">¶</a></h2>
+<p>这里有好几种做法，一种就是直接加入sudo. <strong class="command">sudo adduser &lt;username&gt; sudo</strong></p>
+<p>或者直接在 /etc/sudoers.</p>
+<div class="highlight-bash"><div class="highlight"><pre>%sudo <span class="nv">ALL</span><span class="o">=(</span>ALL:ALL<span class="o">)</span> ALL
+</pre></div>
+</div>
+<ol class="arabic">
+<li><p class="first"><strong class="command">usermod -a -G sudo &lt;username&gt;</strong></p>
+</li>
+<li><p class="first"><strong class="command">useradd -G admin -a &lt;username&gt;</strong></p>
+</li>
+<li><p class="first">删除0字节文件 <strong class="command">find -type f -size 0 -xec rm -fr {} ;</strong></p>
+</li>
+<li><p class="first">查看进程，按内存从大到小排列  <strong class="command">ps -e -o &quot;%C :%p :%z :%a&quot; |sort -k5 -nr</strong></p>
+</li>
+<li><p class="first">按CPU利用率从大到小排列 <strong class="command">ps -e -o &quot;%C :%p :%z :%a&quot; |sort -nr</strong></p>
+</li>
+<li><p class="first">打印出cache里的url  <strong class="command">grep -r -a jpg /data/cache/* |string |grep &quot;http:&quot; |awk -F'http:' '{print &quot;http:&quot;$2;}</strong></p>
+</li>
+<li><p class="first">查看http的并发请求及其TCP连接状态  <strong class="command">netstat -n|awk '/tcp/{++$[$NF]} END {for( a in S) print a,S[a]}'</strong></p>
+</li>
+<li><p class="first">这个文里Root的一行，匹配Root一行，把no,yes. <strong class="command">sed -i '/Root/s/no/yes' /etc/ssh/sshd_config</strong></p>
+</li>
+<li><p class="first">如何杀掉mysql进程 <strong class="command">ps aux |grep mysql |grep -v grep |awk `{print $2}' |xargs kill -9</strong>,</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nb">kill</span> -TERM mysqld
+<span class="nb">kill</span> -9 <span class="sb">`</span>cat /usr/local/apache2/logs/httpd.pid<span class="sb">`</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>linux下的习惯把pid存入 xxx.pid文件。
+#. 利用 HEREdoc</p>
+<blockquote>
+<div>cat &lt;&lt;EOF
++&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-+
+| === Welcome to <cite>whoami</cite> |
++&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;-+</div></blockquote>
+<p>EOF</p>
+<ol class="arabic">
+<li><p class="first">for 来建立连接</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nb">cd</span> /usr/local/mysql/bin
+<span class="k">for</span> i in *
+   <span class="k">do</span> ln /usr/locla/myql/bin/$i /usr/bin/$i
+<span class="k">done</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">内存的大小 :command;`free -m | grep &#8220;Mem&#8221; | awk &#8216;{print $2}&#8217;`</p>
+</li>
+</ol>
+<div class="highlight-bash"><div class="highlight"><pre><span class="m">20</span> swap 空间# free
+检查swap used 值是否过高如果swap used 值过高，进一步检查swap 动作是否频繁：
+<span class="c1"># vmstat 1 5</span>
+观察si 和so 值是否较大
+<span class="m">21</span> 磁盘空间# df -h
+检查是否有分区使用率<span class="o">(</span>Use%<span class="o">)</span>过高<span class="o">(</span>比如超过90%<span class="o">)</span> 如发现某个分区空间接近用尽，可以进入该分区的挂载
+点，用以下命令找出占用空间最多的文件或目录：
+<span class="c1"># du -cks * | sort -rn | head -n 10</span>
+<span class="m">22</span> 磁盘I/O 负载# iostat -x <span class="m">1</span> 2
+检查I/O 使用率<span class="o">(</span>%util<span class="o">)</span>是否超过100%
+<span class="m">23</span> 网络负载# sar -n DEV
+检查网络流量<span class="o">(</span>rxbyt/s, txbyt/s<span class="o">)</span>是否过高
+<span class="m">24</span> 网络错误# netstat -i
+检查是否有网络错误<span class="o">(</span>drop fifo colls carrier<span class="o">)</span> 也可以用命令：# cat /proc/net/dev
+<span class="m">25</span> 网络连接数目# netstat -an <span class="p">|</span> grep -E “<span class="o">(</span>tcp<span class="o">)</span>” <span class="p">|</span> cut -c 68- <span class="p">|</span> sort <span class="p">|</span> uniq -c <span class="p">|</span> sort -n
+<span class="m">26</span> 进程总数# ps aux <span class="p">|</span> wc -l
+检查进程个数是否正常<span class="o">(</span>比如超过250<span class="o">)</span>
+<span class="m">27</span> 可运行进程数目# vmwtat <span class="m">1</span> 5
+列给出的是可运行进程的数目，检查其是否超过系统逻辑CPU 的4 倍
+<span class="m">28</span> 进程# top -id 1
+观察是否有异常进程出现
+<span class="m">29</span> 网络状态检查DNS, 网关等是否可以正常连通
+<span class="m">30</span> 用户# who <span class="p">|</span> wc -l
+检查登录用户是否过多<span class="o">(</span>比如超过50 个<span class="o">)</span> 也可以用命令：# uptime
+<span class="m">31</span> 系统日志# cat /var/log/rf logview/*errors
+检查是否有异常错误记录也可以搜寻一些异常关键字，例如：
+<span class="c1"># grep -i error /var/log/messages</span>
+<span class="c1"># grep -i fail /var/log/messages</span>
+<span class="m">32</span> 核心日志# dmesg
+检查是否有异常错误记录
+<span class="m">33</span> 系统时间# date
+检查系统时间是否正确
+<span class="m">34</span> 打开文件数目# lsof <span class="p">|</span> wc -l
+检查打开文件总数是否过多
+<span class="m">35</span> 日志# logwatch –print 配置/etc/log.d/logwatch.conf ，将Mailto 设置为自己的email 地址，
+启动mail 服务<span class="o">(</span>sendmail 或者postfix<span class="o">)</span>，这样就可以每天收到日志报告了。
+缺省logwatch 只报告昨天的日志，可以用# logwatch –print –range all 获得所有的日志分析结果。
+可以用# logwatch –print –detail high 获得更具体的日志分析结果<span class="o">(</span>而不仅仅是出错日志<span class="o">)</span>。
+36.杀掉80 端口相关的进程
+lsof -i :80<span class="p">|</span>grep -v <span class="s2">&quot;PID&quot;</span><span class="p">|</span>awk <span class="s1">&#39;{print &quot;kill -9&quot;,$2}&#39;</span><span class="p">|</span>sh
+37.清除僵死进程。
+ps -eal <span class="p">|</span> awk <span class="s1">&#39;{ if ($2 == &quot;Z&quot;) {print $4}}&#39;</span> <span class="p">|</span> <span class="nb">kill</span> -9
+38.tcpdump 抓包，用来防止80 端口被人攻击时可以分析数据
+<span class="c1"># tcpdump -c 10000 -i eth0 -n dst port 80 &gt; /root/pkts</span>
+39.然后检查IP 的重复数并从小到大排序注意<span class="s2">&quot;-t\ +0&quot;</span> 中间是两个空格
+<span class="c1"># less pkts | awk {&#39;printf $3&quot;\n&quot;&#39;} | cut -d. -f 1-4 | sort | uniq -c | awk {&#39;printf $1&quot; &quot;$2&quot;\n&quot;&#39;} | sort -</span>
+n -t<span class="se">\ </span>+0
+40.查看有多少个活动的php-cgi 进程
+netstat -anp <span class="p">|</span> grep php-cgi <span class="p">|</span> grep tcp <span class="p">|</span> wc -l
+chkconfig --list <span class="p">|</span> awk <span class="s1">&#39;{if ($5==&quot;3:on&quot;) print $1}&#39;</span>
+41.kudzu 查看网卡型号
+kudzu --probe --class<span class="o">=</span>network
+</pre></div>
+</div>
+<div class="section" id="id12">
+<h3>常用的正则表式<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>匹配中文字符的正则表达式： [u4e00-u9fa5]</li>
+<li>评注：匹配中文还真是个头疼的事，有了这个表达式就好办了</li>
+<li>匹配双字节字符(包括汉字在内)：[x00-xff]</li>
+<li>评注：可以用来计算字符串的长度（一个双字节字符长度计2，ASCII 字符计1）</li>
+<li>匹配空白行的正则表达式： ns*r</li>
+<li>评注：可以用来删除空白行</li>
+<li>匹配HTML 标记的正则表达式：&lt;(S*?)[&gt;]*&gt;.*?&lt;/1&gt;|&lt;.*? /&gt;</li>
+<li>评注：网上流传的版本太糟糕，上面这个也仅仅能匹配部分，对于复杂的嵌套标记依旧无能为力</li>
+<li>匹配首尾空白字符的正则表达式： s*|s*$</li>
+<li>评注：可以用来删除行首行尾的空白字符(包括空格、制表符、换页符等等)，非常有用的表达式</li>
+<li>匹配Email 地址的正则表达式：w+([-+.]w+)*&#64;w+([-.]w+)*.w+([-.]w+)*</li>
+<li>评注：表单验证时很实用</li>
+<li>匹配网址URL 的正则表达式：[a-zA-z]+:/ /[s]*</li>
+<li>评注：网上流传的版本功能很有限，上面这个基本可以满足需求</li>
+<li>匹配帐号是否合法(字母开头，允许5-16 字节，允许字母数字下划线)：[a-zA-Z][<a href="#id14"><span class="problematic" id="id15">a-zA-Z0-9_</span></a>]{4,15}$</li>
+<li>评注：表单验证时很实用</li>
+<li>匹配国内电话号码： d{3}-d{8}|d{4}-d{7}</li>
+<li>评注：匹配形式如0511-4405222 或021-87888822</li>
+<li>匹配腾讯QQ 号：[1-9][0-9]{4,}</li>
+<li>评注：腾讯QQ 号从10000 开始</li>
+<li>匹配中国邮政编码： [1-9]d{5}(?!d)</li>
+<li>评注：中国邮政编码为6 位数字</li>
+<li>匹配身份证： d{15}|d{18}</li>
+<li>评注：中国的身份证为15 位或18 位</li>
+<li>匹配ip 地址：d+.d+.d+.d+</li>
+<li>评注：提取ip 地址时有用</li>
+<li>匹配特定数字：</li>
+<li>[1-9]d*$ 匹配正整数</li>
+<li>-[1-9]d*$ 匹配负整数</li>
+<li>-?[1-9]d*$ 匹配整数</li>
+<li>[1-9]d*|0$ 匹配非负整数（正整数+ 0）</li>
+<li>-[1-9]d*|0$ 匹配非正整数（负整数+ 0）</li>
+<li>[1-9]d*.d*|0.d*[1-9]d*$ 匹配正浮点数</li>
+<li>-([1-9]d*.d*|0.d*[1-9]d*)$ 匹配负浮点数</li>
+<li>-?([1-9]d*.d*|0.d*[1-9]d*|0?.0+|0)$ 匹配浮点数</li>
+<li>[1-9]d*.d*|0.d*[1-9]d*|0?.0+|0$ 匹配非负浮点数（正浮点数+ 0）</li>
+<li>(-([1-9]d*.d*|0.d*[1-9]d*))|0?.0+|0$ 匹配非正浮点数（负浮点数+ 0）</li>
+<li>评注：处理大量数据时有用，具体应用时注意修正</li>
+<li>匹配特定字符串：</li>
+<li>[A-Za-z]+$ 匹配由26 个英文字母组成的字符串</li>
+<li>[A-Z]+$ 匹配由26 个英文字母的大写组成的字符串</li>
+<li>[a-z]+$ 匹配由26 个英文字母的小写组成的字符串</li>
+<li>[A-Za-z0-9]+$ 匹配由数字和26 个英文字母组成的字符串</li>
+<li>w+$ 匹配由数字、26 个英文字母或者下划线组成的字符串</li>
+<li>评注：最基本也是最常用的一些表达式</li>
+</ol>
+</div>
+<div class="section" id="coreutils">
+<h3>coreutils<a class="headerlink" href="#coreutils" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://www.gnu.org/software/coreutils/manual/coreutils.html">https://www.gnu.org/software/coreutils/manual/coreutils.html</a></p>
+<p>最全命令手册，非常有用 timeout,</p>
+</div>
+<div class="section" id="notification">
+<h3>notification<a class="headerlink" href="#notification" title="Permalink to this headline">¶</a></h3>
+<p>当执行一个长时间的事情的时候，能不能自动通知，有几种方式，</p>
+<ol class="arabic simple">
+<li>声音， beep,aplay,pacmd,espeaker.</li>
+<li>email, 可以通过邮件，自动发邮件</li>
+<li>动画， 例如利用xlock,xeve,xbotton等直接在屏幕上显示动画。</li>
+<li>可以用 <a class="reference external" href="https://github.com/gorakhargosh/watchdog">watchdog</a> 来添加一些监控</li>
+</ol>
+</div>
+<div class="section" id="fortune">
+<h3>fortune<a class="headerlink" href="#fortune" title="Permalink to this headline">¶</a></h3>
+<p>可以随机产生诗句。</p>
+</div>
+<div class="section" id="udevadm">
+<h3>udevadm<a class="headerlink" href="#udevadm" title="Permalink to this headline">¶</a></h3>
+<p>查看硬件的变动  <strong class="command">udevadm monitor</strong>.</p>
+</div>
+<div class="section" id="pdfgrep">
+<h3>pdfgrep<a class="headerlink" href="#pdfgrep" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://pdfgrep.org/">https://pdfgrep.org/</a></p>
+</div>
+<div class="section" id="googler">
+<h3>googler<a class="headerlink" href="#googler" title="Permalink to this headline">¶</a></h3>
+<p>命令行google工具。</p>
+</div>
+<div class="section" id="how2">
+<h3>How2<a class="headerlink" href="#how2" title="Permalink to this headline">¶</a></h3>
+<p>命令行的stackoverflow工具。
+<a class="reference external" href="https://github.com/gwli/how2">https://github.com/gwli/how2</a></p>
+</div>
+<div class="section" id="ndiff">
+<h3>ndiff<a class="headerlink" href="#ndiff" title="Permalink to this headline">¶</a></h3>
+<p>nmap 输出的diff工具。 我们可能需要各种对象的diff工具。可以对比xml文本输出。</p>
+</div>
+<div class="section" id="rootfs">
+<h3>如何制作 rootfs<a class="headerlink" href="#rootfs" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="use-ssh-in-pip-line">
+<h3>use ssh in pip line<a class="headerlink" href="#use-ssh-in-pip-line" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">Remote backup</p>
+<div class="highlight-bash"><div class="highlight"><pre>sudo dd <span class="k">if</span><span class="o">=</span>/dev/sda <span class="p">|</span> ssh remoteuser@ip.address.of.remote.machine <span class="s1">&#39;dd of=sda.img&#39;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">run script on remote machine</p>
+<div class="highlight-bash"><div class="highlight"><pre>ssh remoteuser@ip.address.of.server <span class="s1">&#39;bash -s&#39;</span> &lt; scriptfile.onlocalhost.sh
+</pre></div>
+</div>
+</li>
+<li><p class="first">file transfer</p>
+<div class="highlight-bash"><div class="highlight"><pre>tar czf - /home/localuser/filefolder <span class="p">|</span> ssh remote-machine@ip.address.of.remote.machine tar -xvzf -C /home/remoteuser/
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="chroot">
+<h3>chroot<a class="headerlink" href="#chroot" title="Permalink to this headline">¶</a></h3>
+<p>特别来修复坏的系统，用chroot特别有用。</p>
+<div class="highlight-bash"><div class="highlight"><pre>mount /sda2 /mnt/sda2
+mount -t proc /proc /mnt/sda2/proc
+mount --rbind /sys /mnt/sda2/sys
+mount --make-rslave /mnt/sda2/sys
+mount --rbind /dev /mnt/sda2/dev
+mount --make-rslave /mnt/sda2/dev
+
+chroot /mnt/sda2 /bin/bash
+</pre></div>
+</div>
+<p>当然还有schroot, dchroot,pivot_root 具体见 <a class="reference external" href="https://askubuntu.com/questions/158847/what-is-the-difference-of-chroot-dchroot-and-schroot">此</a>
+pivot_root和chroot的主要区别是，pivot_root主要是把整个系统切换到一个新的root目录，而移除对之前root文件系统的依赖，这样你就能够umount原先的root文件系统。而chroot是针对某个进程，而系统的其它部分依旧运行于老的root目录。</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="ch">#! /bin/sh</span>
+mount -n -t proc proc /proc
+<span class="nb">echo</span> 0x0100 &gt;/proc/sys/kernel/real-root-dev
+umount -n /proc
+</pre></div>
+</div>
+<p>mount 的时候，会把mount的所有信息都放在 <code class="file docutils literal"><span class="pre">/etc/mtab</span></code> 但是当 <cite>/etc</cite> 只读的情况下，就会mount失改，这时候就会用到 mount -n 不写 /etc/mtab</p>
+</div>
+<div class="section" id="gtop">
+<h3>gtop<a class="headerlink" href="#gtop" title="Permalink to this headline">¶</a></h3>
+<p>基于console的可视化例如windows  resmonitor</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Linux 基本命令</a><ul>
+<li><a class="reference internal" href="#id1">命令补全</a></li>
+<li><a class="reference internal" href="#id2">关机操作</a></li>
+<li><a class="reference internal" href="#id3">目录操作</a></li>
+<li><a class="reference internal" href="#id4">文件操作</a></li>
+<li><a class="reference internal" href="#id5">其它</a></li>
+<li><a class="reference internal" href="#id6">解压</a></li>
+<li><a class="reference internal" href="#tar">tar 到指定的目录</a><ul>
+<li><a class="reference internal" href="#ar">ar</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#grep">grep</a></li>
+<li><a class="reference internal" href="#screenshot">screenshot</a></li>
+<li><a class="reference internal" href="#nohup">nohup</a></li>
+<li><a class="reference internal" href="#du-and-df">du and df</a></li>
+<li><a class="reference internal" href="#id7">下载工具</a></li>
+<li><a class="reference internal" href="#id8">如何查看linux的版本</a></li>
+<li><a class="reference internal" href="#id9">如何判断linux是否运行在虚拟机上</a></li>
+<li><a class="reference internal" href="#id10">文件批量重命名</a></li>
+<li><a class="reference internal" href="#id11">取文件的部分内容</a></li>
+<li><a class="reference internal" href="#date">date</a></li>
+<li><a class="reference internal" href="#cronjob">cronjob</a></li>
+<li><a class="reference internal" href="#minicom">minicom</a></li>
+<li><a class="reference internal" href="#development-tools">Development Tools</a></li>
+<li><a class="reference internal" href="#centos-development-tools">centos 的development tools</a></li>
+<li><a class="reference internal" href="#resize2fs">resize2fs 分区</a></li>
+<li><a class="reference internal" href="#sync">sync</a></li>
+<li><a class="reference internal" href="#sudoer">如何添加sudoer</a><ul>
+<li><a class="reference internal" href="#id12">常用的正则表式</a></li>
+<li><a class="reference internal" href="#coreutils">coreutils</a></li>
+<li><a class="reference internal" href="#notification">notification</a></li>
+<li><a class="reference internal" href="#fortune">fortune</a></li>
+<li><a class="reference internal" href="#udevadm">udevadm</a></li>
+<li><a class="reference internal" href="#pdfgrep">pdfgrep</a></li>
+<li><a class="reference internal" href="#googler">googler</a></li>
+<li><a class="reference internal" href="#how2">How2</a></li>
+<li><a class="reference internal" href="#ndiff">ndiff</a></li>
+<li><a class="reference internal" href="#rootfs">如何制作 rootfs</a></li>
+<li><a class="reference internal" href="#use-ssh-in-pip-line">use ssh in pip line</a></li>
+<li><a class="reference internal" href="#chroot">chroot</a></li>
+<li><a class="reference internal" href="#gtop">gtop</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/content/Stage_1/Command.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">My Linux 0.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2014, gangwei.li.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

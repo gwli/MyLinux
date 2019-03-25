@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Module与driver &mdash; My Linux 0.3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="My Linux 0.3 documentation" href="../../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">My Linux 0.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="moduledriver">
+<h1>Module与driver<a class="headerlink" href="#moduledriver" title="Permalink to this headline">¶</a></h1>
+<p>linux下driver的安装还是很有挑战的，会遇到各种的不兼合，并且会无法适从。但是明白其加载原理之后，自然一切都了然于心了。</p>
+<p>driver起的就是逻辑设备，要想到一个linux中使用一个设备，就为其建立一个逻辑设备也就是driver,正是因为这一层逻辑设备，我们才可以各种虚拟设备。以及实现虚拟化的。</p>
+<p>这个映射关心是由udev来做实现的，而driver本身的管理是由modeprobe.conf来管理的。
+module的依赖，以及alias,以及blacklist机制,还可以配制module的参数。并且还可以不用加载直接执行就可以直接执行的。每一个module,driver的管理配置都可以放在 <cite>etc/moduleprobe.d/</cite> 下面。</p>
+<p><a class="reference external" href="https://wiki.archlinux.org/index.php/kernel_modules">kernel modules</a></p>
+<p>例如  <a class="reference external" href="http://askubuntu.com/questions/112302/how-do-i-disable-the-nouveau-kernel-driver">http://askubuntu.com/questions/112302/how-do-i-disable-the-nouveau-kernel-driver</a> 就是利用了blacklist</p>
+<p>并且一般情况下换了硬件之后，OS不工作了，或者工作不正常了，例如桌面进不去了换了显卡之后，只要重装一下，所有状态reset为正常值应该就好了。
+例如 <cite>sudo apt-get install nvidia-331</cite> 然后 <cite>reboot</cite> .</p>
+<div class="section" id="device-management">
+<h2>device Management<a class="headerlink" href="#device-management" title="Permalink to this headline">¶</a></h2>
+<p>这个事情起因是在这里http://www.kroah.com/linux/talks/ols_2003_udev_paper/Reprint-Kroah-Hartman-OLS2003.pdf
+原因硬件命名规则太死板了，例如硬盘太多，原来那种major/minor号又不够。 因为每位都8位，并且还有很预留的，另外
+是热插拔的硬件很多，总不能都事先留着吧，那样/dev的目录太大了。另外也能保证每一次都在同一个地方。这样内核就头疼了。</p>
+<p>后边就有udev这种方法，由kernel只告诉用户有硬件来了，它叫什么名字，由你告诉我，然后再用对应的driver来读取他。
+也就是为什么多个硬件可以共用一个driver,或者你可以靠一个假的硬件原因。现在有了逻辑设备。 driver与逻辑设备对应。
+我可以指这个mapping,也可以系统自己生成。系统采用第一次生成后保存下来。以后延用。</p>
+<p>mdev,udev两者实现的基理不同，udev采用 netlink的机制，自己造一个Dameo来检测 uevent,而mdev 则是注册一个回调函数来实现。 /sys/kernel/hotplug 。<a class="reference external" href="http://blog.csdn.net/lifengxun20121019/article/details/17403527">http://blog.csdn.net/lifengxun20121019/article/details/17403527</a></p>
+<p><a class="reference external" href="http://git.busybox.net/busybox/plain/docs/mdev.txt">http://git.busybox.net/busybox/plain/docs/mdev.txt</a>
+<a class="reference external" href="http://wiki.gentoo.org/wiki/Mdev">http://wiki.gentoo.org/wiki/Mdev</a></p>
+<p>when you plug in a new device such as USB. which label &#8220;sdb...&#8221; will be used for it. here you can use udev.
+1. db store the user device information
+1. <em>rule</em> how to recognize the device.  当你发现你的OS在新的硬件上，不识别，例如网卡不能用了，第一步那就是先把这个rule给删除了。* rm -fr /etc/udev/rules.d/*
+1. <a class="reference external" href="http://blog.csdn.net/absurd/article/details/1587938">udev的实现原理</a>
+1. <a class="reference external" href="http://blog.csdn.net/fjb2080/article/details/4876314">使用udevadm修改usb优盘在/dev下的名字</a>
+1. <a class="reference external" href="http://www.mike.org.cn/articles/linux-xiangjie-udev/">Linux┊详解udev</a></p>
+<p>如果你想定义硬件的命名等都是可以用 udev.rules 来解决的。
+<a class="reference external" href="http://www.reactivated.net/writing_udev_rules.html">writing udev rules</a> .</p>
+<p>如何写查询属性可以用  <strong class="command">udevinfo</strong> 或者 <strong class="command">udevadm info -qury=property -path=/sys/block/sda</strong></p>
+<p>driver 之间的依赖关系是由LKM来管理，<a class="reference external" href="http://blog.csdn.net/ruixj/article/details/3772798">如何自动加载与实现逻辑设备与物理设备的mapping</a> 主要是对应的pci数据结构，每一个硬件都会用vender,device ID,以及相对应的subID，是通过udev来实现的与管理的，这个就像windows，pnpUtils是一样的。</p>
+<p>每一个设备成功后都会占用一个端口号或者内存地址段。应该是每一个硬件都会ID之类的东东，内核来做了这个mapping,例如eth0 对应哪 一个网口。 就像我们在NEAT所做的，逻辑设备与物理设备之间的mapping. 并这个关系更规范与通用化一些。</p>
+</div>
+<div class="section" id="kernel-module-driver-install-and-debug">
+<h2>kernel module  driver install and debug<a class="headerlink" href="#kernel-module-driver-install-and-debug" title="Permalink to this headline">¶</a></h2>
+<p>kernel module usually end with <em>xxx.ko</em>.  from linux kernel 2.6, the kernel use dynamic mechanism. you dynamically insmod,rmmod .  use the depmod to generate /lib/modules/2.6.xx/modules.dep and then modprob would automatically insert the module according the modules.dep.  the driver is one of module.  the module could have alias name.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Item</th>
+<th class="head">Content</th>
+<th class="head">Remark</th>
+<th class="head">&nbsp;</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>module location</td>
+<td><em>/lib/modules/kernel version /kernel/drivers</em></td>
+<td>ethernet card driver  /lib/modules/2.6.4-gentoo-r4/kernel/drivers/net/r8168.ko</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>configuration file</td>
+<td>etc/modules.autoload.d/XX</td>
+<td>you just need to add the module name here. etc/modules.autoload.d/kernel-2.6</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>modprobe</td>
+<td>modprobe  r8168.ko</td>
+<td>the module could have alias name.  etc/modprobe.d/XXXX</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>depmod</td>
+<td>depmod -a r8168</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>dmesg</td>
+<td>kernel会将开机信息存储在ring buffer中。您若是开机时来不及查看信息，可利用dmesg来查看。开机信息亦保存在/var/log目录中，名称为dmesg的文件里。</td>
+<td>dmesg用来显示内核环缓冲区（kernel-ring buffer）内容，内核将各种消息存放在这里。在系统引导时，内核将与硬件和模块初始化相关的信息填到这个缓冲区中。内核环缓冲区中的消息对于诊断系统问题 通常非常有用。在运行dmesg时，它显示大量信息。通常通过less或grep使用管道查看dmesg的输出，这样可以更容易找到待查信息。例如，如果发现硬盘性能低下，可以使用dmesg来检查它们是否运行在DMA模式：</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://www.ibm.com/developerworks/cn/linux/l-cn-kernelmodules/">解析 Linux 内核可装载模块的版本检查机制</a> 以及 <a class="reference external" href="http://blog.aliyun.com/1123">如何突破其CRC验证</a> 简单直接把crc值，直接在elf里改成符合规定的值，说白了就是凑答案 .</li>
+<li><a class="reference external" href="http://wiki.linuxdeepin.com/index.php?title=Linux%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97">module common command</a> 以及其`实现机制 &lt;<a class="reference external" href="http://read.pudn.com/downloads37/sourcecode/unix_linux/124135/Linux%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6.PDF">http://read.pudn.com/downloads37/sourcecode/unix_linux/124135/Linux%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6.PDF</a>&gt;`_ .</li>
+</ol>
+<p>内核检测到硬件，然后去加载mapping的driver,在加载的过程中要经过modeprobe.conf这样的过虑，并且解决其依赖关系。没有对应关系就要手工加载了。
+一般是要把module放在 <code class="file docutils literal"><span class="pre">/lib/modules/&lt;kernel</span> <span class="pre">version&gt;/kernel/driver/net</span></code> 以及去修改 <code class="file docutils literal"><span class="pre">/etc/modules.d/&lt;kernel</span> <span class="pre">version</span></code>
+2.4 的版本 用的是module.conf,而2.6的版本用是modeprobe.conf
+所以多个硬件可以共用一个driver,只需要用alias 把硬件本身映射到一个别名。
+硬件一般用中断传递信息，而内核如何来传递这些信息用uevent, 不管你的底层是什么中断。并且uevent 通过netlink来进传送。</p>
+<div class="section" id="id1">
+<h3>底层的中断又有很多<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>PCI总线的中断，例MSI与MSI-X中断机制。中断的级联扩展。</p>
+<p>内核的调试</p>
+<p><a class="reference external" href="http://www.ibm.com/developerworks/cn/linux/l-kdb/">Linux 系统内核的调试</a>  主要有三种kgdb,SkyEye,UML三种技术。</p>
+</div>
+</div>
+<div class="section" id="intel-ethernet-153a">
+<h2>intel  ethernet 153a 网卡不稳定<a class="headerlink" href="#intel-ethernet-153a" title="Permalink to this headline">¶</a></h2>
+<p>查看问题的，第一个要收集信息，不要轻易破坏了环境。尽可能多的收集信息
+#.  保存error 信息
+#.  save /var/log/dmesg  与 /var/log/syslog
+#.  查看 是否内核加载了 cat /proc/modules <a href="#id3"><span class="problematic" id="id4">|</span></a>view -
+#.  根据error message进行初步的推理并验证
+#.  提炼你的问题，一句话，几个词
+#.  ehtools 查看并且修改硬件。
+#.  insmod -m 查看插入时信息
+#.  看看没有新版本可以用，看看CL.   <a class="reference external" href="http://sourceforge.net/projects/e1000/">http://sourceforge.net/projects/e1000/</a>
+#.  去官网查看相关的FAQ 以及bugs.  <a class="reference external" href="http://sourceforge.net/p/e1000/bugs/430/">http://sourceforge.net/p/e1000/bugs/430/</a>
+#.  还有那是 READE
+#.  最后看一个 开发framework,去找一个init, close函数，只需要看看其做了什么，就知道了。</p>
+<div class="section" id="driver">
+<h3>driver 的开发<a class="headerlink" href="#driver" title="Permalink to this headline">¶</a></h3>
+<p>一般都是register, init, shutdown, close等等几个函数接口。
+<a class="reference external" href="http://10.19.226.116:8800/trac/ticket/2705">http://10.19.226.116:8800/trac/ticket/2705</a>
+就是标准 .so 只是链接的库不同，以及编译的选项要与主机匹配。
+<a class="reference external" href="http://www.tldp.org/LDP/lkmpg/2.6/html/x181.html">http://www.tldp.org/LDP/lkmpg/2.6/html/x181.html</a> 有详细的教程</p>
+<p>内核的编译都需要内核的头文件，以及symbols表，以及依赖与加载的先后关系。
+以及内核的版本号，如果开启了版本的匹配功能，则需要对应，不然不能加载。</p>
+<p>内核用uevent与用户态通信。</p>
+<p>insmod/lsmod的原理。
+<a class="reference external" href="http://elinux.org/images/8/89/Managing_Kernel_Modules_With_kmod.pdf">http://elinux.org/images/8/89/Managing_Kernel_Modules_With_kmod.pdf</a></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Module与driver</a><ul>
+<li><a class="reference internal" href="#device-management">device Management</a></li>
+<li><a class="reference internal" href="#kernel-module-driver-install-and-debug">kernel module  driver install and debug</a><ul>
+<li><a class="reference internal" href="#id1">底层的中断又有很多</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#intel-ethernet-153a">intel  ethernet 153a 网卡不稳定</a><ul>
+<li><a class="reference internal" href="#driver">driver 的开发</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/content/Stage_2/ModuleAndDriver.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">My Linux 0.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2014, gangwei.li.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

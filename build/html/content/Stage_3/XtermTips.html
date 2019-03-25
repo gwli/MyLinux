@@ -1,0 +1,343 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introduction &mdash; My Linux 0.3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="My Linux 0.3 documentation" href="../../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">My Linux 0.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>在linux中接处最多就是终端，所以熟悉各种的使用技巧与用法，可以大大的提高效率。同时也可以打开多终端实现多用户的并行操作。或者使用expect来实现多用户交互。或者直接使用socket 来进行模似。</p>
+</div>
+<div class="section" id="windows-manager">
+<h1>windows manager<a class="headerlink" href="#windows-manager" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="13%" />
+<col width="13%" />
+<col width="13%" />
+<col width="13%" />
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="http://www.fvwm.org/">fvwm</a>  <a class="reference external" href="http://home.ustc.edu.cn/~lixuebai/GNU/FVWM.html">a good introduction</a></td>
+<td>amiwm</td>
+<td>icewm</td>
+<td>windowmaker</td>
+<td>afterstep</td>
+<td>sawfish</td>
+<td>kwm</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p><em>FVWM</em> 它的采用与Xwindows 通过语法格式。设置一些全局变量，对于是ImagePath,Button,Menu等控制。以及键盘消息的映射。窗口布局的管理。对它的使用也像VIM的配置文件一样。先找来一个模板，然后根据自己的需求来改。 FVWM另外强大的一点那就是可以SHELL 进行交互。也就是配置文件是可以动态的生成的。这样就极大提搞了其灵活性。</p>
+</div>
+<div class="section" id="toolkit">
+<h1>Toolkit<a class="headerlink" href="#toolkit" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+<col width="14%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>motif</td>
+<td>XForms</td>
+<td>FLTK</td>
+<td>Gtk</td>
+<td>Qt</td>
+<td>LessTif</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="desktop-environments">
+<h1>Desktop Environments<a class="headerlink" href="#desktop-environments" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>CDE Common Desktop Environment</td>
+<td>KDE</td>
+<td>GNOME</td>
+<td>GUNStep</td>
+<td>ROX</td>
+<td>GTK+XFce</td>
+<td>UDE</td>
+<td><a class="reference external" href="http://step.polymtl.ca/~coyote/xview_main.html">Xview/OpenLook</a></td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="file-manager">
+<h1>FIle manager<a class="headerlink" href="#file-manager" title="Permalink to this headline">¶</a></h1>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>gmc</td>
+<td>Nautilus</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>#StandIOTerminal
+terminal
+========</p>
+<p>首先要搞明白的这个定义，终端就是可以主机进行输入输出通信的设备。对于终端的分类与介绍在OS Design and Implementation有详细的介绍。基本上分三类：%BR%&lt;img src=&#8221;%ATTACHURLPATH%/TerminalType.jpg&#8221; alt=&#8221;TerminalType.jpg&#8221;  /&gt;</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="http://invisible-island.net/xterm/xterm.faq.html">xterm</a></td>
+<td>&nbsp;</td>
+<td>功能强大，最初版本</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>dtterm</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>rvxt</td>
+<td>支持更好的画面，同时支持perl脚本扩展</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>xterm tty pts pty 的区别</td>
+<td><a class="reference external" href="http://kpshare.blog.51cto.com/1195439/275837">概念区分一</a>  <a class="reference external" href="http://topic.csdn.net/u/20100201/17/a34370cc-8a61-4315-a4d0-84242362064d.html">概念区分之一</a></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>所以对于终端的控制主要是两大类，一个是对其输入的控制，一个就是对其输出控制。 在linux中使用`termInfo &lt;<a class="reference external" href="http://billtym.blog.51cto.com/1745172/418510">http://billtym.blog.51cto.com/1745172/418510</a>&gt;`_ 来配置终端。其实所有的操作最终都是通过它来起作用。其实是UNIX哲学中，所有算法都是围绕数据结构转的。
+#. <em>对输入的控制</em> 对于输入模式主要有常见两种那就是RAW模式与cooked 模式。另外一个那就是echo 与否。例外就是一些特殊字符的输入，以及编辑习惯都是都可以设置的，一个重要的话题，对其进行配置，这个可以通过profile 与.shellrc这些文件来进行配置。%BR%</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>setty</td>
+<td>来进行对于输入进行各种设置</td>
+<td>setty -echo</td>
+<td>set -o</td>
+<td>settty</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple">
+<li><em>对于输出的控制</em> %BR%</li>
+</ol>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>颜色与光标的移动</td>
+<td><a class="reference external" href="http://www.ibm.com/developerworks/cn/aix/library/au-learningtput/index.html">tput入门使用 IBM</a>   <a class="reference external" href="http://tldp.org/HOWTO/Bash-Prompt-HOWTO/x405.html">tput user manual</a></td>
+<td>想要对屏幕显示进行个性化设置，可以利用这个命令，例如在屏幕上实现语法高亮等等。</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>^</td>
+<td>通过转义字符来实现 ESC [</td>
+<td>使用echo -e  &#8220;ESC [ XX &#8221; 来使用</td>
+<td><a class="reference external" href="http://blog.sina.com.cn/s/blog_613454190100lzwl.html">使用ncurses来操作或者开发</a></td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple">
+<li><em>对于TTY的管理控制</em>  TTY也也是C/S模式，分主端，与从端。一般情况下，主端都是系统建好的。%BR%</li>
+</ol>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="http://docs.sun.com/app/docs/doc/819-6951/modsafapp-18?l=zh&amp;a=view">如何查看TTY端口的服务状态</a></td>
+<td>pmadm</td>
+<td>ttyadm</td>
+<td>contty</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>如何连接，与配置</td>
+<td><a class="reference external" href="http://www.deansys.com/doc/ldd3/ch18.html">linux 设备驱动，TTY驱动</a></td>
+<td><a class="reference external" href="http://stevens0102.blogbus.com/logs/47327581.html">getty</a>  连接tty  <a href="#id3"><span class="problematic" id="id4">`</span></a>清除被占用的tty端口的方法</td>
+<td>rmdev</td>
+<td>stty-cxms fuser</td>
+<td>pdisalble</td>
+<td>strreset &lt;<a class="reference external" href="http://blog.chinaunix.net/u/25969/showart_1084733.html">http://blog.chinaunix.net/u/25969/showart_1084733.html</a>&gt;`_</td>
+<td>` mkdev  &lt;<a class="reference external" href="http://study.chyangwa.com/IT/AIX/aixcmds3/mkdev.htm">http://study.chyangwa.com/IT/AIX/aixcmds3/mkdev.htm</a>&gt;`_</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id5">
+<h1>终端使用技巧<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h1>
+<ol class="arabic simple">
+<li>共享terminal环境。利用screen 命令。</li>
+</ol>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference external" href="http://www.ibm.com/developerworks/cn/linux/l-cn-screen/">使用 screen 管理你的远程会话</a></td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://hooney.javaeye.com/blog/167062">term 转义字符大全以及颜色大全</a></li>
+<li><a class="reference external" href="http://study.chyangwa.com/IT/AIX/aixcmds6/xterm.htm">xterm 命令大全</a></li>
+<li><a class="reference external" href="http://www.perlmonks.org/?node_id=569933">rxvt perl 二次开发</a></li>
+<li>` tty,pty 区别与模式 &lt;<a class="reference external" href="http://www.svn8.com/linux/WL/20091223/15601.html">http://www.svn8.com/linux/WL/20091223/15601.html</a>&gt;`_</li>
+<li><a class="reference external" href="http://blogold.chinaunix.net/u3/103643/showart_2200383.html">为什么要用PTY</a></li>
+<li><a class="reference external" href="http://topic.csdn.net/t/20060426/13/4715138.html">PTY 开发</a></li>
+<li><a class="reference external" href="http://study.chyangwa.com/IT/AIX/aixcmds6/mastertoc.htm#mtoc">linux 命令大全</a></li>
+</ol>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Introduction</a></li>
+<li><a class="reference internal" href="#windows-manager">windows manager</a></li>
+<li><a class="reference internal" href="#toolkit">Toolkit</a></li>
+<li><a class="reference internal" href="#desktop-environments">Desktop Environments</a></li>
+<li><a class="reference internal" href="#file-manager">FIle manager</a></li>
+<li><a class="reference internal" href="#id5">终端使用技巧</a></li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/content/Stage_3/XtermTips.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">My Linux 0.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2014, gangwei.li.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

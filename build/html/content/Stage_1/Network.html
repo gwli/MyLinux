@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>网络 &mdash; My Linux 0.3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="My Linux 0.3 documentation" href="../../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">My Linux 0.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>网络<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>如何检查网速<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>自己直接ifconfig ; sleep 1;ifconfig 查看结果相减就可以了。当然也有一些其他的命令
+nload,iftop,iptraf,nethogs,bmon <a class="reference external" href="http://os.51cto.com/art/201404/435279.htm">http://os.51cto.com/art/201404/435279.htm</a></p>
+</div>
+<div class="section" id="dns-lookup">
+<h2>dns lookup<a class="headerlink" href="#dns-lookup" title="Permalink to this headline">¶</a></h2>
+<p>nslookup 可以查询IP,或者域名。</p>
+<p><code class="file docutils literal"><span class="pre">/etc/resolve.conf</span></code> 来配置DNS</p>
+<div class="highlight-bash"><div class="highlight"><pre>nameserver 10.19.189.252
+search xxx.com
+</pre></div>
+</div>
+<p>但是其他域名管理，以及LDAP等等以及NIS都是通过NSS来管理的,配置文件在 <code class="file docutils literal"><span class="pre">/etc/nsswitch.conf</span></code> .</p>
+</div>
+<div class="section" id="ip">
+<h2>IP 冲突<a class="headerlink" href="#ip" title="Permalink to this headline">¶</a></h2>
+<p>在windows下会有直接提示IP冲突。 在linux下则没有。</p>
+<div class="section" id="id3">
+<h3>如何检则<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">在其中冲突的一台用 <strong class="command">arping</strong> .</p>
+</li>
+<li><p class="first">查看本地的arp cache</p>
+<div class="highlight-bash"><div class="highlight"><pre>$ arp -a &lt;IP&gt;
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="dhcpip">
+<h3>如何更新DHCP获得IP地址<a class="headerlink" href="#dhcpip" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">用ifconfig</p>
+<p><strong class="command">ifconfig set eth0 DPCP</strong></p>
+</li>
+<li><p class="first">用dhclient</p>
+<p><strong class="command">dhclient -r &amp;&amp; sleep 20 &amp;&amp; dhclient</strong></p>
+</li>
+</ol>
+<p>dhcp 的配置文件在 /etc/sysconfig/network/dhcp</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c1"># If it happens during booting it won&#39;t be a problem and you can</span>
+<span class="c1"># safely say &quot;yes&quot; here. For a roaming notebook with X kept running, &quot;no&quot;</span>
+<span class="c1"># makes more sense.</span>
+<span class="c1">#</span>
+<span class="nv">DHCLIENT_SET_HOSTNAME</span><span class="o">=</span><span class="s2">&quot;no&quot;</span>
+
+<span class="c1">## Type:        string</span>
+<span class="c1">## Default:     AUTO</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>如何配置双机共享网络<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://askubuntu.com/questions/169473/sharing-connection-to-other-pcs-via-wired-ethernet">https://askubuntu.com/questions/169473/sharing-connection-to-other-pcs-via-wired-ethernet</a></p>
+<ol class="arabic">
+<li><p class="first">选择编辑网络</p>
+</li>
+<li><p class="first">建立一个新连接</p>
+</li>
+<li><p class="first">ipv4 setting 选择 &#8220;share to other computers&#8221;</p>
+</li>
+<li><p class="first">ifconfig 就能看到这个端口上起了一个DHCPserver. 也可以用以下命令</p>
+<div class="highlight-bash"><div class="highlight"><pre>ifconfig eth0 <span class="o">[</span>-<span class="o">]</span>pointtopoint <span class="o">[</span>addre<span class="o">]</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="gentoo">
+<h3>gentoo 的网卡启动过程<a class="headerlink" href="#gentoo" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p class="first">上电启动，内核的加载驱动并注册相应的中断，内核可以识别硬件了。</p>
+</li>
+<li><p class="first">udev 识别硬件信息，并建立相应的逻辑设备，例如网卡哪一个eth0,哪一个是eth1,以及USB
+等等。所以要改设备的逻辑名，就是在这个时候时候改的 <code class="file docutils literal"><span class="pre">/etc/udev/rules.d/</span></code></p>
+</li>
+<li><p class="first">init 根据runlevel决定起哪些服务。
+各个启动过程，几家linux的实现，大体上一致，而事实是各个不相同。</p>
+<ol class="arabic simple">
+<li>gentoo 是在 <code class="file docutils literal"><span class="pre">/etc/runlevel</span></code> 下的，并且采用 <strong class="command">rc-config</strong> 来查看的。
+直接在对应的level下建立一个link 就可以了。</li>
+</ol>
+<p>#. SUSE 的启动是并行的，是用.before, .after等来实现的。
+#.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="ssh">
+<h2>SSH<a class="headerlink" href="#ssh" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c1">#.forward X</span>
+ssh -X user@hostname
+
+<span class="c1">#no password login</span>
+<span class="c1">#. ssh-keygen</span>
+<span class="c1">#. ssh-copy-id user@remotehost</span>
+<span class="c1">#. vim ~/.ssh/config  (file owner 600)</span>
+
+   Host devbox
+      HostName &lt;IP&gt;
+      Port 22
+      User <span class="nb">test</span>
+      PreferredAuthentications publickey
+      IdentityFile ~/.ssh/id_rsa
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li>对于</li>
+</ol>
+</div>
+<div class="section" id="id5">
+<h2>如何扫描机器IP<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash"><div class="highlight"><pre>nmap -p <span class="m">22</span> --open -sV 10.19.189.0/24 &gt;sshservers
+grep -B <span class="m">4</span> <span class="s1">&#39;OpenSSH 5.8p1&#39;</span> sshservers
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">网络</a><ul>
+<li><a class="reference internal" href="#id2">如何检查网速</a></li>
+<li><a class="reference internal" href="#dns-lookup">dns lookup</a></li>
+<li><a class="reference internal" href="#ip">IP 冲突</a><ul>
+<li><a class="reference internal" href="#id3">如何检则</a></li>
+<li><a class="reference internal" href="#dhcpip">如何更新DHCP获得IP地址</a></li>
+<li><a class="reference internal" href="#id4">如何配置双机共享网络</a></li>
+<li><a class="reference internal" href="#gentoo">gentoo 的网卡启动过程</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ssh">SSH</a></li>
+<li><a class="reference internal" href="#id5">如何扫描机器IP</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/content/Stage_1/Network.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">My Linux 0.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2014, gangwei.li.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>

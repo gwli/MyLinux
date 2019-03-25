@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>tty console &mdash; My Linux 0.3 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="My Linux 0.3 documentation" href="../../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">My Linux 0.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tty-console">
+<h1>tty console<a class="headerlink" href="#tty-console" title="Permalink to this headline">¶</a></h1>
+<p>现在终于明白了tty的设计原理了。简单的理解，就是一个socket通信。并且把两端通用化。例如一些编辑的功能，例如具备一些editor的初步功能。
+一个最简单功能，那就是直接for循环，就可以搞定。拿浏览器来做对比，就会一目了然，那就是终端也需要一定的rendering功能。 而这些不是应用程序本身需要
+考虑的功能。</p>
+<p>未来的terminal 趋向于全终端editor+ browser + session management 的功能。例如QTconsole能够支持图表与公式的功能。</p>
+<p>例如tmux 来实现多session的管理。以及asciinema 的录制。
+以及各个session之间的共享，其实就是socket的组播功能。</p>
+<p>pts的原理，<a class="reference external" href="http://www.baike.com/ipadwiki/PTS">http://www.baike.com/ipadwiki/PTS</a></p>
+<p>ssh,telnet这些与在本地的xterm都同相同地方，那就是其输入输出连接一个终端。并且都是双工通信或者三工通信，in,out,error.  而对于终端来说，那就是一个master,slave,一个读一个写。要正好与进程之间反过来才行。 而这些都是要终端打交道。</p>
+<p>/dev/console 总是指向系统的TTY，它决定了系统的信息往哪里输出，/dev/tty0总是指向当前的tty, tty[1-x] 则是独立逻辑tty设备。</p>
+</div>
+<div class="section" id="terminal">
+<h1>terminal 中显示符号<a class="headerlink" href="#terminal" title="Permalink to this headline">¶</a></h1>
+<p>这个关键是编码与字体的支持，只要有两者的支持就能显示，例如 <a class="reference external" href="https://unix.stackexchange.com/questions/96591/is-it-possible-to-show-mathematical-symbols-in-the-terminal">在terminal中显示数学符号</a></p>
+</div>
+<div class="section" id="shell">
+<h1>远程网络shell之间<a class="headerlink" href="#shell" title="Permalink to this headline">¶</a></h1>
+<p>ssh 的过程。
+远程网络终端和本机shell之间建立了一条双向通道&#8211;“远程网络终端-(套接字)&#8211;本机协议处理进程&#8211;主终端&#8211;从终端&#8211;shell”</p>
+</div>
+<div class="section" id="serial-io">
+<h1>serial IO 的原理<a class="headerlink" href="#serial-io" title="Permalink to this headline">¶</a></h1>
+<p>CPU -&gt; driver -&gt;bus -&gt;I/O pin
+<a class="reference external" href="http://www.tldp.org/HOWTO/Serial-HOWTO-4.html">http://www.tldp.org/HOWTO/Serial-HOWTO-4.html</a></p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">tty console</a></li>
+<li><a class="reference internal" href="#terminal">terminal 中显示符号</a></li>
+<li><a class="reference internal" href="#shell">远程网络shell之间</a></li>
+<li><a class="reference internal" href="#serial-io">serial IO 的原理</a></li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/content/Stage_3/tty.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">My Linux 0.3 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2014, gangwei.li.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.6.
+    </div>
+  </body>
+</html>
