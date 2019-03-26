@@ -1,6 +1,6 @@
-==============
+**************
 Module与driver 
-==============
+**************
 
 
 linux下driver的安装还是很有挑战的，会遇到各种的不兼合，并且会无法适从。但是明白其加载原理之后，自然一切都了然于心了。
@@ -19,7 +19,7 @@ module的依赖，以及alias,以及blacklist机制,还可以配制module的参�
 例如 `sudo apt-get install nvidia-331` 然后 `reboot` .
 
 device Management
------------------
+=================
 
 这个事情起因是在这里http://www.kroah.com/linux/talks/ols_2003_udev_paper/Reprint-Kroah-Hartman-OLS2003.pdf
 原因硬件命名规则太死板了，例如硬盘太多，原来那种major/minor号又不够。 因为每位都8位，并且还有很预留的，另外
@@ -65,12 +65,13 @@ kernel module usually end with *xxx.ko*.  from linux kernel 2.6, the kernel use 
    depmod  , depmod -a r8168 ,
    dmesg  , kernel会将开机信息存储在ring buffer中。您若是开机时来不及查看信息，可利用dmesg来查看。开机信息亦保存在/var/log目录中，名称为dmesg的文件里。 , dmesg用来显示内核环缓冲区（kernel-ring buffer）内容，内核将各种消息存放在这里。在系统引导时，内核将与硬件和模块初始化相关的信息填到这个缓冲区中。内核环缓冲区中的消息对于诊断系统问题 通常非常有用。在运行dmesg时，它显示大量信息。通常通过less或grep使用管道查看dmesg的输出，这样可以更容易找到待查信息。例如，如果发现硬盘性能低下，可以使用dmesg来检查它们是否运行在DMA模式：,
    
+
 .. seealso::
 
-#. `解析 Linux 内核可装载模块的版本检查机制 <http://www.ibm.com/developerworks/cn/linux/l-cn-kernelmodules/>`_ 以及 `如何突破其CRC验证 <http://blog.aliyun.com/1123>`_ 简单直接把crc值，直接在elf里改成符合规定的值，说白了就是凑答案 .
-#. `module common command <http://wiki.linuxdeepin.com/index.php?title=Linux%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97>`_ 以及其`实现机制 <http://read.pudn.com/downloads37/sourcecode/unix_linux/124135/Linux%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6.PDF>`_ . 
+    #. `解析 Linux 内核可装载模块的版本检查机制 <http://www.ibm.com/developerworks/cn/linux/l-cn-kernelmodules/>`_ 以及 `如何突破其CRC验证 <http://blog.aliyun.com/1123>`_ 简单直接把crc值，直接在elf里改成符合规定的值，说白了就是凑答案 .
+    #. `module common command <http://wiki.linuxdeepin.com/index.php?title=Linux%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97>`_ 以及其`实现机制 <http://read.pudn.com/downloads37/sourcecode/unix_linux/124135/Linux%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6.PDF>`_ . 
 
-.. code-block::
+.. code-block:: bash
    
    $dmesg | grep DMA 
 
@@ -100,7 +101,7 @@ intel  ethernet 153a 网卡不稳定
 查看问题的，第一个要收集信息，不要轻易破坏了环境。尽可能多的收集信息
 #.  保存error 信息
 #.  save /var/log/dmesg  与 /var/log/syslog
-#.  查看 是否内核加载了 cat /proc/modules |view -
+#.  查看 是否内核加载了 `cat /proc/modules |view -`
 #.  根据error message进行初步的推理并验证
 #.  提炼你的问题，一句话，几个词
 #.  ehtools 查看并且修改硬件。

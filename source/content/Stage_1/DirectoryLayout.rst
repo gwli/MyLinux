@@ -1,8 +1,6 @@
+********************
 Linux 的目录结构
-****************
-
-#. Linux 树状目录结构表
-
+********************
 
 .. figure:: Stage_1/images/linux_file_tree.png
    :align: center
@@ -24,9 +22,16 @@ Linux 的目录结构
 #. /lib: 库文件；
 #. /tmp: 用于创建临时文件或目录；
 #. /usr/include/: 头文件的位置；
-#. /src: 内核和软件的源代码的位置；
+#. /usr/src: 内核和软件的源代码的位置；
 #. /local: 安装外来软件的地方；
 #. /sudo: 使得普通用户可以得到超级用户权利。
+
+.. csv-table::
+   :header: "Linux", "Windows"
+   
+   "/usr", " C:\\Programe files"
+   "/lib", "C:\\windows\\system32"
+   "/etc"," Windows Registery"   
 
 最基本目录
 ==========

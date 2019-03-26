@@ -27,6 +27,7 @@ how to config
 #. bootup options
 
    .. code-block:: bash
+
       /etc/rc.local 
       /etc/rc.d/rc.local
 
@@ -68,6 +69,7 @@ how to config
 
 
 this new method is working `vnc-server-installation-on-centos-7 <https://www.howtoforge.com/vnc-server-installation-on-centos-7>`_
+
 #. autologin
 
    .. code-block:: bash
@@ -78,8 +80,10 @@ this new method is working `vnc-server-installation-on-centos-7 <https://www.how
        AutomaticLogic=root
       
 .. note::
+
    this just work VM.
-.. [ref] http://blog.csdn.net/kpshare/article/details/7523546
+
+.. [#CSDNAUTOLOGIN] http://blog.csdn.net/kpshare/article/details/7523546
 
 
 https://www.centos.org/forums/viewtopic.php?f=47&t=48288

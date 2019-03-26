@@ -1,5 +1,6 @@
+***********
 Input设备
-=========
+***********
 
 核心问题，如何实现硬件输入与逻辑对象之间的映射。
 
@@ -9,6 +10,7 @@ Input设备
 Document/input/input-programming.txt
 键盘模式：
 键盘模式有4种， 在Linux 下可以用vc_kbd_mode（老版本中是kbd_mode）参数来设置和显示模式：
+
 1） Scancode mode （raw ）raw模式：将键盘端口上读出的扫描码放入缓冲区
 2） Keycode mode (mediumraw) mediumraw模式：将扫描码过滤为键盘码放入缓冲区
 3） ASCII mode (XLATE ) XLATE模式：识别各种键盘码的组合，转换为TTY终端代码放入缓冲区
@@ -36,11 +38,11 @@ Document/input/input-programming.txt
       udevadm hwdb --update
       udevadm trigger /dev/input/eventXX
 
-从这个 `https://bugs.launchpad.net/ubuntu/+source/systemd/+bug/1597415`_ 分析开始。 
+从这个 `bug 1597415 <https://bugs.launchpad.net/ubuntu/+source/systemd/+bug/1597415>`_ 分析开始。 
 
 硬件与driver 的关联是在
 
-*/proc/bus/input/devices 这里对应的， handlers + devices.
+* /proc/bus/input/devices 这里对应的， handlers + devices.
 * In /lib/udev/hwdb.d/60-keyboard.hwdb
 
 
@@ -54,12 +56,13 @@ Document/input/input-programming.txt
 可以用 os.open打开同一个文件即可。并且不用缓冲区即可。
 
 .. seealso::
+
    * `linux input子系统详截 <http://wenku.baidu.com/view/a6c4b6bfc77da26925c5b001.html>`_ 
    * `Android 【真机】与【模拟器】触摸屏事件的模拟差异分析 <http://www.linuxidc.com/Linux/2011-06/37906.htm>`_  
    * `区分/dev/tty、/dev/console、/dev/pts、/dev/ttyn <http://bbs.chinaunix.net/thread-2080479-1-1.html>`_  
 
 thinking
---------
+========
 
 
 *sendEvent*

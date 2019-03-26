@@ -29,10 +29,10 @@
 
 .. list-table::
    
-   private
-   shared
-   slave
-   unbindable 
+   * - private
+     - shared
+     - slave
+     - unbindable 
 
 具体可以说明见 `kernel doc <https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt>`_
 `应用挂载名称空间 <https://www.ibm.com/developerworks/cn/linux/l-mount-namespaces.html>`_ 来讲这些，空间的隔离，linux中使用各种各样的命名空间。
@@ -163,9 +163,9 @@ http://www.voidcn.com/article/p-mttgftgp-gn.html
 =============
 
 
-.. image:: fs_capacity.png
+.. image:: Stage_2/fs_capacity.png
 
-.. figure:: fs_performance.png
+.. figure:: Stage_2/fs_performance.png
    
    https://www.ibm.com/developerworks/cn/linux/l-jfs/
 
@@ -208,14 +208,14 @@ cat  XXX.iso > /dev/<usbpartition>
 
 由于物理磁盘受限于空间的大小，扩展起来不是很方便，这就有了逻辑磁盘的概念。lvm. 先在物理磁盘上建立phiycal Volume, 多个PV 可以组成一个VG，然后在每一个VG上可以建立LV，当然LV可也可以扩VG。而LV就当做一个分区来用。并且随时能够调整大小。 pv,vg,lv.
 
-.. image:: /Stage_2/fs/lv.jpg
+.. image:: Stage_2/fs/lv.jpg
 
 partclone
 =========
 
 http://partclone.org/， 
 
-.. code-block::
+.. code-block:: bash
    
    partclone.ext3 -c -d -s /dev/hda1 -o hda1.img
    cat sda1.ext3-ptcl-img.gz.a* | gunzip -c | partclone.ext3 -d -r -s - -o /dev/sda1
@@ -387,7 +387,7 @@ HardLink and softlink
 #. 若文件用户数据块中存放的内容是另一个的路径名的指向，则该文件就是软链接。
 
 
-`http://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/`_
+`l-cn-hardandsymb-links <http://www.ibm.com/developerworks/cn/linux/l-cn-hardandsymb-links/>`_
 
 `what-is-the-difference-between-a-hard-link-and-a-symbolic-link <http://askubuntu.com/questions/108771/what-is-the-difference-between-a-hard-link-and-a-symbolic-link>`_ 
 

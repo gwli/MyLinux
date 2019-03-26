@@ -66,10 +66,14 @@ terminal
 
 #. *对于TTY的管理控制*  TTY也也是C/S模式，分主端，与从端。一般情况下，主端都是系统建好的。%BR%
 
-.. csv-table:: 
 
-   `如何查看TTY端口的服务状态 <http://docs.sun.com/app/docs/doc/819-6951/modsafapp-18?l=zh&a=view>`_ , pmadm,ttyadm,contty ,
-   如何连接，与配置, `linux 设备驱动，TTY驱动 <http://www.deansys.com/doc/ldd3/ch18.html>`_  , `getty <http://stevens0102.blogbus.com/logs/47327581.html>`_  连接tty  `清除被占用的tty端口的方法,rmdev ,stty-cxms fuser, pdisalble,strreset <http://blog.chinaunix.net/u/25969/showart_1084733.html>`_ ,` mkdev  <http://study.chyangwa.com/IT/AIX/aixcmds3/mkdev.htm>`_ ,
+`如何查看TTY端口的服务状态 <http://docs.sun.com/app/docs/doc/819-6951/modsafapp-18?l=zh&a=view>`_ , pmadm,ttyadm,contty ,
+
+如何连接，与配置, `linux 设备驱动，TTY驱动 <http://www.deansys.com/doc/ldd3/ch18.html>`_  , `getty <http://stevens0102.blogbus.com/logs/47327581.html>`_ 
+
+连接tty, `清除被占用的tty端口的方法,rmdev ,stty-cxms fuser, pdisalble,strreset <http://blog.chinaunix.net/u/25969/showart_1084733.html>`_ ,` mkdev  <http://study.chyangwa.com/IT/AIX/aixcmds3/mkdev.htm>`_ ,
+
+
 
 终端使用技巧
 ==================

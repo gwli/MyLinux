@@ -128,7 +128,7 @@ module 加载在 /etc/init.d/kmod 里实现的加载哪一个driver,并且加载
 
 http://leaf.sourceforge.net/doc/bootproc.html 这里说细的linux启动流程。
 
-并且启动过程是可以打断的加入参数 break=init就可以了，或者在起动的时候按快捷键，例如按 :kbd:`I` for gentoo os. `https://wiki.debian.org/BootProcess
+并且启动过程是可以打断的加入参数 break=init就可以了，或者在起动的时候按快捷键，例如按 :kbd:`I` for gentoo os. `BootProcess <https://wiki.debian.org/BootProcess>`_
 
 
 init 开始并行化，event_base化。
@@ -220,7 +220,7 @@ boot.php 的内容
 
    kernel vmlinuz-3.16.0-rc4 bootfile=http://boot.ipxe.org/demo/boot.php fastboot initrd=initrd.img
    initrd initrd.img
-boot    
+   boot    
 
 how to config PXE server
 ========================

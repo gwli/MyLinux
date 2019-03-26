@@ -42,6 +42,7 @@ USBOverIP
 
    ../usbipd -D -d
    libuspip: error:  udev_device_get_sysattr_value failed
+
 https://github.com/torvalds/linux/tree/master/tools/usb/usbip
 https://github.com/solarkennedy/wiki.xkyle.com/wiki/USB-over-IP-On-Ubuntu
 https://github.com/forensix/libusbip

@@ -1,14 +1,15 @@
+*************************
 XWindows 与窗口管理
-*******************
-
+*************************
 
 introduction
 ============
 
-所有的`GUI框架 <http://blog.csdn.net/baozi3026/article/details/7757293>`_ 主要有两大块，消息处理的机制与窗口布局。消息的路由。经常被隐藏在类的继承里面。
+所有的 `GUI框架 <http://blog.csdn.net/baozi3026/article/details/7757293>`_ 主要有两大块，消息处理的机制与窗口布局。消息的路由。经常被隐藏在类的继承里面。
 
-`Xwindows <http://wiki.ubuntu.org.cn/%E7%90%86%E8%A7%A3_Xwindow\>`_ 后面的:a.b是a指的是你的机器起的第几个Xwindows，直接起X 时，是可以指定硬件ID来显示在哪一个显示上。alt+F7~F8来进行切换。可以起多个X server,就像vncserver一样， X :1 &就是一个，1就是偏移量， X window 默认是6000端口，而VNC用了5800，而vnc的http用的是5900端口，这也是为什么VNC最多只能一个百个原因，因为6000以后就被Xwindows占用了。 ubuntu永启动X时是用 unix socket这个只适用于本地进程通信，而不能远程。这也就是为什么无法远程连接的原因。Xdefault 样式表默认配置，xdm是管理器，这样我就可以用telnet直接 Xserver来进行绘制窗口。同时我也可以hook一些事件了。可以进行屏幕录制了。考虑把这个做出来。
+`Xwindows <http://wiki.ubuntu.org.cn/%E7%90%86%E8%A7%A3_Xwindow>`_ 后面的:a.b是a指的是你的机器起的第几个Xwindows，直接起X 时，是可以指定硬件ID来显示在哪一个显示上。alt+F7~F8来进行切换。可以起多个X server,就像vncserver一样， X :1 &就是一个，1就是偏移量， X window 默认是6000端口，而VNC用了5800，而vnc的http用的是5900端口，这也是为什么VNC最多只能一个百个原因，因为6000以后就被Xwindows占用了。 ubuntu永启动X时是用 unix socket这个只适用于本地进程通信，而不能远程。这也就是为什么无法远程连接的原因。Xdefault 样式表默认配置，xdm是管理器，这样我就可以用telnet直接 Xserver来进行绘制窗口。同时我也可以hook一些事件了。可以进行屏幕录制了。考虑把这个做出来。
 整个显示分为几层 
+
 #. 物理屏幕 一块或者多块
 #. 逻辑屏幕
 #. 窗口
@@ -19,6 +20,7 @@ introduction
 #. 作图
 #. 各种种图形组
 #. 各个图元
+
 消息传递本质就是if,else判断，MFC是利用宏生成这个if,else的。另一种那就是利用OO的继承机制。或者采用观察者等设计模式来做。
 
 表面上看起来很灵活的东西，发现在最后本质都是一样的，不过在上层利用编译器与宏来做了各种替换优化工作。就像那些模板一样。
@@ -54,7 +56,7 @@ http://openmind.iteye.com/blog/1319868  或者http://forum.ubuntu.org.cn/viewtop
 #. 计算 cvt, 然后把 ModeLine 写入 /etc/x11/xorg.conf
 也可以调整显示方向可以在  :command:`xrander --rotate` 也可以用 `xrotate`
 
-.. codeblock:: bash
+.. code-block:: bash
    
    xrandr --setprovideroutputsource 0x46 0x2b4
    xrandr --output LVDS-0 --off
@@ -292,9 +294,9 @@ Thinking
 
 DRI Direct Rendering Infrastructure. 
 RM & DRI
- DRI 全称 Direct Rendering Infrastructure。X11 是采用 C/S 架构的，客户端的任何操作都需要和服务器进行通讯，在实时的 3D 渲染上性能无法接受。DRI 在 X11 上能够允许直接访问硬件渲染器（显卡），从而直接将 3D 图形渲染到屏幕上，绕过 X11 ，提升性能，这种叫作直接渲染（direct render）。DRI 为上层 3D 库提供访问底层硬件的接口。DRM 全称 Direct Rendering Manager，直接渲染管理器，是真正操作硬件的层次。各个硬件厂商负责提供各自硬件的 drm 模块（开源的提供源码、不开源的提供二进制文件）。DRI 通过调用 DRM 的接口来实现上层 3D 图形库的接口。DRI 的源码则在 Mesa 中。
+DRI 全称 Direct Rendering Infrastructure。X11 是采用 C/S 架构的，客户端的任何操作都需要和服务器进行通讯，在实时的 3D 渲染上性能无法接受。DRI 在 X11 上能够允许直接访问硬件渲染器（显卡），从而直接将 3D 图形渲染到屏幕上，绕过 X11 ，提升性能，这种叫作直接渲染（direct render）。DRI 为上层 3D 库提供访问底层硬件的接口。DRM 全称 Direct Rendering Manager，直接渲染管理器，是真正操作硬件的层次。各个硬件厂商负责提供各自硬件的 drm 模块（开源的提供源码、不开源的提供二进制文件）。DRI 通过调用 DRM 的接口来实现上层 3D 图形库的接口。DRI 的源码则在 Mesa 中。
 
- `x window配置 <http://blog.csdn.net/wangjasonlinux/article/details/9194547>`_
+`x window配置 <http://blog.csdn.net/wangjasonlinux/article/details/9194547>`_
 
 
  InputClass 会改把 /dev/input/event中映射过来。

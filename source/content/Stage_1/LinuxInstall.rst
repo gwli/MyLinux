@@ -1,5 +1,6 @@
+************
 linux 和选择
-============
+************
 
 其实只要看到每一个事情起源就自然明白其源由了，例如这么多linux，到底各有什么区别，只要再一下其各个发展史，以及先后顺序就知道了。例如 apt-get dpkg这种方式是debian首创的。 后面系统都会吸取前面系统的优点。 gentoo是出现最迟的，当然也就是优点更多一些了。
 
@@ -17,7 +18,7 @@ usb 启动盘制作
 所以只要把USB变成可引导盘，并且分区格式化并不会影响MBR，因为这个是分区之外的事情。 然后就可以像里面copy kernel了。这也就是为什么，今天直接往U盘copy 光盘内容就可以用了的原因。
 
 software install apt-get 
-------------------------
+==========================
 
 
 One of the key function is process the package denpendencies.  this is a troubleness on linux. but the apt-get help to handle them.
@@ -59,7 +60,7 @@ sourcelist support three source
 在17.10之后，就可以直接使用 apturl 来直接从网址安装了，https://help.ubuntu.com/community/AptURL
 
 如果出现 出现PGP key error 缺 key
----------------------------------
+==================================
 
 .. code-block:: bash
 
@@ -94,6 +95,7 @@ https://help.ubuntu.com/community/AptGet/Howto
 https://wiki.ubuntu.com/AutoDeb
 
 .. code-block:: bash
+
    auto-apt ./configure
    autodeb  archive.tar.gz
 
@@ -128,7 +130,7 @@ http://stackoverflow.com/questions/6331109/how-to-setup-multiple-architecture-de
 ====================
 
 .. code-block:: bash
-   #   
+
    sudo apt-mark hold <packagename>
    #check 
    apt-cache policy <packagename>
@@ -184,7 +186,7 @@ dpkg
 #. 查询包 :command:`dpkg -l |grep vnc`
 #. 删除   :command:`dpkg -r vnc`
 #. 查看依赖 :command:`apt-cache depends packagename`
-#. 查看安装了哪些文件 :commmand:`dpkg -L packagename`
+#. 查看安装了哪些文件 :command:`dpkg -L packagename`
 
 
 
@@ -203,7 +205,7 @@ http://askubuntu.com/questions/1148/what-is-the-best-place-to-install-user-apps
 https://nixos.org/nix/
 
 如何快速的制作一个linux系统
----------------------------
+=====================================
 
 #. 在一个现在系统上直接把系统文件打包
 
@@ -236,7 +238,7 @@ https://nixos.org/nix/
       grub-mkconfig -o /mnt/sda1/boot/grub.cfg
 
  
-   .. seealso::
+.. seealso::
    
    #. `使用官方Ubuntu软件库构建DVD镜像 <http://linux.chinaunix.net/docs/2007-04-03/4110.shtml>`_  
    
@@ -248,10 +250,10 @@ https://nixos.org/nix/
    
    #. `lsb standard <http://refspecs.linuxfoundation.org/lsb.shtml>`_  
    #. `中文支持 <http://www.4wei.cn/archives/1001458/comment-page-1>`_  
+
+
    Grub2AndBootup.rst
    
-   USB install 
-   -----------
 
 
 install
@@ -269,6 +271,7 @@ ubuntu 发行光盘的制作
 至于采用什么格式，还得看启动kernel支持哪种类型，一般都会支持sqfs格式的。
 
 由于ISO文件中只读，于是不能写入。 于是就有casper-rw 的功能，实际就是在系统里默认mount这个目录，利用autofs,unionfs的功能http://unionfs.filesystems.org/  就实现了这个功能。也就是在USB生成一个casper-rw的文件。 并利用mkfs -f 把这个文件当做系统格式化。 dd 来生成这样一个文件。
+
 #. http://www.syslinux.org/wiki/index.php/ISOLINUX
 #. http://unix.stackexchange.com/questions/122832/how-to-use-casper-rw-file-for-persistance
 #. https://help.ubuntu.com/community/LiveCDCustomization
@@ -291,18 +294,26 @@ Creat bootable usb
 
 #. Download syslinux on windows
       http://www.kernel.org/pub/linux/utils/boot/syslinux/syslinux-4.04.zip
-   2. Format USB stick in fat32
-   3. Copy syslinux.exe to <usb>/boot/syslinux
-   4. boot
+#. Format USB stick in fat32
+#. Copy syslinux.exe to <usb>/boot/syslinux
+#. boot
+
+   .. code-block:: bash
+
       cd <usb>\boot\syslinux
       syslinux.exe -ma -d /boot/syslinux <usb driver letter:>
-   5. find these files and copy to <usb>\boot\syslinux
-      memdisk                   引导IMG镜像的文件
-      vesamenu.c32               二种窗口模块之一
-      menu.c32                   二种窗口模块之一
-      chain.c32                   指定分区启动  如：chain.c32 hd0,1 (或chain.c32    hd1,1)
-      reboot.c32                  重新启动计算机
-   6. Create an empty file named livecd in usb root
+
+#. find these files and copy to <usb>\boot\syslinux
+
+   .. list-table::
+
+      * - memdisk                   引导IMG镜像的文件
+        - vesamenu.c32               二种窗口模块之一
+        - menu.c32                   二种窗口模块之一
+        - chain.c32                   指定分区启动  如：chain.c32 hd0,1 (或chain.c32    hd1,1)
+        - reboot.c32                  重新启动计算机
+
+#. Create an empty file named livecd in usb root
       
 
 
@@ -335,7 +346,6 @@ Install NFS on Ubuntu
 
       /home/tss3st  *(rw,sync,no_root_squash)
 
-**
 
 #. Restart NFS service
    

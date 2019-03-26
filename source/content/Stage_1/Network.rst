@@ -33,7 +33,7 @@ IP 冲突
 
 #. 在其中冲突的一台用 :command:`arping` . 
 
-   .. code-block::
+   .. code-block:: bash
       
       localhost:~ # arping -I eth1 10.19.189.113
       ARPING 10.19.189.113 from 10.19.189.122 eth1
@@ -102,10 +102,9 @@ gentoo 的网卡启动过程
 #. init 根据runlevel决定起哪些服务。
    各个启动过程，几家linux的实现，大体上一致，而事实是各个不相同。 
    
-   #. gentoo 是在 :file:`/etc/runlevel` 下的，并且采用 :command:`rc-config` 来查看的。 
+#. gentoo 是在 :file:`/etc/runlevel` 下的，并且采用 :command:`rc-config` 来查看的。 
       直接在对应的level下建立一个link 就可以了。
-   #. SUSE 的启动是并行的，是用.before, .after等来实现的。
-   #. 
+#. SUSE 的启动是并行的，是用.before, .after等来实现的。
 
 SSH
 ===

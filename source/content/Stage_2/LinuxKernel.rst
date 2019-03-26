@@ -1,5 +1,6 @@
+************
 LinuxKernel
-===========
+************
 
 与main函数的区别就在需要链接的地方不一样，至少开头是静态链接的，对用initrd 之类的都采用两次load法，起动之前一次，起动后更新。 为了解决鸡生蛋，蛋生鸡的问题。同时对模块的热加载功能，insmode,rmmode,其实本质就是dllexport的功能。只是内核支持动态加载，而一般的应用程序做不到，只能通过gdb来这样么做。但是unreal 是能够做到一点。做到热加载的，编译之后直接可以用，不需要重起。
 
@@ -20,9 +21,10 @@ linux 采用二级页表机制，页表目录和页表＋页内基址。　Page=
 其实一个本质问题在于，如何这样的解读内存结构，这个与包的结构是一样的，是采用TLK的模式还是表头然后内容的方式。首先是分配大小。然后要根据自定义的结构来读写内存。类的内存结构与包的结构是一样的道理。
 
 进程与程序的关系
-----------------
+================
 
-     <img src="%ATTACHURLPATH%/C_memory.jpg" alt="C_memory.jpg" width='600' height='450'  align=right />
+<img src="%ATTACHURLPATH%/C_memory.jpg" alt="C_memory.jpg" width='600' height='450'  align=right />
+
 #. `C语言到汇编到机器语言到进程转换 <http://learn.akae.cn/media/ch18.html>`_ 
 #. `从内存中加载并启动一个exe <http://wenku.baidu.com/view/1f70370a4a7302768e99398b.html>`_ 
 #. `可执行程序加载到内存的过程 <http://blog.csdn.net/w_s_xin/article/details/5044457>`_   第一步就是把文件用`mmap <http://blog.chinaunix.net/uid-26669729-id-3077015.html>`_ 映射到内存中。哪些库是放在共享区，可以供所有程序去调用，或者还是用到的时候才去加载。 `Linux下程序的加载、运行和终止流程  <http://blog.csdn.net/tigerscorpio/article/details/6227730>`_ 
@@ -89,7 +91,8 @@ https://doc.opensuse.org/documentation/html/openSUSE_121/opensuse-tuning/cha.tun
 http://www.ibm.com/developerworks/cn/linux/l-cn-sysfs/   /sys 是sysfs的挂载点，取代了/proc的大部分功能，并且经过了很好的设计。
 
 当然也可以用 man /proc 与man sysfs来得到更多信息。
-.. ::
+
+.. code-block:: bash
  
    print "Started with the heartbeat host $HeartbeatHost:$HeartbeatPort\n";
    
@@ -124,10 +127,13 @@ system call
 #. `Implement-Sys-Call-Linux-2.6-i386 <http://www.tldp.org/HOWTO/html_single/Implement-Sys-Call-Linux-2.6-i386/>`_ 
   
 
-   brk,sbrk,getrlimit,setrlimit,prlimit查看系统资源的systemcall.
+brk,sbrk,getrlimit,setrlimit,prlimit查看系统资源的systemcall.
+
 libc的库有一个gensyscalls.py 生成 syscall 例表。 /ndk/toolchains/X/prebuild/<platofrm>/share/lib/syscalls 可以看到各个系统的system call 个数，现在linux 325个API。
 
 这些systemcall与大部分 shell 命令是对应的，例如mkdir等，其实本质就让shell 过程 
+
+.. code-block:: c
 
    while(1) {
      switch {syscall} {
@@ -140,14 +146,17 @@ libc的库有一个gensyscalls.py 生成 syscall 例表。 /ndk/toolchains/X/pre
 
 Signal
 ------
+
 before, I always feel msterious about the signal. but now I know that the signal is always with us. for example, when shutdown, the OS should close all the process, how to do this, send the signal. the basic module of process with glibc should be able to the common signal. for example we use the *kill -9 process* to let the process close. 
 
 essentially, the Signal is relevent logic/soft interrupt with CPU and Hardware. 
 `在ring 0改变watchpoint的值 <http://bbs.chinaunix.net/forum.php?mod=viewthread&tid=3660999&page=1&extra=#pid21816738>`_  continus received SIGTRAP.
- for Debug, there are three way you can control.
- #. state register, this can control CPU behavoier. 
-    2. CPU event
-    3. interrupt.
+
+for Debug, there are three way you can control.
+
+#. state register, this can control CPU behavoier. 
+#. CPU event
+#. interrupt.
 
 
 对于中断的处理，原则是要保存当前的所状态，中断处理之后，再恢复回来。 但是为了性能，而是根据需要来保存一些必要的register,而非全部。
@@ -158,8 +167,8 @@ SystemLog 机制
 
 多进程同写一个文件，就是会同步与原子操作问题。正常情况下，每一个系统调用都是原子操作。原子操作水平是什么样的。例子函数级的，还是指令级，还是API级的，中断CPU指令级，所以所有的单指令操作都是原子操作。同时原子操作都需要下一层的支持，在同一步不可有做到真正有效原子操作。就像第三方的中立性一样。这个就需要系统构构了，例如ARM的结构，并且内核的原子操作都是直接用汇编来锁定总线来搞定的，这个是C语言做不到的。
 
-   `Linux系统环境下关于多进程并发写同一个文件的讨论  <http://blog.chinaunix.net/uid-24585858-id-2856540.html>`_ 
-   `多个进程把日志记录在同一个文件的问题 <http://www.chinaunix.net/old_jh/23/804742.html>`_  利用消息队列+单进程读写文件 会大大改善IO，但是多机并行的机制呢。
+#.  `Linux系统环境下关于多进程并发写同一个文件的讨论  <http://blog.chinaunix.net/uid-24585858-id-2856540.html>`_ 
+#.  `多个进程把日志记录在同一个文件的问题 <http://www.chinaunix.net/old_jh/23/804742.html>`_  利用消息队列+单进程读写文件 会大大改善IO，但是多机并行的机制呢。
 
 
 
@@ -174,12 +183,11 @@ http://blog.chinaunix.net/uid-20746260-id-3044842.html
 
 module 本身也是 debug选项可以用的。 可以参看manual.
 
-See also
---------
+.. seealso::
 
-#. `浅析动态内存分配栈与堆 <http://blog.sina.com.cn/s/blog&#95;6444798b0100pslu.html>`_  当数据量非常大时，使用什么策略来用内存。例如我们能同时对多少个数进行排序。
-#. `linux sourcecode search <http://lxr.linux.no/+trees>`_  
-#. `/sysfs 文件系统类似于/proc 但是优于/proc <http://www.ibm.com/developerworks/cn/linux/l-cn-sysfs/>`_  
+   #. `浅析动态内存分配栈与堆 <http://blog.sina.com.cn/s/blog&#95;6444798b0100pslu.html>`_  当数据量非常大时，使用什么策略来用内存。例如我们能同时对多少个数进行排序。
+   #. `linux sourcecode search <http://lxr.linux.no/+trees>`_  
+   #. `/sysfs 文件系统类似于/proc 但是优于/proc <http://www.ibm.com/developerworks/cn/linux/l-cn-sysfs/>`_  
 
 Thinking
 ========
