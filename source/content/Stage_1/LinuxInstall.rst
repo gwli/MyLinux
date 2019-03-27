@@ -17,9 +17,14 @@ usb 启动盘制作
 
 所以只要把USB变成可引导盘，并且分区格式化并不会影响MBR，因为这个是分区之外的事情。 然后就可以像里面copy kernel了。这也就是为什么，今天直接往U盘copy 光盘内容就可以用了的原因。
 
+
+
+
 software install apt-get 
 ==========================
 
+#. linux package management
+   build and compile
 
 One of the key function is process the package denpendencies.  this is a troubleness on linux. but the apt-get help to handle them.
 

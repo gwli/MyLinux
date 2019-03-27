@@ -1,15 +1,25 @@
-**************
+***************
 Linux 基本命令
-**************
+***************
+
 
 命令补全
 ========
 
 bash 的命令补全功能，不只是简单的字符串补全，而是根据上下文来补全。这些都的实现都在  /usr/share/bash=complete 中。 如果没有可以安装 apt=get install bash=complete
 
+.. image:: Stage_1/asciinema/auto-complete.gif
+   :scale: 50%
+
 <a href="https://asciinema.org/a/LUcAqGRm2vJc8sQYUlhO4fIef?autoplay=1" target="_blank"><img src="https://asciinema.org/a/LUcAqGRm2vJc8sQYUlhO4fIef.png" width="835"/></a>
 
 service 命令，它列出系统中有 services . 
+
+IO redirection
+==============
+
+
+On Linux, /dev/stdin, /dev/stdout, /dev/stderr are symbolic links to /proc/self/fd/0, /proc/self/fd/1, /proc/self/fd/2
 
 关机操作
 ========
@@ -48,6 +58,20 @@ service 命令，它列出系统中有 services .
 #. 在文件间建立连接: ln =s（软连接）
 #. 查找文件: find 
 #. 基于内容查找： grep
+
+https://github.com/lujun9972/lujun9972.github.com/issues/25#sec-1-18
+: 操作符
+
+命名管道
+========
+
+.. code-block:: bash
+
+   mkfifo in_data out_data
+   command <in_data >out_data &
+   exec 3> in_data 4< out_data
+   echo <some thing here> >&3
+   read <some variables here> <&4
 
 其它
 ====
