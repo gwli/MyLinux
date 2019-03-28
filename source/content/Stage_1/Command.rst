@@ -546,3 +546,21 @@ gtop
    find -iname "lib*.so" |xargs -I % mv %  ./backdir/
    find -iname "lib*.so"|xargs -d '\n' -I % mv % ./backdir/
 
+
+如何得到精确的CPU时间
+=====================
+
+一种是采用 getconf CLK_TCK 再加/proc/pid/stat 来实现。 另一个那就是top -bn 1 就行了。
+https://straypixels.net/getting-the-cpu-time-of-a-process-in-bash-is-difficult/
+
+
+#. `bash中trap的用法 <http://hi.baidu.com/jackbillow/item/7310670e8eae9d19eafe38cc>`_  bash 可以接收64个中断
+
+zenity GUI
+==========
+
+#. `zenity 一个小巧方便的用户交互的GUI. <http://os.51cto.com/art/201011/235135.htm>`_  ,`zenity for windows <http://www.placella.com/software/zenity/>`_ 
+
+   .. code-block:: bash
+
+      zenity --entry --text="Please enter your_name"
