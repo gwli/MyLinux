@@ -289,6 +289,7 @@ sync
       kill =9 `cat /usr/local/apache2/logs/httpd.pid`
 
 linux下的习惯把pid存入 xxx.pid文件。
+
 #. 利用 HEREdoc
    
    .. code-block:: bash
@@ -533,3 +534,15 @@ gtop
 ====
 
 基于console的可视化例如windows  resmonitor
+
+
+例如xargs列表也会有妙用
+=======================
+
+:command:`man xargs`  作用就是把字节流变换成list, 可以用-d 来指定界符，同时每几个元为一组 -n 3，同时这个参数参入到哪里 -I %,同时也可以指字最多多少命令并行 -P 0 就是尽可能多。
+
+.. code-block:: bash
+
+   find -iname "lib*.so" |xargs -I % mv %  ./backdir/
+   find -iname "lib*.so"|xargs -d '\n' -I % mv % ./backdir/
+

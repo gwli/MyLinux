@@ -1,21 +1,30 @@
-**********
-Bash 效率
-**********
+****************
+Bash Scripting
+****************
+
+为什么大的系统都需要shell语言，以及 胶水语言原因，那就是方便集成，对于一个大系统不可能每一次都是修改编译选项来实现。
+例如对于修改系统的driver,就要有给一个接口来操作，有了shell之后，就是只要添加一个命令就可以搞定了。
+
+对于小的应用程序如何实现呢，可以采用gdbshell来实现功能，例如直接调用dlopen这样来加载。
+并且现在LLVM本身现在也提供shell的功能。更加的适合来做这个事情。
+
+
+集成测试的方法，两种搭建各种辅助环境，另外一种那就是相互测试。这里一个基础的条件那就是一个shell或者胶水语言的出现。
 
 优缺点
 ========
 
 *优点*
 
-#. 简练，接近自然语言，并且最容易扩展. 
+#. 简练，接近自然语言，容易扩展. 
    
-   * Unix 小而美的哲学的典范。
-   * 那就是对外部命令的支持，混然天成的，只要你放PATH下面，就自动的识别。 并且只要你的脚本支持命令行参数。 就可以传递任意的参数。
+   * Unix小而美的哲学的典范。
+   * 所有的UNIX 命令,系统调用,公共程序,工具,和编译过的二进制程序,对于shell 脚本来说,都是可调用的.
 
    .. csv-table::
 
       sh(dash),   151k,
-      bash,       1.01M
+      bash,       1M
       python2.7,  3.4M
       python3.5,  4.3M
       perl5.22.1, 1.91M
@@ -24,30 +33,207 @@ Bash 效率
       awk,        116k
       vim,        2.7M
        
-#. 目前最方便灵活的以文件为中心IO控制，重定向功能
+#. 通用性强,大部分linux发行版本的默认shell
+#. 灵活的IO重定向，命令替换，管理组合  `find | grep`, `()& < > $()`
+#. 好用自动补齐功能
 
-   * 一切皆文件
-   * 灵活的管道组合 `find | grep`
-   * 灵活的进程控制 `()& < > $()`
+   :command:`apt-get install bash-completion` 
 
-#. 有variable,if,loop,fucntion 等功能提供了足够的灵活性。 
-#. 提供足够的字符串处理功能 
-   
-   * find,grep,cut,sed,awk,tr
+   并且随着 bash的升级，4.3之后已经可以 自动补全 参数了。看来是越来越强了。如果是想自定义可以使用
+   http://kodango.com/bash-competion-programming
 
-#. 灵活的要根据上下文的自动补齐功能
+   这一点zsh 做更灵活，各种补全，尽可能tab. 并且支持** 来递归。
 
    .. image:: Stage_1/asciinema/auto-complete.gif
       :scale: 50%
 
+
 *缺点*
 
-#. 变量没有作用域,靠前缀拼接来实现， 并且对于复杂变量，list,dict有限的支持， 没有结构体的支持。
-#. 原生的数值计算比较麻烦
+#. 变量没有作用域,没有类型，只有字符串
+#. 没有复杂的数据结构 ,队列，堆栈，链表等
+#. 速度慢
+#. ... `see more <http://mywiki.wooledge.org/BashWeaknesses>`_
 
+.. figure:: Stage_1/images/bash_component_architecture.png
 
 基本组成
 =========
+
+shell 命令
+----------
+
+* 简单命令
+* pipelines
+* list of Commands
+* 组合命令
+
+shell expansions
+----------------
+
+* {} 直积(笛卡尔积) :math:`{a,b}* {0,1,3} => {a,0},{a,1},{a,2},{b,0},{b,1},{b,2}`
+
+  .. code-block:: bash
+
+     mkdir -p Top/{a,b,c,d,e}/{h,i,j,k}/{o,p,q}
+     find 
+     scp -p  xxx/{a,c,d,e}  user@host:dest/
+
+* shell pattern matching
+
+  .. code-block:: bash
+
+  * any
+  ** rcursive match
+  ? 0,1
+  [...] charter range
+  ?(pattern-list)  0,1
+  *(pattern-list)  any
+  +(pattern-list)  1+
+  @(pattern-list)  1+
+  !(pattern-list)  not match
+
+
+  - 善用通配符，减少输入
+
+    .. code-block:: bash
+
+       vim **/*READ*  #open the README at any subfolder
+
+* ~扩展
+
+  .. code-block:: bash
+
+     ~ The value of $HOME
+     ~/foo #$HOME/foo
+     ~fred/foo  #The subdirectory foo of the home directory of the user fred
+     ~+/foo $PWD/foo
+
+* 变量与参数扩展
+
+   * =前后没有空格  `varname="value"`
+   * speical variable 替换
+
+   * 特殊变量
+       
+   .. csv-table::
+      :header": "Variable","Description"
+      
+      "$0",The filename of the current script.
+      "$n",These variables correspond to the arguments with which a script was invoked. Here n is a positive decimal number corresponding to the position of an argument (the first argument is $1, the second argument is $2, and so on).
+      "$$",The process ID of the current shell. For shell scripts, this is the process ID under which they are executing.
+      "$#",The number of arguments supplied to a script.
+      "$@",All the arguments are individually double quoted. If a script receives two arguments, $@ is equivalent to $1 $2.
+      "$*",All the arguments are double quoted. If a script receives two arguments, $* is equivalent to $1 $2.
+      "$?",The exit status of the last command executed.
+      "$!",The process ID of the last background command.
+      "$_",The last argument of the previous command.
+      
+   * 利用$* 来实现命令的封装，在你需要定制你的命令的时候
+     
+     .. code-block:: bash
+        
+        ll.sh 
+        ls -l $* 
+   * default value
+     ${parameter:-word} 
+     ${parameter:=word}
+     ${parameter:?word}
+     ${parameter:+word}
+   * string slice
+     ${parameter:offset}
+     ${parameter:offset:length}
+     #左匹配删除
+     ${parameter#word}
+     ${parameter##word}
+     
+     # 右侧删除
+     ${parameter%word}
+     ${parameter%%word}
+
+     # 替换
+     ${parameter/pattern/string}
+     # 小写 
+     ${parameter^pattern}
+     ${parameter,pattern}
+
+     #小写
+     ${parameter^^pattern}
+     ${parameter,,pattern}
+
+    - 把你复杂的变量直接存为变量
+
+      .. code-block:: bash
+         
+         mydu="du -csh"   
+
+* 命令替换
+
+  .. code-block:: bash
+
+     $(command)  
+     `command`
+
+* 数学计算替换 仅支持整数 `$(( expression ))`
+* 进程替换
+  `<(list) or  >(list)`
+
+* Word Split $IFS  <space>,<tab>,<newline>
+
+组合命令，管道，命令替换，进程替换，IO重定向
+----------------------------------------------
+
+* 与或 命令列表
+
+  code-block:: bash
+
+  command1 && command2
+
+  command1 || command2
+
+* Grouping commands  as a unit, 
+
+  .. code-block:: bash
+
+     ( list ) #/executed in a subshell  
+     { list; } #at current shell context
+
+  - redirection and pipeline is applied to the entire command list. 
+  
+* Pipes
+
+  .. code-block:: bash
+
+     command1 | command2
+     command1 |& command2
+
+  
+Redirections
+------------
+
+.. list-table:: 
+   
+   * - stdin
+     - stdout
+     - stderr 
+   * - 0
+     - 1
+     - 2
+     - & 
+
+   * - >, >>
+     - <, <<,<<<
+     - [n]<&digit-
+     - [n]<>word
+
+
+command line editing
+---------------------
+
+#. 编辑模式 vi/emcas
+   set -o vi
+#. history 
+#. troubleshoot set -x, strace
 
 变量,替换,字符串
 ----------------
@@ -62,78 +248,31 @@ Bash 效率
        .. image:: Stage_1/asciinema/variable_expand.gif
           :scale: 50%
     
-    - 把你复杂的变量直接存为变量
 
-      .. code-block:: bash
-         
-         mydu="du -csh"   
-
-* 特殊变量
-    
-.. csv-table::
-   :header": "Variable","Description"
-   
-   "$0",The filename of the current script.
-   "$n",These variables correspond to the arguments with which a script was invoked. Here n is a positive decimal number corresponding to the position of an argument (the first argument is $1, the second argument is $2, and so on).
-   "$$",The process ID of the current shell. For shell scripts, this is the process ID under which they are executing.
-   "$#",The number of arguments supplied to a script.
-   "$@",All the arguments are individually double quoted. If a script receives two arguments, $@ is equivalent to $1 $2.
-   "$*",All the arguments are double quoted. If a script receives two arguments, $* is equivalent to $1 $2.
-   "$?",The exit status of the last command executed.
-   "$!",The process ID of the last background command.
-   "$_",The last argument of the previous command.
-   
-* 利用$* 来实现命令的封装，在你需要定制你的命令的时候
-  
-  .. code-block:: bash
-     
-     ll.sh 
-     ls -l $* 
 
 
 * 替换
-  * [] 或选择
-    ls *
-  * {} 直积(笛卡尔积) :math:`{a,b}* {0,1,3} => {a,0},{a,1},{a,2},{b,0},{b,1},{b,2}`
-
-  .. code-block::
-
-     mkdir -p Top/{a,b,c,d,e}/{h,i,j,k}/{o,p,q}
-     find 
-     scp -p  xxx/{a,c,d,e}  user@host:dest/
 
 流控
 ----
   
 .. code-block:: bash
 
-   #!/bin/bash 
-   #fi
-   if [ -z $# ] then;
-     do something
+   if test-commands; then
+     consequent-commands;
+   [elif more-test-commands; then
+     more-consequents;]
+   [else alternate-consequents;]
    fi
 
+   case word in
+    [ [(] pattern [| pattern]…) command-list ;;]…
+   esac
 
-   #!/bin/bash 
-   for i in `seq 1 10`;
-   do 
-      echo $i
-   done 
-   
-
-   #!/bin/bash 
-   COUNTER=0 
-   while [ $COUNTER -lt 10 ] ; do
-      echo The counter is $COUNTER
-      let COUNTER=COUNTER+1
-   done 
-
-   #!/bin/bash 
-   COUNTER=20
-   until [  $COUNTER -lt 10 ]; do
-       echo COUNTER $COUNTER
-       let COUNTER-=1
-   done
+   until test-commands; do consequent-commands; done
+   while test-commands; do consequent-commands; done
+   for name [ [in [words …] ] ; ] do commands; done
+ 
 
 
 * 在大部分情况下避免使用if,通过 find,grep等filter来实现过滤。
@@ -230,24 +369,6 @@ Text Process
 可以用以进程替换，再加>，<就像管道了。 ,$()就当于相当于 subst可以任意次的替换，而不相双引号与反勾号替换执行次数。
 并且今天添加了cleanApk这样功能，让大家都来用这样才能显示自己的实力。
 
-为什么大的系统都需要shell语言，以及 胶水语言原因，那就是方便集成，对于一个大系统不可能每一次都是修改编译选项来实现。
-例如对于修改系统的driver,就要有给一个接口来操作，有了shell之后，就是只要添加一个命令就可以搞定了。
-
-对于小的应用程序如何实现呢，可以采用gdbshell来实现功能，例如直接调用dlopen这样来加载。
-并且现在LLVM本身现在也提供shell的功能。更加的适合来做这个事情。
-
-
-集成测试的方法，两种搭建各种辅助环境，另外一种那就是相互测试。这里一个基础的条件那就是一个shell或者胶水语言的出现。
-例如xargs列表也会有妙用
-=======================
-
-:command:`man xargs`  作用就是把字节流变换成list, 可以用-d 来指定界符，同时每几个元为一组 -n 3，同时这个参数参入到哪里 -I %,同时也可以指字最多多少命令并行 -P 0 就是尽可能多。
-
-.. code-block:: bash
-
-   find -iname "lib*.so" |xargs -I % mv %  ./backdir/
-   find -iname "lib*.so"|xargs -d '\n' -I % mv % ./backdir/
-
 
 分隔符
 ======
@@ -280,15 +401,6 @@ $@ 所有的位置参数每一个独立。
 
 
 
-自动补齐
-========
-
-:command:`apt-get install bash-completion` 
-
-并且随着 bash的升级，4.3之后已经可以 自动补全 参数了。看来是越来越强了。如果是想自定义可以使用
-http://kodango.com/bash-competion-programming
-
-这一点zsh 做更灵活，各种补全，尽可能tab. 并且支持** 来递归。
 
 串行与并行计算与同步
 --------------------
@@ -457,7 +569,6 @@ See also
 #. `zsh it was said to be the best shell until now <http://www.zsh.org/>`_  
 
 #. `bash-utility-script-library <http://stackoverflow.com/questions/11369522/bash-utility-script-library>`_  为什么bash没有库，因其函数没有返回值，基本都是全局空间，没有什么封闭性，可以就很难在大范围的适用。
-#. `Advanced Bash-Scripting Guide <http://www.tldp.org/LDP/abs/html/>`_  终于找到这个在线版本
 #. `tf-idf-hadoop-streaming-bash-part-1 <http://www.oraclealchemist.com/news/tf-idf-hadoop-streaming-bash-part-1/>`_  
 
 Thinking
@@ -609,3 +720,4 @@ zsh 对于cd 有层的 d 可以查看九层的目录，然后 cd -n 就进入n�
 .. [bash architecture]   http://aosabook.org/en/bash.html
 .. [gnu bash manual]  https://www.gnu.org/software/bash/manual/html_node/index.html#SEC_Contents
 .. [Bash Prog Intro HowTo] http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html#toc7
+.. [text process] https://www.tldp.org/LDP/abs/html/textproc.html

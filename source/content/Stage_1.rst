@@ -3,6 +3,7 @@
 ######
 
 .. include:: Stage_1/DirectoryLayout.rst
+.. include:: Stage_1/Bash.rst
 .. include:: Stage_1/Command.rst
 .. include:: Stage_1/LinuxInstall.rst
 .. include:: Stage_1/Network.rst
