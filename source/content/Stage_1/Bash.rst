@@ -1,40 +1,28 @@
-****************
-Bash Scripting
-****************
-
-
+*******************************
+Linux Shell Effecitive Skills 
+*******************************
 
 What's is shell
 ================
 
-dash,csh,ksh,
+.. figure:: Stage_1/images/LinuxArch.png
+.. figure:: source/content/Stage_1/images/shell_families.png
 
-zsh  1990 
-Bash 1988
-Tcsh  
-Csh  1978 https://www.wikiwand.com/en/C_shell
+sh,csh/Tcsh,ksh,bash,zsh
+
+Csh  1978 
 Ksh  1983
+Bash 1988
+zsh  1990 
 
 * 系统可交互接口,简练，接近自己语言。 
+
    * Unix小而美的哲学的典范。
    * 所有的UNIX 命令,系统调用,公共程序,工具,和编译过的二进制程序,对于shell 脚本来说,都是可调用的.
    * 所有shell feature 成熟，并且能够在新的shell上完成兼容。 
 
-* 高效交互方式
-
-  * shell expansion
-  * command execution
-  * command line editing
-
-* 可编程性
-
-  * varirable
-  * flow control constructs
-  * functions
-
 Bash
-========
-
+=====
 
 #. 通用性强, 大部分linux发行版本的默认shell
 #. 各种shell发展成熟，也成为后续的shell的事实标准
@@ -42,23 +30,22 @@ Bash
 
    `find | grep`, `()& < > $()`
 
-#. 
-*缺点*
+* 高效交互方式
 
-#. 变量没有作用域,没有类型，只有字符串
-#. 没有复杂的数据结构 ,队列，堆栈，链表等
-#. 速度慢
-#. ... `see more <http://mywiki.wooledge.org/BashWeaknesses>`_
+  * Shell history and choose one
+  * Shell expansion
+  * Command execution
+  * Command line editing
+  * Text process
 
 Bash 的原理框图
-===============
+================
 
 .. figure:: Stage_1/images/bash_component_architecture.png
 
 
 shell expansions
 ================
-
 
 * brace expansion
 * tilde expansion
@@ -72,8 +59,6 @@ shell expansions
 -------------------
 
 :math:`(a,b)* (x,y,z) => (a,x),(a,y),(a,z),(b,x),(b,y),(b,z)`
-
-https://www.wikiwand.com/en/Bash_(Unix_shell)
 
   .. code-block:: bash
      
@@ -147,10 +132,18 @@ https://www.wikiwand.com/en/Bash_(Unix_shell)
    ~+/foo $PWD/foo
 
 
- 变量与参数扩展
+
+变量与参数扩展
 -----------------
 
-* =前后没有空格  `varname="value"` `$varname ${varable}`
+* `=`前后没有空格  `varname="value"` `$varname ${varable}`
+
+
+  - 把你常用的路径直接存为变量，可以减少cd 的次数
+
+    .. image:: Stage_1/asciinema/variable_expand.gif
+       :scale: 50%
+
 
   - 把你复杂的变量直接存为变量
 
@@ -158,16 +151,11 @@ https://www.wikiwand.com/en/Bash_(Unix_shell)
        
        mydu="du -csh"   
 
-  - 把你常用的路径直接存为变量，可以减少cd 的次数
+* speical variable 替换  扩展
 
-    .. image:: Stage_1/asciinema/variable_expand.gif
-       :scale: 50%
+ 
 
-* speical variable 替换  特殊变量 特殊符号的扩展
-
-
-.. csv-table::
-   :header": "Variable","Description"
+.. code-block:: bash
    
    "$0","The filename of the current script."
    "$n","These variables correspond to the arguments with which a script was invoked. Here n is a positive decimal number corresponding to the position of an argument (the first argument is $1, the second argument is $2, and so on)."
@@ -181,20 +169,19 @@ https://www.wikiwand.com/en/Bash_(Unix_shell)
       
    * 利用$* 来实现命令的封装，在你需要定制你的命令的时候
      
-     .. code-block:: bash
-        
-        ll.sh 
-        ls -l $* 
+.. code-block:: bash
+   
+   ll.sh 
+   ls -l $* 
 
-        *$@*
-        exec /usr/bin/flex -l "$@" 以前不知道为什么要有这些用法。现在明白了主要为了方便二次的转接。尤其在做接口函数的，这样可以无缝传给那些函数。正是通过些符号，我们很方便定制各种各样的命令，就样android中build 中envsetup,sh 中那些cgrep,regrep, 等等这些命令。进行二次封装可以大大加快的自己的速度。
+   *$@*
+   exec /usr/bin/flex -l "$@" 以前不知道为什么要有这些用法。现在明白了主要为了方便二次的转接。尤其在做接口函数的，这样可以无缝传给那些函数。正是通过些符号，我们很方便定制各种各样的命令，就样android中build 中envsetup,sh 中那些cgrep,regrep, 等等这些命令。进行二次封装可以大大加快的自己的速度。
 
 .. ::
 
    $# 命令行参数的个数
    $* 所有的位置参数当做一个单词
    $@ 所有的位置参数每一个独立。
-
 
 
 * 参数替换
@@ -247,13 +234,14 @@ https://www.wikiwand.com/en/Bash_(Unix_shell)
    $(command)  
    `command`
 
+.. code-block:: bash
+
    bash~$ date +%Y%m%d%H%M%S
    20190330203926
    bash~$ mkdir log_$(date +%Y%m%d%H%M%S)
    bash~$ ls
    log_20190330204008  
    bash~$
-
    
 * 进程替换 `<(list) or  >(list)`
 
@@ -262,13 +250,6 @@ https://www.wikiwand.com/en/Bash_(Unix_shell)
   .. code-block:: bash
 
      diff <(ls $first_directory | sort) <(ls $second_directory | sort)` 直接来对比两条命令的输出。
-
-     exec &> >(tee -a "$log_file")
-     echo This will be logged to the file and to the screen
-     $log_file will contain the output of the script and any subprocesses, and the output will also be printed to the screen.
-     
-     >(...) starts the process ... and returns a file representing its standard input. exec &> ... redirects both standard output and standard error into ... for the remainder of the script (use just exec > ... for stdout only). tee -a appends its standard input to the file, and also prints it to the screen.
-     https://unix.stackexchange.com/questions/145651/using-exec-and-tee-to-redirect-logs-to-stdout-and-a-log-file-in-the-same-time
 
 Filename expansion (pattern matching)
 -----------------------------------------
@@ -289,8 +270,7 @@ Filename expansion (pattern matching)
 
 .. code-block:: bash
 
-   [test@localhost pam.d]$ ls
-   [test@localhost pam.d]$ ls /etc/pam.d/
+   bash$ ls /etc/pam.d/
    atd                  gdm-autologin           login             postlogin-ac       smtp              system-auth
    chfn                 gdm-fingerprint         other             ppp                smtp.postfix      system-auth-ac
    chsh                 gdm-launch-environment  passwd            remote             sshd              systemd-user
@@ -299,10 +279,10 @@ Filename expansion (pattern matching)
    cups                 gdm-smartcard           pluto             setup              sudo              xserver
    fingerprint-auth     ksu                     polkit-1          smartcard-auth     sudo-i
    fingerprint-auth-ac  liveinst                postlogin         smartcard-auth-ac  su-l
-   [test@localhost pam.d]$ cp /etc/pam.d/gdm-+(auto|pass)* .
-   [test@localhost pam.d]$ ls
+   bash$ cp /etc/pam.d/gdm-+(auto|pass)* .
+   bash$ ls
    gdm-autologin  gdm-password
-   [test@localhost pam.d]$ 
+   bash$ 
 
 * 善用通配符，减少输入
 
@@ -319,7 +299,7 @@ Filename expansion (pattern matching)
 Shell Command execution 
 ============================
       
-组合命令，管道，命令替换，进程替换，IO重定向
+命令,管道,IO重定向
       
       
 commands
@@ -359,10 +339,8 @@ https://www.gnu.org/software/bash/manual/html_node/index.html#SEC_Contents
    for name [ [in [words …] ] ; ] do commands; done
 
 
-
 * 在大部分情况下避免使用if,通过 find,grep等filter来实现过滤。
 * loop 大部分情况只用for就够了,少部分使用while
-
 
 Grouping commands  as a unit 
 -----------------------------
@@ -398,6 +376,13 @@ Grouping commands  as a unit
 pipelines
 -----------
   
+.. image:: Stage_1/images/How_pipe_works.png
+
+在Unix设计哲学中，有一个重要设计原则--KISS(Keep it Simple, Stupid)，大概意思就是只关注如何做好一件事，并把它做到极致。每个程序都有各自的功能，那么有没有一样东西将不同功能的程序互相连通，自由组合成更为强大的宏工具呢？此时，管道出现了，它能够让程序实现了高内聚，低耦合
+管道的发名者叫，Malcolm Douglas McIlroy，他也是Unix的创建者，是Unix文化的缔造者之一。他归纳的Unix哲学如下：
+
+.. image:: Stage_1/images/pipe_design.png
+
 * Pipes
 
   .. code-block:: bash
@@ -484,8 +469,7 @@ pipelines
 IO redirection
 ---------------
 
-命令的模型 这个图不错
-http://www.jianshu.com/p/3687e12b8d48
+.. image:: Stage_1/images/io.png
 
 .. list-table:: 
    
@@ -506,6 +490,14 @@ http://www.jianshu.com/p/3687e12b8d48
    <<<"here string" 就是python 中"""三目符的用法。
 
 
+.. code-block:: bash
+
+   exec &> >(tee -a "$log_file")
+   echo This will be logged to the file and to the screen
+   $log_file will contain the output of the script and any subprocesses, and the output will also be printed to the screen.
+   
+   >(...) starts the process ... and returns a file representing its standard input. exec &> ... redirects both standard output and standard error into ... for the remainder of the script (use just exec > ... for stdout only). tee -a appends its standard input to the file, and also prints it to the screen.
+   https://unix.stackexchange.com/questions/145651/using-exec-and-tee-to-redirect-logs-to-stdout-and-a-log-file-in-the-same-time
 
 
 * basic concept
@@ -528,6 +520,7 @@ http://www.jianshu.com/p/3687e12b8d48
     action one
     action two
    }> 1>out.out 2>error.log
+
 *对于文件的读写* 例如读入前三行
 
 .. code-block:: bash
@@ -627,6 +620,14 @@ http://www.jianshu.com/p/3687e12b8d48
 command line editing
 =====================
 
+.. image:: Stage_1/asciinema/auto-complete.gif
+   :scale: 50%
+
+- 路径补全，
+- 命令补全，
+- 命令参数补全，
+- 智能拼写纠正
+- 插件内容补全
 
 command complete
 ---------------------
@@ -637,18 +638,7 @@ command complete
 http://kodango.com/bash-competion-programming
 
 这一点zsh 做更灵活，各种补全，尽可能tab. 并且支持** 来递归。
-
-.. image:: Stage_1/asciinema/auto-complete.gif
-   :scale: 50%
-
-- 路径补全，
-- 命令补全，
-- 命令参数补全，
-- 智能拼写纠正
-- 插件内容补全
-
 如果这个做好，可以大大加快工作效率。例如 
-
 #. `More on Using the Bash Complete Command <http://www.linuxjournal.com/content/more-using-bash-complete-command>`_  可以利用来自定义命令补全，是可以加上过滤条件的
 #. `Programmable-Completion <http://www.gnu.org/software/bash/manual/bash.html#Programmable-Completion>`_  bash 中有专门的文档来说明，据说zsh的补全做的最好。
 #. 目前在对于android，已经有现在与补全功能了，在sdk/bash_compeletion/adb  加载了它之后，android下就可以自动补全了。
@@ -689,10 +679,9 @@ history skill
    !# The entire command line typed so far.
    
 troubleshoot debug 
--------------------------------
+----------------------------
 
 set -eux, strace
--
    
    `cmd1 &&  cmd2 && cm3`  = `set -e ;cmd1;cmd2;cmd3`
 * set -u  The shell prints a message to stderr when it tries to expand a variable that's is not set.Also it immediately exits.
@@ -744,13 +733,6 @@ shell function
 text Process
 ============
 
-分隔符
-------
-
-现在明白了，sh 的了些限制，sh 直接用空格当做分隔符，并且调用也这样。 也就是为什么赋值，不能分开写的原因。
-
-默认的都是空格， 换行。
-列表分隔符是,  
 
 * Regular Expression 
   
@@ -760,6 +742,8 @@ text Process
 
 * tools collections
   
+交并补
+
    - diff,sort/tsort,uniq,join,paste,join,wc,
    - expand,cut,head,tail,look,sed,awk,tr,grep
    - fold,fmt,col,column,nl,pr
@@ -906,7 +890,6 @@ https://github.com/Idnan/bash-guide,有大量的例子可以用直接用
    Change 19006994 files shelved.
    -------------
 
-
 参考
 ====
 
@@ -915,3 +898,4 @@ https://github.com/Idnan/bash-guide,有大量的例子可以用直接用
 .. [gnu bash manual]  https://www.gnu.org/software/bash/manual/html_node/index.html#SEC_Contents
 .. [Bash Prog Intro HowTo] http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html#toc7
 .. [text process] https://www.tldp.org/LDP/abs/html/textproc.html
+.. [brace expansion examples] https://www.wikiwand.com/en/Bash_(Unix_shell)
