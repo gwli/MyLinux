@@ -733,21 +733,40 @@ shell function
 text Process
 ============
 
+Regular Expression 
+---------------------
 
-* Regular Expression 
-  
-  .. code-block:: bash
-     
-     . * [] ? {} () ^,$
+.. image::  Stage_1/images/regexp-en.png
+
+|Meta character|Description|
+|:----:|----|
+|.|Period matches any single character except a line break.|
+|[ ]|Character class. Matches any character contained between the square brackets.|
+|[^ ]|Negated character class. Matches any character that is not contained between the square brackets|
+|*|Matches 0 or more repetitions of the preceding symbol.|
+|+|Matches 1 or more repetitions of the preceding symbol.|
+|?|Makes the preceding symbol optional.|
+|{n,m}|Braces. Matches at least "n" but not more than "m" repetitions of the preceding symbol.|
+|(xyz)|Character group. Matches the characters xyz in that exact order.|
+|&#124;|Alternation. Matches either the characters before or the characters after the symbol.|
+|&#92;|Escapes the next character. This allows you to match reserved characters <code>[ ] ( ) { } . * + ? ^ $ \ &#124;</code>|
+|^|Matches the beginning of the input.|
+|$|Matches the end of the input.|
+
+https://github.com/ziishaned/learn-regex/blob/master/README.md
+
 
 * tools collections
   
-交并补
 
    - diff,sort/tsort,uniq,join,paste,join,wc,
    - expand,cut,head,tail,look,sed,awk,tr,grep
    - fold,fmt,col,column,nl,pr
    https://www.tldp.org/LDP/abs/html/textproc.html
+
+
+交并补
+--------
 
 * sort/tsort
 
