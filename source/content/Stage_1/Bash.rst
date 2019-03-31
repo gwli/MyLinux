@@ -6,7 +6,7 @@ What's is shell
 ================
 
 .. figure:: Stage_1/images/LinuxArch.png
-.. figure:: source/content/Stage_1/images/shell_families.png
+.. figure:: Stage_1/images/shell_families.png
 
 sh,csh/Tcsh,ksh,bash,zsh
 
