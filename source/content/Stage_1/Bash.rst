@@ -220,6 +220,10 @@ shell expansions
         ${parameter,,pattern}
 
 
+  .. code-block:: bash
+
+     #replace the ext from mp4 to mp3
+     for i in *;do ffmpeg -i $i  `basename ${i/mp4/mp3}`;done
 
 * 数学计算替换 仅支持整数 `$(( expression ))`
 
