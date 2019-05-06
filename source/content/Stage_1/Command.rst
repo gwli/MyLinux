@@ -564,3 +564,11 @@ zenity GUI
    .. code-block:: bash
 
       zenity --entry --text="Please enter your_name"
+
+
+ 查询并安装 
+ ============
+
+ .. code-block:: bash
+
+    apt search ipopt | grep "/" |cut -d "/" -f 1|xargs sudo apt -y install 
