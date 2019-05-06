@@ -1,5 +1,5 @@
 ***************
-Linux 基本命令
+Linux 常用命令
 ***************
 
 
@@ -545,6 +545,12 @@ gtop
 
    find -iname "lib*.so" |xargs -I % mv %  ./backdir/
    find -iname "lib*.so"|xargs -d '\n' -I % mv % ./backdir/
+
+   # 并行
+   for i in `find $src -iname "*.mp4"` ;
+   do
+      echo ffmpeg -i $i  $dst/`basename ${i/mp4/mp3}` 
+   done | xargs -P 2 -I {} bash -c '{}'
 
 
 如何得到精确的CPU时间
