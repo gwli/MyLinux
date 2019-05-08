@@ -18,10 +18,54 @@ usb 启动盘制作
 所以只要把USB变成可引导盘，并且分区格式化并不会影响MBR，因为这个是分区之外的事情。 然后就可以像里面copy kernel了。这也就是为什么，今天直接往U盘copy 光盘内容就可以用了的原因。
 
 
+包管理的需求
+===============
+
+* 包的依赖管理
+* 安装路径记录
+* 包基本信息查询
+* 详细file列表
+* 包的配置
+* 包的反安装
+* 包的来源管理
+* 包的cache管理
+* 包的来源管理
 
 
 software install apt-get 
 ==========================
+
+
+.. code-block:: bash
+   
+   Package: apache2
+   Architecture: amd64
+   Version: 2.4.29-1ubuntu4
+   Priority: optional
+   Section: web
+   Origin: Ubuntu
+   Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+   Original-Maintainer: Debian Apache Maintainers <debian-apache@lists.debian.org>
+   Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+   Installed-Size: 520
+   Provides: httpd, httpd-cgi
+   Pre-Depends: dpkg (>= 1.17.14)
+   Depends: lsb-base, procps, perl, mime-support, apache2-bin (= 2.4.29-1ubuntu4), apache2-utils (= 2.4.29-1ubuntu4), apache2-data (= 2.4.29-1ubuntu4), perl:any
+   Recommends: ssl-cert
+   Suggests: www-browser, apache2-doc, apache2-suexec-pristine | apache2-suexec-custom, ufw
+   Conflicts: apache2.2-bin, apache2.2-common
+   Replaces: apache2.2-bin, apache2.2-common
+   Filename: pool/main/a/apache2/apache2_2.4.29-1ubuntu4_amd64.deb
+   Size: 95120
+   MD5sum: a075e1df7aa8b6755df2876a4f15fd21
+   SHA1: 9f5c0311bcf0c05d16ca09a6f92bf3ef3ba389a5
+   SHA256: 08919cc69d210c8f98c2d28b6149801885b8bdd1c5ff5e1eb0e41c0a7c50f1fe
+   Homepage: http://httpd.apache.org/
+   Description: Apache HTTP Server
+   Task: lamp-server
+   Description-md5: d02426bc360345e5acd45367716dc35c
+   Supported: 5y
+   
 
 #. linux package management
    build and compile
