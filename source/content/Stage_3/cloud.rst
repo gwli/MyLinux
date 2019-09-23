@@ -22,6 +22,9 @@ service 的是逻辑应用接接口，上层对应api-server, 来实现load-blan
 并且自己一整套的package 管理 helm. 
 并且oracle已经开始了下一代云的框架的设计，K8S直接在裸机上，或者硬件上。实现automonous linux/database的功能。
 
+并且在之上形成workflow 的CI/CD功能。
+https://kubernetes.feisky.xyz/
+
 
 Azure webinars
 ==================
