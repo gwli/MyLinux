@@ -163,9 +163,9 @@ http://www.voidcn.com/article/p-mttgftgp-gn.html
 =============
 
 
-.. image:: Stage_2/fs_capacity.png
+.. image:: /content/Stage_2/fs_capacity.png
 
-.. figure:: Stage_2/fs_performance.png
+.. figure:: /content/Stage_2/fs_performance.png
    
    https://www.ibm.com/developerworks/cn/linux/l-jfs/
 
@@ -208,7 +208,7 @@ cat  XXX.iso > /dev/<usbpartition>
 
 由于物理磁盘受限于空间的大小，扩展起来不是很方便，这就有了逻辑磁盘的概念。lvm. 先在物理磁盘上建立phiycal Volume, 多个PV 可以组成一个VG，然后在每一个VG上可以建立LV，当然LV可也可以扩VG。而LV就当做一个分区来用。并且随时能够调整大小。 pv,vg,lv.
 
-.. image:: Stage_2/fs/lv.jpg
+.. image:: /content/Stage_2/fs/lv.jpg
 
 partclone
 =========

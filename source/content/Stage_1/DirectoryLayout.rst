@@ -2,7 +2,7 @@
 Linux 的目录结构
 ********************
 
-.. figure:: Stage_1/images/linux_file_tree.png
+.. figure:: /content/Stage_1/images/linux_file_tree.png
    :align: center
    :alt: alternate text
    :figclass: align-center
@@ -78,6 +78,7 @@ Linux 的目录结构
 #. /boot 系统启动用的文件 : grub config, initrd,vmlinuz；
    
    .. code-block:: bash
+
       $ ls /boot/
       grub
       config-4.13.0-37-generic

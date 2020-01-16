@@ -5,8 +5,8 @@ Linux Shell Effecitive Skills
 What's is shell
 ================
 
-.. figure:: Stage_1/images/LinuxArch.png
-.. figure:: Stage_1/images/shell_families.png
+.. figure:: /content/Stage_1/images/LinuxArch.png
+.. figure:: /content/Stage_1/images/shell_families.png
 
 sh,csh/Tcsh,ksh,bash,zsh
 
@@ -41,7 +41,7 @@ Bash
 Bash 的原理框图
 ================
 
-.. figure:: Stage_1/images/bash_component_architecture.png
+.. figure:: /content/Stage_1/images/bash_component_architecture.png
 
 
 shell expansions
@@ -141,7 +141,7 @@ shell expansions
 
   - 把你常用的路径直接存为变量，可以减少cd 的次数
 
-    .. image:: Stage_1/asciinema/variable_expand.gif
+    .. image:: /content/Stage_1/asciinema/variable_expand.gif
        :scale: 50%
 
 
@@ -295,10 +295,10 @@ Filename expansion (pattern matching)
       vim **/*READ*  #open the README at any subfolder
       vim /etc/pa*ac
 
- Word Split
- -----------
+Word Split
+-----------
 
- $IFS  <space>,<tab>,<newline>
+$IFS  <space>,<tab>,<newline>
       
 Shell Command execution 
 ============================
@@ -380,12 +380,12 @@ Grouping commands  as a unit
 pipelines
 -----------
   
-.. image:: Stage_1/images/How_pipe_works.png
+.. image:: /content/Stage_1/images/How_pipe_works.png
 
 在Unix设计哲学中，有一个重要设计原则--KISS(Keep it Simple, Stupid)，大概意思就是只关注如何做好一件事，并把它做到极致。每个程序都有各自的功能，那么有没有一样东西将不同功能的程序互相连通，自由组合成更为强大的宏工具呢？此时，管道出现了，它能够让程序实现了高内聚，低耦合
 管道的发名者叫，Malcolm Douglas McIlroy，他也是Unix的创建者，是Unix文化的缔造者之一。他归纳的Unix哲学如下：
 
-.. image:: Stage_1/images/pipe_design.png
+.. image:: /content/Stage_1/images/pipe_design.png
 
 * Pipes
 
@@ -473,13 +473,14 @@ pipelines
 IO redirection
 ---------------
 
-.. image:: Stage_1/images/io.png
+.. image:: /content/Stage_1/images/io.png
 
 .. list-table:: 
    
    * - stdin
      - stdout
      - stderr 
+     - all 
    * - 0
      - 1
      - 2
@@ -490,8 +491,8 @@ IO redirection
      - [n]<&[fd]-
      - [n]<>filesmae
 
-   << here doc
-   <<<"here string" 就是python 中"""三目符的用法。
+<< here doc
+<<<"here string" 就是python 中"""三目符的用法。
 
 
 .. code-block:: bash
@@ -504,28 +505,28 @@ IO redirection
    https://unix.stackexchange.com/questions/145651/using-exec-and-tee-to-redirect-logs-to-stdout-and-a-log-file-in-the-same-time
 
 
-* basic concept
+   basic concept
+   
+   * stdin 0,stdout 1,stderr 2, exec
+   * `` $() 
+   * fork  {},() &
+   
+   simple one
   
-  * stdin 0,stdout 1,stderr 2, exec
-  * `` $() 
-  * fork  {},() &
+   ls -l > ls-l.txt
+   grep da * 2> grep-errors.txt
+   xxxx 2>&1 | tee log.txt
+   stdout/stderr  >
+   stdin/exec <
   
-* simple one
-
-  ls -l > ls-l.txt
-  grep da * 2> grep-errors.txt
-  xxxx 2>&1 | tee log.txt
-  stdout/stderr  >
-  stdin/exec <
-
-  rm -f $(find / -iname core) &> /dev/null
-
-* { 
-    action one
-    action two
-   }> 1>out.out 2>error.log
-
-*对于文件的读写* 例如读入前三行
+   rm -f $(find / -iname core) &> /dev/null
+  
+   { 
+     action one
+     action two
+    }> 1>out.out 2>error.log
+  
+  对于文件的读写* 例如读入前三行
 
 .. code-block:: bash
     
@@ -624,7 +625,7 @@ IO redirection
 command line editing
 =====================
 
-.. image:: Stage_1/asciinema/auto-complete.gif
+.. image:: /content/Stage_1/asciinema/auto-complete.gif
    :scale: 50%
 
 - 路径补全，
@@ -688,13 +689,13 @@ troubleshoot debug
 set -eux, strace
    
    `cmd1 &&  cmd2 && cm3`  = `set -e ;cmd1;cmd2;cmd3`
-* set -u  The shell prints a message to stderr when it tries to expand a variable that's is not set.Also it immediately exits.
 
-* set -x print each command in sript to stderr before running it.  
-* set -o pipefail Pipelines failed on the first command which failes instead of dying later on down the pipepline.
+#. set -u  The shell prints a message to stderr when it tries to expand a variable that's is not set.Also it immediately exits.
+#. set -x print each command in sript to stderr before running it.  
+#. set -o pipefail Pipelines failed on the first command which failes instead of dying later on down the pipepline.
 #. has options to control output format and support  and OR
-#. "Exit Traps" Can Make Your Bash Scripts Way More Robust And Reliable
-    http://redsymbol.net/articles/bash-exit-traps/
+#. "Exit Traps" Can Make Your Bash Scripts Way More Robust And Reliable http://redsymbol.net/articles/bash-exit-traps/
+
 并且bash 命令回显机制是做的最好的，-verbose以及打印命令回显呢。
 对于linux 下大部分的命令输出都是可以参数可控控制，并且大部分命令都支持 与或非
 同时直接支持把结果当命令进一步执行这个不正是自己之前到 tcl 用到 subst 功能吗。
@@ -740,33 +741,44 @@ text Process
 Regular Expression 
 ---------------------
 
-.. image::  Stage_1/images/regexp-en.png
+.. image:: /content/Stage_1/images/regexp-en.png
 
-|Meta character|Description|
-|:----:|----|
-|.|Period matches any single character except a line break.|
-|[ ]|Character class. Matches any character contained between the square brackets.|
-|[^ ]|Negated character class. Matches any character that is not contained between the square brackets|
-|*|Matches 0 or more repetitions of the preceding symbol.|
-|+|Matches 1 or more repetitions of the preceding symbol.|
-|?|Makes the preceding symbol optional.|
-|{n,m}|Braces. Matches at least "n" but not more than "m" repetitions of the preceding symbol.|
-|(xyz)|Character group. Matches the characters xyz in that exact order.|
-|&#124;|Alternation. Matches either the characters before or the characters after the symbol.|
-|&#92;|Escapes the next character. This allows you to match reserved characters <code>[ ] ( ) { } . * + ? ^ $ \ &#124;</code>|
-|^|Matches the beginning of the input.|
-|$|Matches the end of the input.|
++----------------+----------------------------------------------------------------------------------------------------------------------+
+| Meta character | Description                                                                                                          |
++================+======================================================================================================================+
+|.               | Period matches any single character except a line break.                                                             |
++----------------+----------------------------------------------------------------------------------------------------------------------+
+|[ ]             | Character class. Matches any character contained between the square brackets.                                        |
++----------------+----------------------------------------------------------------------------------------------------------------------+
+|[^ ]            | Negated character class. Matches any character that is not contained between the square brackets                     |
++----------------+----------------------------------------------------------------------------------------------------------------------+
+|*               | Matches 0 or more repetitions of the preceding symbol.                                                               |
++----------------+----------------------------------------------------------------------------------------------------------------------+
+|+               | Matches 1 or more repetitions of the preceding symbol.                                                               |
++----------------+----------------------------------------------------------------------------------------------------------------------+
+|?               | Makes the preceding symbol optional.                                                                                 |
++----------------+----------------------------------------------------------------------------------------------------------------------+
+|{n,m}           | Braces. Matches at least "n" but not more than "m" repetitions of the preceding symbol.                              |
++----------------+----------------------------------------------------------------------------------------------------------------------+
+|(xyz)           | Character group. Matches the characters xyz in that exact order.                                                     |
++----------------+----------------------------------------------------------------------------------------------------------------------+
+|&#124;          | Alternation. Matches either the characters before or the characters after the symbol.                                |
++----------------+----------------------------------------------------------------------------------------------------------------------+
+|&#92;           | Escapes the next character.This allows you to match reserved characters <code>[ ] ( ) { } . * + ? ^ $ \ &#124;</code>|
++----------------+----------------------------------------------------------------------------------------------------------------------+
+|^               | Matches the beginning of the input.                                                                                  |
++----------------+----------------------------------------------------------------------------------------------------------------------+
+|$               | Matches the end of the input.                                                                                        |
++----------------+----------------------------------------------------------------------------------------------------------------------+
 
 https://github.com/ziishaned/learn-regex/blob/master/README.md
 
 
 * tools collections
   
-
    - diff,sort/tsort,uniq,join,paste,join,wc,
    - expand,cut,head,tail,look,sed,awk,tr,grep
-   - fold,fmt,col,column,nl,pr
-   https://www.tldp.org/LDP/abs/html/textproc.html
+   - fold,fmt,col,column,nl,pr https://www.tldp.org/LDP/abs/html/textproc.html
 
 
 交并补
@@ -863,6 +875,7 @@ https://github.com/Idnan/bash-guide,有大量的例子可以用直接用
 * paste
 
 .. code-block:: bash
+
    bash$ cat items
    alphabet blocks
     building blocks

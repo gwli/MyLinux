@@ -8,7 +8,7 @@ Linux 常用命令
 
 bash 的命令补全功能，不只是简单的字符串补全，而是根据上下文来补全。这些都的实现都在  /usr/share/bash=complete 中。 如果没有可以安装 apt=get install bash=complete
 
-.. image:: Stage_1/asciinema/auto-complete.gif
+.. image:: /content/Stage_1/asciinema/auto-complete.gif
    :scale: 50%
 
 <a href="https://asciinema.org/a/LUcAqGRm2vJc8sQYUlhO4fIef?autoplay=1" target="_blank"><img src="https://asciinema.org/a/LUcAqGRm2vJc8sQYUlhO4fIef.png" width="835"/></a>
@@ -572,8 +572,8 @@ zenity GUI
       zenity --entry --text="Please enter your_name"
 
 
- 查询并安装 
- ============
+查询并安装 
+============
 
  .. code-block:: bash
 

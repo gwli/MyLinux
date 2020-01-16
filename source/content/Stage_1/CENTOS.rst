@@ -81,7 +81,7 @@ this new method is working `vnc-server-installation-on-centos-7 <https://www.how
       
 .. note::
 
-   this just work VM.
+   this just work VM. see [#CSDNAUTOLOGIN]_
 
 .. [#CSDNAUTOLOGIN] http://blog.csdn.net/kpshare/article/details/7523546
 
