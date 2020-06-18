@@ -125,9 +125,9 @@ SSH
          User test
          PreferredAuthentications publickey
          IdentityFile ~/.ssh/id_rsa
-   
+
   
-#. 对于
+#. 例如git可以基于ssh进行加密验证的方式，可以用ssh-agent bash 来起动shell, 就可以用ssh 当做一个hook，来拦截加密的处理请求，而其他交互一切照旧，这个采用乘法原则，特别unix哲学的思路。再利用 ssh-add 来加载密码信息。
 
 如何扫描机器IP
 ============== 
