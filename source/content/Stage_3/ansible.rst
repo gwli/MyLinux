@@ -21,3 +21,9 @@ https://www.ansible.com/overview/how-ansible-works, 也就是把自己的远程�
 
 https://docs.ansible.com/ansible/latest/cli/ansible-playbook.html
 https://jensrantil.github.io/post/salt-vs-ansible/
+
+
+对于windows 的支持
+===================
+
+* https://chocolatey.org/ 不错的第三方ansible 包管理。
