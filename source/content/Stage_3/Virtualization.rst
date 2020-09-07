@@ -106,3 +106,8 @@ https://virtuallyvisual.wordpress.com/2017/01/18/nvidia-grid-and-microsoft-windo
 steps
 
 
+KVM
+====
+
+KVM kernel-based virtual machine,主要是内核支持GPU的virt-D等支持，本质也就是硬件上支持CPU的context切换，相当于current conext,以及其他context. 把内存其他管理等等还扔给linux kernel来进行。以及其他对IO设备的模拟QEMU。libvirt 库可直接用来操作。
+
