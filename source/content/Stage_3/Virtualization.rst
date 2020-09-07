@@ -110,4 +110,15 @@ KVM
 ====
 
 KVM kernel-based virtual machine,主要是内核支持GPU的virt-D等支持，本质也就是硬件上支持CPU的context切换，相当于current conext,以及其他context. 把内存其他管理等等还扔给linux kernel来进行。以及其他对IO设备的模拟QEMU。libvirt 库可直接用来操作。
+CPU虚拟化通过VMX两个状态切换来实现虚拟化。 https://developer.aliyun.com/article/724399?spm=a2c6h.12873639.0.0.783322056v4fst。
+内存的虚拟化通过EPT（Extended Page Tables，扩展页表），从而将客户机虚拟地址到宿主机物理地址的转换通过硬件来实现
+  
+  * 客户机虚拟地址，GVA（Guest Virtual Address）
+  * 客户机物理地址，GPA（Guest Physical Address）
+  * 宿主机虚拟地址，HVA（Host Virtual Address）
+  * 宿主机物理地址，HPA（Host Physical Address）
+而其他硬件虚拟化主要是通过QEMU来模拟，或者硬件的直接支持或者
 
+.. image::
+   
+   https://ucc.alicdn.com/pic/developer-ecology/a363969e35d3441eab73ac7fdb660015.png
