@@ -119,7 +119,12 @@ CPU虚拟化通过VMX两个状态切换来实现虚拟化。 https://developer.a
   * 宿主机物理地址，HPA（Host Physical Address）
 而其他硬件虚拟化主要是通过QEMU来模拟，或者硬件的直接支持或者驱动的cs模式来支持 https://developer.aliyun.com/article/724399?spm=a2c6h.12873639.0.0.783322056v4fst
 
+QEMU 基本原理就是通过hook ioctl接口来实现。
+
 .. image::
    
    https://ucc.alicdn.com/pic/developer-ecology/a363969e35d3441eab73ac7fdb660015.png
 
+.. image::
+   
+   kvm_workflow.png
