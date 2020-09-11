@@ -128,3 +128,11 @@ QEMU 基本原理就是通过hook ioctl接口来实现。
 .. image::
    
    kvm_workflow.png
+
+网络模式类似于virtualbox 有三种模式。 https://linuxnatives.net/2012/virtualized-bridged-networking-with-macvtap
+通过virsh可以操作大部分操作. 
+网络部分，https://wiki.libvirt.org/page/Networking
+virsh 可以用xml来建立模板，没有现在k8s采用yml与json来的方便。 
+
+kvm的存储模块 https://libvirt.org/storage.html
+
