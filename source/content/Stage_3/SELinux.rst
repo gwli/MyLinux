@@ -59,7 +59,12 @@ https://wiki.ubuntu.com/AppArmor 使用说明。
 PAM
 ===
 
-主要是对用户的验证。 采用分离的模块，把验证与正常的程序使用分离开来。更利于扩展开发，而不是每一个应用程序里包含自己的验证。
+https://github.com/linux-pam/linux-pam
+
+主要是对用户的验证。 采用分离的模块，把验证与正常的程序使用分离开来。更利于扩展开发，而不是每一个应用程序里包含自己的验证。所有默认的库放在 /usr/lib/security下面，并且支持一些if的判断条件，includer指令。 实现小的验证语言，并且在/etc/pam.d/每一个应用程序一个验证脚本。每一个模块的用法，都可以用man pam_access这样来访问。这里有一个例子https://www.ibm.com/developerworks/cn/linux/l-polyinstantiation/l-polyinstantiation-pdf.pdf。 之前的ssh的登录session的环境变量的问题，应该就是出在这里。
+
+如何troubleshoot,可以使用 pam_echo 指令，以及各个模块的debug选项， log都打在syslog 可以在/var/log/secure. 
+
 https://www.ibm.com/developerworks/cn/linux/l-pam/
 https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Managing_Smart_Cards/PAM_Configuration_Files.html
 其实这三种都是验证与应用要本身是分离的。使用说明见 http://www.linux-pam.org/, 在 linux能看到那就是 /etc/pam.conf 有点类似于把权限管理给外包出去，这样有助于集中管理。同时也不需要应用程序开发者来考虑安全问题。
