@@ -13,6 +13,8 @@ ansible
 
 例外采用有状态，还是无状态，如何管理这些机器分组以及像docker service一样编排。 进一步具体到具体命令编排。 
 
+
+
 playbook
 =========
 https://www.ansible.com/overview/how-ansible-works, 也就是把自己的远程装driver的ssh脚本规模化了。主要用了ssh 连接远程机器，并且copy一段代码上去，然后 直接执行。
@@ -27,3 +29,9 @@ https://jensrantil.github.io/post/salt-vs-ansible/
 ===================
 
 * https://chocolatey.org/ 不错的第三方ansible 包管理。
+
+其他linux distribution 的支持
+=============================
+ansible 内置的包管理，可以自动管理支持多平台，例如apt/yum/apk 等等。
+ansible-vault 可以用加密文件，或可以加密一个字符串，并且放在变量里。
+ansible-galaxy 有各种各样的插件可以用。
