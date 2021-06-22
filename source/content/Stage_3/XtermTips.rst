@@ -92,6 +92,13 @@ terminal
 #. `PTY 开发 <http://topic.csdn.net/t/20060426/13/4715138.html>`_ 
 #. `linux 命令大全 <http://study.chyangwa.com/IT/AIX/aixcmds6/mastertoc.htm#mtoc>`_ 
 
+tmux 使用
+=============
 
-     
+tmux 可以把terminal变成vim一样的使用.
+1. 分屏 ctl+B,%  ctl+B,"
+2. 最大化 ctl+B,z
+3. 切换windows   ctrl+B,Q 然后选数字,只是当前的两个切,"
+4. 进入copy 模式  ctrl+b,[  , paste ctrl+b,]   ctl+space开始复制,enter/atl+w,ctl+w 结束复制.
+5. 进入vim 模式  tmux set -g mode-keys vim
 
