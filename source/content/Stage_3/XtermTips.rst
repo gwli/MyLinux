@@ -99,7 +99,7 @@ tmux 可以把terminal变成vim一样的使用.
 
 #. 分屏 ctl+B,%  ctl+B,"
 #. 最大化 ctl+B,z
-# 切换windows   ctrl+B,Q 然后选数字,只是当前的两个切,"
+#. 切换windows   ctrl+B,Q 然后选数字,只是当前的两个切,"
 #. 进入copy 模式  ctrl+b,[  , paste ctrl+b,]   ctl+space开始复制,enter/atl+w,ctl+w 结束复制.
 #. 进入vim 模式  tmux set -g mode-keys vim
 
