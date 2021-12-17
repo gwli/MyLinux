@@ -129,6 +129,10 @@ SSH
   
 #. 例如git可以基于ssh进行加密验证的方式，可以用ssh-agent bash 来起动shell, 就可以用ssh 当做一个hook，来拦截加密的处理请求，而其他交互一切照旧，这个采用乘法原则，特别unix哲学的思路。再利用 ssh-add 来加载密码信息。
 
+#. ssh tunnel forword
+不管是正向还是反向的 forword一般情况下都只对localhost管用，如果对任意IP都管用，特别是reverse 的时候，要把ssshd中gatewayports 打开。https://superuser.com/questions/588591/how-to-make-an-ssh-tunnel-publicly-accessible
+
+
 如何扫描机器IP
 ============== 
 
