@@ -7,6 +7,7 @@ image 就是最终的操作系统。
 https://layers.openembedded.org/layerindex/recipe/37578/  各种recipe 的查询方案，可以直接使用就行了。
 并且yocto 有一整套自己 bitbake的编译管理流程来管理依赖。自动生成 package 以及image。
 之下那就是各种layers,以及recipe.
+bitbake core-image-sato
 
 
 
